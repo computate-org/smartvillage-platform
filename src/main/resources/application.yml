@@ -151,6 +151,8 @@ AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
 AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
 # The Auth roles required to add and modify traffic flow observed records. 
 AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
+# The Auth roles required to add and modify crowd flow observed records. 
+AUTH_ROLE_REQUIRED_CrowdFlowObserved: 'SiteAdmin'
 # The Auth roles required to add and modify smart traffic light records. 
 AUTH_ROLE_REQUIRED_SmartTrafficLight: 'SiteAdmin'
 # The Auth roles required to add and modify system event records. 

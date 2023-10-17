@@ -32,7 +32,9 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.crowdFlowObserved = JSON.parse($('.pageForm .crowdFlowObserved').val());
 				}
+					window.listCrowdFlowObserved = JSON.parse($('.pageForm .listCrowdFlowObserved').val());
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -271,6 +273,8 @@
 {{> "htmBodyMenuBaseModelPage"}}{{/inline}}
 {{#*inline "htmBodyGraphCrowdFlowObservedPage"}}		<!-- #*inline "htmBodyGraphCrowdFlowObservedPage" -->
 <div id="htmBodyGraphBaseModelPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyGraphLocationCrowdFlowObservedPage"}}		<!-- #*inline "htmBodyGraphLocationCrowdFlowObservedPage" -->
+<div id="htmBodyGraphLocationBaseModelPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0CrowdFlowObservedPage"}}		<!-- #*inline "htmBodyCount0CrowdFlowObservedPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
@@ -288,6 +292,12 @@
 				<span class="">no CrowdFlowObserved found</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1AllCrowdFlowObservedPage"}}		<!-- #*inline "htmBodyCount1AllCrowdFlowObservedPage" -->
 		<h1 class="w3-center ">
@@ -303,6 +313,12 @@
 				<span class="">{{crowdFlowObserved_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1CrowdFlowObservedPage"}}		<!-- #*inline "htmBodyCount1CrowdFlowObservedPage" -->
 		<h1>
@@ -318,6 +334,12 @@
 				<span class="">{{crowdFlowObserved_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyAllCrowdFlowObservedPage"}}		<!-- #*inline "htmBodyAllCrowdFlowObservedPage" -->
 		<h1>
@@ -328,6 +350,11 @@
 				<span class="">CrowdFlowObserveds</span>
 			</a>
 		</h1>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 		<div class="">
 			<div>
 	{{#if pagination.pagePrevious}}
@@ -361,12 +388,14 @@
 {{/inline}}
 {{#*inline "htmFormCrowdFlowObservedPage"}}
 		<!-- #*inline "htmForm" -->
-		<form action="/api/CrowdFlowObserved" id="CrowdFlowObservedForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
-{{#if id}}
-			<input name="id" class="valueId" type="hidden" value="{{id}}"/>
+		<form action="/api/crowd-flow-observed" id="CrowdFlowObservedForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if pk}}
+			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+			<input name="crowdFlowObserved" id="crowdFlowObserved" class="crowdFlowObserved"  value='{{{toJsonObjectStringInApostrophes crowdFlowObserved_ }}}' type="hidden"/>
+			<input name="listCrowdFlowObserved" id="listCrowdFlowObserved" class="listCrowdFlowObserved"  value='{{{toJsonArrayStringInApostrophes listCrowdFlowObserved }}}' type="hidden"/>
 		</form>
 {{#if id}}
 {{#block "htmButton_searchpageCrowdFlowObserved"}}{{/block}}
@@ -437,12 +466,12 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmAddress" roleForWriteBool="true" roleForReadBool="true"}}
+{{> "htmWalkingAreaId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmAddress" roleForWriteBool="false" roleForReadBool="true"}}
+{{> "htmWalkingAreaId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmAddress" roleForWriteBool="false" roleForReadBool="false"}}
+{{> "htmWalkingAreaId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -452,6 +481,15 @@
 {{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -499,12 +537,30 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDataProvider" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
 {{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTrafficSimulationId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -660,15 +716,6 @@
 {{> "htmSource" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmSource" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
@@ -710,12 +757,12 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmAddress" roleForWriteBool="true" roleForReadBool="true"}}
+{{> "htmWalkingAreaId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmAddress" roleForWriteBool="false" roleForReadBool="true"}}
+{{> "htmWalkingAreaId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmAddress" roleForWriteBool="false" roleForReadBool="false"}}
+{{> "htmWalkingAreaId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -725,6 +772,15 @@
 {{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -772,12 +828,30 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDataProvider" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
 {{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTrafficSimulationId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -933,15 +1007,6 @@
 {{> "htmSource" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmSource" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 							</div>
@@ -1061,12 +1126,12 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmAddress" roleForWriteBool="true" roleForReadBool="true"}}
+{{> "htmWalkingAreaId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmAddress" roleForWriteBool="false" roleForReadBool="true"}}
+{{> "htmWalkingAreaId" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
-{{> "htmAddress" roleForWriteBool="false" roleForReadBool="false"}}
+{{> "htmWalkingAreaId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1076,6 +1141,15 @@
 {{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1123,12 +1197,30 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmEntityId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmEntityId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmDataProvider" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
 {{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTrafficSimulationId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTrafficSimulationId" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1286,15 +1378,6 @@
 {{> "htmSource" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmType" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmType" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
 							</div>
 						</div>
 					</div>
@@ -1389,11 +1472,7 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 	{{#eq crowdFlowObservedCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
@@ -1479,7 +1558,7 @@
 		<button
 			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
 			id="refreshThisCrowdFlowObservedGenPage"
-			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{id}}' } ], {}, function() { addGlow($('#refreshThisCrowdFlowObservedGenPage')); }, function() { addError($('#refreshThisCrowdFlowObservedGenPage')); }); return false; ">
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'pk:{{pk}}' } ], {}, function() { addGlow($('#refreshThisCrowdFlowObservedGenPage')); }, function() { addError($('#refreshThisCrowdFlowObservedGenPage')); }); return false; ">
 			<i class="fas fa-sync-alt "></i>
 			refresh this CrowdFlowObserved
 		</button>
@@ -1532,15 +1611,15 @@
 					name="suggestCrowdFlowObserved"
 					id="suggestCrowdFlowObserved{{id}}"
 					autocomplete="off"
-					oninput="suggestCrowdFlowObservedObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,pk,pageUrlPk,objectTitle' } ], $('#suggestListCrowdFlowObserved{{id}}'), {{id}}; "
-					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/CrowdFlowObserved?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+					oninput="suggestCrowdFlowObservedObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,pk,pageUrlPk,objectTitle' } ], $('#suggestListCrowdFlowObserved{{id}}'), {{pk}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/crowd-flow-observed?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
 				{{#if listCrowdFlowObserved}}
 					value="{{query2}}"
 				{{/if}}
 				/>
 				<button
 					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
-					onclick="window.location.href = '/CrowdFlowObserved?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					onclick="window.location.href = '/crowd-flow-observed?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
 					>
 					<i class="fas fa-search "></i>
 				</button>
@@ -1552,7 +1631,7 @@
 				</div>
 			</div>
 			<div class="">
-				<a href="/CrowdFlowObserved" class="">
+				<a href="/crowd-flow-observed" class="">
 					<i class="fad fa-map-location-dot"></i>
 					see all the CrowdFlowObserveds
 				</a>
@@ -1582,7 +1661,7 @@
 
 {{#*inline "inputCreated"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span id="{{classApiMethodMethod}}_created" class="varCrowdFlowObserved{{id}}Created varCrowdFlowObservedCreated " title="{{formatZonedDateTime crowdFlowObserved_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime crowdFlowObserved_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_created" class="varCrowdFlowObserved{{pk}}Created varCrowdFlowObservedCreated " title="{{formatZonedDateTime crowdFlowObserved_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime crowdFlowObserved_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1608,7 +1687,7 @@
 
 {{#*inline "inputModified"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span id="{{classApiMethodMethod}}_modified" class="varCrowdFlowObserved{{id}}Modified varCrowdFlowObservedModified " title="{{formatZonedDateTime crowdFlowObserved_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime crowdFlowObserved_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+														<span id="{{classApiMethodMethod}}_modified" class="varCrowdFlowObserved{{pk}}Modified varCrowdFlowObservedModified " title="{{formatZonedDateTime crowdFlowObserved_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime crowdFlowObserved_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1634,7 +1713,7 @@
 
 {{#*inline "inputObjectId"}}
 	{{#eq 'Page' classApiMethodMethod}}
-														<span id="{{classApiMethodMethod}}_objectId" class="varCrowdFlowObserved{{id}}ObjectId varCrowdFlowObservedObjectId ">{{crowdFlowObserved_.objectId}}</span>
+														<span id="{{classApiMethodMethod}}_objectId" class="varCrowdFlowObserved{{pk}}ObjectId varCrowdFlowObservedObjectId ">{{crowdFlowObserved_.objectId}}</span>
 	{{/eq}}
 {{/inline}}
 
@@ -1670,19 +1749,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classCrowdFlowObserved inputCrowdFlowObserved{{id}}Archived w3-input w3-border "
+															class="classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classCrowdFlowObserved inputCrowdFlowObserved{{id}}Archived w3-input w3-border "
+																class="classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classCrowdFlowObserved inputCrowdFlowObserved{{id}}Archived w3-input w3-border "
+																class="setArchived valueArchived classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if crowdFlowObserved_.archived}}
@@ -1699,10 +1778,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Archived varCrowdFlowObservedArchived ">{{crowdFlowObserved_.archived}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Archived varCrowdFlowObservedArchived ">{{crowdFlowObserved_.archived}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Archived varCrowdFlowObservedArchived ">{{crowdFlowObserved_.archived}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Archived varCrowdFlowObservedArchived ">{{crowdFlowObserved_.archived}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1738,19 +1817,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classCrowdFlowObserved inputCrowdFlowObserved{{id}}Deleted w3-input w3-border "
+															class="classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classCrowdFlowObserved inputCrowdFlowObserved{{id}}Deleted w3-input w3-border "
+																class="classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classCrowdFlowObserved inputCrowdFlowObserved{{id}}Deleted w3-input w3-border "
+																class="setDeleted valueDeleted classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if crowdFlowObserved_.deleted}}
@@ -1767,25 +1846,25 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Deleted varCrowdFlowObservedDeleted ">{{crowdFlowObserved_.deleted}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Deleted varCrowdFlowObservedDeleted ">{{crowdFlowObserved_.deleted}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Deleted varCrowdFlowObservedDeleted ">{{crowdFlowObserved_.deleted}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Deleted varCrowdFlowObservedDeleted ">{{crowdFlowObserved_.deleted}}</span>
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmAddress"}}
-<!-- #*inline "htmAddress" -->
+{{#*inline "htmWalkingAreaId"}}
+<!-- #*inline "htmWalkingAreaId" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
 									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}CrowdFlowObservedAddress">
+										<div id="suggest{{classApiMethodMethod}}CrowdFlowObservedWalkingAreaId">
 											<div class="w3-card ">
 												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_address">address</label>
+													<label for="{{classApiMethodMethod}}_walkingAreaId">walking area ID</label>
 												</div>
 											<div class="w3-cell-row w3-padding ">
 													<div class="w3-cell ">
-														{{> "inputAddress" roleForWrite=roleForWrite roleForRead=roleForRead}}
+														{{> "inputWalkingAreaId" roleForWrite=roleForWrite roleForRead=roleForRead}}
 													</div>
 												</div>
 											</div>
@@ -1794,39 +1873,39 @@
 								</div>
 {{/inline}}
 
-{{#*inline "inputAddress"}}
+{{#*inline "inputWalkingAreaId"}}
 		{{#eq roleForWriteBool "true"}}
 														<input
 															type="text"
-															placeholder="address"
-															title="The mailing address"															id="{{classApiMethodMethod}}_address"
+															placeholder="walking area ID"
+															title="The walking area ID of pedestrians in SUMO"															id="{{classApiMethodMethod}}_walkingAreaId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setAddress classCrowdFlowObserved inputCrowdFlowObserved{{id}}Address w3-input w3-border "
-																name="setAddress"
+																class="setWalkingAreaId classCrowdFlowObserved inputCrowdFlowObserved{{pk}}WalkingAreaId w3-input w3-border "
+																name="setWalkingAreaId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setAddress classCrowdFlowObserved inputCrowdFlowObserved{{id}}Address w3-input w3-border "
-																name="setAddress"
+																class="setWalkingAreaId classCrowdFlowObserved inputCrowdFlowObserved{{pk}}WalkingAreaId w3-input w3-border "
+																name="setWalkingAreaId"
 		{{else}}
-																class="valueAddress w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Address w3-input w3-border "
-																name="address"
+																class="valueWalkingAreaId w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}WalkingAreaId w3-input w3-border "
+																name="walkingAreaId"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAddress', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_address')); }, function() { addError($('#{{classApiMethodMethod}}_address')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setWalkingAreaId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_walkingAreaId')); }, function() { addError($('#{{classApiMethodMethod}}_walkingAreaId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{crowdFlowObserved_.address}}"
+															value="{{crowdFlowObserved_.walkingAreaId}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Address varCrowdFlowObservedAddress ">{{crowdFlowObserved_.address}}</span>
+															<span class="varCrowdFlowObserved{{pk}}WalkingAreaId varCrowdFlowObservedWalkingAreaId ">{{crowdFlowObserved_.walkingAreaId}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Address varCrowdFlowObservedAddress ">{{crowdFlowObserved_.address}}</span>
+														<span class="varCrowdFlowObserved{{pk}}WalkingAreaId varCrowdFlowObservedWalkingAreaId ">{{crowdFlowObserved_.walkingAreaId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1857,20 +1936,20 @@
 															placeholder="alternate name"
 															title="An alternative name for this item"															id="{{classApiMethodMethod}}_alternateName"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setAlternateName classCrowdFlowObserved inputCrowdFlowObserved{{id}}AlternateName w3-input w3-border "
+																class="setAlternateName classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AlternateName w3-input w3-border "
 																name="setAlternateName"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setAlternateName classCrowdFlowObserved inputCrowdFlowObserved{{id}}AlternateName w3-input w3-border "
+																class="setAlternateName classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AlternateName w3-input w3-border "
 																name="setAlternateName"
 		{{else}}
-																class="valueAlternateName w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}AlternateName w3-input w3-border "
+																class="valueAlternateName w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AlternateName w3-input w3-border "
 																name="alternateName"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAlternateName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAlternateName', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.alternateName}}"
@@ -1879,10 +1958,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}AlternateName varCrowdFlowObservedAlternateName ">{{crowdFlowObserved_.alternateName}}</span>
+															<span class="varCrowdFlowObserved{{pk}}AlternateName varCrowdFlowObservedAlternateName ">{{crowdFlowObserved_.alternateName}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}AlternateName varCrowdFlowObservedAlternateName ">{{crowdFlowObserved_.alternateName}}</span>
+														<span class="varCrowdFlowObserved{{pk}}AlternateName varCrowdFlowObservedAlternateName ">{{crowdFlowObserved_.alternateName}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmColor"}}
+<!-- #*inline "htmColor" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}CrowdFlowObservedColor">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_color">color</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputColor" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputColor"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="color"
+															id="{{classApiMethodMethod}}_color"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setColor classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Color w3-input w3-border "
+																name="setColor"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setColor classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Color w3-input w3-border "
+																name="setColor"
+		{{else}}
+																class="valueColor w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Color w3-input w3-border "
+																name="color"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setColor', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{crowdFlowObserved_.color}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varCrowdFlowObserved{{pk}}Color varCrowdFlowObservedColor ">{{crowdFlowObserved_.color}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varCrowdFlowObserved{{pk}}Color varCrowdFlowObservedColor ">{{crowdFlowObserved_.color}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1913,32 +2048,32 @@
 															placeholder="area served"
 															title="The geographic area where a service or offered item is provided"															id="{{classApiMethodMethod}}_areaServed"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setAreaServed classCrowdFlowObserved inputCrowdFlowObserved{{id}}AreaServed w3-input w3-border "
+																class="setAreaServed classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AreaServed w3-input w3-border "
 																name="setAreaServed"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setAreaServed classCrowdFlowObserved inputCrowdFlowObserved{{id}}AreaServed w3-input w3-border "
+																class="setAreaServed classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AreaServed w3-input w3-border "
 																name="setAreaServed"
 		{{else}}
-																class="valueAreaServed w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}AreaServed w3-input w3-border "
+																class="valueAreaServed w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AreaServed w3-input w3-border "
 																name="areaServed"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAreaServed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_areaServed')); }, function() { addError($('#{{classApiMethodMethod}}_areaServed')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAreaServed', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_areaServed')); }, function() { addError($('#{{classApiMethodMethod}}_areaServed')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{crowdFlowObserved_.areaServed}}"
+															value="{{toJsonObjectString crowdFlowObserved_.areaServed}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}AreaServed varCrowdFlowObservedAreaServed ">{{crowdFlowObserved_.areaServed}}</span>
+															<span class="varCrowdFlowObserved{{pk}}AreaServed varCrowdFlowObservedAreaServed ">{{crowdFlowObserved_.areaServed}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}AreaServed varCrowdFlowObservedAreaServed ">{{crowdFlowObserved_.areaServed}}</span>
+														<span class="varCrowdFlowObserved{{pk}}AreaServed varCrowdFlowObservedAreaServed ">{{crowdFlowObserved_.areaServed}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -1969,20 +2104,20 @@
 															placeholder="average crowd speed"
 															title="Average speed of the crowd transiting during the observation period"															id="{{classApiMethodMethod}}_averageCrowdSpeed"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setAverageCrowdSpeed classCrowdFlowObserved inputCrowdFlowObserved{{id}}AverageCrowdSpeed w3-input w3-border "
+																class="setAverageCrowdSpeed classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AverageCrowdSpeed w3-input w3-border "
 																name="setAverageCrowdSpeed"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setAverageCrowdSpeed classCrowdFlowObserved inputCrowdFlowObserved{{id}}AverageCrowdSpeed w3-input w3-border "
+																class="setAverageCrowdSpeed classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AverageCrowdSpeed w3-input w3-border "
 																name="setAverageCrowdSpeed"
 		{{else}}
-																class="valueAverageCrowdSpeed w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}AverageCrowdSpeed w3-input w3-border "
+																class="valueAverageCrowdSpeed w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AverageCrowdSpeed w3-input w3-border "
 																name="averageCrowdSpeed"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAverageCrowdSpeed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageCrowdSpeed')); }, function() { addError($('#{{classApiMethodMethod}}_averageCrowdSpeed')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageCrowdSpeed', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_averageCrowdSpeed')); }, function() { addError($('#{{classApiMethodMethod}}_averageCrowdSpeed')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.averageCrowdSpeed}}"
@@ -1991,10 +2126,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}AverageCrowdSpeed varCrowdFlowObservedAverageCrowdSpeed ">{{crowdFlowObserved_.averageCrowdSpeed}}</span>
+															<span class="varCrowdFlowObserved{{pk}}AverageCrowdSpeed varCrowdFlowObservedAverageCrowdSpeed ">{{crowdFlowObserved_.averageCrowdSpeed}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}AverageCrowdSpeed varCrowdFlowObservedAverageCrowdSpeed ">{{crowdFlowObserved_.averageCrowdSpeed}}</span>
+														<span class="varCrowdFlowObserved{{pk}}AverageCrowdSpeed varCrowdFlowObservedAverageCrowdSpeed ">{{crowdFlowObserved_.averageCrowdSpeed}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2025,20 +2160,20 @@
 															placeholder="average headway time"
 															title="Average headway time. Headway time is the time elapsed between two consecutive persons"															id="{{classApiMethodMethod}}_averageHeadwayTime"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setAverageHeadwayTime classCrowdFlowObserved inputCrowdFlowObserved{{id}}AverageHeadwayTime w3-input w3-border "
+																class="setAverageHeadwayTime classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AverageHeadwayTime w3-input w3-border "
 																name="setAverageHeadwayTime"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setAverageHeadwayTime classCrowdFlowObserved inputCrowdFlowObserved{{id}}AverageHeadwayTime w3-input w3-border "
+																class="setAverageHeadwayTime classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AverageHeadwayTime w3-input w3-border "
 																name="setAverageHeadwayTime"
 		{{else}}
-																class="valueAverageHeadwayTime w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}AverageHeadwayTime w3-input w3-border "
+																class="valueAverageHeadwayTime w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}AverageHeadwayTime w3-input w3-border "
 																name="averageHeadwayTime"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setAverageHeadwayTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); }, function() { addError($('#{{classApiMethodMethod}}_averageHeadwayTime')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageHeadwayTime', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); }, function() { addError($('#{{classApiMethodMethod}}_averageHeadwayTime')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.averageHeadwayTime}}"
@@ -2047,10 +2182,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}AverageHeadwayTime varCrowdFlowObservedAverageHeadwayTime ">{{crowdFlowObserved_.averageHeadwayTime}}</span>
+															<span class="varCrowdFlowObserved{{pk}}AverageHeadwayTime varCrowdFlowObservedAverageHeadwayTime ">{{crowdFlowObserved_.averageHeadwayTime}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}AverageHeadwayTime varCrowdFlowObservedAverageHeadwayTime ">{{crowdFlowObserved_.averageHeadwayTime}}</span>
+														<span class="varCrowdFlowObserved{{pk}}AverageHeadwayTime varCrowdFlowObservedAverageHeadwayTime ">{{crowdFlowObserved_.averageHeadwayTime}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2086,19 +2221,19 @@
 															id="{{classApiMethodMethod}}_congested"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classCrowdFlowObserved inputCrowdFlowObserved{{id}}Congested w3-input w3-border "
+															class="classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Congested w3-input w3-border "
 															name="setCongested"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classCrowdFlowObserved inputCrowdFlowObserved{{id}}Congested w3-input w3-border "
+																class="classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Congested w3-input w3-border "
 																name="setCongested"
 		{{else}}
-																class="setCongested valueCongested classCrowdFlowObserved inputCrowdFlowObserved{{id}}Congested w3-input w3-border "
+																class="setCongested valueCongested classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Congested w3-input w3-border "
 																name="setCongested"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setCongested', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_congested')); }, function() { addError($('#{{classApiMethodMethod}}_congested')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCongested', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_congested')); }, function() { addError($('#{{classApiMethodMethod}}_congested')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if crowdFlowObserved_.congested}}
@@ -2115,10 +2250,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Congested varCrowdFlowObservedCongested ">{{crowdFlowObserved_.congested}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Congested varCrowdFlowObservedCongested ">{{crowdFlowObserved_.congested}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Congested varCrowdFlowObservedCongested ">{{crowdFlowObserved_.congested}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Congested varCrowdFlowObservedCongested ">{{crowdFlowObserved_.congested}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmEntityId"}}
+<!-- #*inline "htmEntityId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}CrowdFlowObservedEntityId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_entityId">entity ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputEntityId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputEntityId"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="entity ID"
+															title="A unique ID for this Smart Data Model"															id="{{classApiMethodMethod}}_entityId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setEntityId classCrowdFlowObserved inputCrowdFlowObserved{{pk}}EntityId w3-input w3-border "
+																name="setEntityId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setEntityId classCrowdFlowObserved inputCrowdFlowObserved{{pk}}EntityId w3-input w3-border "
+																name="setEntityId"
+		{{else}}
+																class="valueEntityId w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}EntityId w3-input w3-border "
+																name="entityId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEntityId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{crowdFlowObserved_.entityId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varCrowdFlowObserved{{pk}}EntityId varCrowdFlowObservedEntityId ">{{crowdFlowObserved_.entityId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varCrowdFlowObserved{{pk}}EntityId varCrowdFlowObservedEntityId ">{{crowdFlowObserved_.entityId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2149,20 +2340,20 @@
 															placeholder="data provider"
 															title="A sequence of characters identifying the provider of the harmonised data entity."															id="{{classApiMethodMethod}}_dataProvider"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDataProvider classCrowdFlowObserved inputCrowdFlowObserved{{id}}DataProvider w3-input w3-border "
+																class="setDataProvider classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DataProvider w3-input w3-border "
 																name="setDataProvider"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDataProvider classCrowdFlowObserved inputCrowdFlowObserved{{id}}DataProvider w3-input w3-border "
+																class="setDataProvider classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DataProvider w3-input w3-border "
 																name="setDataProvider"
 		{{else}}
-																class="valueDataProvider w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}DataProvider w3-input w3-border "
+																class="valueDataProvider w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DataProvider w3-input w3-border "
 																name="dataProvider"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDataProvider', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDataProvider', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.dataProvider}}"
@@ -2171,10 +2362,66 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}DataProvider varCrowdFlowObservedDataProvider ">{{crowdFlowObserved_.dataProvider}}</span>
+															<span class="varCrowdFlowObserved{{pk}}DataProvider varCrowdFlowObservedDataProvider ">{{crowdFlowObserved_.dataProvider}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}DataProvider varCrowdFlowObservedDataProvider ">{{crowdFlowObserved_.dataProvider}}</span>
+														<span class="varCrowdFlowObserved{{pk}}DataProvider varCrowdFlowObservedDataProvider ">{{crowdFlowObserved_.dataProvider}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTrafficSimulationId"}}
+<!-- #*inline "htmTrafficSimulationId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}CrowdFlowObservedTrafficSimulationId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_trafficSimulationId">traffic simulation ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTrafficSimulationId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTrafficSimulationId"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="traffic simulation ID"
+															title="The Traffic Simulation ID"															id="{{classApiMethodMethod}}_trafficSimulationId"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTrafficSimulationId classCrowdFlowObserved inputCrowdFlowObserved{{pk}}TrafficSimulationId w3-input w3-border "
+																name="setTrafficSimulationId"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTrafficSimulationId classCrowdFlowObserved inputCrowdFlowObserved{{pk}}TrafficSimulationId w3-input w3-border "
+																name="setTrafficSimulationId"
+		{{else}}
+																class="valueTrafficSimulationId w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}TrafficSimulationId w3-input w3-border "
+																name="trafficSimulationId"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setTrafficSimulationId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_trafficSimulationId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficSimulationId')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{crowdFlowObserved_.trafficSimulationId}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varCrowdFlowObserved{{pk}}TrafficSimulationId varCrowdFlowObservedTrafficSimulationId ">{{crowdFlowObserved_.trafficSimulationId}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varCrowdFlowObserved{{pk}}TrafficSimulationId varCrowdFlowObservedTrafficSimulationId ">{{crowdFlowObserved_.trafficSimulationId}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2205,20 +2452,20 @@
 															placeholder="date created"
 															title="Entity creation timestamp. This will usually be allocated by the storage platform."															id="{{classApiMethodMethod}}_dateCreated"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDateCreated classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateCreated w3-input w3-border "
+																class="setDateCreated classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateCreated w3-input w3-border "
 																name="setDateCreated"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDateCreated classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateCreated w3-input w3-border "
+																class="setDateCreated classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateCreated w3-input w3-border "
 																name="setDateCreated"
 		{{else}}
-																class="valueDateCreated w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateCreated w3-input w3-border "
+																class="valueDateCreated w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateCreated w3-input w3-border "
 																name="dateCreated"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateCreated', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateCreated', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.dateCreated}}"
@@ -2227,10 +2474,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}DateCreated varCrowdFlowObservedDateCreated ">{{crowdFlowObserved_.dateCreated}}</span>
+															<span class="varCrowdFlowObserved{{pk}}DateCreated varCrowdFlowObservedDateCreated ">{{crowdFlowObserved_.dateCreated}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}DateCreated varCrowdFlowObservedDateCreated ">{{crowdFlowObserved_.dateCreated}}</span>
+														<span class="varCrowdFlowObserved{{pk}}DateCreated varCrowdFlowObservedDateCreated ">{{crowdFlowObserved_.dateCreated}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2261,20 +2508,20 @@
 															placeholder="date modified"
 															title="Timestamp of the last modification of the entity. This will usually be allocated by the storage platform."															id="{{classApiMethodMethod}}_dateModified"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDateModified classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateModified w3-input w3-border "
+																class="setDateModified classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateModified w3-input w3-border "
 																name="setDateModified"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDateModified classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateModified w3-input w3-border "
+																class="setDateModified classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateModified w3-input w3-border "
 																name="setDateModified"
 		{{else}}
-																class="valueDateModified w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateModified w3-input w3-border "
+																class="valueDateModified w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateModified w3-input w3-border "
 																name="dateModified"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateModified', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateModified', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.dateModified}}"
@@ -2283,10 +2530,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}DateModified varCrowdFlowObservedDateModified ">{{crowdFlowObserved_.dateModified}}</span>
+															<span class="varCrowdFlowObserved{{pk}}DateModified varCrowdFlowObservedDateModified ">{{crowdFlowObserved_.dateModified}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}DateModified varCrowdFlowObservedDateModified ">{{crowdFlowObserved_.dateModified}}</span>
+														<span class="varCrowdFlowObserved{{pk}}DateModified varCrowdFlowObservedDateModified ">{{crowdFlowObserved_.dateModified}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2317,20 +2564,20 @@
 															placeholder="date observed"
 															title="The date and time of this observation in ISO8601 UTC format. It can be represented by an specific time instant or by an ISO8601 interval. As a workaround for the lack of support of Orion Context Broker for datetime intervals, it can be used two separate attributes: `dateObservedFrom`, `dateObservedTo`"															id="{{classApiMethodMethod}}_dateObserved"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDateObserved classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObserved w3-input w3-border "
+																class="setDateObserved classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObserved w3-input w3-border "
 																name="setDateObserved"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDateObserved classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObserved w3-input w3-border "
+																class="setDateObserved classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObserved w3-input w3-border "
 																name="setDateObserved"
 		{{else}}
-																class="valueDateObserved w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObserved w3-input w3-border "
+																class="valueDateObserved w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObserved w3-input w3-border "
 																name="dateObserved"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateObserved', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObserved')); }, function() { addError($('#{{classApiMethodMethod}}_dateObserved')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObserved', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateObserved')); }, function() { addError($('#{{classApiMethodMethod}}_dateObserved')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.dateObserved}}"
@@ -2339,10 +2586,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}DateObserved varCrowdFlowObservedDateObserved ">{{crowdFlowObserved_.dateObserved}}</span>
+															<span class="varCrowdFlowObserved{{pk}}DateObserved varCrowdFlowObservedDateObserved ">{{crowdFlowObserved_.dateObserved}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}DateObserved varCrowdFlowObservedDateObserved ">{{crowdFlowObserved_.dateObserved}}</span>
+														<span class="varCrowdFlowObserved{{pk}}DateObserved varCrowdFlowObservedDateObserved ">{{crowdFlowObserved_.dateObserved}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2373,20 +2620,20 @@
 															placeholder="date observed from"
 															title="Observation period start date and time. See `dateObserved`."															id="{{classApiMethodMethod}}_dateObservedFrom"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDateObservedFrom classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObservedFrom w3-input w3-border "
+																class="setDateObservedFrom classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObservedFrom w3-input w3-border "
 																name="setDateObservedFrom"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDateObservedFrom classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObservedFrom w3-input w3-border "
+																class="setDateObservedFrom classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObservedFrom w3-input w3-border "
 																name="setDateObservedFrom"
 		{{else}}
-																class="valueDateObservedFrom w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObservedFrom w3-input w3-border "
+																class="valueDateObservedFrom w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObservedFrom w3-input w3-border "
 																name="dateObservedFrom"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateObservedFrom', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedFrom')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObservedFrom', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedFrom')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.dateObservedFrom}}"
@@ -2395,10 +2642,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}DateObservedFrom varCrowdFlowObservedDateObservedFrom ">{{crowdFlowObserved_.dateObservedFrom}}</span>
+															<span class="varCrowdFlowObserved{{pk}}DateObservedFrom varCrowdFlowObservedDateObservedFrom ">{{crowdFlowObserved_.dateObservedFrom}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}DateObservedFrom varCrowdFlowObservedDateObservedFrom ">{{crowdFlowObserved_.dateObservedFrom}}</span>
+														<span class="varCrowdFlowObserved{{pk}}DateObservedFrom varCrowdFlowObservedDateObservedFrom ">{{crowdFlowObserved_.dateObservedFrom}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2429,20 +2676,20 @@
 															placeholder="date observed to"
 															title="Observation period end date and time. See `dateObserved`."															id="{{classApiMethodMethod}}_dateObservedTo"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDateObservedTo classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObservedTo w3-input w3-border "
+																class="setDateObservedTo classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObservedTo w3-input w3-border "
 																name="setDateObservedTo"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDateObservedTo classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObservedTo w3-input w3-border "
+																class="setDateObservedTo classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObservedTo w3-input w3-border "
 																name="setDateObservedTo"
 		{{else}}
-																class="valueDateObservedTo w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}DateObservedTo w3-input w3-border "
+																class="valueDateObservedTo w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}DateObservedTo w3-input w3-border "
 																name="dateObservedTo"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateObservedTo', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObservedTo')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedTo')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObservedTo', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateObservedTo')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedTo')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.dateObservedTo}}"
@@ -2451,10 +2698,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}DateObservedTo varCrowdFlowObservedDateObservedTo ">{{crowdFlowObserved_.dateObservedTo}}</span>
+															<span class="varCrowdFlowObserved{{pk}}DateObservedTo varCrowdFlowObservedDateObservedTo ">{{crowdFlowObserved_.dateObservedTo}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}DateObservedTo varCrowdFlowObservedDateObservedTo ">{{crowdFlowObserved_.dateObservedTo}}</span>
+														<span class="varCrowdFlowObserved{{pk}}DateObservedTo varCrowdFlowObservedDateObservedTo ">{{crowdFlowObserved_.dateObservedTo}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2485,20 +2732,20 @@
 															placeholder="description"
 															title="A description of this item"															id="{{classApiMethodMethod}}_description"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDescription classCrowdFlowObserved inputCrowdFlowObserved{{id}}Description w3-input w3-border "
+																class="setDescription classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Description w3-input w3-border "
 																name="setDescription"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDescription classCrowdFlowObserved inputCrowdFlowObserved{{id}}Description w3-input w3-border "
+																class="setDescription classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Description w3-input w3-border "
 																name="setDescription"
 		{{else}}
-																class="valueDescription w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Description w3-input w3-border "
+																class="valueDescription w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Description w3-input w3-border "
 																name="description"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDescription', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDescription', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.description}}"
@@ -2507,10 +2754,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Description varCrowdFlowObservedDescription ">{{crowdFlowObserved_.description}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Description varCrowdFlowObservedDescription ">{{crowdFlowObserved_.description}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Description varCrowdFlowObservedDescription ">{{crowdFlowObserved_.description}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Description varCrowdFlowObservedDescription ">{{crowdFlowObserved_.description}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2541,20 +2788,20 @@
 															placeholder="direction"
 															title="Usual direction of travel in the walkway referred by this observation with respect to the city center. Enum:'inbound, outbound'"															id="{{classApiMethodMethod}}_direction"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setDirection classCrowdFlowObserved inputCrowdFlowObserved{{id}}Direction w3-input w3-border "
+																class="setDirection classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Direction w3-input w3-border "
 																name="setDirection"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setDirection classCrowdFlowObserved inputCrowdFlowObserved{{id}}Direction w3-input w3-border "
+																class="setDirection classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Direction w3-input w3-border "
 																name="setDirection"
 		{{else}}
-																class="valueDirection w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Direction w3-input w3-border "
+																class="valueDirection w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Direction w3-input w3-border "
 																name="direction"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDirection', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_direction')); }, function() { addError($('#{{classApiMethodMethod}}_direction')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDirection', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_direction')); }, function() { addError($('#{{classApiMethodMethod}}_direction')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.direction}}"
@@ -2563,10 +2810,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Direction varCrowdFlowObservedDirection ">{{crowdFlowObserved_.direction}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Direction varCrowdFlowObservedDirection ">{{crowdFlowObserved_.direction}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Direction varCrowdFlowObservedDirection ">{{crowdFlowObserved_.direction}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Direction varCrowdFlowObservedDirection ">{{crowdFlowObserved_.direction}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2597,20 +2844,20 @@
 															placeholder="location"
 															title="Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"															id="{{classApiMethodMethod}}_location"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setLocation classCrowdFlowObserved inputCrowdFlowObserved{{id}}Location w3-input w3-border "
+																class="setLocation classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Location w3-input w3-border "
 																name="setLocation"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setLocation classCrowdFlowObserved inputCrowdFlowObserved{{id}}Location w3-input w3-border "
+																class="setLocation classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Location w3-input w3-border "
 																name="setLocation"
 		{{else}}
-																class="valueLocation w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Location w3-input w3-border "
+																class="valueLocation w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Location w3-input w3-border "
 																name="location"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLocation', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.location}}"
@@ -2619,10 +2866,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Location varCrowdFlowObservedLocation ">{{crowdFlowObserved_.location}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Location varCrowdFlowObservedLocation ">{{crowdFlowObserved_.location}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Location varCrowdFlowObservedLocation ">{{crowdFlowObserved_.location}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Location varCrowdFlowObservedLocation ">{{crowdFlowObserved_.location}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2653,20 +2900,20 @@
 															placeholder="name"
 															title="The name of this item."															id="{{classApiMethodMethod}}_name"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setName classCrowdFlowObserved inputCrowdFlowObserved{{id}}Name w3-input w3-border "
+																class="setName classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Name w3-input w3-border "
 																name="setName"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setName classCrowdFlowObserved inputCrowdFlowObserved{{id}}Name w3-input w3-border "
+																class="setName classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Name w3-input w3-border "
 																name="setName"
 		{{else}}
-																class="valueName w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Name w3-input w3-border "
+																class="valueName w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Name w3-input w3-border "
 																name="name"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setName', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.name}}"
@@ -2675,10 +2922,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Name varCrowdFlowObservedName ">{{crowdFlowObserved_.name}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Name varCrowdFlowObservedName ">{{crowdFlowObserved_.name}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Name varCrowdFlowObservedName ">{{crowdFlowObserved_.name}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Name varCrowdFlowObservedName ">{{crowdFlowObserved_.name}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2709,20 +2956,20 @@
 															placeholder="occupancy"
 															title="Fraction of the observation time where a person has been occupying the observed walkway"															id="{{classApiMethodMethod}}_occupancy"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setOccupancy classCrowdFlowObserved inputCrowdFlowObserved{{id}}Occupancy w3-input w3-border "
+																class="setOccupancy classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Occupancy w3-input w3-border "
 																name="setOccupancy"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setOccupancy classCrowdFlowObserved inputCrowdFlowObserved{{id}}Occupancy w3-input w3-border "
+																class="setOccupancy classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Occupancy w3-input w3-border "
 																name="setOccupancy"
 		{{else}}
-																class="valueOccupancy w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Occupancy w3-input w3-border "
+																class="valueOccupancy w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Occupancy w3-input w3-border "
 																name="occupancy"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setOccupancy', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_occupancy')); }, function() { addError($('#{{classApiMethodMethod}}_occupancy')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setOccupancy', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_occupancy')); }, function() { addError($('#{{classApiMethodMethod}}_occupancy')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.occupancy}}"
@@ -2731,10 +2978,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Occupancy varCrowdFlowObservedOccupancy ">{{crowdFlowObserved_.occupancy}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Occupancy varCrowdFlowObservedOccupancy ">{{crowdFlowObserved_.occupancy}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Occupancy varCrowdFlowObservedOccupancy ">{{crowdFlowObserved_.occupancy}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Occupancy varCrowdFlowObservedOccupancy ">{{crowdFlowObserved_.occupancy}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2765,32 +3012,32 @@
 															placeholder="owner"
 															title="A List containing a JSON encoded sequence of characters referencing the unique Ids of the owner(s)"															id="{{classApiMethodMethod}}_owner"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setOwner classCrowdFlowObserved inputCrowdFlowObserved{{id}}Owner w3-input w3-border "
+																class="setOwner classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Owner w3-input w3-border "
 																name="setOwner"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setOwner classCrowdFlowObserved inputCrowdFlowObserved{{id}}Owner w3-input w3-border "
+																class="setOwner classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Owner w3-input w3-border "
 																name="setOwner"
 		{{else}}
-																class="valueOwner w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Owner w3-input w3-border "
+																class="valueOwner w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Owner w3-input w3-border "
 																name="owner"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setOwner', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_owner')); }, function() { addError($('#{{classApiMethodMethod}}_owner')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setOwner', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_owner')); }, function() { addError($('#{{classApiMethodMethod}}_owner')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{crowdFlowObserved_.owner}}"
+															value="{{toJsonObjectString crowdFlowObserved_.owner}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Owner varCrowdFlowObservedOwner ">{{crowdFlowObserved_.owner}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Owner varCrowdFlowObservedOwner ">{{crowdFlowObserved_.owner}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Owner varCrowdFlowObservedOwner ">{{crowdFlowObserved_.owner}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Owner varCrowdFlowObservedOwner ">{{crowdFlowObserved_.owner}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2821,20 +3068,20 @@
 															placeholder="people count"
 															title="Total number of people detected during this observation."															id="{{classApiMethodMethod}}_peopleCount"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setPeopleCount classCrowdFlowObserved inputCrowdFlowObserved{{id}}PeopleCount w3-input w3-border "
+																class="setPeopleCount classCrowdFlowObserved inputCrowdFlowObserved{{pk}}PeopleCount w3-input w3-border "
 																name="setPeopleCount"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setPeopleCount classCrowdFlowObserved inputCrowdFlowObserved{{id}}PeopleCount w3-input w3-border "
+																class="setPeopleCount classCrowdFlowObserved inputCrowdFlowObserved{{pk}}PeopleCount w3-input w3-border "
 																name="setPeopleCount"
 		{{else}}
-																class="valuePeopleCount w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}PeopleCount w3-input w3-border "
+																class="valuePeopleCount w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}PeopleCount w3-input w3-border "
 																name="peopleCount"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setPeopleCount', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_peopleCount')); }, function() { addError($('#{{classApiMethodMethod}}_peopleCount')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setPeopleCount', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_peopleCount')); }, function() { addError($('#{{classApiMethodMethod}}_peopleCount')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.peopleCount}}"
@@ -2843,10 +3090,10 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}PeopleCount varCrowdFlowObservedPeopleCount ">{{crowdFlowObserved_.peopleCount}}</span>
+															<span class="varCrowdFlowObserved{{pk}}PeopleCount varCrowdFlowObservedPeopleCount ">{{crowdFlowObserved_.peopleCount}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}PeopleCount varCrowdFlowObservedPeopleCount ">{{crowdFlowObserved_.peopleCount}}</span>
+														<span class="varCrowdFlowObserved{{pk}}PeopleCount varCrowdFlowObservedPeopleCount ">{{crowdFlowObserved_.peopleCount}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2877,32 +3124,32 @@
 															placeholder="ref road segment"
 															title="Concerned road segment on which the observation has been made"															id="{{classApiMethodMethod}}_refRoadSegment"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setRefRoadSegment classCrowdFlowObserved inputCrowdFlowObserved{{id}}RefRoadSegment w3-input w3-border "
+																class="setRefRoadSegment classCrowdFlowObserved inputCrowdFlowObserved{{pk}}RefRoadSegment w3-input w3-border "
 																name="setRefRoadSegment"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setRefRoadSegment classCrowdFlowObserved inputCrowdFlowObserved{{id}}RefRoadSegment w3-input w3-border "
+																class="setRefRoadSegment classCrowdFlowObserved inputCrowdFlowObserved{{pk}}RefRoadSegment w3-input w3-border "
 																name="setRefRoadSegment"
 		{{else}}
-																class="valueRefRoadSegment w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}RefRoadSegment w3-input w3-border "
+																class="valueRefRoadSegment w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}RefRoadSegment w3-input w3-border "
 																name="refRoadSegment"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setRefRoadSegment', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_refRoadSegment')); }, function() { addError($('#{{classApiMethodMethod}}_refRoadSegment')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setRefRoadSegment', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_refRoadSegment')); }, function() { addError($('#{{classApiMethodMethod}}_refRoadSegment')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{crowdFlowObserved_.refRoadSegment}}"
+															value="{{toJsonObjectString crowdFlowObserved_.refRoadSegment}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}RefRoadSegment varCrowdFlowObservedRefRoadSegment ">{{crowdFlowObserved_.refRoadSegment}}</span>
+															<span class="varCrowdFlowObserved{{pk}}RefRoadSegment varCrowdFlowObservedRefRoadSegment ">{{crowdFlowObserved_.refRoadSegment}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}RefRoadSegment varCrowdFlowObservedRefRoadSegment ">{{crowdFlowObserved_.refRoadSegment}}</span>
+														<span class="varCrowdFlowObserved{{pk}}RefRoadSegment varCrowdFlowObservedRefRoadSegment ">{{crowdFlowObserved_.refRoadSegment}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2933,32 +3180,32 @@
 															placeholder="see also"
 															title="list of uri pointing to additional resources about the item"															id="{{classApiMethodMethod}}_seeAlso"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setSeeAlso classCrowdFlowObserved inputCrowdFlowObserved{{id}}SeeAlso w3-input w3-border "
+																class="setSeeAlso classCrowdFlowObserved inputCrowdFlowObserved{{pk}}SeeAlso w3-input w3-border "
 																name="setSeeAlso"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSeeAlso classCrowdFlowObserved inputCrowdFlowObserved{{id}}SeeAlso w3-input w3-border "
+																class="setSeeAlso classCrowdFlowObserved inputCrowdFlowObserved{{pk}}SeeAlso w3-input w3-border "
 																name="setSeeAlso"
 		{{else}}
-																class="valueSeeAlso w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}SeeAlso w3-input w3-border "
+																class="valueSeeAlso w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}SeeAlso w3-input w3-border "
 																name="seeAlso"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSeeAlso', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_seeAlso')); }, function() { addError($('#{{classApiMethodMethod}}_seeAlso')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeAlso', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_seeAlso')); }, function() { addError($('#{{classApiMethodMethod}}_seeAlso')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
-															value="{{crowdFlowObserved_.seeAlso}}"
+															value="{{toJsonObjectString crowdFlowObserved_.seeAlso}}"
 	{{/eq}}
 														/>
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}SeeAlso varCrowdFlowObservedSeeAlso ">{{crowdFlowObserved_.seeAlso}}</span>
+															<span class="varCrowdFlowObserved{{pk}}SeeAlso varCrowdFlowObservedSeeAlso ">{{crowdFlowObserved_.seeAlso}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}SeeAlso varCrowdFlowObservedSeeAlso ">{{crowdFlowObserved_.seeAlso}}</span>
+														<span class="varCrowdFlowObserved{{pk}}SeeAlso varCrowdFlowObservedSeeAlso ">{{crowdFlowObserved_.seeAlso}}</span>
 		{{/eq}}
 {{/inline}}
 
@@ -2989,20 +3236,20 @@
 															placeholder="source"
 															title="A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object."															id="{{classApiMethodMethod}}_source"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setSource classCrowdFlowObserved inputCrowdFlowObserved{{id}}Source w3-input w3-border "
+																class="setSource classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Source w3-input w3-border "
 																name="setSource"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSource classCrowdFlowObserved inputCrowdFlowObserved{{id}}Source w3-input w3-border "
+																class="setSource classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Source w3-input w3-border "
 																name="setSource"
 		{{else}}
-																class="valueSource w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Source w3-input w3-border "
+																class="valueSource w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{pk}}Source w3-input w3-border "
 																name="source"
 		{{/eq}}
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setSource', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSource', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{crowdFlowObserved_.source}}"
@@ -3011,65 +3258,9 @@
 
 													{{else}}
 														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Source varCrowdFlowObservedSource ">{{crowdFlowObserved_.source}}</span>
+															<span class="varCrowdFlowObserved{{pk}}Source varCrowdFlowObservedSource ">{{crowdFlowObserved_.source}}</span>
 			{{/ifContainsKeys}}
 		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Source varCrowdFlowObservedSource ">{{crowdFlowObserved_.source}}</span>
-		{{/eq}}
-{{/inline}}
-
-{{#*inline "htmType"}}
-<!-- #*inline "htmType" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}CrowdFlowObservedType">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_type">type</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputType" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputType"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="type"
-															title="NGSI Entity type. It has to be CrowdFlowObserved"															id="{{classApiMethodMethod}}_type"
-	{{#eq "Page" classApiMethodMethod}}
-																class="setType classCrowdFlowObserved inputCrowdFlowObserved{{id}}Type w3-input w3-border "
-																name="setType"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="setType classCrowdFlowObserved inputCrowdFlowObserved{{id}}Type w3-input w3-border "
-																name="setType"
-		{{else}}
-																class="valueType w3-input w3-border classCrowdFlowObserved inputCrowdFlowObserved{{id}}Type w3-input w3-border "
-																name="type"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_type')); }, function() { addError($('#{{classApiMethodMethod}}_type')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{crowdFlowObserved_.type}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-														{{#ifContainsKeys userKeys}}
-															<span class="varCrowdFlowObserved{{id}}Type varCrowdFlowObservedType ">{{crowdFlowObserved_.type}}</span>
-			{{/ifContainsKeys}}
-		{{else}}
-														<span class="varCrowdFlowObserved{{id}}Type varCrowdFlowObservedType ">{{crowdFlowObserved_.type}}</span>
+														<span class="varCrowdFlowObserved{{pk}}Source varCrowdFlowObservedSource ">{{crowdFlowObserved_.source}}</span>
 		{{/eq}}
 {{/inline}}

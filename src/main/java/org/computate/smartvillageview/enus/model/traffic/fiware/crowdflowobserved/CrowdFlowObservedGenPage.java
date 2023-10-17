@@ -455,6 +455,11 @@ public class CrowdFlowObservedGenPage extends CrowdFlowObservedGenPageGen<BaseMo
 			w.o(searchListCrowdFlowObserved_.get(0));
 	}
 
+	protected void _pk(Wrap<Long> w) {
+		if(crowdFlowObserved_ != null)
+			w.o(crowdFlowObserved_.getPk());
+	}
+
 	protected void _id(Wrap<String> w) {
 		if(crowdFlowObserved_ != null)
 			w.o(crowdFlowObserved_.getId());
@@ -484,12 +489,12 @@ public class CrowdFlowObservedGenPage extends CrowdFlowObservedGenPageGen<BaseMo
 
 	@Override
 	protected void _pageUri(Wrap<String> c) {
-		c.o("/CrowdFlowObserved");
+		c.o("/crowd-flow-observed");
 	}
 
 	@Override
 	protected void _apiUri(Wrap<String> c) {
-		c.o("/api/CrowdFlowObserved");
+		c.o("/api/crowd-flow-observed");
 	}
 
 	@Override
@@ -518,7 +523,7 @@ public class CrowdFlowObservedGenPage extends CrowdFlowObservedGenPageGen<BaseMo
 
 	@Override
 	protected void _pageImageUri(Wrap<String> c) {
-			c.o("/png/CrowdFlowObserved-999.png");
+			c.o("/png/crowd-flow-observed-999.png");
 	}
 
 	@Override
@@ -532,6 +537,6 @@ public class CrowdFlowObservedGenPage extends CrowdFlowObservedGenPageGen<BaseMo
 	}
 
 	protected void _pageUriCrowdFlowObserved(Wrap<String> c) {
-			c.o("/CrowdFlowObserved");
+			c.o("/crowd-flow-observed");
 	}
 }

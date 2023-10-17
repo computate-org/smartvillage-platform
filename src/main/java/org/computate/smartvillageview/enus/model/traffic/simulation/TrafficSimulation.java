@@ -7,8 +7,13 @@ import java.util.Optional;
 
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillageview.enus.model.base.BaseModel;
+import org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved;
+import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObserved;
+import org.computate.vertx.search.list.SearchList;
 
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
+import io.vertx.pgclient.data.Path;
 import io.vertx.pgclient.data.Point;
 
 /**
@@ -59,18 +64,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: entity ID
-	 * Description: A unique ID for this Smart Data Model
-	 * HtmRow: 5
-	 * HtmCell: 1
-	 * Facet: true
-	 */
-	protected void _entityId(Wrap<String> w) {}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * Facet: true
 	 * DisplayName: Start date and Time
 	 * Description: The start date and time. 
@@ -94,6 +87,31 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * DisplayName: entity ID
+	 * Description: A unique ID for this Smart Data Model
+	 * HtmRow: 3
+	 * HtmCell: 2
+	 * Facet: true
+	 */
+	protected void _entityId(Wrap<String> w) {}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Relate: SimulationReport.simulationKey
+	 * Facet: true
+	 * DisplayName: simulation reports
+	 * Description: The generated reports for this simulation
+	 * HtmRow: 4
+	 * HtmCell: 1
+	 */
+	protected void _reportKeys(List<Long> w) {
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * FiwareType: geo:point
 	 * DocValues: true
 	 * Persist: true
@@ -103,6 +121,44 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _location(Wrap<Point> w) {
+	}
+
+	/**
+	 * Ignore: true
+	 */
+	protected void _observedSearch(Promise<SearchList<BaseModel>> promise) {
+		SearchList<BaseModel> l = new SearchList<>();
+		if(entityId != null) {
+			l.setC(BaseModel.class);
+			l.q("*:*");
+			l.fq(String.format("trafficSimulationId_docvalues_string:%s", entityId));
+			l.fq(String.format(BaseModel.VAR_classSimpleName + "_docvalues_string:(%s OR %s)", TrafficFlowObserved.CLASS_SIMPLE_NAME, CrowdFlowObserved.CLASS_SIMPLE_NAME));
+			l.setStore(true);
+		}
+		promise.complete(l);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Location: true
+	 * DocValues: true
+	 */
+	protected void _areaServed(List<Path> l) {
+		observedSearch.getList().forEach(baseModel -> {
+			if(baseModel instanceof TrafficFlowObserved) {
+				Path path = new Path();
+				((TrafficFlowObserved)baseModel).getAreaServed().getPoints().forEach(point -> {
+					path.addPoint(point);
+				});
+				l.add(path);
+			} else if(baseModel instanceof CrowdFlowObserved) {
+				Path path = new Path();
+				((CrowdFlowObserved)baseModel).getAreaServed().getPoints().forEach(point -> {
+					path.addPoint(point);
+				});
+				l.add(path);
+			}
+		});;
 	}
 
 	/**
@@ -468,19 +524,6 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 
 	/**
 	 * {@inheritDoc}
-	 * DocValues: true
-	 * Relate: SimulationReport.simulationKey
-	 * Facet: true
-	 * DisplayName: simulation reports
-	 * Description: The generated reports for this simulation
-	 * HtmRow: 4
-	 * HtmCell: 1
-	 */
-	protected void _reportKeys(List<Long> w) {
-	}
-
-	/**
-	 * {@inheritDoc}
 	 * DisplayName: TLS States paths
 	 * Description: The paths to all TLS States files
 	 */
@@ -547,6 +590,24 @@ public class TrafficSimulation extends TrafficSimulationGen<BaseModel> {
 	 * Facet: true
 	 */
 	protected void _e1DetectorPaths(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _walkingAreaIds(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
+	 * Facet: true
+	 */
+	protected void _walkingAreaLanes(JsonArray l) {
 	}
 
 	@Override

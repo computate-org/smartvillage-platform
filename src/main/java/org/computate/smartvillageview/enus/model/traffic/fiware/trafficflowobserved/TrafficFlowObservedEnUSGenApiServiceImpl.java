@@ -769,7 +769,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 							bParams.add(o2.sqlAlternateName());
 						break;
 					case "setAreaServed":
-							o2.setAreaServed(jsonObject.getString(entityVar));
+							o2.setAreaServed(jsonObject.getJsonObject(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
 							bSql.append(TrafficFlowObserved.VAR_areaServed + "=$" + num);
@@ -1484,7 +1484,7 @@ public class TrafficFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl
 						bParams.add(o2.sqlAlternateName());
 						break;
 					case TrafficFlowObserved.VAR_areaServed:
-						o2.setAreaServed(jsonObject.getString(entityVar));
+						o2.setAreaServed(jsonObject.getJsonObject(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}

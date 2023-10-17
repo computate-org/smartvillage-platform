@@ -1051,7 +1051,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	public static Path staticSetAreaServed(SiteRequestEnUS siteRequest_, String o) {
 		if(o != null) {
 			try {
-				Path path = null;
+				Path shape = null;
 				if(StringUtils.isNotBlank(o)) {
 					ObjectMapper objectMapper = new ObjectMapper();
 					SimpleModule module = new SimpleModule();
@@ -1065,9 +1065,28 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 						}
 					});
 					objectMapper.registerModule(module);
-					path = objectMapper.readValue(Json.encode(o), Path.class);
+					shape = objectMapper.readValue(Json.encode(o), Path.class);
 				}
-				return path;
+				return shape;
+			} catch(Exception ex) {
+				ExceptionUtils.rethrow(ex);
+			}
+		}
+		return null;
+	}
+	public void setAreaServed(JsonObject o) {
+		this.areaServed = TrafficFlowObserved.staticSetAreaServed(siteRequest_, o);
+	}
+	public static Path staticSetAreaServed(SiteRequestEnUS siteRequest_, JsonObject o) {
+		if(o != null) {
+			try {
+				Path shape = new Path();
+				o.getJsonArray("coordinates").stream().map(a -> (JsonArray)a).forEach(g -> {
+					g.stream().map(a -> (JsonArray)a).forEach(points -> {
+						shape.addPoint(new Point(Double.parseDouble(points.getString(0)), Double.parseDouble(points.getString(1))));
+					});
+				});
+				return shape;
 			} catch(Exception ex) {
 				ExceptionUtils.rethrow(ex);
 			}
@@ -4950,6 +4969,7 @@ public abstract class TrafficFlowObservedGen<DEV> extends BaseModel {
 	}
 	public void storeTrafficFlowObserved(SolrResponse.Doc doc) {
 		TrafficFlowObserved oTrafficFlowObserved = (TrafficFlowObserved)this;
+		SiteRequestEnUS siteRequest = oTrafficFlowObserved.getSiteRequest_();
 
 		oTrafficFlowObserved.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficFlowObserved.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));

@@ -392,7 +392,7 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 					));
 				} else {
 					try {
-						searchCrowdFlowObservedList(siteRequest, true, false, true).onSuccess(listCrowdFlowObserved -> {
+						searchCrowdFlowObservedList(siteRequest, false, true, true).onSuccess(listCrowdFlowObserved -> {
 							try {
 								if(listCrowdFlowObserved.getResponse().getResponse().getNumFound() > 1
 										&& !Optional.ofNullable(config.getString(ConfigKeys.AUTH_ROLE_REQUIRED + "_CrowdFlowObserved")).map(v -> RoleBasedAuthorization.create(v).match(siteRequest.getUser())).orElse(false)
@@ -410,6 +410,7 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 									siteRequest.setApiRequest_(apiRequest);
 									if(apiRequest.getNumFound() == 1L)
 										apiRequest.setOriginal(listCrowdFlowObserved.first());
+									apiRequest.setPk(Optional.ofNullable(listCrowdFlowObserved.first()).map(o2 -> o2.getPk()).orElse(null));
 									eventBus.publish("websocketCrowdFlowObserved", JsonObject.mapFrom(apiRequest).toString());
 
 									listPATCHCrowdFlowObserved(apiRequest, listCrowdFlowObserved).onSuccess(e -> {
@@ -527,6 +528,7 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}
 							if(apiRequest.getNumFound() == 1L)
 								apiRequest.setOriginal(o);
+							apiRequest.setPk(Optional.ofNullable(listCrowdFlowObserved.first()).map(o2 -> o2.getPk()).orElse(null));
 							patchCrowdFlowObservedFuture(o, false).onSuccess(o2 -> {
 								eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(new JsonObject().encodePrettily()))));
 							}).onFailure(ex -> {
@@ -559,17 +561,367 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 
 		try {
 			ApiRequest apiRequest = siteRequest.getApiRequest_();
-			persistCrowdFlowObserved(o, true).onSuccess(c -> {
-				indexCrowdFlowObserved(o).onSuccess(e -> {
-					promise.complete(o);
+			Promise<CrowdFlowObserved> promise1 = Promise.promise();
+			pgPool.withTransaction(sqlConnection -> {
+				siteRequest.setSqlConnection(sqlConnection);
+				varsCrowdFlowObserved(siteRequest).onSuccess(a -> {
+					sqlPATCHCrowdFlowObserved(o, inheritPk).onSuccess(crowdFlowObserved -> {
+						persistCrowdFlowObserved(crowdFlowObserved).onSuccess(c -> {
+							relateCrowdFlowObserved(crowdFlowObserved).onSuccess(d -> {
+								indexCrowdFlowObserved(crowdFlowObserved).onSuccess(o2 -> {
+									if(apiRequest != null) {
+										apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+										if(apiRequest.getNumFound() == 1L && Optional.ofNullable(siteRequest.getJsonObject()).map(json -> json.size() > 0).orElse(false)) {
+											o2.apiRequestCrowdFlowObserved();
+											if(apiRequest.getVars().size() > 0)
+												eventBus.publish("websocketCrowdFlowObserved", JsonObject.mapFrom(apiRequest).toString());
+										}
+									}
+									promise1.complete(crowdFlowObserved);
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
+					}).onFailure(ex -> {
+						promise1.fail(ex);
+					});
 				}).onFailure(ex -> {
-					promise.fail(ex);
+					promise1.fail(ex);
 				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(crowdFlowObserved -> {
+				Promise<CrowdFlowObserved> promise2 = Promise.promise();
+				refreshCrowdFlowObserved(crowdFlowObserved).onSuccess(a -> {
+					promise2.complete(crowdFlowObserved);
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(crowdFlowObserved -> {
+				promise.complete(crowdFlowObserved);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("patchCrowdFlowObservedFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<CrowdFlowObserved> sqlPATCHCrowdFlowObserved(CrowdFlowObserved o, Boolean inheritPk) {
+		Promise<CrowdFlowObserved> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE CrowdFlowObserved SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			Set<String> methodNames = jsonObject.fieldNames();
+			CrowdFlowObserved o2 = new CrowdFlowObserved();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			for(String entityVar : methodNames) {
+				switch(entityVar) {
+					case "setInheritPk":
+							o2.setInheritPk(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_inheritPk + "=$" + num);
+							num++;
+							bParams.add(o2.sqlInheritPk());
+						break;
+					case "setCreated":
+							o2.setCreated(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_created + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCreated());
+						break;
+					case "setArchived":
+							o2.setArchived(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_archived + "=$" + num);
+							num++;
+							bParams.add(o2.sqlArchived());
+						break;
+					case "setDeleted":
+							o2.setDeleted(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_deleted + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDeleted());
+						break;
+					case "setSessionId":
+							o2.setSessionId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_sessionId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSessionId());
+						break;
+					case "setUserKey":
+							o2.setUserKey(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_userKey + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUserKey());
+						break;
+					case "setColor":
+							o2.setColor(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_color + "=$" + num);
+							num++;
+							bParams.add(o2.sqlColor());
+						break;
+					case "setEntityId":
+							o2.setEntityId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_entityId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlEntityId());
+						break;
+					case "setTrafficSimulationId":
+							o2.setTrafficSimulationId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_trafficSimulationId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlTrafficSimulationId());
+						break;
+					case "setWalkingAreaId":
+							o2.setWalkingAreaId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_walkingAreaId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlWalkingAreaId());
+						break;
+					case "setAlternateName":
+							o2.setAlternateName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_alternateName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAlternateName());
+						break;
+					case "setAreaServed":
+							o2.setAreaServed(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_areaServed + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAreaServed());
+						break;
+					case "setAverageCrowdSpeed":
+							o2.setAverageCrowdSpeed(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_averageCrowdSpeed + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageCrowdSpeed());
+						break;
+					case "setAverageHeadwayTime":
+							o2.setAverageHeadwayTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_averageHeadwayTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageHeadwayTime());
+						break;
+					case "setCongested":
+							o2.setCongested(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_congested + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCongested());
+						break;
+					case "setDataProvider":
+							o2.setDataProvider(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_dataProvider + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDataProvider());
+						break;
+					case "setDateCreated":
+							o2.setDateCreated(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_dateCreated + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateCreated());
+						break;
+					case "setDateModified":
+							o2.setDateModified(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_dateModified + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateModified());
+						break;
+					case "setDateObserved":
+							o2.setDateObserved(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_dateObserved + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateObserved());
+						break;
+					case "setDateObservedFrom":
+							o2.setDateObservedFrom(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_dateObservedFrom + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateObservedFrom());
+						break;
+					case "setDateObservedTo":
+							o2.setDateObservedTo(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_dateObservedTo + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDateObservedTo());
+						break;
+					case "setDescription":
+							o2.setDescription(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_description + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDescription());
+						break;
+					case "setDirection":
+							o2.setDirection(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_direction + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDirection());
+						break;
+					case "setLocation":
+							o2.setLocation(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_location + "=$" + num);
+							num++;
+							bParams.add(o2.sqlLocation());
+						break;
+					case "setName":
+							o2.setName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_name + "=$" + num);
+							num++;
+							bParams.add(o2.sqlName());
+						break;
+					case "setOccupancy":
+							o2.setOccupancy(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_occupancy + "=$" + num);
+							num++;
+							bParams.add(o2.sqlOccupancy());
+						break;
+					case "setOwner":
+							o2.setOwner(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_owner + "=$" + num);
+							num++;
+							bParams.add(o2.sqlOwner());
+						break;
+					case "setPeopleCount":
+							o2.setPeopleCount(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_peopleCount + "=$" + num);
+							num++;
+							bParams.add(o2.sqlPeopleCount());
+						break;
+					case "setRefRoadSegment":
+							o2.setRefRoadSegment(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_refRoadSegment + "=$" + num);
+							num++;
+							bParams.add(o2.sqlRefRoadSegment());
+						break;
+					case "setSeeAlso":
+							o2.setSeeAlso(jsonObject.getJsonObject(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_seeAlso + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSeeAlso());
+						break;
+					case "setSource":
+							o2.setSource(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(CrowdFlowObserved.VAR_source + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSource());
+						break;
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+				bParams.add(pk);
+				num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value CrowdFlowObserved failed", ex);
+						LOG.error(String.format("relateCrowdFlowObserved failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					CrowdFlowObserved o3 = new CrowdFlowObserved();
+					o3.setSiteRequest_(o.getSiteRequest_());
+					o3.setPk(pk);
+					promise.complete(o3);
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPATCHCrowdFlowObserved failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPATCHCrowdFlowObserved failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPATCHCrowdFlowObserved failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -652,6 +1004,7 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						eventBus.request("smartabyar-smartvillage-enUS-CrowdFlowObserved", json, new DeliveryOptions().addHeader("action", "postCrowdFlowObservedFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
+							apiRequest.setPk(Long.parseLong(responseBody.getString("pk")));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
 							LOG.debug(String.format("postCrowdFlowObserved succeeded. "));
 						}).onFailure(ex -> {
@@ -738,21 +1091,421 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 		Promise<CrowdFlowObserved> promise = Promise.promise();
 
 		try {
-			createCrowdFlowObserved(siteRequest).onSuccess(crowdFlowObserved -> {
-				persistCrowdFlowObserved(crowdFlowObserved, false).onSuccess(c -> {
-					indexCrowdFlowObserved(crowdFlowObserved).onSuccess(o2 -> {
-						promise.complete(crowdFlowObserved);
+			pgPool.withTransaction(sqlConnection -> {
+				Promise<CrowdFlowObserved> promise1 = Promise.promise();
+				siteRequest.setSqlConnection(sqlConnection);
+				varsCrowdFlowObserved(siteRequest).onSuccess(a -> {
+					createCrowdFlowObserved(siteRequest).onSuccess(crowdFlowObserved -> {
+						sqlPOSTCrowdFlowObserved(crowdFlowObserved, inheritPk).onSuccess(b -> {
+							persistCrowdFlowObserved(crowdFlowObserved).onSuccess(c -> {
+								relateCrowdFlowObserved(crowdFlowObserved).onSuccess(d -> {
+									indexCrowdFlowObserved(crowdFlowObserved).onSuccess(o2 -> {
+										promise1.complete(crowdFlowObserved);
+									}).onFailure(ex -> {
+										promise1.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise1.fail(ex);
+								});
+							}).onFailure(ex -> {
+								promise1.fail(ex);
+							});
+						}).onFailure(ex -> {
+							promise1.fail(ex);
+						});
 					}).onFailure(ex -> {
-						promise.fail(ex);
+						promise1.fail(ex);
 					});
 				}).onFailure(ex -> {
-					promise.fail(ex);
+					promise1.fail(ex);
 				});
+				return promise1.future();
+			}).onSuccess(a -> {
+				siteRequest.setSqlConnection(null);
+			}).onFailure(ex -> {
+				siteRequest.setSqlConnection(null);
+				promise.fail(ex);
+			}).compose(crowdFlowObserved -> {
+				Promise<CrowdFlowObserved> promise2 = Promise.promise();
+				refreshCrowdFlowObserved(crowdFlowObserved).onSuccess(a -> {
+					try {
+						ApiRequest apiRequest = siteRequest.getApiRequest_();
+						if(apiRequest != null) {
+							apiRequest.setNumPATCH(apiRequest.getNumPATCH() + 1);
+							crowdFlowObserved.apiRequestCrowdFlowObserved();
+							eventBus.publish("websocketCrowdFlowObserved", JsonObject.mapFrom(apiRequest).toString());
+						}
+						promise2.complete(crowdFlowObserved);
+					} catch(Exception ex) {
+						LOG.error(String.format("postCrowdFlowObservedFuture failed. "), ex);
+						promise.fail(ex);
+					}
+				}).onFailure(ex -> {
+					promise2.fail(ex);
+				});
+				return promise2.future();
+			}).onSuccess(crowdFlowObserved -> {
+				promise.complete(crowdFlowObserved);
 			}).onFailure(ex -> {
 				promise.fail(ex);
 			});
 		} catch(Exception ex) {
 			LOG.error(String.format("postCrowdFlowObservedFuture failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
+	}
+
+	public Future<Void> sqlPOSTCrowdFlowObserved(CrowdFlowObserved o, Boolean inheritPk) {
+		Promise<Void> promise = Promise.promise();
+		try {
+			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Integer num = 1;
+			StringBuilder bSql = new StringBuilder("UPDATE CrowdFlowObserved SET ");
+			List<Object> bParams = new ArrayList<Object>();
+			Long pk = o.getPk();
+			JsonObject jsonObject = siteRequest.getJsonObject();
+			CrowdFlowObserved o2 = new CrowdFlowObserved();
+			o2.setSiteRequest_(siteRequest);
+			List<Future> futures1 = new ArrayList<>();
+			List<Future> futures2 = new ArrayList<>();
+
+			if(siteRequest.getSessionId() != null) {
+				if(bParams.size() > 0) {
+					bSql.append(", ");
+				}
+				bSql.append("sessionId=$" + num);
+				num++;
+				bParams.add(siteRequest.getSessionId());
+			}
+			if(siteRequest.getUserKey() != null) {
+				if(bParams.size() > 0) {
+					bSql.append(", ");
+				}
+				bSql.append("userKey=$" + num);
+				num++;
+				bParams.add(siteRequest.getUserKey());
+			}
+
+			if(jsonObject != null) {
+				Set<String> entityVars = jsonObject.fieldNames();
+				for(String entityVar : entityVars) {
+					switch(entityVar) {
+					case CrowdFlowObserved.VAR_inheritPk:
+						o2.setInheritPk(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_inheritPk + "=$" + num);
+						num++;
+						bParams.add(o2.sqlInheritPk());
+						break;
+					case CrowdFlowObserved.VAR_created:
+						o2.setCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_created + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCreated());
+						break;
+					case CrowdFlowObserved.VAR_archived:
+						o2.setArchived(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_archived + "=$" + num);
+						num++;
+						bParams.add(o2.sqlArchived());
+						break;
+					case CrowdFlowObserved.VAR_deleted:
+						o2.setDeleted(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_deleted + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDeleted());
+						break;
+					case CrowdFlowObserved.VAR_sessionId:
+						o2.setSessionId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_sessionId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSessionId());
+						break;
+					case CrowdFlowObserved.VAR_userKey:
+						o2.setUserKey(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_userKey + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUserKey());
+						break;
+					case CrowdFlowObserved.VAR_color:
+						o2.setColor(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_color + "=$" + num);
+						num++;
+						bParams.add(o2.sqlColor());
+						break;
+					case CrowdFlowObserved.VAR_entityId:
+						o2.setEntityId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_entityId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlEntityId());
+						break;
+					case CrowdFlowObserved.VAR_trafficSimulationId:
+						o2.setTrafficSimulationId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_trafficSimulationId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlTrafficSimulationId());
+						break;
+					case CrowdFlowObserved.VAR_walkingAreaId:
+						o2.setWalkingAreaId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_walkingAreaId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlWalkingAreaId());
+						break;
+					case CrowdFlowObserved.VAR_alternateName:
+						o2.setAlternateName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_alternateName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAlternateName());
+						break;
+					case CrowdFlowObserved.VAR_areaServed:
+						o2.setAreaServed(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_areaServed + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAreaServed());
+						break;
+					case CrowdFlowObserved.VAR_averageCrowdSpeed:
+						o2.setAverageCrowdSpeed(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_averageCrowdSpeed + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageCrowdSpeed());
+						break;
+					case CrowdFlowObserved.VAR_averageHeadwayTime:
+						o2.setAverageHeadwayTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_averageHeadwayTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageHeadwayTime());
+						break;
+					case CrowdFlowObserved.VAR_congested:
+						o2.setCongested(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_congested + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCongested());
+						break;
+					case CrowdFlowObserved.VAR_dataProvider:
+						o2.setDataProvider(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_dataProvider + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDataProvider());
+						break;
+					case CrowdFlowObserved.VAR_dateCreated:
+						o2.setDateCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_dateCreated + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateCreated());
+						break;
+					case CrowdFlowObserved.VAR_dateModified:
+						o2.setDateModified(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_dateModified + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateModified());
+						break;
+					case CrowdFlowObserved.VAR_dateObserved:
+						o2.setDateObserved(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_dateObserved + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateObserved());
+						break;
+					case CrowdFlowObserved.VAR_dateObservedFrom:
+						o2.setDateObservedFrom(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_dateObservedFrom + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateObservedFrom());
+						break;
+					case CrowdFlowObserved.VAR_dateObservedTo:
+						o2.setDateObservedTo(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_dateObservedTo + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDateObservedTo());
+						break;
+					case CrowdFlowObserved.VAR_description:
+						o2.setDescription(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_description + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDescription());
+						break;
+					case CrowdFlowObserved.VAR_direction:
+						o2.setDirection(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_direction + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDirection());
+						break;
+					case CrowdFlowObserved.VAR_location:
+						o2.setLocation(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_location + "=$" + num);
+						num++;
+						bParams.add(o2.sqlLocation());
+						break;
+					case CrowdFlowObserved.VAR_name:
+						o2.setName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_name + "=$" + num);
+						num++;
+						bParams.add(o2.sqlName());
+						break;
+					case CrowdFlowObserved.VAR_occupancy:
+						o2.setOccupancy(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_occupancy + "=$" + num);
+						num++;
+						bParams.add(o2.sqlOccupancy());
+						break;
+					case CrowdFlowObserved.VAR_owner:
+						o2.setOwner(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_owner + "=$" + num);
+						num++;
+						bParams.add(o2.sqlOwner());
+						break;
+					case CrowdFlowObserved.VAR_peopleCount:
+						o2.setPeopleCount(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_peopleCount + "=$" + num);
+						num++;
+						bParams.add(o2.sqlPeopleCount());
+						break;
+					case CrowdFlowObserved.VAR_refRoadSegment:
+						o2.setRefRoadSegment(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_refRoadSegment + "=$" + num);
+						num++;
+						bParams.add(o2.sqlRefRoadSegment());
+						break;
+					case CrowdFlowObserved.VAR_seeAlso:
+						o2.setSeeAlso(jsonObject.getJsonObject(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_seeAlso + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSeeAlso());
+						break;
+					case CrowdFlowObserved.VAR_source:
+						o2.setSource(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(CrowdFlowObserved.VAR_source + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSource());
+						break;
+					}
+				}
+			}
+			bSql.append(" WHERE pk=$" + num);
+			if(bParams.size() > 0) {
+			bParams.add(pk);
+			num++;
+				futures2.add(0, Future.future(a -> {
+					sqlConnection.preparedQuery(bSql.toString())
+							.execute(Tuple.tuple(bParams)
+							).onSuccess(b -> {
+						a.handle(Future.succeededFuture());
+					}).onFailure(ex -> {
+						RuntimeException ex2 = new RuntimeException("value CrowdFlowObserved failed", ex);
+						LOG.error(String.format("relateCrowdFlowObserved failed. "), ex2);
+						a.handle(Future.failedFuture(ex2));
+					});
+				}));
+			}
+			CompositeFuture.all(futures1).onSuccess(a -> {
+				CompositeFuture.all(futures2).onSuccess(b -> {
+					promise.complete();
+				}).onFailure(ex -> {
+					LOG.error(String.format("sqlPOSTCrowdFlowObserved failed. "), ex);
+					promise.fail(ex);
+				});
+			}).onFailure(ex -> {
+				LOG.error(String.format("sqlPOSTCrowdFlowObserved failed. "), ex);
+				promise.fail(ex);
+			});
+		} catch(Exception ex) {
+			LOG.error(String.format("sqlPOSTCrowdFlowObserved failed. "), ex);
 			promise.fail(ex);
 		}
 		return promise.future();
@@ -923,9 +1676,8 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 				apiRequest.setNumPATCH(0L);
 				apiRequest.initDeepApiRequest(siteRequest);
 				siteRequest.setApiRequest_(apiRequest);
-				String inheritPk = Optional.ofNullable(body.getString(CrowdFlowObserved.VAR_id)).orElse(body.getString(CrowdFlowObserved.VAR_id));
+				String inheritPk = Optional.ofNullable(body.getString(CrowdFlowObserved.VAR_pk)).orElse(body.getString(CrowdFlowObserved.VAR_id));
 				body.put("inheritPk", inheritPk);
-				body.put("inheritPk", body.getValue("id"));
 				if(Optional.ofNullable(serviceRequest.getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getJsonArray("var")).orElse(new JsonArray()).stream().filter(s -> "refresh:false".equals(s)).count() > 0L) {
 					siteRequest.getRequestVars().put( "refresh", "false" );
 				}
@@ -971,20 +1723,20 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 								} else {
 									o2.persistForClass(f, bodyVal);
 									o2.relateForClass(f, bodyVal);
-									if(!StringUtils.containsAny(f, "id", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.put("set" + StringUtils.capitalize(f), bodyVal);
 								}
 							}
 							for(String f : Optional.ofNullable(o.getSaves()).orElse(new ArrayList<>())) {
 								if(!body.fieldNames().contains(f)) {
-									if(!StringUtils.containsAny(f, "id", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
+									if(!StringUtils.containsAny(f, "pk", "created", "setCreated") && !Objects.equals(o.obtainForClass(f), o2.obtainForClass(f)))
 										body2.putNull("set" + StringUtils.capitalize(f));
 								}
 							}
 							if(body2.size() > 0) {
 								siteRequest.setJsonObject(body2);
-								patchCrowdFlowObservedFuture(o2, true).onSuccess(b -> {
-									LOG.debug("Import CrowdFlowObserved {} succeeded, modified CrowdFlowObserved. ", body.getValue(CrowdFlowObserved.VAR_id));
+								patchCrowdFlowObservedFuture(o, true).onSuccess(b -> {
+									LOG.debug("Import CrowdFlowObserved {} succeeded, modified CrowdFlowObserved. ", body.getValue(CrowdFlowObserved.VAR_pk));
 									eventHandler.handle(Future.succeededFuture());
 								}).onFailure(ex -> {
 									LOG.error(String.format("putimportCrowdFlowObservedFuture failed. "), ex);
@@ -995,7 +1747,7 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							}
 						} else {
 							postCrowdFlowObservedFuture(siteRequest, true).onSuccess(b -> {
-								LOG.debug("Import CrowdFlowObserved {} succeeded, created new CrowdFlowObserved. ", body.getValue(CrowdFlowObserved.VAR_id));
+								LOG.debug("Import CrowdFlowObserved {} succeeded, created new CrowdFlowObserved. ", body.getValue(CrowdFlowObserved.VAR_pk));
 								eventHandler.handle(Future.succeededFuture());
 							}).onFailure(ex -> {
 								LOG.error(String.format("putimportCrowdFlowObservedFuture failed. "), ex);
@@ -1152,6 +1904,8 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 			MultiMap requestHeaders = MultiMap.caseInsensitiveMultiMap();
 			siteRequest.setRequestHeaders(requestHeaders);
 
+			if(listCrowdFlowObserved.size() == 1)
+				siteRequest.setRequestPk(listCrowdFlowObserved.get(0).getPk());
 			page.setSearchListCrowdFlowObserved_(listCrowdFlowObserved);
 			page.setSiteRequest_(siteRequest);
 			page.promiseDeepCrowdFlowObservedPage(siteRequest).onSuccess(a -> {
@@ -1183,9 +1937,25 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public Future<CrowdFlowObserved> createCrowdFlowObserved(SiteRequestEnUS siteRequest) {
 		Promise<CrowdFlowObserved> promise = Promise.promise();
 		try {
-			CrowdFlowObserved o = new CrowdFlowObserved();
-			o.setSiteRequest_(siteRequest);
-			promise.complete(o);
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			String userId = siteRequest.getUserId();
+			Long userKey = siteRequest.getUserKey();
+			ZonedDateTime created = Optional.ofNullable(siteRequest.getJsonObject()).map(j -> j.getString("created")).map(s -> ZonedDateTime.parse(s, ComputateZonedDateTimeSerializer.ZONED_DATE_TIME_FORMATTER.withZone(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))))).orElse(ZonedDateTime.now(ZoneId.of(config.getString(ConfigKeys.SITE_ZONE))));
+
+			sqlConnection.preparedQuery("INSERT INTO CrowdFlowObserved(created, userKey) VALUES($1, $2) RETURNING pk")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(created.toOffsetDateTime(), userKey)).onSuccess(result -> {
+				Row createLine = result.value().stream().findFirst().orElseGet(() -> null);
+				Long pk = createLine.getLong(0);
+				CrowdFlowObserved o = new CrowdFlowObserved();
+				o.setPk(pk);
+				o.setSiteRequest_(siteRequest);
+				promise.complete(o);
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error("createCrowdFlowObserved failed. ", ex2);
+				promise.fail(ex2);
+			});
 		} catch(Exception ex) {
 			LOG.error(String.format("createCrowdFlowObserved failed. "), ex);
 			promise.fail(ex);
@@ -1489,39 +2259,50 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 	public void searchCrowdFlowObserved2(SiteRequestEnUS siteRequest, Boolean populate, Boolean store, Boolean modify, SearchList<CrowdFlowObserved> searchList) {
 	}
 
-	public Future<Void> persistCrowdFlowObserved(CrowdFlowObserved o, Boolean patch) {
+	public Future<Void> persistCrowdFlowObserved(CrowdFlowObserved o) {
 		Promise<Void> promise = Promise.promise();
 		try {
 			SiteRequestEnUS siteRequest = o.getSiteRequest_();
+			SqlConnection sqlConnection = siteRequest.getSqlConnection();
+			Long pk = o.getPk();
+			sqlConnection.preparedQuery("SELECT * FROM CrowdFlowObserved WHERE pk=$1")
+					.collecting(Collectors.toList())
+					.execute(Tuple.of(pk)
+					).onSuccess(result -> {
 				try {
-					JsonObject jsonObject = siteRequest.getJsonObject();
-					jsonObject.forEach(definition -> {
-							String columnName;
-							Object columnValue;
-						if(patch && StringUtils.startsWith(definition.getKey(), "set")) {
-							columnName = StringUtils.uncapitalize(StringUtils.substringAfter(definition.getKey(), "set"));
-							columnValue = definition.getValue();
-						} else {
-							columnName = definition.getKey();
-							columnValue = definition.getValue();
-						}
-						if(!"pk".equals(columnName)) {
-							try {
-								o.persistForClass(columnName, columnValue);
-							} catch(Exception e) {
-								LOG.error(String.format("persistCrowdFlowObserved failed. "), e);
+					for(Row definition : result.value()) {
+						for(Integer i = 0; i < definition.size(); i++) {
+							String columnName = definition.getColumnName(i);
+							Object columnValue = definition.getValue(i);
+							if(!"pk".equals(columnName)) {
+								try {
+									o.persistForClass(columnName, columnValue);
+								} catch(Exception e) {
+									LOG.error(String.format("persistCrowdFlowObserved failed. "), e);
+								}
 							}
 						}
-					});
+					}
 					promise.complete();
 				} catch(Exception ex) {
 					LOG.error(String.format("persistCrowdFlowObserved failed. "), ex);
 					promise.fail(ex);
 				}
+			}).onFailure(ex -> {
+				RuntimeException ex2 = new RuntimeException(ex);
+				LOG.error(String.format("persistCrowdFlowObserved failed. "), ex2);
+				promise.fail(ex2);
+			});
 		} catch(Exception ex) {
 			LOG.error(String.format("persistCrowdFlowObserved failed. "), ex);
 			promise.fail(ex);
 		}
+		return promise.future();
+	}
+
+	public Future<Void> relateCrowdFlowObserved(CrowdFlowObserved o) {
+		Promise<Void> promise = Promise.promise();
+			promise.complete();
 		return promise.future();
 	}
 
@@ -1567,5 +2348,66 @@ public class CrowdFlowObservedEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 
 	public String searchVar(String varIndexed) {
 		return CrowdFlowObserved.searchVarCrowdFlowObserved(varIndexed);
+	}
+
+	public Future<Void> refreshCrowdFlowObserved(CrowdFlowObserved o) {
+		Promise<Void> promise = Promise.promise();
+		SiteRequestEnUS siteRequest = o.getSiteRequest_();
+		try {
+			ApiRequest apiRequest = siteRequest.getApiRequest_();
+			List<Long> pks = Optional.ofNullable(apiRequest).map(r -> r.getPks()).orElse(new ArrayList<>());
+			List<String> classes = Optional.ofNullable(apiRequest).map(r -> r.getClasses()).orElse(new ArrayList<>());
+			Boolean refresh = !"false".equals(siteRequest.getRequestVars().get("refresh"));
+			if(refresh && !Optional.ofNullable(siteRequest.getJsonObject()).map(JsonObject::isEmpty).orElse(true)) {
+				List<Future> futures = new ArrayList<>();
+
+				for(int i=0; i < pks.size(); i++) {
+					Long pk2 = pks.get(i);
+					String classSimpleName2 = classes.get(i);
+				}
+
+				CompositeFuture.all(futures).onSuccess(b -> {
+					JsonObject params = new JsonObject();
+					params.put("body", new JsonObject());
+					params.put("cookie", new JsonObject());
+					params.put("header", new JsonObject());
+					params.put("form", new JsonObject());
+					params.put("path", new JsonObject());
+					JsonObject query = new JsonObject();
+					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
+					Integer commitWithin = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getInteger("commitWithin")).orElse(null);
+					if(softCommit == null && commitWithin == null)
+						softCommit = true;
+					if(softCommit != null)
+						query.put("softCommit", softCommit);
+					if(commitWithin != null)
+						query.put("commitWithin", commitWithin);
+					query.put("q", "*:*").put("fq", new JsonArray().add("pk:" + o.getPk())).put("var", new JsonArray().add("refresh:false"));
+					params.put("query", query);
+					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
+					JsonObject json = new JsonObject().put("context", context);
+					eventBus.request("smartabyar-smartvillage-enUS-CrowdFlowObserved", json, new DeliveryOptions().addHeader("action", "patchCrowdFlowObservedFuture")).onSuccess(c -> {
+						JsonObject responseMessage = (JsonObject)c.body();
+						Integer statusCode = responseMessage.getInteger("statusCode");
+						if(statusCode.equals(200))
+							promise.complete();
+						else
+							promise.fail(new RuntimeException(responseMessage.getString("statusMessage")));
+					}).onFailure(ex -> {
+						LOG.error("Refresh relations failed. ", ex);
+						promise.fail(ex);
+					});
+				}).onFailure(ex -> {
+					LOG.error("Refresh relations failed. ", ex);
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete();
+			}
+		} catch(Exception ex) {
+			LOG.error(String.format("refreshCrowdFlowObserved failed. "), ex);
+			promise.fail(ex);
+		}
+		return promise.future();
 	}
 }

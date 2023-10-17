@@ -38,6 +38,7 @@ import org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserve
 import io.vertx.core.json.JsonArray;
 import java.lang.Integer;
 import java.lang.String;
+import java.lang.Long;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
@@ -316,6 +317,66 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	////////
+	// pk //
+	////////
+
+
+	/**	 The entity pk
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonSerialize(using = ToStringSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	protected Long pk;
+
+	/**	<br> The entity pk
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObservedGenPage&fq=entiteVar_enUS_indexed_string:pk">Find the entity pk in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _pk(Wrap<Long> w);
+
+	public Long getPk() {
+		return pk;
+	}
+
+	public void setPk(Long pk) {
+		this.pk = pk;
+	}
+	@JsonIgnore
+	public void setPk(String o) {
+		this.pk = CrowdFlowObservedGenPage.staticSetPk(siteRequest_, o);
+	}
+	public static Long staticSetPk(SiteRequestEnUS siteRequest_, String o) {
+		if(NumberUtils.isParsable(o))
+			return Long.parseLong(o);
+		return null;
+	}
+	protected CrowdFlowObservedGenPage pkInit() {
+		Wrap<Long> pkWrap = new Wrap<Long>().var("pk");
+		if(pk == null) {
+			_pk(pkWrap);
+			Optional.ofNullable(pkWrap.getO()).ifPresent(o -> {
+				setPk(o);
+			});
+		}
+		return (CrowdFlowObservedGenPage)this;
+	}
+
+	public static Long staticSearchPk(SiteRequestEnUS siteRequest_, Long o) {
+		return o;
+	}
+
+	public static String staticSearchStrPk(SiteRequestEnUS siteRequest_, Long o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
+		return CrowdFlowObservedGenPage.staticSearchStrPk(siteRequest_, CrowdFlowObservedGenPage.staticSearchPk(siteRequest_, CrowdFlowObservedGenPage.staticSetPk(siteRequest_, o)));
+	}
+
+	////////
 	// id //
 	////////
 
@@ -452,6 +513,7 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 				listCrowdFlowObservedInit();
 				crowdFlowObservedCountInit();
 				crowdFlowObserved_Init();
+				pkInit();
 				idInit();
 				pageUriCrowdFlowObservedInit();
 				promise2.complete();
@@ -515,6 +577,8 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 				return oCrowdFlowObservedGenPage.crowdFlowObservedCount;
 			case "crowdFlowObserved_":
 				return oCrowdFlowObservedGenPage.crowdFlowObserved_;
+			case "pk":
+				return oCrowdFlowObservedGenPage.pk;
 			case "id":
 				return oCrowdFlowObservedGenPage.id;
 			case "pageUriCrowdFlowObserved":
@@ -562,6 +626,8 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 			return CrowdFlowObservedGenPage.staticSetListCrowdFlowObserved(siteRequest_, o);
 		case "crowdFlowObservedCount":
 			return CrowdFlowObservedGenPage.staticSetCrowdFlowObservedCount(siteRequest_, o);
+		case "pk":
+			return CrowdFlowObservedGenPage.staticSetPk(siteRequest_, o);
 		case "id":
 			return CrowdFlowObservedGenPage.staticSetId(siteRequest_, o);
 		case "pageUriCrowdFlowObserved":
@@ -584,6 +650,8 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 			return CrowdFlowObservedGenPage.staticSearchListCrowdFlowObserved(siteRequest_, (JsonArray)o);
 		case "crowdFlowObservedCount":
 			return CrowdFlowObservedGenPage.staticSearchCrowdFlowObservedCount(siteRequest_, (Integer)o);
+		case "pk":
+			return CrowdFlowObservedGenPage.staticSearchPk(siteRequest_, (Long)o);
 		case "id":
 			return CrowdFlowObservedGenPage.staticSearchId(siteRequest_, (String)o);
 		case "pageUriCrowdFlowObserved":
@@ -606,6 +674,8 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 			return CrowdFlowObservedGenPage.staticSearchStrListCrowdFlowObserved(siteRequest_, (String)o);
 		case "crowdFlowObservedCount":
 			return CrowdFlowObservedGenPage.staticSearchStrCrowdFlowObservedCount(siteRequest_, (Integer)o);
+		case "pk":
+			return CrowdFlowObservedGenPage.staticSearchStrPk(siteRequest_, (Long)o);
 		case "id":
 			return CrowdFlowObservedGenPage.staticSearchStrId(siteRequest_, (String)o);
 		case "pageUriCrowdFlowObserved":
@@ -628,6 +698,8 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 			return CrowdFlowObservedGenPage.staticSearchFqListCrowdFlowObserved(siteRequest_, o);
 		case "crowdFlowObservedCount":
 			return CrowdFlowObservedGenPage.staticSearchFqCrowdFlowObservedCount(siteRequest_, o);
+		case "pk":
+			return CrowdFlowObservedGenPage.staticSearchFqPk(siteRequest_, o);
 		case "id":
 			return CrowdFlowObservedGenPage.staticSearchFqId(siteRequest_, o);
 		case "pageUriCrowdFlowObserved":
@@ -652,6 +724,7 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 	public static final String VAR_listCrowdFlowObserved = "listCrowdFlowObserved";
 	public static final String VAR_crowdFlowObservedCount = "crowdFlowObservedCount";
 	public static final String VAR_crowdFlowObserved_ = "crowdFlowObserved_";
+	public static final String VAR_pk = "pk";
 	public static final String VAR_id = "id";
 	public static final String VAR_pageUriCrowdFlowObserved = "pageUriCrowdFlowObserved";
 
@@ -659,6 +732,7 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 	public static final String DISPLAY_NAME_listCrowdFlowObserved = "";
 	public static final String DISPLAY_NAME_crowdFlowObservedCount = "";
 	public static final String DISPLAY_NAME_crowdFlowObserved_ = "";
+	public static final String DISPLAY_NAME_pk = "";
 	public static final String DISPLAY_NAME_id = "";
 	public static final String DISPLAY_NAME_pageUriCrowdFlowObserved = "";
 
@@ -675,6 +749,8 @@ public abstract class CrowdFlowObservedGenPageGen<DEV> extends BaseModelPage {
 			return DISPLAY_NAME_crowdFlowObservedCount;
 		case VAR_crowdFlowObserved_:
 			return DISPLAY_NAME_crowdFlowObserved_;
+		case VAR_pk:
+			return DISPLAY_NAME_pk;
 		case VAR_id:
 			return DISPLAY_NAME_id;
 		case VAR_pageUriCrowdFlowObserved:

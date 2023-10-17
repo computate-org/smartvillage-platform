@@ -36,9 +36,9 @@ import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
 import java.lang.String;
-import java.math.BigDecimal;
-import java.lang.Boolean;
-import io.vertx.pgclient.data.Path;
+import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation;
+import io.vertx.pgclient.data.Polygon;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
@@ -47,8 +47,13 @@ import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.BeanDescription;
 import java.util.stream.Collectors;
 import io.vertx.core.json.Json;
-import org.computate.vertx.serialize.pgclient.PgClientPathSerializer;
-import org.computate.vertx.serialize.pgclient.PgClientPathDeserializer;
+import org.computate.vertx.serialize.pgclient.PgClientPolygonSerializer;
+import org.computate.vertx.serialize.pgclient.PgClientPolygonDeserializer;
+import java.math.BigDecimal;
+import java.lang.Boolean;
+import io.vertx.pgclient.data.Point;
+import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
+import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
 import java.lang.Integer;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
@@ -58,323 +63,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
 /**
-
- * <h1>FIWARE SmartDataModel fields:</h1>
- * {@literal /}{@literal **}<br>
- * {@literal 	 * SmartDataModel: CrowdFlowObserved - Transportation - SmartCities}<br>
- * {@literal 	 * Fiware: true}<br>
- * {@literal 	 * SqlOrder: 1}<br>
- * {@literal 	 * Api: true}<br>
- * {@literal 	 * Page: true}<br>
- * {@literal 	 * SuperPage.enUS: BaseModelPage}<br>
- * {@literal 	 * Indexed: true}<br>
- * {@literal 	 * Order: 1}<br>
- * {@literal 	 * Description: }<br>
- * {@literal 	 * ApiTag.enUS: CrowdFlowObserved}<br>
- * {@literal 	 * ApiUri.enUS: /api/CrowdFlowObserved}<br>
- * <br>
- * {@literal 	 * ApiMethod.enUS: Search}<br>
- * {@literal 	 * ApiMethod: GET}<br>
- * {@literal 	 * ApiMethod: PATCH}<br>
- * {@literal 	 * ApiMethod: POST}<br>
- * {@literal 	 * ApiMethod: PUTImport}<br>
- * <br>
- * {@literal 	 * ApiMethod.enUS: SearchPage}<br>
- * {@literal 	 * Page.SearchPage.enUS: CrowdFlowObservedPage}<br>
- * {@literal 	 * ApiUri.SearchPage.enUS: /CrowdFlowObserved}<br>
- * <br>
- * {@literal 	 * Role.enUS: SiteAdmin}<br>
- * <br>
- * {@literal 	 * AName.enUS: a CrowdFlowObserved}<br>
- * {@literal 	 * Color: 2017-shaded-spruce}<br>
- * {@literal 	 * IconGroup: duotone}<br>
- * {@literal 	 * IconName: map-location-dot}<br>
- * {@literal 	 * Rows: 100}<br>
- * {@literal 	 **}{@literal /}<br>
- * {@literal 	public class CrowdFlowObserved extends CrowdFlowObservedGen<BaseModel>} {<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: address}<br>
- * {@literal 	 * Description: The mailing address}<br>
- * {@literal 	 * HtmRow: 3}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _address(Wrap<JsonObject> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: alternate name}<br>
- * {@literal 	 * Description: An alternative name for this item}<br>
- * {@literal 	 * HtmRow: 3}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _alternateName(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: area served}<br>
- * {@literal 	 * Description: The geographic area where a service or offered item is provided}<br>
- * {@literal 	 * HtmRow: 3}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _areaServed(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: average crowd speed}<br>
- * {@literal 	 * Description: Average speed of the crowd transiting during the observation period}<br>
- * {@literal 	 * HtmRow: 4}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _averageCrowdSpeed(Wrap<BigDecimal> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: average headway time}<br>
- * {@literal 	 * Description: Average headway time. Headway time is the time     elapsed between two consecutive persons}<br>
- * {@literal 	 * HtmRow: 4}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _averageHeadwayTime(Wrap<BigDecimal> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: congested}<br>
- * {@literal 	 * Description: Flags whether there was a crowd congestion during the observation period in the referred walkway. The absence of this attribute means no crowd congestion}<br>
- * {@literal 	 * HtmRow: 4}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _congested(Wrap<Boolean> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: data provider}<br>
- * {@literal 	 * Description: A sequence of characters identifying the provider of the harmonised data entity.}<br>
- * {@literal 	 * HtmRow: 5}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _dataProvider(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: date created}<br>
- * {@literal 	 * Description: Entity creation timestamp. This will usually be allocated by the storage platform.}<br>
- * {@literal 	 * HtmRow: 5}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _dateCreated(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: date modified}<br>
- * {@literal 	 * Description: Timestamp of the last modification of the entity. This will usually be allocated by the storage platform.}<br>
- * {@literal 	 * HtmRow: 5}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _dateModified(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: date observed}<br>
- * {@literal 	 * Description: The date and time of this observation in ISO8601 UTC format. It can be represented by an specific time instant or by an ISO8601 interval. As a workaround for the lack of support of Orion Context Broker for datetime intervals, it can be used two separate attributes: `dateObservedFrom`, `dateObservedTo`}<br>
- * {@literal 	 * HtmRow: 6}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _dateObserved(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: date observed from}<br>
- * {@literal 	 * Description: Observation period start date and time. See `dateObserved`.}<br>
- * {@literal 	 * HtmRow: 6}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _dateObservedFrom(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: date observed to}<br>
- * {@literal 	 * Description: Observation period end date and time. See `dateObserved`.}<br>
- * {@literal 	 * HtmRow: 6}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _dateObservedTo(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: description}<br>
- * {@literal 	 * Description: A description of this item}<br>
- * {@literal 	 * HtmRow: 7}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _description(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: direction}<br>
- * {@literal 	 * Description: Usual direction of travel in the walkway referred by this observation with respect to the city center. Enum:'inbound, outbound'}<br>
- * {@literal 	 * HtmRow: 7}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _direction(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: location}<br>
- * {@literal 	 * Description: Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon}<br>
- * {@literal 	 * HtmRow: 7}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _location(Wrap<Path> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: name}<br>
- * {@literal 	 * Description: The name of this item.}<br>
- * {@literal 	 * HtmRow: 8}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _name(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: occupancy}<br>
- * {@literal 	 * Description: Fraction of the observation time where a person has been occupying the observed walkway}<br>
- * {@literal 	 * HtmRow: 8}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _occupancy(Wrap<BigDecimal> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: owner}<br>
- * {@literal 	 * Description: A List containing a JSON encoded sequence of characters referencing the unique Ids of the owner(s)}<br>
- * {@literal 	 * HtmRow: 8}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _owner(Wrap<JsonObject> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: people count}<br>
- * {@literal 	 * Description: Total number of people detected during this observation.}<br>
- * {@literal 	 * HtmRow: 9}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _peopleCount(Wrap<Integer> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: ref road segment}<br>
- * {@literal 	 * Description: Concerned road segment on which the observation has been made}<br>
- * {@literal 	 * HtmRow: 9}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _refRoadSegment(Wrap<JsonObject> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: see also}<br>
- * {@literal 	 * Description: list of uri pointing to additional resources about the item}<br>
- * {@literal 	 * HtmRow: 9}<br>
- * {@literal 	 * HtmCell: 3}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _seeAlso(Wrap<JsonObject> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: source}<br>
- * {@literal 	 * Description: A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object.}<br>
- * {@literal 	 * HtmRow: 10}<br>
- * {@literal 	 * HtmCell: 1}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _source(Wrap<String> w)} {}<br>
- * <br>
- * {@literal 	/**}<br>
- * {@literal 	 * {@inheritDoc}}<br>
- * {@literal 	 * DocValues: true}<br>
- * {@literal 	 * Persist: true}<br>
- * {@literal 	 * DisplayName: type}<br>
- * {@literal 	 * Description: NGSI Entity type. It has to be CrowdFlowObserved}<br>
- * {@literal 	 * HtmRow: 10}<br>
- * {@literal 	 * HtmCell: 2}<br>
- * {@literal 	 * Facet: true}<br>
- *	 {@literal **}{@literal /}<br>
- * 	{@literal protected void _type(Wrap<String> w)} {}<br>
- * }<br>
-
  * <ol>
 <h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class CrowdFlowObservedGen into the class CrowdFlowObserved. 
- * </li><li>You can add a class comment "Model: true" if you wish to persist these CrowdFlowObserved objects in a relational PostgreSQL database transactionally in the RESTful API. 
- * The code to persist and query the CrowdFlowObservedGen data in the database will then be automatically generated. 
  * </li>
  * <h3>About the CrowdFlowObserved class and it's generated class CrowdFlowObservedGen&lt;BaseModel&gt;: </h3>extends CrowdFlowObservedGen
  * <p>
@@ -416,8 +107,8 @@ import org.computate.search.response.solr.SolrResponse;
  * <h2>ApiTag.enUS: true</h2>
  * <p>This class contains a comment <b>"ApiTag: CrowdFlowObserved"</b>, which groups all of the OpenAPIs for CrowdFlowObserved objects under the tag "CrowdFlowObserved". 
  * </p>
- * <h2>ApiUri.enUS: /api/CrowdFlowObserved</h2>
- * <p>This class contains a comment <b>"ApiUri: /api/CrowdFlowObserved"</b>, which defines the base API URI for CrowdFlowObserved objects as "/api/CrowdFlowObserved" in the OpenAPI spec. 
+ * <h2>ApiUri.enUS: /api/crowd-flow-observed</h2>
+ * <p>This class contains a comment <b>"ApiUri: /api/crowd-flow-observed"</b>, which defines the base API URI for CrowdFlowObserved objects as "/api/crowd-flow-observed" in the OpenAPI spec. 
  * </p>
  * <h2>Color: 2017-shaded-spruce</h2>
  * <p>This class contains a comment <b>"Color: 2017-shaded-spruce"</b>, which styles the CrowdFlowObserved page "2017-shaded-spruce". 
@@ -456,6 +147,9 @@ import org.computate.search.response.solr.SolrResponse;
  * <p>This class contains a comment <b>"SqlOrder: 1"</b>, which means this class will be sorted by the given number 1 ascending when SQL code to create and drop the tables is generated. 
  * </p>
  * <h2>Model: true</h2>
+ * <p>This class contains a comment <b>"Model: true"</b>, which means this class will be stored in the database. 
+ * Every protected void method that begins with "_" that contains a "Persist: true" comment will be a persisted field in the database table. 
+ * </p>
  * <h2>Page: true</h2>
  * <p>This class contains a comment <b>"Page: true"</b>, which means this class will have webpage code generated for these objects. 
  * Java Vert.x backend API code, Handlebars HTML template frontend code, and JavaScript code will all generated and can be extended. 
@@ -528,92 +222,344 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	public static final String CrowdFlowObserved_Title_enUS = "CrowdFlowObserveds";
 	public static final String CrowdFlowObserved_ThePluralName_enUS = "the CrowdFlowObserveds";
 	public static final String CrowdFlowObserved_NoNameFound_enUS = "no CrowdFlowObserved found";
-	public static final String CrowdFlowObserved_ApiUri_enUS = "/api/CrowdFlowObserved";
-	public static final String CrowdFlowObserved_ApiUriSearchPage_enUS = "/CrowdFlowObserved";
+	public static final String CrowdFlowObserved_ApiUri_enUS = "/api/crowd-flow-observed";
+	public static final String CrowdFlowObserved_ApiUriSearchPage_enUS = "/crowd-flow-observed";
 	public static final String CrowdFlowObserved_OfName_enUS = "of CrowdFlowObserved";
 	public static final String CrowdFlowObserved_ANameAdjective_enUS = "a CrowdFlowObserved";
 	public static final String CrowdFlowObserved_NameAdjectiveSingular_enUS = "CrowdFlowObserved";
 	public static final String CrowdFlowObserved_NameAdjectivePlural_enUS = "CrowdFlowObserveds";
-	public static final String Search_enUS_Uri = "/api/CrowdFlowObserved";
-	public static final String Search_enUS_ImageUri = "/png/api/CrowdFlowObserved-999.png";
-	public static final String GET_enUS_Uri = "/api/CrowdFlowObserved/{id}";
-	public static final String GET_enUS_ImageUri = "/png/api/CrowdFlowObserved/{id}-999.png";
-	public static final String PATCH_enUS_Uri = "/api/CrowdFlowObserved";
-	public static final String PATCH_enUS_ImageUri = "/png/api/CrowdFlowObserved-999.png";
-	public static final String POST_enUS_Uri = "/api/CrowdFlowObserved";
-	public static final String POST_enUS_ImageUri = "/png/api/CrowdFlowObserved-999.png";
-	public static final String PUTImport_enUS_Uri = "/api/CrowdFlowObserved-import";
-	public static final String PUTImport_enUS_ImageUri = "/png/api/CrowdFlowObserved-import-999.png";
-	public static final String SearchPage_enUS_Uri = "/CrowdFlowObserved";
-	public static final String SearchPage_enUS_ImageUri = "/png/CrowdFlowObserved-999.png";
+	public static final String Search_enUS_Uri = "/api/crowd-flow-observed";
+	public static final String Search_enUS_ImageUri = "/png/api/crowd-flow-observed-999.png";
+	public static final String GET_enUS_Uri = "/api/crowd-flow-observed/{id}";
+	public static final String GET_enUS_ImageUri = "/png/api/crowd-flow-observed/{id}-999.png";
+	public static final String PATCH_enUS_Uri = "/api/crowd-flow-observed";
+	public static final String PATCH_enUS_ImageUri = "/png/api/crowd-flow-observed-999.png";
+	public static final String POST_enUS_Uri = "/api/crowd-flow-observed";
+	public static final String POST_enUS_ImageUri = "/png/api/crowd-flow-observed-999.png";
+	public static final String PUTImport_enUS_Uri = "/api/crowd-flow-observed-import";
+	public static final String PUTImport_enUS_ImageUri = "/png/api/crowd-flow-observed-import-999.png";
+	public static final String SearchPage_enUS_Uri = "/crowd-flow-observed";
+	public static final String SearchPage_enUS_ImageUri = "/png/crowd-flow-observed-999.png";
 
 	public static final String CrowdFlowObserved_Color = "2017-shaded-spruce";
 	public static final String CrowdFlowObserved_IconGroup = "duotone";
 	public static final String CrowdFlowObserved_IconName = "map-location-dot";
 	public static final Integer CrowdFlowObserved_Rows = 100;
 
-	/////////////
-	// address //
-	/////////////
+	///////////
+	// color //
+	///////////
 
 
-	/**	 The entity address
+	/**	 The entity color
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
 	@JsonInclude(Include.NON_NULL)
-	protected JsonObject address;
+	protected String color;
 
-	/**	<br> The entity address
+	/**	<br> The entity color
 	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:address">Find the entity address in Solr</a>
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _address(Wrap<JsonObject> w);
+	protected abstract void _color(Wrap<String> w);
 
-	public JsonObject getAddress() {
-		return address;
+	public String getColor() {
+		return color;
 	}
-
-	public void setAddress(JsonObject address) {
-		this.address = address;
+	public void setColor(String o) {
+		this.color = CrowdFlowObserved.staticSetColor(siteRequest_, o);
 	}
-	@JsonIgnore
-	public void setAddress(String o) {
-		this.address = CrowdFlowObserved.staticSetAddress(siteRequest_, o);
+	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
 	}
-	public static JsonObject staticSetAddress(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected CrowdFlowObserved addressInit() {
-		Wrap<JsonObject> addressWrap = new Wrap<JsonObject>().var("address");
-		if(address == null) {
-			_address(addressWrap);
-			Optional.ofNullable(addressWrap.getO()).ifPresent(o -> {
-				setAddress(o);
+	protected CrowdFlowObserved colorInit() {
+		Wrap<String> colorWrap = new Wrap<String>().var("color");
+		if(color == null) {
+			_color(colorWrap);
+			Optional.ofNullable(colorWrap.getO()).ifPresent(o -> {
+				setColor(o);
 			});
 		}
 		return (CrowdFlowObserved)this;
 	}
 
-	public static String staticSearchAddress(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o.toString();
+	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
 	}
 
-	public static String staticSearchStrAddress(SiteRequestEnUS siteRequest_, String o) {
+	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
 		return o == null ? null : o.toString();
 	}
 
-	public static String staticSearchFqAddress(SiteRequestEnUS siteRequest_, String o) {
-		return CrowdFlowObserved.staticSearchStrAddress(siteRequest_, CrowdFlowObserved.staticSearchAddress(siteRequest_, CrowdFlowObserved.staticSetAddress(siteRequest_, o)));
+	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
+		return CrowdFlowObserved.staticSearchStrColor(siteRequest_, CrowdFlowObserved.staticSearchColor(siteRequest_, CrowdFlowObserved.staticSetColor(siteRequest_, o)));
 	}
 
-	public JsonObject sqlAddress() {
-		return address;
+	public String sqlColor() {
+		return color;
+	}
+
+	//////////////
+	// entityId //
+	//////////////
+
+
+	/**	 The entity entityId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String entityId;
+
+	/**	<br> The entity entityId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:entityId">Find the entity entityId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _entityId(Wrap<String> w);
+
+	public String getEntityId() {
+		return entityId;
+	}
+	public void setEntityId(String o) {
+		this.entityId = CrowdFlowObserved.staticSetEntityId(siteRequest_, o);
+	}
+	public static String staticSetEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected CrowdFlowObserved entityIdInit() {
+		Wrap<String> entityIdWrap = new Wrap<String>().var("entityId");
+		if(entityId == null) {
+			_entityId(entityIdWrap);
+			Optional.ofNullable(entityIdWrap.getO()).ifPresent(o -> {
+				setEntityId(o);
+			});
+		}
+		return (CrowdFlowObserved)this;
+	}
+
+	public static String staticSearchEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqEntityId(SiteRequestEnUS siteRequest_, String o) {
+		return CrowdFlowObserved.staticSearchStrEntityId(siteRequest_, CrowdFlowObserved.staticSearchEntityId(siteRequest_, CrowdFlowObserved.staticSetEntityId(siteRequest_, o)));
+	}
+
+	public String sqlEntityId() {
+		return entityId;
+	}
+
+	/////////////////////////
+	// trafficSimulationId //
+	/////////////////////////
+
+
+	/**	 The entity trafficSimulationId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String trafficSimulationId;
+
+	/**	<br> The entity trafficSimulationId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:trafficSimulationId">Find the entity trafficSimulationId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _trafficSimulationId(Wrap<String> w);
+
+	public String getTrafficSimulationId() {
+		return trafficSimulationId;
+	}
+	public void setTrafficSimulationId(String o) {
+		this.trafficSimulationId = CrowdFlowObserved.staticSetTrafficSimulationId(siteRequest_, o);
+	}
+	public static String staticSetTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected CrowdFlowObserved trafficSimulationIdInit() {
+		Wrap<String> trafficSimulationIdWrap = new Wrap<String>().var("trafficSimulationId");
+		if(trafficSimulationId == null) {
+			_trafficSimulationId(trafficSimulationIdWrap);
+			Optional.ofNullable(trafficSimulationIdWrap.getO()).ifPresent(o -> {
+				setTrafficSimulationId(o);
+			});
+		}
+		return (CrowdFlowObserved)this;
+	}
+
+	public static String staticSearchTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqTrafficSimulationId(SiteRequestEnUS siteRequest_, String o) {
+		return CrowdFlowObserved.staticSearchStrTrafficSimulationId(siteRequest_, CrowdFlowObserved.staticSearchTrafficSimulationId(siteRequest_, CrowdFlowObserved.staticSetTrafficSimulationId(siteRequest_, o)));
+	}
+
+	public String sqlTrafficSimulationId() {
+		return trafficSimulationId;
+	}
+
+	/////////////////////////////
+	// trafficSimulationSearch //
+	/////////////////////////////
+
+
+	/**	 The entity trafficSimulationSearch
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected SearchList<TrafficSimulation> trafficSimulationSearch;
+
+	/**	<br> The entity trafficSimulationSearch
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:trafficSimulationSearch">Find the entity trafficSimulationSearch in Solr</a>
+	 * <br>
+	 * @param promise is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _trafficSimulationSearch(Promise<SearchList<TrafficSimulation>> promise);
+
+	public SearchList<TrafficSimulation> getTrafficSimulationSearch() {
+		return trafficSimulationSearch;
+	}
+
+	public void setTrafficSimulationSearch(SearchList<TrafficSimulation> trafficSimulationSearch) {
+		this.trafficSimulationSearch = trafficSimulationSearch;
+	}
+	public static SearchList<TrafficSimulation> staticSetTrafficSimulationSearch(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected Future<SearchList<TrafficSimulation>> trafficSimulationSearchPromise() {
+		Promise<SearchList<TrafficSimulation>> promise = Promise.promise();
+		Promise<SearchList<TrafficSimulation>> promise2 = Promise.promise();
+		_trafficSimulationSearch(promise2);
+		promise2.future().onSuccess(o -> {
+			if(o != null && trafficSimulationSearch == null) {
+				o.promiseDeepForClass(siteRequest_).onSuccess(a -> {
+					setTrafficSimulationSearch(o);
+					promise.complete(o);
+				}).onFailure(ex -> {
+					promise.fail(ex);
+				});
+			} else {
+				promise.complete(o);
+			}
+		}).onFailure(ex -> {
+			promise.fail(ex);
+		});
+		return promise.future();
+	}
+
+	////////////////////////
+	// trafficSimulation_ //
+	////////////////////////
+
+
+	/**	 The entity trafficSimulation_
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonIgnore
+	@JsonInclude(Include.NON_NULL)
+	protected TrafficSimulation trafficSimulation_;
+
+	/**	<br> The entity trafficSimulation_
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:trafficSimulation_">Find the entity trafficSimulation_ in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _trafficSimulation_(Wrap<TrafficSimulation> w);
+
+	public TrafficSimulation getTrafficSimulation_() {
+		return trafficSimulation_;
+	}
+
+	public void setTrafficSimulation_(TrafficSimulation trafficSimulation_) {
+		this.trafficSimulation_ = trafficSimulation_;
+	}
+	public static TrafficSimulation staticSetTrafficSimulation_(SiteRequestEnUS siteRequest_, String o) {
+		return null;
+	}
+	protected CrowdFlowObserved trafficSimulation_Init() {
+		Wrap<TrafficSimulation> trafficSimulation_Wrap = new Wrap<TrafficSimulation>().var("trafficSimulation_");
+		if(trafficSimulation_ == null) {
+			_trafficSimulation_(trafficSimulation_Wrap);
+			Optional.ofNullable(trafficSimulation_Wrap.getO()).ifPresent(o -> {
+				setTrafficSimulation_(o);
+			});
+		}
+		return (CrowdFlowObserved)this;
+	}
+
+	///////////////////
+	// walkingAreaId //
+	///////////////////
+
+
+	/**	 The entity walkingAreaId
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String walkingAreaId;
+
+	/**	<br> The entity walkingAreaId
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:walkingAreaId">Find the entity walkingAreaId in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _walkingAreaId(Wrap<String> w);
+
+	public String getWalkingAreaId() {
+		return walkingAreaId;
+	}
+	public void setWalkingAreaId(String o) {
+		this.walkingAreaId = CrowdFlowObserved.staticSetWalkingAreaId(siteRequest_, o);
+	}
+	public static String staticSetWalkingAreaId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected CrowdFlowObserved walkingAreaIdInit() {
+		Wrap<String> walkingAreaIdWrap = new Wrap<String>().var("walkingAreaId");
+		if(walkingAreaId == null) {
+			_walkingAreaId(walkingAreaIdWrap);
+			Optional.ofNullable(walkingAreaIdWrap.getO()).ifPresent(o -> {
+				setWalkingAreaId(o);
+			});
+		}
+		return (CrowdFlowObserved)this;
+	}
+
+	public static String staticSearchWalkingAreaId(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrWalkingAreaId(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqWalkingAreaId(SiteRequestEnUS siteRequest_, String o) {
+		return CrowdFlowObserved.staticSearchStrWalkingAreaId(siteRequest_, CrowdFlowObserved.staticSearchWalkingAreaId(siteRequest_, CrowdFlowObserved.staticSetWalkingAreaId(siteRequest_, o)));
+	}
+
+	public String sqlWalkingAreaId() {
+		return walkingAreaId;
 	}
 
 	///////////////////
@@ -681,8 +627,10 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
+	@JsonDeserialize(using = PgClientPolygonDeserializer.class)
+	@JsonSerialize(using = PgClientPolygonSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected String areaServed;
+	protected Polygon areaServed;
 
 	/**	<br> The entity areaServed
 	 *  is defined as null before being initialized. 
@@ -690,19 +638,66 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _areaServed(Wrap<String> w);
+	protected abstract void _areaServed(Wrap<Polygon> w);
 
-	public String getAreaServed() {
+	public Polygon getAreaServed() {
 		return areaServed;
 	}
+
+	public void setAreaServed(Polygon areaServed) {
+		this.areaServed = areaServed;
+	}
+	@JsonIgnore
 	public void setAreaServed(String o) {
 		this.areaServed = CrowdFlowObserved.staticSetAreaServed(siteRequest_, o);
 	}
-	public static String staticSetAreaServed(SiteRequestEnUS siteRequest_, String o) {
-		return o;
+	public static Polygon staticSetAreaServed(SiteRequestEnUS siteRequest_, String o) {
+		if(o != null) {
+			try {
+				Polygon shape = null;
+				if(StringUtils.isNotBlank(o)) {
+					ObjectMapper objectMapper = new ObjectMapper();
+					SimpleModule module = new SimpleModule();
+					module.setDeserializerModifier(new BeanDeserializerModifier() {
+						@Override
+						public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
+							if (beanDesc.getBeanClass() == Polygon.class) {
+								return new PgClientPolygonDeserializer();
+							}
+							return deserializer;
+						}
+					});
+					objectMapper.registerModule(module);
+					shape = objectMapper.readValue(Json.encode(o), Polygon.class);
+				}
+				return shape;
+			} catch(Exception ex) {
+				ExceptionUtils.rethrow(ex);
+			}
+		}
+		return null;
+	}
+	public void setAreaServed(JsonObject o) {
+		this.areaServed = CrowdFlowObserved.staticSetAreaServed(siteRequest_, o);
+	}
+	public static Polygon staticSetAreaServed(SiteRequestEnUS siteRequest_, JsonObject o) {
+		if(o != null) {
+			try {
+				Polygon shape = new Polygon();
+				o.getJsonArray("coordinates").stream().map(a -> (JsonArray)a).forEach(g -> {
+					g.stream().map(a -> (JsonArray)a).forEach(points -> {
+						shape.addPoint(new Point(Double.parseDouble(points.getString(0)), Double.parseDouble(points.getString(1))));
+					});
+				});
+				return shape;
+			} catch(Exception ex) {
+				ExceptionUtils.rethrow(ex);
+			}
+		}
+		return null;
 	}
 	protected CrowdFlowObserved areaServedInit() {
-		Wrap<String> areaServedWrap = new Wrap<String>().var("areaServed");
+		Wrap<Polygon> areaServedWrap = new Wrap<Polygon>().var("areaServed");
 		if(areaServed == null) {
 			_areaServed(areaServedWrap);
 			Optional.ofNullable(areaServedWrap.getO()).ifPresent(o -> {
@@ -712,19 +707,21 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		return (CrowdFlowObserved)this;
 	}
 
-	public static String staticSearchAreaServed(SiteRequestEnUS siteRequest_, String o) {
+	public static Polygon staticSearchAreaServed(SiteRequestEnUS siteRequest_, Polygon o) {
 		return o;
 	}
 
-	public static String staticSearchStrAreaServed(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
+	public static String staticSearchStrAreaServed(SiteRequestEnUS siteRequest_, Polygon o) {
+		JsonArray pointsArray = new JsonArray();
+		o.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
+		return new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString();
 	}
 
 	public static String staticSearchFqAreaServed(SiteRequestEnUS siteRequest_, String o) {
 		return CrowdFlowObserved.staticSearchStrAreaServed(siteRequest_, CrowdFlowObserved.staticSearchAreaServed(siteRequest_, CrowdFlowObserved.staticSetAreaServed(siteRequest_, o)));
 	}
 
-	public String sqlAreaServed() {
+	public Polygon sqlAreaServed() {
 		return areaServed;
 	}
 
@@ -1400,10 +1397,10 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	 *	 is defined as null before being initialized. 
 	 */
 	@JsonProperty
-	@JsonDeserialize(using = PgClientPathDeserializer.class)
-	@JsonSerialize(using = PgClientPathSerializer.class)
+	@JsonDeserialize(using = PgClientPointDeserializer.class)
+	@JsonSerialize(using = PgClientPointSerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	protected Path location;
+	protected Point location;
 
 	/**	<br> The entity location
 	 *  is defined as null before being initialized. 
@@ -1411,47 +1408,33 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	 * <br>
 	 * @param w is for wrapping a value to assign to this entity during initialization. 
 	 **/
-	protected abstract void _location(Wrap<Path> w);
+	protected abstract void _location(Wrap<Point> w);
 
-	public Path getLocation() {
+	public Point getLocation() {
 		return location;
 	}
 
-	public void setLocation(Path location) {
+	public void setLocation(Point location) {
 		this.location = location;
 	}
 	@JsonIgnore
 	public void setLocation(String o) {
 		this.location = CrowdFlowObserved.staticSetLocation(siteRequest_, o);
 	}
-	public static Path staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
+	public static Point staticSetLocation(SiteRequestEnUS siteRequest_, String o) {
 		if(o != null) {
-			try {
-				Path path = null;
-				if(StringUtils.isNotBlank(o)) {
-					ObjectMapper objectMapper = new ObjectMapper();
-					SimpleModule module = new SimpleModule();
-					module.setDeserializerModifier(new BeanDeserializerModifier() {
-						@Override
-						public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
-							if (beanDesc.getBeanClass() == Path.class) {
-								return new PgClientPathDeserializer();
-							}
-							return deserializer;
-						}
-					});
-					objectMapper.registerModule(module);
-					path = objectMapper.readValue(Json.encode(o), Path.class);
-				}
-				return path;
-			} catch(Exception ex) {
-				ExceptionUtils.rethrow(ex);
-			}
+			Matcher m = Pattern.compile("\\{[\\w\\W]*\"coordinates\"\\s*:\\s*\\[\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)\\]").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			m = Pattern.compile("\\s*(\\d*\\.\\d*)\\s*,\\s*(\\d*\\.\\d*)").matcher(o);
+			if(m.find())
+				return new Point(Double.parseDouble(m.group(1)), Double.parseDouble(m.group(2)));
+			throw new RuntimeException(String.format("Invalid point format \"%s\", try these formats instead: 55.633703,13.49254 or {\"type\":\"Point\",\"coordinates\":[55.633703,13.49254]}", o));
 		}
 		return null;
 	}
 	protected CrowdFlowObserved locationInit() {
-		Wrap<Path> locationWrap = new Wrap<Path>().var("location");
+		Wrap<Point> locationWrap = new Wrap<Point>().var("location");
 		if(location == null) {
 			_location(locationWrap);
 			Optional.ofNullable(locationWrap.getO()).ifPresent(o -> {
@@ -1461,21 +1444,19 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		return (CrowdFlowObserved)this;
 	}
 
-	public static Path staticSearchLocation(SiteRequestEnUS siteRequest_, Path o) {
+	public static Point staticSearchLocation(SiteRequestEnUS siteRequest_, Point o) {
 		return o;
 	}
 
-	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, Path o) {
-		JsonArray pointsArray = new JsonArray();
-		o.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
-		return new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString();
+	public static String staticSearchStrLocation(SiteRequestEnUS siteRequest_, Point o) {
+		return o == null ? null : o.toString();
 	}
 
 	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
 		return CrowdFlowObserved.staticSearchStrLocation(siteRequest_, CrowdFlowObserved.staticSearchLocation(siteRequest_, CrowdFlowObserved.staticSetLocation(siteRequest_, o)));
 	}
 
-	public Path sqlLocation() {
+	public Point sqlLocation() {
 		return location;
 	}
 
@@ -1924,62 +1905,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		return source;
 	}
 
-	//////////
-	// type //
-	//////////
-
-
-	/**	 The entity type
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String type;
-
-	/**	<br> The entity type
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObserved&fq=entiteVar_enUS_indexed_string:type">Find the entity type in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _type(Wrap<String> w);
-
-	public String getType() {
-		return type;
-	}
-	public void setType(String o) {
-		this.type = CrowdFlowObserved.staticSetType(siteRequest_, o);
-	}
-	public static String staticSetType(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected CrowdFlowObserved typeInit() {
-		Wrap<String> typeWrap = new Wrap<String>().var("type");
-		if(type == null) {
-			_type(typeWrap);
-			Optional.ofNullable(typeWrap.getO()).ifPresent(o -> {
-				setType(o);
-			});
-		}
-		return (CrowdFlowObserved)this;
-	}
-
-	public static String staticSearchType(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrType(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqType(SiteRequestEnUS siteRequest_, String o) {
-		return CrowdFlowObserved.staticSearchStrType(siteRequest_, CrowdFlowObserved.staticSearchType(siteRequest_, CrowdFlowObserved.staticSetType(siteRequest_, o)));
-	}
-
-	public String sqlType() {
-		return type;
-	}
-
 	//////////////
 	// initDeep //
 	//////////////
@@ -2009,7 +1934,27 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		Future.future(a -> a.complete()).compose(a -> {
 			Promise<Void> promise2 = Promise.promise();
 			try {
-				addressInit();
+				colorInit();
+				entityIdInit();
+				trafficSimulationIdInit();
+				promise2.complete();
+			} catch(Exception ex) {
+				promise2.fail(ex);
+			}
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			trafficSimulationSearchPromise().onSuccess(trafficSimulationSearch -> {
+				promise2.complete();
+			}).onFailure(ex -> {
+				promise2.fail(ex);
+			});
+			return promise2.future();
+		}).compose(a -> {
+			Promise<Void> promise2 = Promise.promise();
+			try {
+				trafficSimulation_Init();
+				walkingAreaIdInit();
 				alternateNameInit();
 				areaServedInit();
 				averageCrowdSpeedInit();
@@ -2031,7 +1976,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				refRoadSegmentInit();
 				seeAlsoInit();
 				sourceInit();
-				typeInit();
 				promise2.complete();
 			} catch(Exception ex) {
 				promise2.fail(ex);
@@ -2055,6 +1999,8 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public void siteRequestCrowdFlowObserved(SiteRequestEnUS siteRequest_) {
 			super.siteRequestBaseModel(siteRequest_);
+		if(trafficSimulationSearch != null)
+			trafficSimulationSearch.setSiteRequest_(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -2085,8 +2031,18 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	public Object obtainCrowdFlowObserved(String var) {
 		CrowdFlowObserved oCrowdFlowObserved = (CrowdFlowObserved)this;
 		switch(var) {
-			case "address":
-				return oCrowdFlowObserved.address;
+			case "color":
+				return oCrowdFlowObserved.color;
+			case "entityId":
+				return oCrowdFlowObserved.entityId;
+			case "trafficSimulationId":
+				return oCrowdFlowObserved.trafficSimulationId;
+			case "trafficSimulationSearch":
+				return oCrowdFlowObserved.trafficSimulationSearch;
+			case "trafficSimulation_":
+				return oCrowdFlowObserved.trafficSimulation_;
+			case "walkingAreaId":
+				return oCrowdFlowObserved.walkingAreaId;
 			case "alternateName":
 				return oCrowdFlowObserved.alternateName;
 			case "areaServed":
@@ -2129,8 +2085,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				return oCrowdFlowObserved.seeAlso;
 			case "source":
 				return oCrowdFlowObserved.source;
-			case "type":
-				return oCrowdFlowObserved.type;
 			default:
 				return super.obtainBaseModel(var);
 		}
@@ -2170,8 +2124,14 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static Object staticSetCrowdFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "address":
-			return CrowdFlowObserved.staticSetAddress(siteRequest_, o);
+		case "color":
+			return CrowdFlowObserved.staticSetColor(siteRequest_, o);
+		case "entityId":
+			return CrowdFlowObserved.staticSetEntityId(siteRequest_, o);
+		case "trafficSimulationId":
+			return CrowdFlowObserved.staticSetTrafficSimulationId(siteRequest_, o);
+		case "walkingAreaId":
+			return CrowdFlowObserved.staticSetWalkingAreaId(siteRequest_, o);
 		case "alternateName":
 			return CrowdFlowObserved.staticSetAlternateName(siteRequest_, o);
 		case "areaServed":
@@ -2214,8 +2174,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return CrowdFlowObserved.staticSetSeeAlso(siteRequest_, o);
 		case "source":
 			return CrowdFlowObserved.staticSetSource(siteRequest_, o);
-		case "type":
-			return CrowdFlowObserved.staticSetType(siteRequest_, o);
 			default:
 				return BaseModel.staticSetBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2230,12 +2188,18 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static Object staticSearchCrowdFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "address":
-			return CrowdFlowObserved.staticSearchAddress(siteRequest_, (JsonObject)o);
+		case "color":
+			return CrowdFlowObserved.staticSearchColor(siteRequest_, (String)o);
+		case "entityId":
+			return CrowdFlowObserved.staticSearchEntityId(siteRequest_, (String)o);
+		case "trafficSimulationId":
+			return CrowdFlowObserved.staticSearchTrafficSimulationId(siteRequest_, (String)o);
+		case "walkingAreaId":
+			return CrowdFlowObserved.staticSearchWalkingAreaId(siteRequest_, (String)o);
 		case "alternateName":
 			return CrowdFlowObserved.staticSearchAlternateName(siteRequest_, (String)o);
 		case "areaServed":
-			return CrowdFlowObserved.staticSearchAreaServed(siteRequest_, (String)o);
+			return CrowdFlowObserved.staticSearchAreaServed(siteRequest_, (Polygon)o);
 		case "averageCrowdSpeed":
 			return CrowdFlowObserved.staticSearchAverageCrowdSpeed(siteRequest_, (BigDecimal)o);
 		case "averageHeadwayTime":
@@ -2259,7 +2223,7 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		case "direction":
 			return CrowdFlowObserved.staticSearchDirection(siteRequest_, (String)o);
 		case "location":
-			return CrowdFlowObserved.staticSearchLocation(siteRequest_, (Path)o);
+			return CrowdFlowObserved.staticSearchLocation(siteRequest_, (Point)o);
 		case "name":
 			return CrowdFlowObserved.staticSearchName(siteRequest_, (String)o);
 		case "occupancy":
@@ -2274,8 +2238,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return CrowdFlowObserved.staticSearchSeeAlso(siteRequest_, (JsonObject)o);
 		case "source":
 			return CrowdFlowObserved.staticSearchSource(siteRequest_, (String)o);
-		case "type":
-			return CrowdFlowObserved.staticSearchType(siteRequest_, (String)o);
 			default:
 				return BaseModel.staticSearchBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2290,12 +2252,18 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchStrCrowdFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
-		case "address":
-			return CrowdFlowObserved.staticSearchStrAddress(siteRequest_, (String)o);
+		case "color":
+			return CrowdFlowObserved.staticSearchStrColor(siteRequest_, (String)o);
+		case "entityId":
+			return CrowdFlowObserved.staticSearchStrEntityId(siteRequest_, (String)o);
+		case "trafficSimulationId":
+			return CrowdFlowObserved.staticSearchStrTrafficSimulationId(siteRequest_, (String)o);
+		case "walkingAreaId":
+			return CrowdFlowObserved.staticSearchStrWalkingAreaId(siteRequest_, (String)o);
 		case "alternateName":
 			return CrowdFlowObserved.staticSearchStrAlternateName(siteRequest_, (String)o);
 		case "areaServed":
-			return CrowdFlowObserved.staticSearchStrAreaServed(siteRequest_, (String)o);
+			return CrowdFlowObserved.staticSearchStrAreaServed(siteRequest_, (Polygon)o);
 		case "averageCrowdSpeed":
 			return CrowdFlowObserved.staticSearchStrAverageCrowdSpeed(siteRequest_, (Double)o);
 		case "averageHeadwayTime":
@@ -2319,7 +2287,7 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		case "direction":
 			return CrowdFlowObserved.staticSearchStrDirection(siteRequest_, (String)o);
 		case "location":
-			return CrowdFlowObserved.staticSearchStrLocation(siteRequest_, (Path)o);
+			return CrowdFlowObserved.staticSearchStrLocation(siteRequest_, (Point)o);
 		case "name":
 			return CrowdFlowObserved.staticSearchStrName(siteRequest_, (String)o);
 		case "occupancy":
@@ -2334,8 +2302,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return CrowdFlowObserved.staticSearchStrSeeAlso(siteRequest_, (String)o);
 		case "source":
 			return CrowdFlowObserved.staticSearchStrSource(siteRequest_, (String)o);
-		case "type":
-			return CrowdFlowObserved.staticSearchStrType(siteRequest_, (String)o);
 			default:
 				return BaseModel.staticSearchStrBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2350,8 +2316,14 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	}
 	public static String staticSearchFqCrowdFlowObserved(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
-		case "address":
-			return CrowdFlowObserved.staticSearchFqAddress(siteRequest_, o);
+		case "color":
+			return CrowdFlowObserved.staticSearchFqColor(siteRequest_, o);
+		case "entityId":
+			return CrowdFlowObserved.staticSearchFqEntityId(siteRequest_, o);
+		case "trafficSimulationId":
+			return CrowdFlowObserved.staticSearchFqTrafficSimulationId(siteRequest_, o);
+		case "walkingAreaId":
+			return CrowdFlowObserved.staticSearchFqWalkingAreaId(siteRequest_, o);
 		case "alternateName":
 			return CrowdFlowObserved.staticSearchFqAlternateName(siteRequest_, o);
 		case "areaServed":
@@ -2394,8 +2366,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return CrowdFlowObserved.staticSearchFqSeeAlso(siteRequest_, o);
 		case "source":
 			return CrowdFlowObserved.staticSearchFqSource(siteRequest_, o);
-		case "type":
-			return CrowdFlowObserved.staticSearchFqType(siteRequest_, o);
 			default:
 				return BaseModel.staticSearchFqBaseModel(entityVar,  siteRequest_, o);
 		}
@@ -2422,13 +2392,29 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	}
 	public Object persistCrowdFlowObserved(String var, Object val) {
 		String varLower = var.toLowerCase();
-			if("address".equals(varLower)) {
+			if("color".equals(varLower)) {
 				if(val instanceof String) {
-					setAddress((String)val);
-				} else if(val instanceof JsonObject) {
-					setAddress((JsonObject)val);
+					setColor((String)val);
 				}
-				saves.add("address");
+				saves.add("color");
+				return val;
+			} else if("entityid".equals(varLower)) {
+				if(val instanceof String) {
+					setEntityId((String)val);
+				}
+				saves.add("entityId");
+				return val;
+			} else if("trafficsimulationid".equals(varLower)) {
+				if(val instanceof String) {
+					setTrafficSimulationId((String)val);
+				}
+				saves.add("trafficSimulationId");
+				return val;
+			} else if("walkingareaid".equals(varLower)) {
+				if(val instanceof String) {
+					setWalkingAreaId((String)val);
+				}
+				saves.add("walkingAreaId");
 				return val;
 			} else if("alternatename".equals(varLower)) {
 				if(val instanceof String) {
@@ -2437,8 +2423,10 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				saves.add("alternateName");
 				return val;
 			} else if("areaserved".equals(varLower)) {
-				if(val instanceof String) {
-					setAreaServed((String)val);
+				if(val instanceof Polygon) {
+					setAreaServed((Polygon)val);
+				} else {
+					setAreaServed(val == null ? null : val.toString());
 				}
 				saves.add("areaServed");
 				return val;
@@ -2515,10 +2503,10 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				saves.add("direction");
 				return val;
 			} else if("location".equals(varLower)) {
-				if(val instanceof Path) {
-					setLocation((Path)val);
-				} else {
-					setLocation(val == null ? null : val.toString());
+				if(val instanceof String) {
+					setLocation((String)val);
+				} else if(val instanceof Point) {
+					setLocation((Point)val);
 				}
 				saves.add("location");
 				return val;
@@ -2574,12 +2562,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				}
 				saves.add("source");
 				return val;
-			} else if("type".equals(varLower)) {
-				if(val instanceof String) {
-					setType((String)val);
-				}
-				saves.add("type");
-				return val;
 		} else {
 			return super.persistBaseModel(var, val);
 		}
@@ -2597,10 +2579,28 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
-			if(saves.contains("address")) {
-				String address = (String)doc.get("address_docvalues_string");
-				if(address != null)
-					oCrowdFlowObserved.setAddress(address);
+			if(saves.contains("color")) {
+				String color = (String)doc.get("color_docvalues_string");
+				if(color != null)
+					oCrowdFlowObserved.setColor(color);
+			}
+
+			if(saves.contains("entityId")) {
+				String entityId = (String)doc.get("entityId_docvalues_string");
+				if(entityId != null)
+					oCrowdFlowObserved.setEntityId(entityId);
+			}
+
+			if(saves.contains("trafficSimulationId")) {
+				String trafficSimulationId = (String)doc.get("trafficSimulationId_docvalues_string");
+				if(trafficSimulationId != null)
+					oCrowdFlowObserved.setTrafficSimulationId(trafficSimulationId);
+			}
+
+			if(saves.contains("walkingAreaId")) {
+				String walkingAreaId = (String)doc.get("walkingAreaId_docvalues_string");
+				if(walkingAreaId != null)
+					oCrowdFlowObserved.setWalkingAreaId(walkingAreaId);
 			}
 
 			if(saves.contains("alternateName")) {
@@ -2610,7 +2610,7 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			}
 
 			if(saves.contains("areaServed")) {
-				String areaServed = (String)doc.get("areaServed_docvalues_string");
+				Polygon areaServed = (Polygon)doc.get("areaServed_docvalues_location");
 				if(areaServed != null)
 					oCrowdFlowObserved.setAreaServed(areaServed);
 			}
@@ -2682,7 +2682,7 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			}
 
 			if(saves.contains("location")) {
-				Path location = (Path)doc.get("location_docvalues_location");
+				Point location = (Point)doc.get("location_docvalues_location");
 				if(location != null)
 					oCrowdFlowObserved.setLocation(location);
 			}
@@ -2728,26 +2728,31 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				if(source != null)
 					oCrowdFlowObserved.setSource(source);
 			}
-
-			if(saves.contains("type")) {
-				String type = (String)doc.get("type_docvalues_string");
-				if(type != null)
-					oCrowdFlowObserved.setType(type);
-			}
 		}
 
 		super.populateBaseModel(doc);
 	}
 
 	public void indexCrowdFlowObserved(JsonObject doc) {
-		if(address != null) {
-			doc.put("address_docvalues_string", address.toString());
+		if(color != null) {
+			doc.put("color_docvalues_string", color);
+		}
+		if(entityId != null) {
+			doc.put("entityId_docvalues_string", entityId);
+		}
+		if(trafficSimulationId != null) {
+			doc.put("trafficSimulationId_docvalues_string", trafficSimulationId);
+		}
+		if(walkingAreaId != null) {
+			doc.put("walkingAreaId_docvalues_string", walkingAreaId);
 		}
 		if(alternateName != null) {
 			doc.put("alternateName_docvalues_string", alternateName);
 		}
 		if(areaServed != null) {
-			doc.put("areaServed_docvalues_string", areaServed);
+			JsonArray pointsArray = new JsonArray();
+			areaServed.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
+			doc.put("areaServed_docvalues_location", new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString());
 		}
 		if(averageCrowdSpeed != null) {
 			doc.put("averageCrowdSpeed_docvalues_double", averageCrowdSpeed.doubleValue());
@@ -2783,9 +2788,7 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			doc.put("direction_docvalues_string", direction);
 		}
 		if(location != null) {
-			JsonArray pointsArray = new JsonArray();
-			location.getPoints().stream().map(point -> new JsonArray().add(Double.valueOf(point.getX())).add(Double.valueOf(point.getY()))).collect(Collectors.toList()).forEach(pointArray -> pointsArray.add(pointArray));
-			doc.put("location_docvalues_location", new JsonObject().put("type", "LineString").put("coordinates", pointsArray).toString());
+			doc.put("location_docvalues_location", String.format("%s,%s", location.getX(), location.getY()));
 		}
 		if(name != null) {
 			doc.put("name_docvalues_string", name);
@@ -2808,21 +2811,24 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		if(source != null) {
 			doc.put("source_docvalues_string", source);
 		}
-		if(type != null) {
-			doc.put("type_docvalues_string", type);
-		}
 		super.indexBaseModel(doc);
 
 	}
 
 	public static String varStoredCrowdFlowObserved(String entityVar) {
 		switch(entityVar) {
-			case "address":
-				return "address_docvalues_string";
+			case "color":
+				return "color_docvalues_string";
+			case "entityId":
+				return "entityId_docvalues_string";
+			case "trafficSimulationId":
+				return "trafficSimulationId_docvalues_string";
+			case "walkingAreaId":
+				return "walkingAreaId_docvalues_string";
 			case "alternateName":
 				return "alternateName_docvalues_string";
 			case "areaServed":
-				return "areaServed_docvalues_string";
+				return "areaServed_docvalues_location";
 			case "averageCrowdSpeed":
 				return "averageCrowdSpeed_docvalues_double";
 			case "averageHeadwayTime":
@@ -2861,8 +2867,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				return "seeAlso_docvalues_string";
 			case "source":
 				return "source_docvalues_string";
-			case "type":
-				return "type_docvalues_string";
 			default:
 				return BaseModel.varStoredBaseModel(entityVar);
 		}
@@ -2870,12 +2874,18 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public static String varIndexedCrowdFlowObserved(String entityVar) {
 		switch(entityVar) {
-			case "address":
-				return "address_docvalues_string";
+			case "color":
+				return "color_docvalues_string";
+			case "entityId":
+				return "entityId_docvalues_string";
+			case "trafficSimulationId":
+				return "trafficSimulationId_docvalues_string";
+			case "walkingAreaId":
+				return "walkingAreaId_docvalues_string";
 			case "alternateName":
 				return "alternateName_docvalues_string";
 			case "areaServed":
-				return "areaServed_docvalues_string";
+				return "areaServed_docvalues_location";
 			case "averageCrowdSpeed":
 				return "averageCrowdSpeed_docvalues_double";
 			case "averageHeadwayTime":
@@ -2914,8 +2924,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				return "seeAlso_docvalues_string";
 			case "source":
 				return "source_docvalues_string";
-			case "type":
-				return "type_docvalues_string";
 			default:
 				return BaseModel.varIndexedBaseModel(entityVar);
 		}
@@ -2923,11 +2931,17 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public static String searchVarCrowdFlowObserved(String searchVar) {
 		switch(searchVar) {
-			case "address_docvalues_string":
-				return "address";
+			case "color_docvalues_string":
+				return "color";
+			case "entityId_docvalues_string":
+				return "entityId";
+			case "trafficSimulationId_docvalues_string":
+				return "trafficSimulationId";
+			case "walkingAreaId_docvalues_string":
+				return "walkingAreaId";
 			case "alternateName_docvalues_string":
 				return "alternateName";
-			case "areaServed_docvalues_string":
+			case "areaServed_docvalues_location":
 				return "areaServed";
 			case "averageCrowdSpeed_docvalues_double":
 				return "averageCrowdSpeed";
@@ -2967,8 +2981,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				return "seeAlso";
 			case "source_docvalues_string":
 				return "source";
-			case "type_docvalues_string":
-				return "type";
 			default:
 				return BaseModel.searchVarBaseModel(searchVar);
 		}
@@ -2997,10 +3009,14 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	}
 	public void storeCrowdFlowObserved(SolrResponse.Doc doc) {
 		CrowdFlowObserved oCrowdFlowObserved = (CrowdFlowObserved)this;
+		SiteRequestEnUS siteRequest = oCrowdFlowObserved.getSiteRequest_();
 
-		oCrowdFlowObserved.setAddress(Optional.ofNullable(doc.get("address_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oCrowdFlowObserved.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oCrowdFlowObserved.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oCrowdFlowObserved.setTrafficSimulationId(Optional.ofNullable(doc.get("trafficSimulationId_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oCrowdFlowObserved.setWalkingAreaId(Optional.ofNullable(doc.get("walkingAreaId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oCrowdFlowObserved.setAlternateName(Optional.ofNullable(doc.get("alternateName_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oCrowdFlowObserved.setAreaServed(Optional.ofNullable(doc.get("areaServed_docvalues_string")).map(v -> v.toString()).orElse(null));
+		oCrowdFlowObserved.setAreaServed(Optional.ofNullable(doc.get("areaServed_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oCrowdFlowObserved.setAverageCrowdSpeed(Optional.ofNullable(doc.get("averageCrowdSpeed_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oCrowdFlowObserved.setAverageHeadwayTime(Optional.ofNullable(doc.get("averageHeadwayTime_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oCrowdFlowObserved.setCongested(Optional.ofNullable(doc.get("congested_docvalues_boolean")).map(v -> v.toString()).orElse(null));
@@ -3020,7 +3036,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		oCrowdFlowObserved.setRefRoadSegment(Optional.ofNullable(doc.get("refRoadSegment_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oCrowdFlowObserved.setSeeAlso(Optional.ofNullable(doc.get("seeAlso_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oCrowdFlowObserved.setSource(Optional.ofNullable(doc.get("source_docvalues_string")).map(v -> v.toString()).orElse(null));
-		oCrowdFlowObserved.setType(Optional.ofNullable(doc.get("type_docvalues_string")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseModel(doc);
 	}
@@ -3034,8 +3049,14 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		Object o = Optional.ofNullable(apiRequest).map(ApiRequest::getOriginal).orElse(null);
 		if(o != null && o instanceof CrowdFlowObserved) {
 			CrowdFlowObserved original = (CrowdFlowObserved)o;
-			if(!Objects.equals(address, original.getAddress()))
-				apiRequest.addVars("address");
+			if(!Objects.equals(color, original.getColor()))
+				apiRequest.addVars("color");
+			if(!Objects.equals(entityId, original.getEntityId()))
+				apiRequest.addVars("entityId");
+			if(!Objects.equals(trafficSimulationId, original.getTrafficSimulationId()))
+				apiRequest.addVars("trafficSimulationId");
+			if(!Objects.equals(walkingAreaId, original.getWalkingAreaId()))
+				apiRequest.addVars("walkingAreaId");
 			if(!Objects.equals(alternateName, original.getAlternateName()))
 				apiRequest.addVars("alternateName");
 			if(!Objects.equals(areaServed, original.getAreaServed()))
@@ -3078,8 +3099,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 				apiRequest.addVars("seeAlso");
 			if(!Objects.equals(source, original.getSource()))
 				apiRequest.addVars("source");
-			if(!Objects.equals(type, original.getType()))
-				apiRequest.addVars("type");
 			super.apiRequestBaseModel();
 		}
 	}
@@ -3091,9 +3110,12 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
-		sb.append(Optional.ofNullable(address).map(v -> "address: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(entityId).map(v -> "entityId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(trafficSimulationId).map(v -> "trafficSimulationId: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(walkingAreaId).map(v -> "walkingAreaId: \"" + v + "\"\n" ).orElse(""));
 		sb.append(Optional.ofNullable(alternateName).map(v -> "alternateName: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(areaServed).map(v -> "areaServed: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(areaServed).map(v -> "areaServed: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(averageCrowdSpeed).map(v -> "averageCrowdSpeed: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(averageHeadwayTime).map(v -> "averageHeadwayTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(congested).map(v -> "congested: " + v + "\n").orElse(""));
@@ -3113,12 +3135,16 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		sb.append(Optional.ofNullable(refRoadSegment).map(v -> "refRoadSegment: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(seeAlso).map(v -> "seeAlso: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(source).map(v -> "source: \"" + v + "\"\n" ).orElse(""));
-		sb.append(Optional.ofNullable(type).map(v -> "type: \"" + v + "\"\n" ).orElse(""));
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "CrowdFlowObserved";
-	public static final String VAR_address = "address";
+	public static final String VAR_color = "color";
+	public static final String VAR_entityId = "entityId";
+	public static final String VAR_trafficSimulationId = "trafficSimulationId";
+	public static final String VAR_trafficSimulationSearch = "trafficSimulationSearch";
+	public static final String VAR_trafficSimulation_ = "trafficSimulation_";
+	public static final String VAR_walkingAreaId = "walkingAreaId";
 	public static final String VAR_alternateName = "alternateName";
 	public static final String VAR_areaServed = "areaServed";
 	public static final String VAR_averageCrowdSpeed = "averageCrowdSpeed";
@@ -3140,7 +3166,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	public static final String VAR_refRoadSegment = "refRoadSegment";
 	public static final String VAR_seeAlso = "seeAlso";
 	public static final String VAR_source = "source";
-	public static final String VAR_type = "type";
 
 	public static List<String> varsQForClass() {
 		return CrowdFlowObserved.varsQCrowdFlowObserved(new ArrayList<String>());
@@ -3154,7 +3179,10 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		return CrowdFlowObserved.varsFqCrowdFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsFqCrowdFlowObserved(List<String> vars) {
-		vars.add(VAR_address);
+		vars.add(VAR_color);
+		vars.add(VAR_entityId);
+		vars.add(VAR_trafficSimulationId);
+		vars.add(VAR_walkingAreaId);
 		vars.add(VAR_alternateName);
 		vars.add(VAR_areaServed);
 		vars.add(VAR_averageCrowdSpeed);
@@ -3176,7 +3204,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		vars.add(VAR_refRoadSegment);
 		vars.add(VAR_seeAlso);
 		vars.add(VAR_source);
-		vars.add(VAR_type);
 		BaseModel.varsFqBaseModel(vars);
 		return vars;
 	}
@@ -3185,9 +3212,9 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		return CrowdFlowObserved.varsRangeCrowdFlowObserved(new ArrayList<String>());
 	}
 	public static List<String> varsRangeCrowdFlowObserved(List<String> vars) {
-		vars.add(VAR_address);
 		vars.add(VAR_averageCrowdSpeed);
 		vars.add(VAR_averageHeadwayTime);
+		vars.add(VAR_location);
 		vars.add(VAR_occupancy);
 		vars.add(VAR_owner);
 		vars.add(VAR_peopleCount);
@@ -3197,7 +3224,12 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		return vars;
 	}
 
-	public static final String DISPLAY_NAME_address = "address";
+	public static final String DISPLAY_NAME_color = "color";
+	public static final String DISPLAY_NAME_entityId = "entity ID";
+	public static final String DISPLAY_NAME_trafficSimulationId = "traffic simulation ID";
+	public static final String DISPLAY_NAME_trafficSimulationSearch = "";
+	public static final String DISPLAY_NAME_trafficSimulation_ = "";
+	public static final String DISPLAY_NAME_walkingAreaId = "walking area ID";
 	public static final String DISPLAY_NAME_alternateName = "alternate name";
 	public static final String DISPLAY_NAME_areaServed = "area served";
 	public static final String DISPLAY_NAME_averageCrowdSpeed = "average crowd speed";
@@ -3219,15 +3251,24 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 	public static final String DISPLAY_NAME_refRoadSegment = "ref road segment";
 	public static final String DISPLAY_NAME_seeAlso = "see also";
 	public static final String DISPLAY_NAME_source = "source";
-	public static final String DISPLAY_NAME_type = "type";
 
 	public static String displayNameForClass(String var) {
 		return CrowdFlowObserved.displayNameCrowdFlowObserved(var);
 	}
 	public static String displayNameCrowdFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
-			return DISPLAY_NAME_address;
+		case VAR_color:
+			return DISPLAY_NAME_color;
+		case VAR_entityId:
+			return DISPLAY_NAME_entityId;
+		case VAR_trafficSimulationId:
+			return DISPLAY_NAME_trafficSimulationId;
+		case VAR_trafficSimulationSearch:
+			return DISPLAY_NAME_trafficSimulationSearch;
+		case VAR_trafficSimulation_:
+			return DISPLAY_NAME_trafficSimulation_;
+		case VAR_walkingAreaId:
+			return DISPLAY_NAME_walkingAreaId;
 		case VAR_alternateName:
 			return DISPLAY_NAME_alternateName;
 		case VAR_areaServed:
@@ -3270,8 +3311,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return DISPLAY_NAME_seeAlso;
 		case VAR_source:
 			return DISPLAY_NAME_source;
-		case VAR_type:
-			return DISPLAY_NAME_type;
 		default:
 			return BaseModel.displayNameBaseModel(var);
 		}
@@ -3279,8 +3318,12 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public static String descriptionCrowdFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
-			return "The mailing address";
+		case VAR_entityId:
+			return "A unique ID for this Smart Data Model";
+		case VAR_trafficSimulationId:
+			return "The Traffic Simulation ID";
+		case VAR_walkingAreaId:
+			return "The walking area ID of pedestrians in SUMO";
 		case VAR_alternateName:
 			return "An alternative name for this item";
 		case VAR_areaServed:
@@ -3323,8 +3366,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return "list of uri pointing to additional resources about the item";
 		case VAR_source:
 			return "A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object.";
-		case VAR_type:
-			return "NGSI Entity type. It has to be CrowdFlowObserved";
 			default:
 				return BaseModel.descriptionBaseModel(var);
 		}
@@ -3332,12 +3373,22 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public static String classSimpleNameCrowdFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
-			return "JsonObject";
+		case VAR_color:
+			return "String";
+		case VAR_entityId:
+			return "String";
+		case VAR_trafficSimulationId:
+			return "String";
+		case VAR_trafficSimulationSearch:
+			return "SearchList";
+		case VAR_trafficSimulation_:
+			return "TrafficSimulation";
+		case VAR_walkingAreaId:
+			return "String";
 		case VAR_alternateName:
 			return "String";
 		case VAR_areaServed:
-			return "String";
+			return "Polygon";
 		case VAR_averageCrowdSpeed:
 			return "BigDecimal";
 		case VAR_averageHeadwayTime:
@@ -3361,7 +3412,7 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		case VAR_direction:
 			return "String";
 		case VAR_location:
-			return "Path";
+			return "Point";
 		case VAR_name:
 			return "String";
 		case VAR_occupancy:
@@ -3375,8 +3426,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		case VAR_seeAlso:
 			return "JsonObject";
 		case VAR_source:
-			return "String";
-		case VAR_type:
 			return "String";
 			default:
 				return BaseModel.classSimpleNameBaseModel(var);
@@ -3392,7 +3441,13 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public static Integer htmRowCrowdFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
+		case VAR_color:
+			return 3;
+		case VAR_entityId:
+			return 5;
+		case VAR_trafficSimulationId:
+			return 5;
+		case VAR_walkingAreaId:
 			return 3;
 		case VAR_alternateName:
 			return 3;
@@ -3435,8 +3490,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 		case VAR_seeAlso:
 			return 9;
 		case VAR_source:
-			return 10;
-		case VAR_type:
 			return 10;
 			default:
 				return BaseModel.htmRowBaseModel(var);
@@ -3445,7 +3498,13 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 
 	public static Integer htmCellCrowdFlowObserved(String var) {
 		switch(var) {
-		case VAR_address:
+		case VAR_color:
+			return 3;
+		case VAR_entityId:
+			return 1;
+		case VAR_trafficSimulationId:
+			return 2;
+		case VAR_walkingAreaId:
 			return 1;
 		case VAR_alternateName:
 			return 2;
@@ -3489,8 +3548,6 @@ public abstract class CrowdFlowObservedGen<DEV> extends BaseModel {
 			return 3;
 		case VAR_source:
 			return 1;
-		case VAR_type:
-			return 2;
 			default:
 				return BaseModel.htmCellBaseModel(var);
 		}

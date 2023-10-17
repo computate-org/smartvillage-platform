@@ -691,14 +691,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
-					case "setEntityId":
-							o2.setEntityId(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(TrafficSimulation.VAR_entityId + "=$" + num);
-							num++;
-							bParams.add(o2.sqlEntityId());
-						break;
 					case "setStartDateTime":
 							o2.setStartDateTime(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -714,6 +706,101 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bSql.append(TrafficSimulation.VAR_simulationName + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSimulationName());
+						break;
+					case "setEntityId":
+							o2.setEntityId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_entityId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlEntityId());
+						break;
+					case "setReportKeys":
+						JsonArray setReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
+						setReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						Optional.ofNullable(o.getReportKeys()).orElse(Arrays.asList()).stream().filter(oVal -> oVal != null && !setReportKeysValues.contains(oVal.toString())).forEach(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SimulationReport");
+							}
+							futures2.add(Future.future(promise2 -> {
+								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "addAllReportKeys":
+						JsonArray addAllReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
+						addAllReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "addReportKeys":
+						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
+						break;
+					case "removeReportKeys":
+						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
+							if(!pks.contains(pk2)) {
+								pks.add(pk2);
+								classes.add("SimulationReport");
+							}
+							futures2.add(Future.future(promise2 -> {
+								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
+									promise2.complete();
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
 						break;
 					case "setLocation":
 							o2.setLocation(jsonObject.getString(entityVar));
@@ -939,93 +1026,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							num++;
 							bParams.add(o2.sqlParamTotalIterNum());
 						break;
-					case "setReportKeys":
-						JsonArray setReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
-						setReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						Optional.ofNullable(o.getReportKeys()).orElse(Arrays.asList()).stream().filter(oVal -> oVal != null && !setReportKeysValues.contains(oVal.toString())).forEach(pk2 -> {
-							if(!pks.contains(pk2)) {
-								pks.add(pk2);
-								classes.add("SimulationReport");
-							}
-							futures2.add(Future.future(promise2 -> {
-								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
-									promise2.complete();
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
-					case "addAllReportKeys":
-						JsonArray addAllReportKeysValues = Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray());
-						addAllReportKeysValues.stream().map(oVal -> oVal.toString()).forEach(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
-					case "addReportKeys":
-						Optional.ofNullable(jsonObject.getString(entityVar)).ifPresent(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
-					case "removeReportKeys":
-						Optional.ofNullable(jsonObject.getString(entityVar)).map(val -> Long.parseLong(val)).ifPresent(pk2 -> {
-							if(!pks.contains(pk2)) {
-								pks.add(pk2);
-								classes.add("SimulationReport");
-							}
-							futures2.add(Future.future(promise2 -> {
-								sql(siteRequest).update(SimulationReport.class, pk2).setToNull(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk2).onSuccess(a -> {
-									promise2.complete();
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
 					case "setLaneAreaDetectorIds":
 							o2.setLaneAreaDetectorIds(jsonObject.getJsonArray(entityVar));
 							if(bParams.size() > 0)
@@ -1073,6 +1073,22 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 							bSql.append(TrafficSimulation.VAR_e1DetectorPaths + "=$" + num);
 							num++;
 							bParams.add(o2.sqlE1DetectorPaths());
+						break;
+					case "setWalkingAreaIds":
+							o2.setWalkingAreaIds(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_walkingAreaIds + "=$" + num);
+							num++;
+							bParams.add(o2.sqlWalkingAreaIds());
+						break;
+					case "setWalkingAreaLanes":
+							o2.setWalkingAreaLanes(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(TrafficSimulation.VAR_walkingAreaLanes + "=$" + num);
+							num++;
+							bParams.add(o2.sqlWalkingAreaLanes());
 						break;
 				}
 			}
@@ -1435,15 +1451,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
-					case TrafficSimulation.VAR_entityId:
-						o2.setEntityId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(TrafficSimulation.VAR_entityId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlEntityId());
-						break;
 					case TrafficSimulation.VAR_startDateTime:
 						o2.setStartDateTime(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1461,6 +1468,34 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_simulationName + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSimulationName());
+						break;
+					case TrafficSimulation.VAR_entityId:
+						o2.setEntityId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_entityId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlEntityId());
+						break;
+					case TrafficSimulation.VAR_reportKeys:
+						Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray()).stream().map(oVal -> oVal.toString()).forEach(val -> {
+							futures2.add(Future.future(promise2 -> {
+								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
+									if(!pks.contains(pk2)) {
+										pks.add(pk2);
+										classes.add("SimulationReport");
+									}
+									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
+										promise2.complete();
+									}).onFailure(ex -> {
+										promise2.fail(ex);
+									});
+								}).onFailure(ex -> {
+									promise2.fail(ex);
+								});
+							}));
+						});
 						break;
 					case TrafficSimulation.VAR_location:
 						o2.setLocation(jsonObject.getString(entityVar));
@@ -1714,25 +1749,6 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						num++;
 						bParams.add(o2.sqlParamTotalIterNum());
 						break;
-					case TrafficSimulation.VAR_reportKeys:
-						Optional.ofNullable(jsonObject.getJsonArray(entityVar)).orElse(new JsonArray()).stream().map(oVal -> oVal.toString()).forEach(val -> {
-							futures2.add(Future.future(promise2 -> {
-								search(siteRequest).query(SimulationReport.class, val, inheritPk).onSuccess(pk2 -> {
-									if(!pks.contains(pk2)) {
-										pks.add(pk2);
-										classes.add("SimulationReport");
-									}
-									sql(siteRequest).update(SimulationReport.class, pk2).set(SimulationReport.VAR_simulationKey, TrafficSimulation.class, pk).onSuccess(a -> {
-										promise2.complete();
-									}).onFailure(ex -> {
-										promise2.fail(ex);
-									});
-								}).onFailure(ex -> {
-									promise2.fail(ex);
-								});
-							}));
-						});
-						break;
 					case TrafficSimulation.VAR_laneAreaDetectorIds:
 						o2.setLaneAreaDetectorIds(jsonObject.getJsonArray(entityVar));
 						if(bParams.size() > 0) {
@@ -1786,6 +1802,24 @@ public class TrafficSimulationEnUSGenApiServiceImpl extends BaseApiServiceImpl i
 						bSql.append(TrafficSimulation.VAR_e1DetectorPaths + "=$" + num);
 						num++;
 						bParams.add(o2.sqlE1DetectorPaths());
+						break;
+					case TrafficSimulation.VAR_walkingAreaIds:
+						o2.setWalkingAreaIds(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_walkingAreaIds + "=$" + num);
+						num++;
+						bParams.add(o2.sqlWalkingAreaIds());
+						break;
+					case TrafficSimulation.VAR_walkingAreaLanes:
+						o2.setWalkingAreaLanes(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(TrafficSimulation.VAR_walkingAreaLanes + "=$" + num);
+						num++;
+						bParams.add(o2.sqlWalkingAreaLanes());
 						break;
 					}
 				}
