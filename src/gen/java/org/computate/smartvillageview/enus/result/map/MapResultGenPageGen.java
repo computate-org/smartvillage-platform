@@ -42,9 +42,9 @@ import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these MapResultGenPage objects in a RESTful API. 
  * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MapResultGenPageGen into the class MapResultGenPage. 
  * </li>

@@ -48,7 +48,6 @@ import java.util.Locale;
 import java.time.OffsetDateTime;
 import java.lang.Double;
 import io.vertx.pgclient.data.Point;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
 import java.lang.Boolean;
@@ -60,9 +59,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class MapResultGen into the class MapResult. 
  * </li><li>You can add a class comment "Model: true" if you wish to persist these MapResult objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the MapResultGen data in the database will then be automatically generated. 
@@ -1252,6 +1251,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 	public void storeMapResult(SolrResponse.Doc doc) {
 		MapResult oMapResult = (MapResult)this;
+		SiteRequestEnUS siteRequest = oMapResult.getSiteRequest_();
 
 		oMapResult.setTimeStepId(Optional.ofNullable(doc.get("timeStepId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oMapResult.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));

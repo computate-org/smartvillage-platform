@@ -36,7 +36,6 @@ import org.computate.smartvillageview.enus.result.base.BaseResult;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import io.vertx.pgclient.data.Point;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
 import java.math.BigDecimal;
@@ -48,9 +47,9 @@ import io.vertx.core.json.JsonArray;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeGen into the class IotNode. 
  * </li><li>You can add a class comment "Model: true" if you wish to persist these IotNode objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the IotNodeGen data in the database will then be automatically generated. 
@@ -4266,6 +4265,7 @@ public abstract class IotNodeGen<DEV> extends BaseResult {
 	}
 	public void storeIotNode(SolrResponse.Doc doc) {
 		IotNode oIotNode = (IotNode)this;
+		SiteRequestEnUS siteRequest = oIotNode.getSiteRequest_();
 
 		oIotNode.setJson(Optional.ofNullable(doc.get("json_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oIotNode.setNodeName(Optional.ofNullable(doc.get("nodeName_docvalues_string")).map(v -> v.toString()).orElse(null));

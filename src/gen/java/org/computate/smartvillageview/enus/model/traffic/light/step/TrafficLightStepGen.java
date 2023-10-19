@@ -44,9 +44,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TrafficLightStepGen into the class TrafficLightStep. 
  * </li><li>You can add a class comment "Model: true" if you wish to persist these TrafficLightStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the TrafficLightStepGen data in the database will then be automatically generated. 
@@ -1229,6 +1229,7 @@ public abstract class TrafficLightStepGen<DEV> extends MapResult {
 	}
 	public void storeTrafficLightStep(SolrResponse.Doc doc) {
 		TrafficLightStep oTrafficLightStep = (TrafficLightStep)this;
+		SiteRequestEnUS siteRequest = oTrafficLightStep.getSiteRequest_();
 
 		oTrafficLightStep.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oTrafficLightStep.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));

@@ -692,6 +692,126 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
+					case "setParamPedestrianWaitThresholdSecWestEast":
+							o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
+						break;
+					case "setParamVehicleQueueThresholdWestEast":
+							o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
+						break;
+					case "setParamVehicleQueueThresholdSouthNorth":
+							o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
+						break;
+					case "setParamPedestrianQueueThresholdNorthSouth":
+							o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
+						break;
+					case "setParamPedestrianQueueThresholdWestEast":
+							o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case "setParamDemandScale":
+							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamDemandScale());
+						break;
+					case "setParamStepSize":
+							o2.setParamStepSize(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamStepSize());
+						break;
+					case "setParamRunTime":
+							o2.setParamRunTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamRunTime());
+						break;
+					case "setParamItersPerPar":
+							o2.setParamItersPerPar(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case "setParamTotalIterNum":
+							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case "setUpdatedParameters":
+							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case "setUpdatedPerformance":
+							o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case "setAverageQueueLength":
+							o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case "setReportStatus":
+							o2.setReportStatus(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportStatus());
+						break;
+					case "setReportProgress":
+							o2.setReportProgress(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportProgress());
+						break;
 					case "setReportName":
 							o2.setReportName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -887,126 +1007,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecNorthSouth + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamPedestrianWaitThresholdSecNorthSouth());
-						break;
-					case "setParamPedestrianWaitThresholdSecWestEast":
-							o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
-						break;
-					case "setParamVehicleQueueThresholdWestEast":
-							o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
-						break;
-					case "setParamVehicleQueueThresholdSouthNorth":
-							o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
-						break;
-					case "setParamPedestrianQueueThresholdNorthSouth":
-							o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
-						break;
-					case "setParamPedestrianQueueThresholdWestEast":
-							o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
-						break;
-					case "setParamDemandScale":
-							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamDemandScale());
-						break;
-					case "setParamStepSize":
-							o2.setParamStepSize(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamStepSize());
-						break;
-					case "setParamRunTime":
-							o2.setParamRunTime(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamRunTime());
-						break;
-					case "setParamItersPerPar":
-							o2.setParamItersPerPar(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamItersPerPar());
-						break;
-					case "setParamTotalIterNum":
-							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamTotalIterNum());
-						break;
-					case "setUpdatedParameters":
-							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUpdatedParameters());
-						break;
-					case "setUpdatedPerformance":
-							o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUpdatedPerformance());
-						break;
-					case "setAverageQueueLength":
-							o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
-							num++;
-							bParams.add(o2.sqlAverageQueueLength());
-						break;
-					case "setReportStatus":
-							o2.setReportStatus(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportStatus());
-						break;
-					case "setReportProgress":
-							o2.setReportProgress(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportProgress());
 						break;
 				}
 			}
@@ -1369,6 +1369,141 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
+					case SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast:
+						o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
+						break;
+					case SimulationReport.VAR_paramVehicleQueueThresholdWestEast:
+						o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
+						break;
+					case SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth:
+						o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
+						break;
+					case SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth:
+						o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
+						break;
+					case SimulationReport.VAR_paramPedestrianQueueThresholdWestEast:
+						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case SimulationReport.VAR_paramDemandScale:
+						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamDemandScale());
+						break;
+					case SimulationReport.VAR_paramStepSize:
+						o2.setParamStepSize(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamStepSize());
+						break;
+					case SimulationReport.VAR_paramRunTime:
+						o2.setParamRunTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamRunTime());
+						break;
+					case SimulationReport.VAR_paramItersPerPar:
+						o2.setParamItersPerPar(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case SimulationReport.VAR_paramTotalIterNum:
+						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case SimulationReport.VAR_updatedParameters:
+						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case SimulationReport.VAR_updatedPerformance:
+						o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case SimulationReport.VAR_averageQueueLength:
+						o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case SimulationReport.VAR_reportStatus:
+						o2.setReportStatus(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportStatus());
+						break;
+					case SimulationReport.VAR_reportProgress:
+						o2.setReportProgress(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportProgress());
+						break;
 					case SimulationReport.VAR_reportName:
 						o2.setReportName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1550,141 +1685,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecNorthSouth + "=$" + num);
 						num++;
 						bParams.add(o2.sqlParamPedestrianWaitThresholdSecNorthSouth());
-						break;
-					case SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast:
-						o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
-						break;
-					case SimulationReport.VAR_paramVehicleQueueThresholdWestEast:
-						o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
-						break;
-					case SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth:
-						o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
-						break;
-					case SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth:
-						o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
-						break;
-					case SimulationReport.VAR_paramPedestrianQueueThresholdWestEast:
-						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
-						break;
-					case SimulationReport.VAR_paramDemandScale:
-						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamDemandScale());
-						break;
-					case SimulationReport.VAR_paramStepSize:
-						o2.setParamStepSize(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamStepSize());
-						break;
-					case SimulationReport.VAR_paramRunTime:
-						o2.setParamRunTime(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamRunTime());
-						break;
-					case SimulationReport.VAR_paramItersPerPar:
-						o2.setParamItersPerPar(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamItersPerPar());
-						break;
-					case SimulationReport.VAR_paramTotalIterNum:
-						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamTotalIterNum());
-						break;
-					case SimulationReport.VAR_updatedParameters:
-						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUpdatedParameters());
-						break;
-					case SimulationReport.VAR_updatedPerformance:
-						o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUpdatedPerformance());
-						break;
-					case SimulationReport.VAR_averageQueueLength:
-						o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
-						num++;
-						bParams.add(o2.sqlAverageQueueLength());
-						break;
-					case SimulationReport.VAR_reportStatus:
-						o2.setReportStatus(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-						num++;
-						bParams.add(o2.sqlReportStatus());
-						break;
-					case SimulationReport.VAR_reportProgress:
-						o2.setReportProgress(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-						num++;
-						bParams.add(o2.sqlReportProgress());
 						break;
 					}
 				}
@@ -2317,6 +2317,141 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
+					case SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast:
+						o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
+						break;
+					case SimulationReport.VAR_paramVehicleQueueThresholdWestEast:
+						o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
+						break;
+					case SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth:
+						o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
+						break;
+					case SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth:
+						o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
+						break;
+					case SimulationReport.VAR_paramPedestrianQueueThresholdWestEast:
+						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case SimulationReport.VAR_paramDemandScale:
+						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamDemandScale());
+						break;
+					case SimulationReport.VAR_paramStepSize:
+						o2.setParamStepSize(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamStepSize());
+						break;
+					case SimulationReport.VAR_paramRunTime:
+						o2.setParamRunTime(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamRunTime());
+						break;
+					case SimulationReport.VAR_paramItersPerPar:
+						o2.setParamItersPerPar(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case SimulationReport.VAR_paramTotalIterNum:
+						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
+						num++;
+						bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case SimulationReport.VAR_updatedParameters:
+						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case SimulationReport.VAR_updatedPerformance:
+						o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case SimulationReport.VAR_averageQueueLength:
+						o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+						num++;
+						bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case SimulationReport.VAR_reportStatus:
+						o2.setReportStatus(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportStatus());
+						break;
+					case SimulationReport.VAR_reportProgress:
+						o2.setReportProgress(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+						num++;
+						bParams.add(o2.sqlReportProgress());
+						break;
 					case SimulationReport.VAR_reportName:
 						o2.setReportName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -2498,141 +2633,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecNorthSouth + "=$" + num);
 						num++;
 						bParams.add(o2.sqlParamPedestrianWaitThresholdSecNorthSouth());
-						break;
-					case SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast:
-						o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
-						break;
-					case SimulationReport.VAR_paramVehicleQueueThresholdWestEast:
-						o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
-						break;
-					case SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth:
-						o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
-						break;
-					case SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth:
-						o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
-						break;
-					case SimulationReport.VAR_paramPedestrianQueueThresholdWestEast:
-						o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
-						break;
-					case SimulationReport.VAR_paramDemandScale:
-						o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamDemandScale());
-						break;
-					case SimulationReport.VAR_paramStepSize:
-						o2.setParamStepSize(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamStepSize());
-						break;
-					case SimulationReport.VAR_paramRunTime:
-						o2.setParamRunTime(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamRunTime());
-						break;
-					case SimulationReport.VAR_paramItersPerPar:
-						o2.setParamItersPerPar(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamItersPerPar());
-						break;
-					case SimulationReport.VAR_paramTotalIterNum:
-						o2.setParamTotalIterNum(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
-						num++;
-						bParams.add(o2.sqlParamTotalIterNum());
-						break;
-					case SimulationReport.VAR_updatedParameters:
-						o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUpdatedParameters());
-						break;
-					case SimulationReport.VAR_updatedPerformance:
-						o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUpdatedPerformance());
-						break;
-					case SimulationReport.VAR_averageQueueLength:
-						o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
-						num++;
-						bParams.add(o2.sqlAverageQueueLength());
-						break;
-					case SimulationReport.VAR_reportStatus:
-						o2.setReportStatus(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-						num++;
-						bParams.add(o2.sqlReportStatus());
-						break;
-					case SimulationReport.VAR_reportProgress:
-						o2.setReportProgress(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-						num++;
-						bParams.add(o2.sqlReportProgress());
 						break;
 					}
 				}
@@ -3016,6 +3016,126 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
+					case "setParamPedestrianWaitThresholdSecWestEast":
+							o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
+						break;
+					case "setParamVehicleQueueThresholdWestEast":
+							o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
+						break;
+					case "setParamVehicleQueueThresholdSouthNorth":
+							o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
+						break;
+					case "setParamPedestrianQueueThresholdNorthSouth":
+							o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
+						break;
+					case "setParamPedestrianQueueThresholdWestEast":
+							o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
+						break;
+					case "setParamDemandScale":
+							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamDemandScale());
+						break;
+					case "setParamStepSize":
+							o2.setParamStepSize(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamStepSize());
+						break;
+					case "setParamRunTime":
+							o2.setParamRunTime(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamRunTime());
+						break;
+					case "setParamItersPerPar":
+							o2.setParamItersPerPar(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamItersPerPar());
+						break;
+					case "setParamTotalIterNum":
+							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
+							num++;
+							bParams.add(o2.sqlParamTotalIterNum());
+						break;
+					case "setUpdatedParameters":
+							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedParameters());
+						break;
+					case "setUpdatedPerformance":
+							o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUpdatedPerformance());
+						break;
+					case "setAverageQueueLength":
+							o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
+							num++;
+							bParams.add(o2.sqlAverageQueueLength());
+						break;
+					case "setReportStatus":
+							o2.setReportStatus(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportStatus());
+						break;
+					case "setReportProgress":
+							o2.setReportProgress(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
+							num++;
+							bParams.add(o2.sqlReportProgress());
+						break;
 					case "setReportName":
 							o2.setReportName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -3211,126 +3331,6 @@ public class SimulationReportEnUSGenApiServiceImpl extends BaseApiServiceImpl im
 							bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecNorthSouth + "=$" + num);
 							num++;
 							bParams.add(o2.sqlParamPedestrianWaitThresholdSecNorthSouth());
-						break;
-					case "setParamPedestrianWaitThresholdSecWestEast":
-							o2.setParamPedestrianWaitThresholdSecWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramPedestrianWaitThresholdSecWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianWaitThresholdSecWestEast());
-						break;
-					case "setParamVehicleQueueThresholdWestEast":
-							o2.setParamVehicleQueueThresholdWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamVehicleQueueThresholdWestEast());
-						break;
-					case "setParamVehicleQueueThresholdSouthNorth":
-							o2.setParamVehicleQueueThresholdSouthNorth(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramVehicleQueueThresholdSouthNorth + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamVehicleQueueThresholdSouthNorth());
-						break;
-					case "setParamPedestrianQueueThresholdNorthSouth":
-							o2.setParamPedestrianQueueThresholdNorthSouth(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdNorthSouth + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianQueueThresholdNorthSouth());
-						break;
-					case "setParamPedestrianQueueThresholdWestEast":
-							o2.setParamPedestrianQueueThresholdWestEast(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramPedestrianQueueThresholdWestEast + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamPedestrianQueueThresholdWestEast());
-						break;
-					case "setParamDemandScale":
-							o2.setParamDemandScale(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramDemandScale + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamDemandScale());
-						break;
-					case "setParamStepSize":
-							o2.setParamStepSize(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramStepSize + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamStepSize());
-						break;
-					case "setParamRunTime":
-							o2.setParamRunTime(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramRunTime + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamRunTime());
-						break;
-					case "setParamItersPerPar":
-							o2.setParamItersPerPar(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramItersPerPar + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamItersPerPar());
-						break;
-					case "setParamTotalIterNum":
-							o2.setParamTotalIterNum(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_paramTotalIterNum + "=$" + num);
-							num++;
-							bParams.add(o2.sqlParamTotalIterNum());
-						break;
-					case "setUpdatedParameters":
-							o2.setUpdatedParameters(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_updatedParameters + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUpdatedParameters());
-						break;
-					case "setUpdatedPerformance":
-							o2.setUpdatedPerformance(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_updatedPerformance + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUpdatedPerformance());
-						break;
-					case "setAverageQueueLength":
-							o2.setAverageQueueLength(jsonObject.getJsonArray(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_averageQueueLength + "=$" + num);
-							num++;
-							bParams.add(o2.sqlAverageQueueLength());
-						break;
-					case "setReportStatus":
-							o2.setReportStatus(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportStatus + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportStatus());
-						break;
-					case "setReportProgress":
-							o2.setReportProgress(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SimulationReport.VAR_reportProgress + "=$" + num);
-							num++;
-							bParams.add(o2.sqlReportProgress());
 						break;
 				}
 			}

@@ -43,9 +43,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SitePageGen into the class SitePage. 
  * </li><li>You can add a class comment "Rows: 100" if you wish the SitePage API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
@@ -1940,7 +1940,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public void populateSitePage(SolrResponse.Doc doc) {
 		SitePage oSitePage = (SitePage)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("courseNum")) {
@@ -2131,6 +2131,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 	public void storeSitePage(SolrResponse.Doc doc) {
 		SitePage oSitePage = (SitePage)this;
+		SiteRequestEnUS siteRequest = oSitePage.getSiteRequest_();
 
 		oSitePage.setCourseNum(Optional.ofNullable(doc.get("courseNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSitePage.setLessonNum(Optional.ofNullable(doc.get("lessonNum_docvalues_int")).map(v -> v.toString()).orElse(null));

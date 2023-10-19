@@ -55,9 +55,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class TimeStepGen into the class TimeStep. 
  * </li><li>You can add a class comment "Model: true" if you wish to persist these TimeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the TimeStepGen data in the database will then be automatically generated. 
@@ -788,7 +788,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	}
 	public void populateTimeStep(SolrResponse.Doc doc) {
 		TimeStep oTimeStep = (TimeStep)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("simulationKey")) {
@@ -904,6 +904,7 @@ public abstract class TimeStepGen<DEV> extends BaseResult {
 	}
 	public void storeTimeStep(SolrResponse.Doc doc) {
 		TimeStep oTimeStep = (TimeStep)this;
+		SiteRequestEnUS siteRequest = oTimeStep.getSiteRequest_();
 
 		oTimeStep.setSimulationKey(Optional.ofNullable(doc.get("simulationKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oTimeStep.setPath(Optional.ofNullable(doc.get("path_docvalues_string")).map(v -> v.toString()).orElse(null));

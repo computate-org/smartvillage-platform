@@ -32,9 +32,9 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
-					window.baseModel = JSON.parse('{{{toJsonObjectStringInApostrophes baseModel_ }}}');
+					window.baseModel = JSON.parse($('.pageForm .baseModel').val());
 				}
-				window.listBaseModel = JSON.parse('{{{toJsonArrayStringInApostrophes listBaseModel }}}');
+					window.listBaseModel = JSON.parse($('.pageForm .listBaseModel').val());
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -394,6 +394,8 @@
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+			<input name="baseModel" id="baseModel" class="baseModel"  value='{{{toJsonObjectStringInApostrophes baseModel_ }}}' type="hidden"/>
+			<input name="listBaseModel" id="listBaseModel" class="listBaseModel"  value='{{{toJsonArrayStringInApostrophes listBaseModel }}}' type="hidden"/>
 		</form>
 {{#if id}}
 {{#block "htmButton_searchpageBaseModel"}}{{/block}}

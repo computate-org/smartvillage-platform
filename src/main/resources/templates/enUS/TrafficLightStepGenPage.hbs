@@ -32,7 +32,9 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.trafficLightStep = JSON.parse($('.pageForm .trafficLightStep').val());
 				}
+					window.listTrafficLightStep = JSON.parse($('.pageForm .listTrafficLightStep').val());
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -271,6 +273,8 @@
 {{> "htmBodyMenuMapResultPage"}}{{/inline}}
 {{#*inline "htmBodyGraphTrafficLightStepPage"}}		<!-- #*inline "htmBodyGraphTrafficLightStepPage" -->
 <div id="htmBodyGraphMapResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyGraphLocationTrafficLightStepPage"}}		<!-- #*inline "htmBodyGraphLocationTrafficLightStepPage" -->
+<div id="htmBodyGraphLocationMapResultPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0TrafficLightStepPage"}}		<!-- #*inline "htmBodyCount0TrafficLightStepPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
@@ -288,6 +292,12 @@
 				<span class="">no traffic light step found</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1AllTrafficLightStepPage"}}		<!-- #*inline "htmBodyCount1AllTrafficLightStepPage" -->
 		<h1 class="w3-center ">
@@ -303,6 +313,12 @@
 				<span class="">{{trafficLightStep_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1TrafficLightStepPage"}}		<!-- #*inline "htmBodyCount1TrafficLightStepPage" -->
 		<h1>
@@ -318,6 +334,12 @@
 				<span class="">{{trafficLightStep_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyAllTrafficLightStepPage"}}		<!-- #*inline "htmBodyAllTrafficLightStepPage" -->
 		<h1>
@@ -328,6 +350,11 @@
 				<span class="">traffic light steps</span>
 			</a>
 		</h1>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 		<div class="">
 			<div>
 	{{#if pagination.pagePrevious}}
@@ -367,6 +394,8 @@
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+			<input name="trafficLightStep" id="trafficLightStep" class="trafficLightStep"  value='{{{toJsonObjectStringInApostrophes trafficLightStep_ }}}' type="hidden"/>
+			<input name="listTrafficLightStep" id="listTrafficLightStep" class="listTrafficLightStep"  value='{{{toJsonArrayStringInApostrophes listTrafficLightStep }}}' type="hidden"/>
 		</form>
 {{#if id}}
 {{#block "htmButton_searchpageTrafficLightStep"}}{{/block}}
@@ -467,6 +496,51 @@
 							</div>
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStep" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmTrafficLightId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
@@ -602,6 +676,51 @@
 							</div>
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStep" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmTrafficLightId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
@@ -803,6 +922,51 @@
 							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
 							<div class="w3-cell-row HtmRow">
 {{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateTime" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateTime" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmStep" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmStep" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmColor" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmColor" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmTrafficLightId" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
@@ -958,11 +1122,7 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 	{{#eq trafficLightStepCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
@@ -1482,6 +1642,286 @@
 			{{/ifContainsKeys}}
 		{{else}}
 														<span class="varTrafficLightStep{{id}}SumocfgPath varTrafficLightStepSumocfgPath ">{{trafficLightStep_.sumocfgPath}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmTime"}}
+<!-- #*inline "htmTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_time">Time in seconds</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="Time in seconds"
+															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setTime classTrafficLightStep inputTrafficLightStep{{id}}Time w3-input w3-border "
+																name="setTime"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setTime classTrafficLightStep inputTrafficLightStep{{id}}Time w3-input w3-border "
+																name="setTime"
+		{{else}}
+																class="valueTime w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}Time w3-input w3-border "
+																name="time"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_time')); }, function() { addError($('#{{classApiMethodMethod}}_time')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.time}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}Time varTrafficLightStepTime ">{{trafficLightStep_.time}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficLightStep{{id}}Time varTrafficLightStepTime ">{{trafficLightStep_.time}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateTime"}}
+<!-- #*inline "htmDateTime" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepDateTime">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateTime">Date and Time</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateTime" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateTime"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+																type="text"
+																class="w3-input w3-border datetimepicker setDateTime classTrafficLightStep inputTrafficLightStep{{id}}DateTime w3-input w3-border "
+																placeholder="MM/dd/yyyy h:mm a '['VV']'"
+																data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+																id="{{classApiMethodMethod}}_dateTime"
+																title="The date and time.  (MM/dd/yyyy h:mm a '['VV']')"
+																value="{{#if trafficLightStep_.dateTime}}{{formatZonedDateTime trafficLightStep_.dateTime "MM/dd/yyyy h:mm a '['VV']'" defaultLocaleId defaultZoneId}}{{/if}}"
+														{{#eq 'Page' classApiMethodMethod}}
+															onclick="removeGlow($(this)); ";
+															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateTime', s, function() { addGlow($('#{{classApiMethodMethod}}_dateTime')); }, function() { addError($('#{{classApiMethodMethod}}_dateTime')); }); } "
+														{{/eq}}
+														/>
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}DateTime varTrafficLightStepDateTime ">{{trafficLightStep_.dateTime}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficLightStep{{id}}DateTime varTrafficLightStepDateTime ">{{trafficLightStep_.dateTime}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmStep"}}
+<!-- #*inline "htmStep" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepStep">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_step">step</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputStep" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputStep"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_step"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_step"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classTrafficLightStep inputTrafficLightStep{{id}}Step w3-input w3-border "
+															name="setStep"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classTrafficLightStep inputTrafficLightStep{{id}}Step w3-input w3-border "
+																name="setStep"
+		{{else}}
+																class="setStep valueStep classTrafficLightStep inputTrafficLightStep{{id}}Step w3-input w3-border "
+																name="setStep"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setStep', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_step')); }, function() { addError($('#{{classApiMethodMethod}}_step')); }); "
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if trafficLightStep_.step}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}Step varTrafficLightStepStep ">{{trafficLightStep_.step}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficLightStep{{id}}Step varTrafficLightStepStep ">{{trafficLightStep_.step}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLocation"}}
+<!-- #*inline "htmLocation" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepLocation">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_location">map location</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLocation" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLocation"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="map location"
+															id="{{classApiMethodMethod}}_location"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLocation classTrafficLightStep inputTrafficLightStep{{id}}Location w3-input w3-border "
+																name="setLocation"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLocation classTrafficLightStep inputTrafficLightStep{{id}}Location w3-input w3-border "
+																name="setLocation"
+		{{else}}
+																class="valueLocation w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}Location w3-input w3-border "
+																name="location"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.location}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}Location varTrafficLightStepLocation ">{{trafficLightStep_.location}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficLightStep{{id}}Location varTrafficLightStepLocation ">{{trafficLightStep_.location}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmColor"}}
+<!-- #*inline "htmColor" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}TrafficLightStepColor">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_color">color</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputColor" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputColor"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="color"
+															id="{{classApiMethodMethod}}_color"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setColor classTrafficLightStep inputTrafficLightStep{{id}}Color w3-input w3-border "
+																name="setColor"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setColor classTrafficLightStep inputTrafficLightStep{{id}}Color w3-input w3-border "
+																name="setColor"
+		{{else}}
+																class="valueColor w3-input w3-border classTrafficLightStep inputTrafficLightStep{{id}}Color w3-input w3-border "
+																name="color"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setColor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{trafficLightStep_.color}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varTrafficLightStep{{id}}Color varTrafficLightStepColor ">{{trafficLightStep_.color}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varTrafficLightStep{{id}}Color varTrafficLightStepColor ">{{trafficLightStep_.color}}</span>
 		{{/eq}}
 {{/inline}}
 

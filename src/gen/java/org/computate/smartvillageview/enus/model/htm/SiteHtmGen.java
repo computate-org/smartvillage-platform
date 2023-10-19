@@ -44,9 +44,9 @@ import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteHtmGen into the class SiteHtm. 
  * </li><li>You can add a class comment "Rows: 100" if you wish the SiteHtm API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
@@ -1738,7 +1738,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public void populateSiteHtm(SolrResponse.Doc doc) {
 		SiteHtm oSiteHtm = (SiteHtm)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("url")) {
@@ -2030,6 +2030,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 	public void storeSiteHtm(SolrResponse.Doc doc) {
 		SiteHtm oSiteHtm = (SiteHtm)this;
+		SiteRequestEnUS siteRequest = oSiteHtm.getSiteRequest_();
 
 		oSiteHtm.setUrl(Optional.ofNullable(doc.get("url_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setUri(Optional.ofNullable(doc.get("uri_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2037,22 +2038,22 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 		oSiteHtm.setSequenceNum(Optional.ofNullable(doc.get("sequenceNum_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmGroup(Optional.ofNullable(doc.get("htmGroup_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("labels_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtm.addLabels(v.toString());
+			oSiteHtm.addLabels(SiteHtm.staticSetLabels(siteRequest, v.toString()));
 		});
 		oSiteHtm.setEBefore(Optional.ofNullable(doc.get("eBefore_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setEAfter(Optional.ofNullable(doc.get("eAfter_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setA(Optional.ofNullable(doc.get("a_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("text_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtm.addText(v.toString());
+			oSiteHtm.addText(SiteHtm.staticSetText(siteRequest, v.toString()));
 		});
 		Optional.ofNullable((List<?>)doc.get("comment_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtm.addComment(v.toString());
+			oSiteHtm.addComment(SiteHtm.staticSetComment(siteRequest, v.toString()));
 		});
 		oSiteHtm.setTabs(Optional.ofNullable(doc.get("tabs_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setNewLine(Optional.ofNullable(doc.get("newLine_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 		oSiteHtm.setHtmBefore(Optional.ofNullable(doc.get("htmBefore_stored_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("htmMiddle_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteHtm.addHtmMiddle(v.toString());
+			oSiteHtm.addHtmMiddle(SiteHtm.staticSetHtmMiddle(siteRequest, v.toString()));
 		});
 		oSiteHtm.setHtmAfter(Optional.ofNullable(doc.get("htmAfter_stored_string")).map(v -> v.toString()).orElse(null));
 

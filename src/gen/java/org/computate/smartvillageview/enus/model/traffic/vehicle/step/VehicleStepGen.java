@@ -43,9 +43,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class VehicleStepGen into the class VehicleStep. 
  * </li><li>You can add a class comment "Model: true" if you wish to persist these VehicleStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the VehicleStepGen data in the database will then be automatically generated. 
@@ -1277,6 +1277,7 @@ public abstract class VehicleStepGen<DEV> extends MapResult {
 	}
 	public void storeVehicleStep(SolrResponse.Doc doc) {
 		VehicleStep oVehicleStep = (VehicleStep)this;
+		SiteRequestEnUS siteRequest = oVehicleStep.getSiteRequest_();
 
 		oVehicleStep.setSimulationName(Optional.ofNullable(doc.get("simulationName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oVehicleStep.setSumocfgPath(Optional.ofNullable(doc.get("sumocfgPath_docvalues_string")).map(v -> v.toString()).orElse(null));

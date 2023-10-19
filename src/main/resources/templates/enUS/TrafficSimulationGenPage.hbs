@@ -1255,7 +1255,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationName', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficSimulation_.simulationName}}"
@@ -1311,7 +1311,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEntityId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEntityId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficSimulation_.entityId}}"
@@ -1444,7 +1444,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLocation', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficSimulation_.location}}"

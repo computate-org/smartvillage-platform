@@ -2436,7 +2436,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setColor', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setColor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_color')); }, function() { addError($('#{{classApiMethodMethod}}_color')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.color}}"
@@ -2492,7 +2492,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLocation', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLocation', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.location}}"
@@ -2548,7 +2548,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEntityId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setEntityId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_entityId')); }, function() { addError($('#{{classApiMethodMethod}}_entityId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.entityId}}"
@@ -2604,7 +2604,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setTrafficSimulationId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_trafficSimulationId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficSimulationId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setTrafficSimulationId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_trafficSimulationId')); }, function() { addError($('#{{classApiMethodMethod}}_trafficSimulationId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.trafficSimulationId}}"
@@ -2660,7 +2660,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationName', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSimulationName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_simulationName')); }, function() { addError($('#{{classApiMethodMethod}}_simulationName')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.simulationName}}"
@@ -2772,7 +2772,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAlternateName', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAlternateName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.alternateName}}"
@@ -2884,7 +2884,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageGapDistance', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_averageGapDistance')); }, function() { addError($('#{{classApiMethodMethod}}_averageGapDistance')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageGapDistance', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageGapDistance')); }, function() { addError($('#{{classApiMethodMethod}}_averageGapDistance')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.averageGapDistance}}"
@@ -2940,7 +2940,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageHeadwayTime', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); }, function() { addError($('#{{classApiMethodMethod}}_averageHeadwayTime')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageHeadwayTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageHeadwayTime')); }, function() { addError($('#{{classApiMethodMethod}}_averageHeadwayTime')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.averageHeadwayTime}}"
@@ -2996,7 +2996,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageVehicleLength', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleLength')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleLength')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageVehicleLength', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleLength')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleLength')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.averageVehicleLength}}"
@@ -3052,7 +3052,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageVehicleSpeed', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAverageVehicleSpeed', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }, function() { addError($('#{{classApiMethodMethod}}_averageVehicleSpeed')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.averageVehicleSpeed}}"
@@ -3176,7 +3176,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDataProvider', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDataProvider', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.dataProvider}}"
@@ -3232,7 +3232,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateCreated', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateCreated', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.dateCreated}}"
@@ -3288,7 +3288,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateModified', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateModified', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.dateModified}}"
@@ -3344,7 +3344,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObserved', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateObserved')); }, function() { addError($('#{{classApiMethodMethod}}_dateObserved')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObserved', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObserved')); }, function() { addError($('#{{classApiMethodMethod}}_dateObserved')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.dateObserved}}"
@@ -3400,7 +3400,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObservedFrom', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedFrom')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObservedFrom', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObservedFrom')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedFrom')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.dateObservedFrom}}"
@@ -3456,7 +3456,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObservedTo', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_dateObservedTo')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedTo')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateObservedTo', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateObservedTo')); }, function() { addError($('#{{classApiMethodMethod}}_dateObservedTo')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.dateObservedTo}}"
@@ -3512,7 +3512,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDescription', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDescription', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.description}}"
@@ -3568,7 +3568,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setIntensity', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_intensity')); }, function() { addError($('#{{classApiMethodMethod}}_intensity')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setIntensity', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_intensity')); }, function() { addError($('#{{classApiMethodMethod}}_intensity')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.intensity}}"
@@ -3624,7 +3624,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneDirection', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_laneDirection')); }, function() { addError($('#{{classApiMethodMethod}}_laneDirection')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneDirection', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_laneDirection')); }, function() { addError($('#{{classApiMethodMethod}}_laneDirection')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.laneDirection}}"
@@ -3680,7 +3680,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_laneId')); }, function() { addError($('#{{classApiMethodMethod}}_laneId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_laneId')); }, function() { addError($('#{{classApiMethodMethod}}_laneId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.laneId}}"
@@ -3736,7 +3736,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setName', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.name}}"
@@ -3792,7 +3792,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setOccupancy', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_occupancy')); }, function() { addError($('#{{classApiMethodMethod}}_occupancy')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setOccupancy', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_occupancy')); }, function() { addError($('#{{classApiMethodMethod}}_occupancy')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.occupancy}}"
@@ -3904,7 +3904,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setRefRoadSegment', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_refRoadSegment')); }, function() { addError($('#{{classApiMethodMethod}}_refRoadSegment')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setRefRoadSegment', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_refRoadSegment')); }, function() { addError($('#{{classApiMethodMethod}}_refRoadSegment')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.refRoadSegment}}"
@@ -4084,7 +4084,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSource', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSource', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.source}}"
@@ -4140,7 +4140,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setVehicleSubType', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_vehicleSubType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleSubType')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setVehicleSubType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleSubType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleSubType')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.vehicleSubType}}"
@@ -4196,7 +4196,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setVehicleType', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setVehicleType', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_vehicleType')); }, function() { addError($('#{{classApiMethodMethod}}_vehicleType')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.vehicleType}}"
@@ -4252,7 +4252,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorId')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLaneAreaDetectorId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_laneAreaDetectorId')); }, function() { addError($('#{{classApiMethodMethod}}_laneAreaDetectorId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.laneAreaDetectorId}}"
@@ -4308,7 +4308,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomSigma', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customSigma')); }, function() { addError($('#{{classApiMethodMethod}}_customSigma')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomSigma', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customSigma')); }, function() { addError($('#{{classApiMethodMethod}}_customSigma')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customSigma}}"
@@ -4364,7 +4364,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomAcceleration', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customAcceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customAcceleration')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomAcceleration', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customAcceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customAcceleration')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customAcceleration}}"
@@ -4420,7 +4420,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomDeceleration', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customDeceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customDeceleration')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomDeceleration', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customDeceleration')); }, function() { addError($('#{{classApiMethodMethod}}_customDeceleration')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customDeceleration}}"
@@ -4476,7 +4476,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomMinGreenTime', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customMinGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMinGreenTime')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomMinGreenTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customMinGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMinGreenTime')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customMinGreenTime}}"
@@ -4532,7 +4532,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomMaxGreenTime', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customMaxGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMaxGreenTime')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomMaxGreenTime', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customMaxGreenTime')); }, function() { addError($('#{{classApiMethodMethod}}_customMaxGreenTime')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customMaxGreenTime}}"
@@ -4588,7 +4588,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomAverageVehiclesPerMinute', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }, function() { addError($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomAverageVehiclesPerMinute', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }, function() { addError($('#{{classApiMethodMethod}}_customAverageVehiclesPerMinute')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customAverageVehiclesPerMinute}}"
@@ -4644,7 +4644,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomDemandScalingFactor', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomDemandScalingFactor', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }, function() { addError($('#{{classApiMethodMethod}}_customDemandScalingFactor')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customDemandScalingFactor}}"
@@ -4700,7 +4700,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomQueueLengthThreshold', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }, function() { addError($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomQueueLengthThreshold', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }, function() { addError($('#{{classApiMethodMethod}}_customQueueLengthThreshold')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customQueueLengthThreshold}}"
@@ -4756,7 +4756,7 @@
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomTrafficLightId', $(this).val()//String, function() { addGlow($('#{{classApiMethodMethod}}_customTrafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_customTrafficLightId')); }); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCustomTrafficLightId', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_customTrafficLightId')); }, function() { addError($('#{{classApiMethodMethod}}_customTrafficLightId')); }); "
 	{{/eq}}
 	{{#eq "Page" classApiMethodMethod}}
 															value="{{trafficFlowObserved_.customTrafficLightId}}"

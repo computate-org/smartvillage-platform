@@ -2215,6 +2215,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 	public void storeBaseModel(SolrResponse.Doc doc) {
 		BaseModel oBaseModel = (BaseModel)this;
+		SiteRequestEnUS siteRequest = oBaseModel.getSiteRequest_();
 
 		oBaseModel.setPk(Optional.ofNullable(doc.get("pk_docvalues_long")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
@@ -2225,18 +2226,18 @@ public abstract class BaseModelGen<DEV> extends Object {
 		oBaseModel.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("classCanonicalNames_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oBaseModel.addClassCanonicalNames(v.toString());
+			oBaseModel.addClassCanonicalNames(BaseModel.staticSetClassCanonicalNames(siteRequest, v.toString()));
 		});
 		oBaseModel.setSessionId(Optional.ofNullable(doc.get("sessionId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setUserKey(Optional.ofNullable(doc.get("userKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("saves_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oBaseModel.addSaves(v.toString());
+			oBaseModel.addSaves(BaseModel.staticSetSaves(siteRequest, v.toString()));
 		});
 		oBaseModel.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("objectText_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oBaseModel.addObjectText(v.toString());
+			oBaseModel.addObjectText(BaseModel.staticSetObjectText(siteRequest, v.toString()));
 		});
 		oBaseModel.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseModel.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));

@@ -45,9 +45,9 @@ import io.vertx.core.Future;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SiteUserGen into the class SiteUser. 
  * </li><li>You can add a class comment "Rows: 100" if you wish the SiteUser API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
@@ -1126,7 +1126,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 	public void populateSiteUser(SolrResponse.Doc doc) {
 		SiteUser oSiteUser = (SiteUser)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("userKeys")) {
@@ -1321,9 +1321,10 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 	public void storeSiteUser(SolrResponse.Doc doc) {
 		SiteUser oSiteUser = (SiteUser)this;
+		SiteRequestEnUS siteRequest = oSiteUser.getSiteRequest_();
 
 		Optional.ofNullable((List<?>)doc.get("userKeys_docvalues_longs")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSiteUser.addUserKeys(v.toString());
+			oSiteUser.addUserKeys(SiteUser.staticSetUserKeys(siteRequest, v.toString()));
 		});
 		oSiteUser.setUserId(Optional.ofNullable(doc.get("userId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSiteUser.setUserName(Optional.ofNullable(doc.get("userName_docvalues_string")).map(v -> v.toString()).orElse(null));

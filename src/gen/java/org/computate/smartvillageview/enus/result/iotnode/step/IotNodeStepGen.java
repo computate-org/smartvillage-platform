@@ -47,9 +47,9 @@ import io.vertx.core.json.JsonArray;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class IotNodeStepGen into the class IotNodeStep. 
  * </li><li>You can add a class comment "Model: true" if you wish to persist these IotNodeStep objects in a relational PostgreSQL database transactionally in the RESTful API. 
  * The code to persist and query the IotNodeStepGen data in the database will then be automatically generated. 
@@ -3609,7 +3609,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	public void populateIotNodeStep(SolrResponse.Doc doc) {
 		IotNodeStep oIotNodeStep = (IotNodeStep)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("json")) {
@@ -4265,6 +4265,7 @@ public abstract class IotNodeStepGen<DEV> extends BaseResult {
 	}
 	public void storeIotNodeStep(SolrResponse.Doc doc) {
 		IotNodeStep oIotNodeStep = (IotNodeStep)this;
+		SiteRequestEnUS siteRequest = oIotNodeStep.getSiteRequest_();
 
 		oIotNodeStep.setJson(Optional.ofNullable(doc.get("json_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oIotNodeStep.setNodeName(Optional.ofNullable(doc.get("nodeName_docvalues_string")).map(v -> v.toString()).orElse(null));

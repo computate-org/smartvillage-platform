@@ -3657,16 +3657,17 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 	}
 	public void storeSmartTrafficLight(SolrResponse.Doc doc) {
 		SmartTrafficLight oSmartTrafficLight = (SmartTrafficLight)this;
+		SiteRequestEnUS siteRequest = oSmartTrafficLight.getSiteRequest_();
 
 		oSmartTrafficLight.setEntityId(Optional.ofNullable(doc.get("entityId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setSmartTrafficLightName(Optional.ofNullable(doc.get("smartTrafficLightName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("routeIds_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSmartTrafficLight.addRouteIds(v.toString());
+			oSmartTrafficLight.addRouteIds(SmartTrafficLight.staticSetRouteIds(siteRequest, v.toString()));
 		});
 		oSmartTrafficLight.setRouteIdNorth(Optional.ofNullable(doc.get("routeIdNorth_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setRouteIdEast(Optional.ofNullable(doc.get("routeIdEast_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("trafficFlowObservedIds_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSmartTrafficLight.addTrafficFlowObservedIds(v.toString());
+			oSmartTrafficLight.addTrafficFlowObservedIds(SmartTrafficLight.staticSetTrafficFlowObservedIds(siteRequest, v.toString()));
 		});
 		oSmartTrafficLight.setParamAvgVehiclePerMinFromWestToEast(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromWestToEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setParamAvgVehiclePerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgVehiclePerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -3675,7 +3676,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		oSmartTrafficLight.setParamAvgPedestrianPerMinFromSouthToNorth(Optional.ofNullable(doc.get("paramAvgPedestrianPerMinFromSouthToNorth_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setParamPedestrianDemandScalingFactor(Optional.ofNullable(doc.get("paramPedestrianDemandScalingFactor_docvalues_double")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("paramDemandScale_docvalues_doubles")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSmartTrafficLight.addParamDemandScale(v.toString());
+			oSmartTrafficLight.addParamDemandScale(SmartTrafficLight.staticSetParamDemandScale(siteRequest, v.toString()));
 		});
 		oSmartTrafficLight.setParamMinGreenTimeSecWestEast(Optional.ofNullable(doc.get("paramMinGreenTimeSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setParamMaxGreenTimeSecWestEast(Optional.ofNullable(doc.get("paramMaxGreenTimeSecWestEast_docvalues_double")).map(v -> v.toString()).orElse(null));
@@ -3692,7 +3693,7 @@ public abstract class SmartTrafficLightGen<DEV> extends BaseModel {
 		oSmartTrafficLight.setParamItersPerPar(Optional.ofNullable(doc.get("paramItersPerPar_docvalues_int")).map(v -> v.toString()).orElse(null));
 		oSmartTrafficLight.setParamTotalIterNum(Optional.ofNullable(doc.get("paramTotalIterNum_docvalues_int")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("reportKeys_docvalues_longs")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSmartTrafficLight.addReportKeys(v.toString());
+			oSmartTrafficLight.addReportKeys(SmartTrafficLight.staticSetReportKeys(siteRequest, v.toString()));
 		});
 
 		super.storeBaseModel(doc);

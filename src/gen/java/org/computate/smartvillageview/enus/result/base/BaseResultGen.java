@@ -55,9 +55,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment <b>"Api: true"</b> if you wish to GET, POST, PATCH or PUT these BaseResult objects in a RESTful API. 
  * </li><li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class BaseResultGen into the class BaseResult. 
  * </li>
@@ -2146,6 +2146,7 @@ public abstract class BaseResultGen<DEV> extends Object {
 	}
 	public void storeBaseResult(SolrResponse.Doc doc) {
 		BaseResult oBaseResult = (BaseResult)this;
+		SiteRequestEnUS siteRequest = oBaseResult.getSiteRequest_();
 
 		oBaseResult.setInheritPk(Optional.ofNullable(doc.get("inheritPk_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setCreated(Optional.ofNullable(doc.get("created_docvalues_date")).map(v -> v.toString()).orElse(null));
@@ -2155,18 +2156,18 @@ public abstract class BaseResultGen<DEV> extends Object {
 		oBaseResult.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("classCanonicalNames_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oBaseResult.addClassCanonicalNames(v.toString());
+			oBaseResult.addClassCanonicalNames(BaseResult.staticSetClassCanonicalNames(siteRequest, v.toString()));
 		});
 		oBaseResult.setSessionId(Optional.ofNullable(doc.get("sessionId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setUserKey(Optional.ofNullable(doc.get("userKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("saves_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oBaseResult.addSaves(v.toString());
+			oBaseResult.addSaves(BaseResult.staticSetSaves(siteRequest, v.toString()));
 		});
 		oBaseResult.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("objectText_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oBaseResult.addObjectText(v.toString());
+			oBaseResult.addObjectText(BaseResult.staticSetObjectText(siteRequest, v.toString()));
 		});
 		oBaseResult.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oBaseResult.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));

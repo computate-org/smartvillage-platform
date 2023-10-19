@@ -57,9 +57,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 import io.vertx.core.json.JsonObject;
 
-/**	
-<ol>
-0<h3>Suggestions that can generate more code for you: </h3></ol>
+/**
+ * <ol>
+<h3>Suggestions that can generate more code for you: </h3> * </ol>
  * <li>You can add a class comment "{@inheritDoc}" if you wish to inherit the helpful inherited class comments from class SystemEventGen into the class SystemEvent. 
  * </li><li>You can add a class comment "Rows: 100" if you wish the SystemEvent API to return more or less than 10 records by default. 
  * In this case, the API will return 100 records from the API instead of 10 by default. 
@@ -2567,7 +2567,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 	public void populateSystemEvent(SolrResponse.Doc doc) {
 		SystemEvent oSystemEvent = (SystemEvent)this;
-		saves = doc.get("saves_docvalues_strings");
+		saves = Optional.ofNullable((ArrayList<String>)doc.get("saves_docvalues_strings")).orElse(new ArrayList<String>());
 		if(saves != null) {
 
 			if(saves.contains("type")) {
@@ -2973,6 +2973,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 	public void storeSystemEvent(SolrResponse.Doc doc) {
 		SystemEvent oSystemEvent = (SystemEvent)this;
+		SiteRequestEnUS siteRequest = oSystemEvent.getSiteRequest_();
 
 		oSystemEvent.setType(Optional.ofNullable(doc.get("type_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSystemEvent.setMessage(Optional.ofNullable(doc.get("message_stored_string")).map(v -> v.toString()).orElse(null));
@@ -2987,18 +2988,18 @@ public abstract class SystemEventGen<DEV> extends Object {
 		oSystemEvent.setClassCanonicalName(Optional.ofNullable(doc.get("classCanonicalName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSystemEvent.setClassSimpleName(Optional.ofNullable(doc.get("classSimpleName_docvalues_string")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("classCanonicalNames_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSystemEvent.addClassCanonicalNames(v.toString());
+			oSystemEvent.addClassCanonicalNames(SystemEvent.staticSetClassCanonicalNames(siteRequest, v.toString()));
 		});
 		oSystemEvent.setSessionId(Optional.ofNullable(doc.get("sessionId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSystemEvent.setUserKey(Optional.ofNullable(doc.get("userKey_docvalues_long")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("saves_docvalues_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSystemEvent.addSaves(v.toString());
+			oSystemEvent.addSaves(SystemEvent.staticSetSaves(siteRequest, v.toString()));
 		});
 		oSystemEvent.setObjectTitle(Optional.ofNullable(doc.get("objectTitle_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSystemEvent.setObjectId(Optional.ofNullable(doc.get("objectId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSystemEvent.setObjectSuggest(Optional.ofNullable(doc.get("objectSuggest_suggested")).map(v -> v.toString()).orElse(null));
 		Optional.ofNullable((List<?>)doc.get("objectText_text_enUS")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
-			oSystemEvent.addObjectText(v.toString());
+			oSystemEvent.addObjectText(SystemEvent.staticSetObjectText(siteRequest, v.toString()));
 		});
 		oSystemEvent.setPageUrlId(Optional.ofNullable(doc.get("pageUrlId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oSystemEvent.setPageUrlPk(Optional.ofNullable(doc.get("pageUrlPk_docvalues_string")).map(v -> v.toString()).orElse(null));

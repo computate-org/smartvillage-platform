@@ -32,7 +32,9 @@
 				window.eventBus = new EventBus('/eventbus');
 				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
 				if(pk != null) {
+					window.iotNodeStep = JSON.parse($('.pageForm .iotNodeStep').val());
 				}
+					window.listIotNodeStep = JSON.parse($('.pageForm .listIotNodeStep').val());
 				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
 				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
 				window.defaultRangeVar = '{{ defaultRangeVar }}';
@@ -271,6 +273,8 @@
 {{> "htmBodyMenuBaseResultPage"}}{{/inline}}
 {{#*inline "htmBodyGraphIotNodeStepPage"}}		<!-- #*inline "htmBodyGraphIotNodeStepPage" -->
 <div id="htmBodyGraphBaseResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyGraphLocationIotNodeStepPage"}}		<!-- #*inline "htmBodyGraphLocationIotNodeStepPage" -->
+<div id="htmBodyGraphLocationBaseResultPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0IotNodeStepPage"}}		<!-- #*inline "htmBodyCount0IotNodeStepPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
@@ -288,6 +292,12 @@
 				<span class="">no IOT node step found</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1AllIotNodeStepPage"}}		<!-- #*inline "htmBodyCount1AllIotNodeStepPage" -->
 		<h1 class="w3-center ">
@@ -303,6 +313,12 @@
 				<span class="">{{iotNodeStep_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1IotNodeStepPage"}}		<!-- #*inline "htmBodyCount1IotNodeStepPage" -->
 		<h1>
@@ -318,6 +334,12 @@
 				<span class="">{{iotNodeStep_.objectTitle}}</span>
 			</span>
 		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 {{/inline}}
 {{#*inline "htmBodyAllIotNodeStepPage"}}		<!-- #*inline "htmBodyAllIotNodeStepPage" -->
 		<h1>
@@ -328,6 +350,11 @@
 				<span class="">IOT node steps</span>
 			</a>
 		</h1>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
 		<div class="">
 			<div>
 	{{#if pagination.pagePrevious}}
@@ -367,6 +394,8 @@
 {{/if}}
 			<input name="focusId" type="hidden"/>
 			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+			<input name="iotNodeStep" id="iotNodeStep" class="iotNodeStep"  value='{{{toJsonObjectStringInApostrophes iotNodeStep_ }}}' type="hidden"/>
+			<input name="listIotNodeStep" id="listIotNodeStep" class="listIotNodeStep"  value='{{{toJsonArrayStringInApostrophes listIotNodeStep }}}' type="hidden"/>
 		</form>
 {{#if id}}
 {{#block "htmButton_searchpageIotNodeStep"}}{{/block}}
@@ -1173,11 +1202,7 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
-{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 	{{#eq iotNodeStepCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
 	{{else}}
