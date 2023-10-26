@@ -239,6 +239,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				Integer clusterPort = config.getInteger(ConfigKeys.CLUSTER_PORT);
 				String clusterPublicHostName = config.getString(ConfigKeys.CLUSTER_PUBLIC_HOST_NAME);
 				Integer clusterPublicPort = config.getInteger(ConfigKeys.CLUSTER_PUBLIC_PORT);
+				Integer zookeeperRetryPolicy = config.getInteger(ConfigKeys.ZOOKEEPER_RETRY_POLICY);
 				Integer zookeeperBaseSleepTimeMillis = config.getInteger(ConfigKeys.ZOOKEEPER_BASE_SLEEP_TIME_MILLIS);
 				Integer zookeeperMaxSleepMillis = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_SLEEP_MILLIS);
 				Integer zookeeperMaxRetries = config.getInteger(ConfigKeys.ZOOKEEPER_MAX_RETRIES);
@@ -247,8 +248,9 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 				zkConfig.put("zookeeperHosts", zookeeperHosts);
 				zkConfig.put("sessionTimeout", zookeeperSessionTimeoutMillis);
 				zkConfig.put("connectTimeout", zookeeperConnectionTimeoutMillis);
-				zkConfig.put("rootPath", "smart-village-view");
+				zkConfig.put("rootPath", SITE_NAME);
 				zkConfig.put("retry", new JsonObject()
+						.put("policy", zookeeperRetryPolicy)
 						.put("initialSleepTime", zookeeperBaseSleepTimeMillis)
 						.put("intervalTimes", zookeeperMaxSleepMillis)
 						.put("maxTimes", zookeeperMaxRetries)

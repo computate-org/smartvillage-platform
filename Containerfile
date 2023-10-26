@@ -13,16 +13,16 @@ RUN install -d /usr/local/src/smartabyar-smartvillage
 COPY . /usr/local/src/smartabyar-smartvillage
 RUN git clone https://github.com/computate-org/computate.git /usr/local/src/computate
 
-RUN git clone https://github.com/computate-org/computate-base.git /usr/local/src/computate-base
-RUN git clone https://github.com/computate-org/computate-search.git /usr/local/src/computate-search
-RUN git clone https://github.com/computate-org/computate-vertx.git /usr/local/src/computate-vertx
-RUN git clone https://github.com/computate-org/smartabyar-smartvillage-static.git /usr/local/src/smartabyar-smartvillage-static
-WORKDIR /usr/local/src/computate-base
-RUN mvn clean install -DskipTests
-WORKDIR /usr/local/src/computate-search
-RUN mvn clean install -DskipTests
-WORKDIR /usr/local/src/computate-vertx
-RUN mvn clean install -DskipTests
+#RUN git clone https://github.com/computate-org/computate-base.git /usr/local/src/computate-base
+#RUN git clone https://github.com/computate-org/computate-search.git /usr/local/src/computate-search
+#RUN git clone https://github.com/computate-org/computate-vertx.git /usr/local/src/computate-vertx
+#RUN git clone https://github.com/computate-org/smartabyar-smartvillage-static.git /usr/local/src/smartabyar-smartvillage-static
+#WORKDIR /usr/local/src/computate-base
+#RUN mvn clean install -DskipTests
+#WORKDIR /usr/local/src/computate-search
+#RUN mvn clean install -DskipTests
+#WORKDIR /usr/local/src/computate-vertx
+#RUN mvn clean install -DskipTests
 
 WORKDIR /usr/local/src/smartabyar-smartvillage
 RUN mvn clean install -DskipTests

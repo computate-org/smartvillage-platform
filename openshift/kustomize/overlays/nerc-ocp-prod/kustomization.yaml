@@ -7,7 +7,12 @@ resources:
   - deployments/
   - ingresses/
   - issuers/
-    #  - edgeamqbrokers/
+  - edgepostgress/
+  - edgekafkas/
+  - edgemongodbs/
+  - edgeamqbrokers/
+  - scorpiobrokers/
+  - iotagentjsons/
     #  - ../../bundles/amq-streams/base/
     #  - ../../bundles/amq-broker/base/
     #  - ../../bundles/postgres/base/
