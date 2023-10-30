@@ -411,7 +411,7 @@ public class CrowdFlowObserved extends CrowdFlowObservedGen<BaseModel> {
 
 	@Override
 	protected void _classCanonicalNames(List<String> l) { 
-		l.add(MapResult.class.getCanonicalName());
+//		l.add(MapResult.class.getCanonicalName());
 		super._classCanonicalNames(l);
 	}
 }

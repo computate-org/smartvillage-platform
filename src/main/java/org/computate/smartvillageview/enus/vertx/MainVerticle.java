@@ -21,6 +21,7 @@ import org.computate.smartvillageview.enus.model.page.SitePageEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.system.event.SystemEventEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.bicycle.step.BicycleStepEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.fiware.crowdflowobserved.CrowdFlowObservedEnUSGenApiService;
+import org.computate.smartvillageview.enus.model.traffic.fiware.parkingaccess.ParkingAccessEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.fiware.smarttrafficlight.SmartTrafficLightEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.fiware.trafficflowobserved.TrafficFlowObservedEnUSGenApiService;
 import org.computate.smartvillageview.enus.model.traffic.light.TrafficLightEnUSGenApiService;
@@ -959,6 +960,7 @@ public class MainVerticle extends MainVerticleGen<AbstractVerticle> {
 			TimeStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			BicycleStepEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			TrafficFlowObservedEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
+			ParkingAccessEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			CrowdFlowObservedEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SmartTrafficLightEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);
 			SystemEventEnUSGenApiService.registerService(vertx.eventBus(), config(), workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine, vertx);

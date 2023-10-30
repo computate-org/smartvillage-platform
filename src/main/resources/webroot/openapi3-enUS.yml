@@ -4296,6 +4296,719 @@ paths:
             text/html; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/SearchPageCrowdFlowObservedResponse'
+  /api/parking-access:
+    get:
+      operationId: searchParkingAccess
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchParkingAccessResponse'
+    patch:
+      operationId: patchParkingAccess
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PATCHParkingAccessRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PATCHParkingAccessResponse'
+    post:
+      operationId: postParkingAccess
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/POSTParkingAccessRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/POSTParkingAccessResponse'
+  /api/parking-access-import:
+    put:
+      operationId: putimportParkingAccess
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PUTImportParkingAccessRequest'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/PUTImportParkingAccessResponse'
+  /api/parking-access/{id}:
+    get:
+      operationId: getParkingAccess
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/GETParkingAccessResponse'
+  /parking-access/{id}:
+    get:
+      operationId: searchpageParkingAccessId
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageParkingAccessResponse'
+  /parking-access:
+    get:
+      operationId: searchpageParkingAccess
+      x-vertx-event-bus: smartabyar-smartvillage-enUS-ParkingAccess
+      security:
+        - openIdConnect:
+          - profile
+      description: >+
+      summary: >+
+      tags:
+        - ParkingAccess
+      parameters:
+        - name: vertx-web.session
+          in: cookie
+          schema:
+            type: string
+        - name: sessionIdBefore
+          in: cookie
+          schema:
+            type: string
+        - in: query
+          name: q
+          description: 'The query parameter defines a query using standard query syntax. This parameter is mandatory.'
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: 'The filter query parameter defines a query that can be used to restrict the superset of documents that can be returned, without influencing score. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: var
+          description: 'The var parameters are additional optional variables and values to pass into the application. '
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: 'The field list parameter limits the information included in a query response to a specified list of fields. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: 'The sort parameter arranges search results in either ascending (asc) or descending (desc) order. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: start
+          description: 'The start parameter specifies an offset into a query result set and instructs Solr to begin displaying results from this offset. '
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: 'The rows parameter specifies the maximum number of documents from the complete result set that Solr should return to the client at one time. '
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
+        - in: query
+          name: facet
+          description: 'The facet parameter enables facet counts in the query response. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: facet.range.start
+          description: 'The facet.range.start parameter specifies the lower bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.end
+          description: 'The facet.range.end specifies the upper bound of the ranges. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range.gap
+          description: 'The span of each range expressed as a value to be added to the lower bound. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.pivot
+          description: 'The facet.pivot parameter defines the fields to use for the pivot. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.range
+          description: 'The facet.range parameter defines the field for which Solr should create range facets. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: facet.field
+          description: 'The facet.field parameter identifies a field that should be treated as a facet. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - in: query
+          name: d
+          description: 'The radial distance, usually in kilometers. '
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - in: query
+          name: pt
+          description: 'he center point using the format lat,lon if latitude & longitude. Otherwise, x,y for PointType or x y for RPT field types. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sfield
+          description: 'A spatial indexed field. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: score
+          description: '(Advanced option; not supported by LatLonType (deprecated) or PointType) If the query is used in a scoring context (e.g., as the main query in q), this local parameter determines what scores will be produced. Valid values are: none, kilometers, miles, degrees, distance, recipDistance, overlapRatio, area, area2D'
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: distanceUnits
+          description: 'This is used to specify the units for distance measurements used throughout the use of this field. This can be degrees, kilometers or miles. '
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: stats
+          description: 'The Stats component returns simple statistics for numeric, string, and date fields within the document set. '
+          required: false
+          schema:
+            type: boolean
+        - in: query
+          name: stats.field
+          description: 'Specifies a field for which statistics should be generated. '
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/SearchPageParkingAccessResponse'
   /api/smart-traffic-light:
     get:
       operationId: searchSmartTrafficLight
@@ -13436,6 +14149,51 @@ components:
         text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/SearchPageCrowdFlowObservedResponse'
+    SearchParkingAccessResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchParkingAccessResponse'
+    PATCHParkingAccessRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHParkingAccessRequest'
+    PATCHParkingAccessResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PATCHParkingAccessResponse'
+    POSTParkingAccessRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTParkingAccessRequest'
+    POSTParkingAccessResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/POSTParkingAccessResponse'
+    PUTImportParkingAccessRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTImportParkingAccessRequest'
+    PUTImportParkingAccessResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/PUTImportParkingAccessResponse'
+    GETParkingAccessResponse:
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/GETParkingAccessResponse'
+    SearchPageParkingAccessResponse:
+      content:
+        text/html; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/SearchPageParkingAccessResponse'
     SearchSmartTrafficLightResponse:
       content:
         application/json; charset=utf-8:
@@ -17905,6 +18663,523 @@ components:
     SearchPageCrowdFlowObservedResponse:
       allOf:
         - type: string
+    SearchParkingAccessResponse:
+      allOf:
+        - type: object
+          properties:
+            startNum:
+              type: integer
+              minimum: 0
+            foundNum:
+              type: integer
+              minimum: 0
+            returnedNum:
+              type: integer
+              minimum: 0
+            list:
+              type: array
+              items:
+                type: object
+                properties:
+                  address:
+                    type: object
+                  alternateName:
+                    type: string
+                  areaServed:
+                    type: object
+                  category:
+                    type: object
+                  dataProvider:
+                    type: string
+                  dateCreated:
+                    type: string
+                  dateModified:
+                    type: string
+                  description:
+                    type: string
+                  features:
+                    type: object
+                  height:
+                    type: string
+                  location:
+                    type: object
+                  name:
+                    type: string
+                  owner:
+                    type: object
+                  refOffStreetParking:
+                    type: object
+                  seeAlso:
+                    type: object
+                  slope:
+                    type: string
+                  source:
+                    type: string
+                  width:
+                    type: string
+    PATCHParkingAccessRequest:
+      allOf:
+        - type: object
+          properties:
+            setAddress:
+              type: object
+              nullable: true
+            removeAddress:
+              type: object
+            removeAllAddress:
+              type: object
+            setAlternateName:
+              type: string
+              nullable: true
+            removeAlternateName:
+              type: string
+            removeAllAlternateName:
+              type: string
+            setAreaServed:
+              type: object
+              nullable: true
+            removeAreaServed:
+              type: object
+            removeAllAreaServed:
+              type: object
+            setCategory:
+              type: object
+              nullable: true
+            removeCategory:
+              type: object
+            removeAllCategory:
+              type: object
+            setDataProvider:
+              type: string
+              nullable: true
+            removeDataProvider:
+              type: string
+            removeAllDataProvider:
+              type: string
+            setDateCreated:
+              type: string
+              nullable: true
+            removeDateCreated:
+              type: string
+            removeAllDateCreated:
+              type: string
+            setDateModified:
+              type: string
+              nullable: true
+            removeDateModified:
+              type: string
+            removeAllDateModified:
+              type: string
+            setDescription:
+              type: string
+              nullable: true
+            removeDescription:
+              type: string
+            removeAllDescription:
+              type: string
+            setFeatures:
+              type: object
+              nullable: true
+            removeFeatures:
+              type: object
+            removeAllFeatures:
+              type: object
+            setHeight:
+              type: string
+              nullable: true
+            removeHeight:
+              type: string
+            removeAllHeight:
+              type: string
+            setLocation:
+              type: object
+              nullable: true
+            removeLocation:
+              type: object
+            removeAllLocation:
+              type: object
+            setName:
+              type: string
+              nullable: true
+            removeName:
+              type: string
+            removeAllName:
+              type: string
+            setOwner:
+              type: object
+              nullable: true
+            removeOwner:
+              type: object
+            removeAllOwner:
+              type: object
+            setRefOffStreetParking:
+              type: object
+              nullable: true
+            removeRefOffStreetParking:
+              type: object
+            removeAllRefOffStreetParking:
+              type: object
+            setSeeAlso:
+              type: object
+              nullable: true
+            removeSeeAlso:
+              type: object
+            removeAllSeeAlso:
+              type: object
+            setSlope:
+              type: string
+              nullable: true
+            removeSlope:
+              type: string
+            removeAllSlope:
+              type: string
+            setSource:
+              type: string
+              nullable: true
+            removeSource:
+              type: string
+            removeAllSource:
+              type: string
+            setWidth:
+              type: string
+              nullable: true
+            removeWidth:
+              type: string
+            removeAllWidth:
+              type: string
+    PATCHParkingAccessResponse:
+      allOf:
+        - type: object
+          properties:
+            setAddress:
+              type: object
+              nullable: true
+            removeAddress:
+              type: object
+            removeAllAddress:
+              type: object
+            setAlternateName:
+              type: string
+              nullable: true
+            removeAlternateName:
+              type: string
+            removeAllAlternateName:
+              type: string
+            setAreaServed:
+              type: object
+              nullable: true
+            removeAreaServed:
+              type: object
+            removeAllAreaServed:
+              type: object
+            setCategory:
+              type: object
+              nullable: true
+            removeCategory:
+              type: object
+            removeAllCategory:
+              type: object
+            setDataProvider:
+              type: string
+              nullable: true
+            removeDataProvider:
+              type: string
+            removeAllDataProvider:
+              type: string
+            setDateCreated:
+              type: string
+              nullable: true
+            removeDateCreated:
+              type: string
+            removeAllDateCreated:
+              type: string
+            setDateModified:
+              type: string
+              nullable: true
+            removeDateModified:
+              type: string
+            removeAllDateModified:
+              type: string
+            setDescription:
+              type: string
+              nullable: true
+            removeDescription:
+              type: string
+            removeAllDescription:
+              type: string
+            setFeatures:
+              type: object
+              nullable: true
+            removeFeatures:
+              type: object
+            removeAllFeatures:
+              type: object
+            setHeight:
+              type: string
+              nullable: true
+            removeHeight:
+              type: string
+            removeAllHeight:
+              type: string
+            setLocation:
+              type: object
+              nullable: true
+            removeLocation:
+              type: object
+            removeAllLocation:
+              type: object
+            setName:
+              type: string
+              nullable: true
+            removeName:
+              type: string
+            removeAllName:
+              type: string
+            setOwner:
+              type: object
+              nullable: true
+            removeOwner:
+              type: object
+            removeAllOwner:
+              type: object
+            setRefOffStreetParking:
+              type: object
+              nullable: true
+            removeRefOffStreetParking:
+              type: object
+            removeAllRefOffStreetParking:
+              type: object
+            setSeeAlso:
+              type: object
+              nullable: true
+            removeSeeAlso:
+              type: object
+            removeAllSeeAlso:
+              type: object
+            setSlope:
+              type: string
+              nullable: true
+            removeSlope:
+              type: string
+            removeAllSlope:
+              type: string
+            setSource:
+              type: string
+              nullable: true
+            removeSource:
+              type: string
+            removeAllSource:
+              type: string
+            setWidth:
+              type: string
+              nullable: true
+            removeWidth:
+              type: string
+            removeAllWidth:
+              type: string
+    POSTParkingAccessRequest:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: object
+            category:
+              type: object
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            description:
+              type: string
+            features:
+              type: object
+            height:
+              type: string
+            location:
+              type: object
+            name:
+              type: string
+            owner:
+              type: object
+            refOffStreetParking:
+              type: object
+            seeAlso:
+              type: object
+            slope:
+              type: string
+            source:
+              type: string
+            width:
+              type: string
+    POSTParkingAccessResponse:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: object
+            category:
+              type: object
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            description:
+              type: string
+            features:
+              type: object
+            height:
+              type: string
+            location:
+              type: object
+            name:
+              type: string
+            owner:
+              type: object
+            refOffStreetParking:
+              type: object
+            seeAlso:
+              type: object
+            slope:
+              type: string
+            source:
+              type: string
+            width:
+              type: string
+    PUTImportParkingAccessRequest:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: object
+            category:
+              type: object
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            description:
+              type: string
+            features:
+              type: object
+            height:
+              type: string
+            location:
+              type: object
+            name:
+              type: string
+            owner:
+              type: object
+            refOffStreetParking:
+              type: object
+            seeAlso:
+              type: object
+            slope:
+              type: string
+            source:
+              type: string
+            width:
+              type: string
+    PUTImportParkingAccessResponse:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: object
+            category:
+              type: object
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            description:
+              type: string
+            features:
+              type: object
+            height:
+              type: string
+            location:
+              type: object
+            name:
+              type: string
+            owner:
+              type: object
+            refOffStreetParking:
+              type: object
+            seeAlso:
+              type: object
+            slope:
+              type: string
+            source:
+              type: string
+            width:
+              type: string
+    GETParkingAccessResponse:
+      allOf:
+        - type: object
+          properties:
+            address:
+              type: object
+            alternateName:
+              type: string
+            areaServed:
+              type: object
+            category:
+              type: object
+            dataProvider:
+              type: string
+            dateCreated:
+              type: string
+            dateModified:
+              type: string
+            description:
+              type: string
+            features:
+              type: object
+            height:
+              type: string
+            location:
+              type: object
+            name:
+              type: string
+            owner:
+              type: object
+            refOffStreetParking:
+              type: object
+            seeAlso:
+              type: object
+            slope:
+              type: string
+            source:
+              type: string
+            width:
+              type: string
+    SearchPageParkingAccessResponse:
+      allOf:
+        - type: string
     SearchSmartTrafficLightResponse:
       allOf:
         - type: object
@@ -22371,6 +23646,13 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
+            setAreaServed:
+              type: array
+              nullable: true
+            removeAreaServed:
+              type: array
+            removeAllAreaServed:
+              type: array
             setSmartTrafficLightKey:
               type: string
               nullable: true
@@ -22783,6 +24065,13 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
+            setAreaServed:
+              type: array
+              nullable: true
+            removeAreaServed:
+              type: array
+            removeAllAreaServed:
+              type: array
             setSmartTrafficLightKey:
               type: string
               nullable: true
@@ -23194,6 +24483,8 @@ components:
                     type: string
                   simulationKey:
                     type: string
+                  areaServed:
+                    type: array
                   smartTrafficLightKey:
                     type: string
                   simulationName:
@@ -23327,6 +24618,13 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
+            setAreaServed:
+              type: array
+              nullable: true
+            removeAreaServed:
+              type: array
+            removeAllAreaServed:
+              type: array
             setSmartTrafficLightKey:
               type: string
               nullable: true
@@ -23739,6 +25037,13 @@ components:
               type: string
             removeAllSimulationKey:
               type: string
+            setAreaServed:
+              type: array
+              nullable: true
+            removeAreaServed:
+              type: array
+            removeAllAreaServed:
+              type: array
             setSmartTrafficLightKey:
               type: string
               nullable: true
@@ -24136,6 +25441,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:
@@ -24254,6 +25561,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:
@@ -24372,6 +25681,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:
@@ -24490,6 +25801,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:
@@ -24608,6 +25921,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:
@@ -24726,6 +26041,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:
@@ -24844,6 +26161,8 @@ components:
               type: string
             simulationKey:
               type: string
+            areaServed:
+              type: array
             smartTrafficLightKey:
               type: string
             simulationName:

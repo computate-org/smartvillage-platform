@@ -1,0 +1,2649 @@
+{{#*inline "htmTitleParkingAccessPage"}}		<!-- inline "htmTitleParkingAccessPage" -->
+		<title>{{#if searchListParkingAccess_}}{{#eq parkingAccessCount int1}}{{#if id}}ParkingAccess{{else}}ParkingAccess{{/if}}{{else}}no ParkingAccess found{{/eq}}{{else}}ParkingAccesss{{/if}}</title>
+{{/inline}}
+{{#*inline "htmMetaParkingAccessPage"}}{{> "htmMetaBaseModelPage"}}{{/inline}}
+{{#*inline "htmStyleParkingAccessPage"}}{{> "htmStyleBaseModelPage"}}{{/inline}}
+{{#*inline "htmScriptsParkingAccessPage"}}{{> "htmScriptsBaseModelPage"}}		<!-- inline "htmScriptsParkingAccessPage" -->
+		<script src="{{staticBaseUrl}}/js/enUS/ParkingAccessPage.js"></script>
+{{/inline}}
+{{#*inline "htmScriptParkingAccessPage"}}		<!-- inline "htmScriptParkingAccessPage" -->
+		<script>
+			$('#site-calendar-box').accordion({ collapsible: true, active: false });
+{{#if DEFAULT_MAP_LOCATION }}
+			window.DEFAULT_MAP_LOCATION = { lat: {{ DEFAULT_MAP_LOCATION.lat }}, lon: {{ DEFAULT_MAP_LOCATION.lon }} };
+{{/if}}
+{{#if DEFAULT_MAP_ZOOM }}
+			window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{{/if}}
+			window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+			$(document).ready(function() {
+				document.onkeydown = function(evt) {
+					evt = evt || window.event;
+					var isEscape = false;
+					if ('key' in evt) {
+						isEscape = (evt.key === 'Escape' || evt.key === 'Esc');
+					} else {
+						isEscape = (evt.keyCode === 27);
+					}
+					if (isEscape) {
+						$('.w3-modal:visible').hide();
+					}
+				};
+				window.eventBus = new EventBus('/eventbus');
+				var pk = {{#if pk}}{{pk}}{{else}}null{{/if}};
+				if(pk != null) {
+					window.parkingAccess = JSON.parse($('.pageForm .parkingAccess').val());
+				}
+					window.listParkingAccess = JSON.parse($('.pageForm .listParkingAccess').val());
+				window.varsFq = JSON.parse('{{{toJsonObjectStringInApostrophes varsFq}}}');
+				window.varsRange = JSON.parse('{{{toJsonObjectStringInApostrophes varsRange}}}');
+				window.defaultRangeVar = '{{ defaultRangeVar }}';
+				pageGraphParkingAccess();
+
+				var calendarEl = document.getElementById('site-calendar');
+				var calendar = new FullCalendar.Calendar(calendarEl, {
+					initialView: 'dayGridMonth'
+				});
+				//calendar.render();
+{{#block "websocket"}}{{/block}}
+			});
+		</script>
+{{/inline}}
+{{#*inline "websocketParkingAccessPage"}}
+				<!-- inline "websocketParkingAccessPage" -->
+				websocketParkingAccess(websocketParkingAccessInner);
+{{/inline}}
+{{#*inline "htmUrlParkingAccess"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
+{{#*inline "htmHeadParkingAccessPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
+{{#*inline "htmBodySearchParkingAccessPage"}}								<!-- #*inline "htmBodySearchParkingAccessPage" -->
+								<div>
+{{#each varsQ}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qParkingAccess_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qParkingAccess_{{ @key }}" placeholder="{{ displayName }}" class="" {{#eq ../var 'objectSuggest' }}onkeyup{{else}}onchange{{/eq}}="qChange('ParkingAccess', this); " data-var="{{ var }}" autocomplete="off="/>
+											<div class="pageSearchVal w3-tiny "></div>
+										</div>
+									</div>
+{{/each}}
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qParkingAccess_Start">start<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qParkingAccess_start" placeholder="{{ displayName }}" class="" onchange="paramChange('ParkingAccess', this); " data-var="start" autocomplete="off=" value="{{ start }}"/>
+											<div class="pageSearchVal w3-tiny ">start={{ start }}</div>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<label for="qParkingAccess_Rows">rows<sup class="w3-tiny "> (Long)</sup></label>
+										</div>
+									</div>
+									<div class="w3-cell-row ">
+										<div class="w3-cell w3-cell-top ">
+											<input id="qParkingAccess_rows" placeholder="{{ displayName }}" class="" onchange="paramChange('ParkingAccess', this); " data-var="rows" autocomplete="off" value="{{ rows }}"/>
+											<div class="pageSearchVal w3-tiny ">rows={{ rows }}</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+{{#*inline "htmBodyFiltersParkingAccessPage"}}								<!-- #*inline "htmBodyFiltersParkingAccessPage" -->
+								<div>
+{{#each varsFq }}
+									<div class="">
+										<label for="fqParkingAccess_{{ @key }}">{{ displayName }}<sup class="w3-tiny "> ({{ classSimpleName }})</sup></label>
+										<div class="w3-cell-row ">
+											<div class="w3-cell w3-cell-top ">
+												<button id="buttonFacetParkingAccess_{{ @key }}" class="" onclick="facetFieldChange('ParkingAccess', this); " title="see values " data-var="{{ var }}" data-clear="{{#if facetField }}true{{else}}false{{/if}}"><i class="fas fa-list "></i></button>
+											</div>
+											<div class="w3-cell w3-cell-top ">
+												<input id="fqParkingAccess_{{ @key }}" placeholder="{{ displayName }}" class="" onchange="fqChange('ParkingAccess', this); " data-var="{{ var }}" autocomplete="off=" value="{{ val }}"/>
+											</div>
+										</div>
+									</div>
+									<div class="w3-tiny ">
+										<div class="pageSearchVal " id="pageSearchVal-fqParkingAccess_{{ @key }}">{{#if val }}fq={{ var }}:{{encodeURIComponent val }}{{/if}}</div>
+										<div class="pageSearchVal " id="pageSearchVal-buttonFacetParkingAccess_{{ @key }}">{{#if facetField.var }}facet.field={{ facetField.var }}{{/if}}</div>
+										<ol class="pageFacetField w3-small pageFacetFieldParkingAccess_{{ @key }} " id="pageFacetFieldParkingAccess_{{ @key }}">
+{{#each facetField.counts }}
+											<li class="cursor-pointer " data-class="ParkingAccess" data-var="{{ ../var }}" data-val="{{ @key }}" onclick="fqReplace('ParkingAccess', this); ">{{ @key }}: {{ this }}</li>
+{{/each}}
+										</ol>
+									</div>
+{{/each}}
+								</div>
+{{/inline}}
+{{#*inline "htmBodyRangeParkingAccessPage"}}								<!-- #*inline "htmBodyRangeParkingAccessPage" -->
+								<table class="w3-padding ">
+									<tr>
+										<td class="w3-padding w3-tiny " colspan="2">
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-ParkingAccess">{{#if rangeGap }}facet.range.gap={{encodeURIComponent rangeGap }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-ParkingAccess">{{#if rangeStart }}facet.range.start={{encodeURIComponent rangeStart }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-ParkingAccess">{{#if rangeEnd }}facet.range.end={{encodeURIComponent rangeEnd }}{{/if}}</div>
+											<div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-ParkingAccess">{{#if defaultRangeVar }}facet.range={!tag=r1}{{encodeURIComponent defaultRangeVar }}{{/if}}</div>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+									<tr class="">
+										<td class="">
+											<span>Range Gap</span>
+										</td>
+										<td class="">
+											<select name="facet.range.gap" id="pageFacetRangeGap-ParkingAccess" onchange="facetRangeGapChange('ParkingAccess', this); ">
+												<option value="+1YEAR"{{#eq defaultRangeGap '+1YEAR'}} selected="selected"{{else}}{{/eq}}>Year</option>
+												<option value="+1MONTH"{{#eq defaultRangeGap '+1MONTH'}} selected="selected"{{else}}{{/eq}}>Month</option>
+												<option value="+1WEEK"{{#eq defaultRangeGap '+1WEEK'}} selected="selected"{{else}}{{/eq}}>Week</option>
+												<option value="+1DAY"{{#eq defaultRangeGap '+1DAY'}} selected="selected"{{else}}{{#if defaultRangeGap}}{{else}} selected="selected"{{/if}}{{/eq}}>Day</option>
+												<option value="+1HOUR"{{#eq defaultRangeGap '+1HOUR'}} selected="selected"{{else}}{{/eq}}>Hour</option>
+												<option value="+1MINUTE"{{#eq defaultRangeGap '+1MINUTE'}} selected="selected"{{else}}{{/eq}}>Minute</option>
+												<option value="+1SECOND"{{#eq defaultRangeGap '+1SECOND'}} selected="selected"{{else}}{{/eq}}>Second</option>
+											</select>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range Start</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeStart" id="pageFacetRangeStart-ParkingAccess" value="{{formatZonedDateTime defaultRangeStart "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeStartChange('ParkingAccess', this); "/></span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span>Range End</span>
+										</td>
+									</tr>
+									<tr class="">
+										<td class="" colspan="2">
+											<span><input type="datetime-local" name="facetRangeEnd" id="pageFacetRangeEnd-ParkingAccess" value="{{formatZonedDateTime defaultRangeEnd "yyyy-MM-dd'T'HH:mm" defaultLocaleId defaultZoneId}}" onclick="facetRangeEndChange('ParkingAccess', this); "/></span>
+										</td>
+									</tr>
+								</table>
+								<table class="w3-padding ">
+{{#each varsRange }}
+									<tr class="">
+										<td class="">
+											<span><input type="radio" name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeParkingAccess_{{ @key }}" value="{{ var }}"{{#eq defaultRangeVar var }} checked="checked"{{/eq}} onclick="facetRangeChange('ParkingAccess', this); "/></span>
+										</td>
+										<td class="">
+											<label for="pageFacetRangeParkingAccess_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyPivotParkingAccessPage"}}								<!-- #*inline "htmBodyPivotParkingAccessPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-PivotParkingAccessHidden">
+{{#each defaultPivotVars }}
+									<div class="pageSearchVal-PivotParkingAccessHidden " id="pageSearchVal-PivotParkingAccessHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-PivotParkingAccess">
+{{#if defaultPivotVars }}
+									<div class="pageSearchVal pageSearchVal-PivotParkingAccess " id="pageSearchVal-PivotParkingAccess_1">facet.pivot={!range=r1}{{#each defaultPivotVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotParkingAccess_{{ @key }}" value="{{ var }}"{{#if pivot }} checked="checked"{{/if}} onclick="facetPivotChange('ParkingAccess', this); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFacetPivotParkingAccess_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyFieldListParkingAccessPage"}}								<!-- #*inline "htmBodyFieldListParkingAccessPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-FieldListParkingAccessHidden">
+{{#each defaultFieldListVars }}
+									<div class="pageSearchVal-FieldListParkingAccessHidden " id="pageSearchVal-FieldListParkingAccessHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-FieldListParkingAccess">
+{{#if defaultFieldListVars }}
+									<div class="pageSearchVal pageSearchVal-FieldListParkingAccess " id="pageSearchVal-FieldListParkingAccess_1">fl={{#each defaultFieldListVars }}{{#if @index }},{{/if}}{{ this }}{{/each}}</div>
+{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageFieldList" class="pageFieldList " id="pageFieldListParkingAccess_{{ @key }}" value="{{ var }}"{{#if fieldList }} checked="checked"{{/if}} onclick="facetFieldListChange('ParkingAccess', this); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<label for="pageFieldListParkingAccess_{{ @key }}">{{ displayName }}</label>
+										</td>
+									</tr>
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyStatsParkingAccessPage"}}								<!-- #*inline "htmBodyStatsParkingAccessPage" -->
+								<div style="display: none; " class="w3-padding w3-tiny " id="pageSearchVal-StatsParkingAccessHidden">
+{{#each defaultStatsVars }}
+									<div class="pageSearchVal-StatsParkingAccessHidden " id="pageSearchVal-StatsParkingAccessHidden_{{ this }}">{{ this }}</div>
+{{/each}}
+								</div>
+								<div class="w3-padding w3-tiny " id="pageSearchVal-StatsParkingAccess">
+{{#if defaultStatsVars }}
+{{#each defaultStatsVars }}									<div class="pageSearchVal pageSearchVal-StatsParkingAccess_{{ this }} " id="pageSearchVal-StatsParkingAccess_{{ this }}">stats.field={{ this }}</div>
+{{/each}}{{/if}}
+								</div>
+								<table class="w3-table ">
+{{#each varsFq }}
+{{#if enableStats }}
+									<tr class="">
+										<td class="">
+											<span><input type="checkbox" name="pageStats" class="pageStats " id="pageStatsParkingAccess_{{ @key }}" value="{{ var }}"{{#if ./stats }} checked="checked"{{/if}} onclick="facetStatsChange('ParkingAccess', this); "/></span>
+										</td>
+										<td class="w3-cell ">
+											<div>
+												<label for="pageStatsParkingAccess_{{ @key }}">{{ displayName }}</label>
+											</div>
+											<div class="pageStatsField w3-small pageStatsFieldParkingAccess_{{ @key }} " id="pageStatsFieldParkingAccess_{{ @key }}">
+{{#if ./stats }}
+{{#each ./stats }}
+{{#eq @key 'name' }}{{else}}
+												<div data-class="ParkingAccess" data-var="{{ ../var }}" data-val="{{ @key }}">{{ @key }}: {{ this }}</div>
+{{/eq}}
+{{/each}}
+{{#if ./stats/max }}
+									<div>									<span> step </span>									<input id="animateStatsStep" placeholder="step" value="1" style="width: 4em; "/>									<span> min </span>									<input id="animateStatsMin" placeholder="min" value="{{ ./stats/min }}" style="width: 4em; "/>									<span> max </span>									<input id="animateStatsMax" placeholder="max" value="{{ ./stats/max }}" style="width: 4em; "/>									<span> speed in seconds </span>									<input id="animateStatsSpeed" placeholder="speed" value="1" style="width: 4em; "/>									<button onclick="animateStats(); ">animate</button>									</div>{{/if}}
+{{/if}}
+											</div>
+										</td>
+									</tr>
+{{/if}}
+{{/each}}
+								</table>
+{{/inline}}
+{{#*inline "htmBodyMenuParkingAccessPage"}}		<!-- #*inline "htmBodyMenuParkingAccessPage" -->
+{{> "htmBodyMenuBaseModelPage"}}{{/inline}}
+{{#*inline "htmBodyGraphParkingAccessPage"}}		<!-- #*inline "htmBodyGraphParkingAccessPage" -->
+<div id="htmBodyGraphBaseModelPage" class="w3-content htmBodyGraph "></div>{{/inline}}
+{{#*inline "htmBodyGraphLocationParkingAccessPage"}}		<!-- #*inline "htmBodyGraphLocationParkingAccessPage" -->
+<div id="htmBodyGraphLocationBaseModelPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
+{{#*inline "htmBodyCount0ParkingAccessPage"}}		<!-- #*inline "htmBodyCount0ParkingAccessPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+				{{/if}}
+				<span class="">ParkingAccesss</span>
+			</a>
+		</h1>
+		<h2>
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				{{#if classIconCssClasses}}
+					<i class="{{ classIconCssClasses }}  site-menu-icon "></i>
+				{{/if}}
+				<span class="">no ParkingAccess found</span>
+			</span>
+		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodyCount1AllParkingAccessPage"}}		<!-- #*inline "htmBodyCount1AllParkingAccessPage" -->
+		<h1 class="w3-center ">
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+			{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+			{{/if}}
+				<span class="">ParkingAccess</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{parkingAccess_.objectTitle}}</span>
+			</span>
+		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodyCount1ParkingAccessPage"}}		<!-- #*inline "htmBodyCount1ParkingAccessPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">ParkingAccess</span>
+			</a>
+		</h1>
+		<h2 class="w3-center ">
+			<span class="w3-bar-item w3-padding w3-center w3-block w3-2017-shaded-spruce">
+				<span class="">{{parkingAccess_.objectTitle}}</span>
+			</span>
+		</h2>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodyAllParkingAccessPage"}}		<!-- #*inline "htmBodyAllParkingAccessPage" -->
+		<h1>
+			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+	{{#if classIconCssClasses}}
+				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
+	{{/if}}
+				<span class="">ParkingAccesss</span>
+			</a>
+		</h1>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+		<div class="">
+			<div>
+	{{#if pagination.pagePrevious}}
+				<a href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-left "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-left w3-opacity "></i>
+	{{/if}}
+	{{#gte pagination.rowsPrevious pagination.1L}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}">
+					<i class="fas fa-minus-square "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-minus-square w3-opacity "></i>
+	{{/gte}}
+				<a href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+					<i class="fas fa-plus-square "></i>
+				</a>
+	{{#if pagination.pageNext}}
+				<a href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}">
+					<i class="fas fa-arrow-square-right "></i>
+				</a>
+	{{else}}
+				<i class="fas fa-arrow-square-right w3-opacity "></i>
+	{{/if}}
+				<span>{{ pagination.startNum }} - {{ pagination.endNum }} of {{ pagination.foundNum }}</span>
+			</div>
+{{> "table1ParkingAccessPage"}}
+		</div>
+{{/inline}}
+{{#*inline "htmFormParkingAccessPage"}}
+		<!-- #*inline "htmForm" -->
+		<form action="/api/parking-access" id="ParkingAccessForm" class="pageForm " style="" onsubmit="event.preventDefault(); return false; ">
+{{#if pk}}
+			<input name="pk" class="valuePk" type="hidden" value="{{pk}}"/>
+{{/if}}
+			<input name="focusId" type="hidden"/>
+			<input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{{toJsonObjectStringInApostrophes pageResponse }}}' type="hidden"/>
+			<input name="parkingAccess" id="parkingAccess" class="parkingAccess"  value='{{{toJsonObjectStringInApostrophes parkingAccess_ }}}' type="hidden"/>
+			<input name="listParkingAccess" id="listParkingAccess" class="listParkingAccess"  value='{{{toJsonArrayStringInApostrophes listParkingAccess }}}' type="hidden"/>
+		</form>
+{{#if id}}
+{{#block "htmButton_searchpageParkingAccess"}}{{/block}}
+{{#block "htmForm_searchpageParkingAccess"}}{{/block}}
+{{/if}}
+{{/inline}}
+{{#*inline "htmButtonParkingAccessPage_patchParkingAccess"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#patchParkingAccessModal').show(); "
+			>
+			<i class="fas fa-edit "></i>
+			Modify ParkingAccess
+		</button>
+{{/inline}}
+{{#*inline "htmFormButtonParkingAccessPage_patchParkingAccess"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="patchParkingAccess(null, $('#patchParkingAccessFormValues')); "
+							>Modify ParkingAccess</button>
+{{/inline}}
+{{#*inline "htmFormParkingAccessPage_patchParkingAccess"}}
+		<div id="patchParkingAccessModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#patchParkingAccessModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Modify ParkingAccess</h2>
+					</header>
+					<div class="" id="patchParkingAccessFormValues">
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAddress" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAddress" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAddress" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAlternateName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAreaServed" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAreaServed" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAreaServed" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCategory" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCategory" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCategory" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDataProvider" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateCreated" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateCreated" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateModified" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateModified" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDescription" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDescription" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDescription" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmFeatures" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmFeatures" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmFeatures" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmHeight" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmHeight" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmHeight" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmOwner" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmOwner" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmOwner" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRefOffStreetParking" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRefOffStreetParking" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRefOffStreetParking" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSeeAlso" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSeeAlso" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSeeAlso" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSlope" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSlope" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSlope" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSource" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSource" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSource" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmWidth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmWidth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmWidth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+							</div>
+{{#block "htmFormButton_patchParkingAccess"}}{{/block}}
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmButtonParkingAccessPage_postParkingAccess"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#postParkingAccessModal').show(); "
+			>
+			<i class="fas fa-file-plus "></i>
+			Create a ParkingAccess
+		</button>
+{{/inline}}
+{{#*inline "htmFormButtonParkingAccessPage_postParkingAccess"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="postParkingAccess($('#postParkingAccessForm')); "
+							>Create a ParkingAccess</button>
+{{/inline}}
+{{#*inline "htmFormParkingAccessPage_postParkingAccess"}}
+		<div id="postParkingAccessModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#postParkingAccessModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Create a ParkingAccess</h2>
+						<div class="">You can override any default values below: </div>
+					</header>
+					<div class="" id="postParkingAccessFormValues">
+						<div id="postParkingAccessForm">
+{{#block "htmFormButton_postParkingAccess"}}{{/block}}
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAddress" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAddress" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAddress" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAlternateName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAreaServed" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAreaServed" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAreaServed" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCategory" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCategory" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCategory" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDataProvider" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateCreated" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateCreated" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateModified" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateModified" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDescription" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDescription" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDescription" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmFeatures" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmFeatures" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmFeatures" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmHeight" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmHeight" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmHeight" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmOwner" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmOwner" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmOwner" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRefOffStreetParking" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRefOffStreetParking" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRefOffStreetParking" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSeeAlso" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSeeAlso" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSeeAlso" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSlope" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSlope" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSlope" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSource" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSource" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSource" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmWidth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmWidth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmWidth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+							</div>
+						</div>
+{{#block "htmFormButton_postParkingAccess"}}{{/block}}
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmButtonParkingAccessPage_putimportParkingAccess"}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			onclick="$('#putimportParkingAccessModal').show(); "
+			>
+			<i class="fas fa-file-import "></i>
+			Import ParkingAccesss
+		</button>
+{{/inline}}
+{{#*inline "htmFormButtonParkingAccessPage_putimportParkingAccess"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="putimportParkingAccess($('#putimportParkingAccessFormValues')); "
+							>Import ParkingAccesss</button>
+{{/inline}}
+{{#*inline "htmFormParkingAccessPage_putimportParkingAccess"}}
+		<div id="putimportParkingAccessModal" class="w3-modal ">
+			<div class="w3-modal-content ">
+				<div class="w3-card-4 ">
+					<header class="w3-container w3-2017-shaded-spruce">
+	{{#eq "Page" classApiMethodMethod}}
+						<span class="w3-button w3-display-topright " onclick="$('#putimportParkingAccessModal').hide(); ">×</span>
+	{{/eq}}
+						<h2 class="w3-padding ">Import ParkingAccesss</h2>
+					</header>
+					<div class="" id="putimportParkingAccessFormValues">
+						<div class="w3-cell-row ">
+							<textarea
+								class="PUTImport_searchList w3-input w3-border "
+								style="height: 300px; "
+								placeholder="{ 'searchList': [ { 'pk': ... , 'saves': [ ... ] }, ... ] }"
+								></textarea>
+						</div>
+{{#block "htmFormButton_putimportParkingAccess"}}{{/block}}
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmButtonParkingAccessPage_searchpageParkingAccess"}}
+{{/inline}}
+{{#*inline "htmFormButtonParkingAccessPage_searchpageParkingAccess"}}
+						<button
+							class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-margin w3-2017-shaded-spruce "
+							onclick="searchpageParkingAccess(); "
+							>Search ParkingAccesss</button>
+{{/inline}}
+{{#*inline "htmFormParkingAccessPage_searchpageParkingAccess"}}
+		<div id="searchpageParkingAccessModal" class="">
+			<div class="">
+				<div class="w3-card-4 ">
+					<div class="" id="searchpageParkingAccessFormValues">
+						<div id="searchpageParkingAccessForm">
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCreated" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCreated" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmModified" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmModified" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmObjectId" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmObjectId" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmArchived" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmArchived" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDeleted" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDeleted" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAddress" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAddress" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAddress" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAlternateName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAlternateName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmAreaServed" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmAreaServed" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmAreaServed" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmCategory" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmCategory" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmCategory" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDataProvider" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDataProvider" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateCreated" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateCreated" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateCreated" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDateModified" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDateModified" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDateModified" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmDescription" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmDescription" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmDescription" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmFeatures" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmFeatures" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmFeatures" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmHeight" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmHeight" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmHeight" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmLocation" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmLocation" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmName" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmName" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmName" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmOwner" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmOwner" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmOwner" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmRefOffStreetParking" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmRefOffStreetParking" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmRefOffStreetParking" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSeeAlso" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSeeAlso" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSeeAlso" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+								<!-- entiteHtmLigneVerticaleAncien == null || !entiteHtmLigneVerticaleAncien -->
+							</div>
+							<!-- BooleanUtils.isFalse(entiteHtmLigneVerticale) -->
+							<div class="w3-cell-row HtmRow">
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSlope" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSlope" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSlope" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmSource" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmSource" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmSource" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmWidth" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmWidth" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmWidth" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+{{/inline}}
+{{#*inline "htmBodySidebarParkingAccessPage"}}
+				<div class="w3-dropdown-click w3-bar-block min-width-300px ">
+					<div class="min-width-300px ">
+						<span title="Search" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-magnifying-glass hover-box-shadow w3-xlarge "></i> Search</span>
+						<span title="Filters" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleFilters').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-filters hover-box-shadow w3-xlarge "></i> Filters</span>
+						<span title="Range" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleRange').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-calendar-range hover-box-shadow w3-xlarge "></i> Range</span>
+						<span title="Pivot" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarToggleFieldList').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarTogglePivot').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-table-pivot hover-box-shadow w3-xlarge "></i> Pivot</span>
+						<span title="FieldList" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleStats').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleFieldList').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-list-ul hover-box-shadow w3-xlarge "></i> FieldList</span>
+						<span title="Stats" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " onclick="$('.siteSidebarToggleFieldList').hide(); $('.siteSidebarTogglePivot').hide(); $('.siteSidebarToggleSearch').hide(); $('.siteSidebarToggleFilters').hide(); $('.siteSidebarToggleRange').hide(); $('.siteSidebarToggleStats').toggle(); $('.siteSidebarToggle').removeClass('w3-black'); $('.siteSidebarToggle').addClass('w3-2017-shaded-spruce'); $(this).addClass('w3-black'); $(this).removeClass('w3-2017-shaded-spruce'); "><i class="fad fa-chart-candlestick hover-box-shadow w3-xlarge "></i> Stats</span>
+						<a title="API" class="siteSidebarToggle w3-padding-small w3-hover-black w3-2017-shaded-spruce " href="{{ apiUri }}{{#if pk }}/{{ pk }}{{else}}{{#if id }}/{{ id }}{{else}}{{ queryStr }}{{/if}}{{/if}}"><i class="fad fa-brackets-curly hover-box-shadow w3-xlarge "></i> API</a>
+					</div>
+					<div class=" ">
+						<div class="siteSidebarToggle siteSidebarToggleSearch w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-magnifying-glass "></i> Search</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodySearch"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFilters w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-filters "></i> Filters</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFilters"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleRange w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce  ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-calendar-range "></i> Range</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyRange"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarTogglePivot w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-table-pivot "></i> Pivot</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyPivot"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleFieldList w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-list-ul "></i> Field List</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyFieldList"}}{{/block}}
+							</div>
+						</div>
+						<div  class="siteSidebarToggle siteSidebarToggleStats w3-dropdown-content min-width-300px w3-white w3-border w3-border-2017-shaded-spruce " style="display: none; ">
+							<div class="w3-bar w3-2017-shaded-spruce ">
+								<span class="w3-bar-item ">
+								<i class="fad fa-chart-candlestick "></i> Stats</span>
+							</div>
+							<div class="w3-bar-block ">
+{{#block "htmBodyStats"}}{{/block}}
+							</div>
+						</div>
+					</div>
+				</div>
+{{/inline}}
+{{#*inline "htmBodyStartParkingAccessPage"}}
+{{> "htmBodyStartBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyMiddleParkingAccessPage"}}
+{{> "htmBodyMiddleBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyEndParkingAccessPage"}}
+{{> "htmBodyEndBaseModelPage"}}
+{{/inline}}
+{{#*inline "htmBodyParkingAccessPage"}}
+{{#block "htmBodyStart"}}{{/block}}
+{{#block "htmBodyMiddle"}}{{/block}}
+{{#block "htmBodyEnd"}}{{/block}}
+{{/inline}}
+{{#*inline "htmBodyMiddleParkingAccessPage"}}
+		<div class="w3-bar w3-content ">
+{{#block "htmBodySidebar"}}{{/block}}
+		</div>
+	<div class="pageContent w3-content ">
+	{{#eq parkingAccessCount int0}}
+{{#block "htmBodyCount0"}}{{/block}}
+	{{else}}
+		{{#eq parkingAccessCount int1}}
+			{{#if id}}
+{{#block "htmBodyCount1"}}{{/block}}
+			{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+			{{/if}}
+		{{else}}
+{{#block "htmBodyAll"}}{{/block}}
+		{{/eq}}
+	{{/eq}}
+{{#block "htmForm"}}{{/block}}
+{{#block "htmForms"}}{{/block}}
+	</div>
+{{/inline}}
+{{#*inline "table1ParkingAccessPage"}}
+		<div class="w3-responsive ">
+			<table class="w3-table w3-bordered w3-striped w3-border w3-hoverable ">
+{{> table2ParkingAccessPage}}
+			</table>
+		</div>
+{{/inline}}
+{{#*inline "table2ParkingAccessPage"}}
+{{> "thead1ParkingAccessPage"}}
+{{> "tbody1ParkingAccessPage"}}
+{{> "tfoot1ParkingAccessPage"}}
+{{/inline}}
+{{#*inline "thead1ParkingAccessPage"}}
+				<thead class="w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+{{> thead2ParkingAccessPage}}
+				</thead>
+{{/inline}}
+{{#*inline "thead2ParkingAccessPage"}}
+			<tr>
+						<th>created</th>
+						<th></th>
+			</tr>
+{{/inline}}
+{{#*inline "tbody1ParkingAccessPage"}}
+				<tbody>
+{{> tbody2ParkingAccessPage}}
+				</tbody>
+{{/inline}}
+{{#*inline "tbody2ParkingAccessPage"}}
+		{{#each listParkingAccess}}
+					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
+							</a>
+						</td>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<i class="fad fa-map-location-dot "></i>
+								<span class="white-space-pre-wrap ">{{objectTitle}}</span>
+							</a>
+						</td>
+					</tr>
+		{{/each}}
+{{/inline}}
+{{#*inline "tfoot1ParkingAccessPage"}}
+				<tfoot class="w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">
+{{> tfoot2ParkingAccessPage}}
+				</tfoot>
+{{/inline}}
+{{#*inline "tfoot2ParkingAccessPage"}}
+			<tr>
+			{{#if getColumnCreated}}
+				<td>
+				</td>
+			{{/if}}
+			{{#if getColumnObjectTitle}}
+				<td>
+				</td>
+			{{/if}}
+			</tr>
+	{{/inline}}
+{{#*inline "htmFormsParkingAccessPage"}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+		{{#eq parkingAccessCount int1}}
+		<button
+			class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+			id="refreshThisParkingAccessGenPage"
+			onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'pk:{{pk}}' } ], {}, function() { addGlow($('#refreshThisParkingAccessGenPage')); }, function() { addError($('#refreshThisParkingAccessGenPage')); }); return false; ">
+			<i class="fas fa-sync-alt "></i>
+			refresh this ParkingAccess
+		</button>
+		{{/eq}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_patchParkingAccess"}}{{/block}}
+{{#block "htmForm_patchParkingAccess"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleAdmin}}
+{{#eq parkingAccessCount int1}}
+{{#if id}}
+{{else}}
+{{#block "htmButton_postParkingAccess"}}{{/block}}
+{{#block "htmForm_postParkingAccess"}}{{/block}}
+{{/if}}
+{{else}}
+{{#block "htmButton_postParkingAccess"}}{{/block}}
+{{#block "htmForm_postParkingAccess"}}{{/block}}
+{{/eq}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles authRoleSuperAdmin}}
+{{#block "htmButton_putimportParkingAccess"}}{{/block}}
+{{#block "htmForm_putimportParkingAccess"}}{{/block}}
+{{/ifContainsAnyRoles}}
+{{#block "htmSuggested"}}{{/block}}
+{{/inline}}
+{{#*inline "htmSuggestedParkingAccessPage"}}
+			{{#ifContainsAnyRoles roles roleForWrite}}
+					<div class="">
+						<button id="refreshAllParkingAccessGenPage{{id}}" class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-2017-shaded-spruce "
+							onclick="patch{{classSimpleName}}Vals([], {}, function() { addGlow($('#refreshAllParkingAccessGenPage{{id}}')); }, function() { addError($('#refreshAllParkingAccessGenPage{{id}}')); }); "
+							>
+							<i class="fas fa-sync-alt "></i>
+							refresh all the ParkingAccesss
+						</button>
+					</div>
+			{{/ifContainsAnyRoles}}
+			<div class="w3-cell-row ">
+				<div class="w3-cell ">
+					<span>
+						search ParkingAccesss: 
+					</span>
+				</div>
+			</div>
+			<div class="w3-bar ">
+				<input
+					type="text"
+					class="suggestParkingAccess w3-input w3-border w3-bar-item "
+					name="suggestParkingAccess"
+					id="suggestParkingAccess{{id}}"
+					autocomplete="off"
+					oninput="suggestParkingAccessObjectSuggest( [ { 'name': 'q', 'value': 'objectSuggest:' + $(this).val() }, { 'name': 'rows', 'value': '10' }, { 'name': 'fl', 'value': 'classCanonicalName,pk,pageUrlPk,objectTitle' } ], $('#suggestListParkingAccess{{id}}'), {{pk}}; "
+					onkeyup="if (event.keyCode === 13) { event.preventDefault(); window.location.href = '/parking-access?q={{query1}}:' + encodeURIComponent(this.value) + '{{fqs}}{{sorts}}&amp;rows={{start2}}&amp;rows={{rows1}}"
+				{{#if listParkingAccess}}
+					value="{{query2}}"
+				{{/if}}
+				/>
+				<button
+					class="w3-btn w3-round w3-border w3-border-black w3-ripple w3-padding w3-bar-item w3-2017-shaded-spruce "
+					onclick="window.location.href = '/parking-access?q=&quot;, query1, &quot;:' + encodeURIComponent(this.previousElementSibling.value) + '&quot;, fqs, sorts, &quot;&amp;rows=&quot;, start2, &quot;&amp;rows=&quot;, rows1, &quot;'; "
+					>
+					<i class="fas fa-search "></i>
+				</button>
+			<div>
+			<div class="w3-cell-row ">
+				<div class="w3-cell w3-left-align w3-cell-top ">
+					<ul class="w3-ul w3-hoverable " id="suggestListParkingAccess{{id}}">
+					</ul>
+				</div>
+			</div>
+			<div class="">
+				<a href="/parking-access" class="">
+					<i class="fad fa-map-location-dot"></i>
+					see all the ParkingAccesss
+				</a>
+			</div>
+{{/inline}}
+{{> BaseModelPage baseModel_=parkingAccess_}}
+
+{{#*inline "htmCreated"}}
+<!-- #*inline "htmCreated" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_created">created</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCreated"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span id="{{classApiMethodMethod}}_created" class="varParkingAccess{{pk}}Created varParkingAccessCreated " title="{{formatZonedDateTime parkingAccess_.created 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime parkingAccess_.created 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmModified"}}
+<!-- #*inline "htmModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_modified">modified</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputModified"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span id="{{classApiMethodMethod}}_modified" class="varParkingAccess{{pk}}Modified varParkingAccessModified " title="{{formatZonedDateTime parkingAccess_.modified 'EEEE MMMM d yyyy H:mm:ss.SSS zz VV' defaultLocaleId defaultZoneId}}">{{formatZonedDateTime parkingAccess_.modified 'EEE MMM d yyyy h:mm a zz' defaultLocaleId defaultZoneId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmObjectId"}}
+<!-- #*inline "htmObjectId" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessObjectId">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_objectId">ID</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputObjectId" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputObjectId"}}
+	{{#eq 'Page' classApiMethodMethod}}
+														<span id="{{classApiMethodMethod}}_objectId" class="varParkingAccess{{pk}}ObjectId varParkingAccessObjectId ">{{parkingAccess_.objectId}}</span>
+	{{/eq}}
+{{/inline}}
+
+{{#*inline "htmArchived"}}
+<!-- #*inline "htmArchived" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessArchived">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_archived">archived</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputArchived" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputArchived"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_archived"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_archived"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classParkingAccess inputParkingAccess{{pk}}Archived w3-input w3-border "
+															name="setArchived"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classParkingAccess inputParkingAccess{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{else}}
+																class="setArchived valueArchived classParkingAccess inputParkingAccess{{pk}}Archived w3-input w3-border "
+																name="setArchived"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if parkingAccess_.archived}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Archived varParkingAccessArchived ">{{parkingAccess_.archived}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Archived varParkingAccessArchived ">{{parkingAccess_.archived}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDeleted"}}
+<!-- #*inline "htmDeleted" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessDeleted">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_deleted">deleted</label>
+												</div>
+												<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDeleted" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDeleted"}}
+		{{#eq roleForWriteBool "true"}}
+	{{#eq 'Page' classApiMethodMethod}}
+															<input
+																type="checkbox"
+																id="{{classApiMethodMethod}}_deleted"
+																value="true"
+	{{else}}
+														<select
+															id="{{classApiMethodMethod}}_deleted"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															class="classParkingAccess inputParkingAccess{{pk}}Deleted w3-input w3-border "
+															name="setDeleted"
+	{{else}}
+		{{#eq 'Page' classApiMethodMethod}}
+																class="classParkingAccess inputParkingAccess{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{else}}
+																class="setDeleted valueDeleted classParkingAccess inputParkingAccess{{pk}}Deleted w3-input w3-border "
+																name="setDeleted"
+		{{/eq}}
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+	{{/eq}}
+	{{#eq 'Page' classApiMethodMethod}}
+		{{#if parkingAccess_.deleted}}
+																checked="checked"
+		{{/if}}
+																/>
+	{{else}}
+															>
+															<option value="" selected="selected"></option>
+															<option value="true">true</option>
+															<option value="false">false</option>
+														</select>
+	{{/eq}}
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Deleted varParkingAccessDeleted ">{{parkingAccess_.deleted}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Deleted varParkingAccessDeleted ">{{parkingAccess_.deleted}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAddress"}}
+<!-- #*inline "htmAddress" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessAddress">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_address">address</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAddress" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAddress"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="address"
+															title="The mailing address"															id="{{classApiMethodMethod}}_address"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAddress classParkingAccess inputParkingAccess{{pk}}Address w3-input w3-border "
+																name="setAddress"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAddress classParkingAccess inputParkingAccess{{pk}}Address w3-input w3-border "
+																name="setAddress"
+		{{else}}
+																class="valueAddress w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Address w3-input w3-border "
+																name="address"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAddress', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_address')); }, function() { addError($('#{{classApiMethodMethod}}_address')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.address}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Address varParkingAccessAddress ">{{parkingAccess_.address}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Address varParkingAccessAddress ">{{parkingAccess_.address}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAlternateName"}}
+<!-- #*inline "htmAlternateName" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessAlternateName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_alternateName">alternate name</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAlternateName" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAlternateName"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="alternate name"
+															title="An alternative name for this item"															id="{{classApiMethodMethod}}_alternateName"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAlternateName classParkingAccess inputParkingAccess{{pk}}AlternateName w3-input w3-border "
+																name="setAlternateName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAlternateName classParkingAccess inputParkingAccess{{pk}}AlternateName w3-input w3-border "
+																name="setAlternateName"
+		{{else}}
+																class="valueAlternateName w3-input w3-border classParkingAccess inputParkingAccess{{pk}}AlternateName w3-input w3-border "
+																name="alternateName"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAlternateName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_alternateName')); }, function() { addError($('#{{classApiMethodMethod}}_alternateName')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.alternateName}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}AlternateName varParkingAccessAlternateName ">{{parkingAccess_.alternateName}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}AlternateName varParkingAccessAlternateName ">{{parkingAccess_.alternateName}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmAreaServed"}}
+<!-- #*inline "htmAreaServed" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessAreaServed">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_areaServed">area served</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputAreaServed" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputAreaServed"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="area served"
+															title="The geographic area where a service or offered item is provided"															id="{{classApiMethodMethod}}_areaServed"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setAreaServed classParkingAccess inputParkingAccess{{pk}}AreaServed w3-input w3-border "
+																name="setAreaServed"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setAreaServed classParkingAccess inputParkingAccess{{pk}}AreaServed w3-input w3-border "
+																name="setAreaServed"
+		{{else}}
+																class="valueAreaServed w3-input w3-border classParkingAccess inputParkingAccess{{pk}}AreaServed w3-input w3-border "
+																name="areaServed"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setAreaServed', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_areaServed')); }, function() { addError($('#{{classApiMethodMethod}}_areaServed')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.areaServed}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}AreaServed varParkingAccessAreaServed ">{{parkingAccess_.areaServed}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}AreaServed varParkingAccessAreaServed ">{{parkingAccess_.areaServed}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmCategory"}}
+<!-- #*inline "htmCategory" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessCategory">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_category">category</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputCategory" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputCategory"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="category"
+															title="Category of the access point (entrance, exit, etc.). Allowed values: Those specified by the DATEX II _AccessCategoryEnum_ or other values meaningful to the application."															id="{{classApiMethodMethod}}_category"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setCategory classParkingAccess inputParkingAccess{{pk}}Category w3-input w3-border "
+																name="setCategory"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setCategory classParkingAccess inputParkingAccess{{pk}}Category w3-input w3-border "
+																name="setCategory"
+		{{else}}
+																class="valueCategory w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Category w3-input w3-border "
+																name="category"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setCategory', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_category')); }, function() { addError($('#{{classApiMethodMethod}}_category')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.category}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Category varParkingAccessCategory ">{{parkingAccess_.category}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Category varParkingAccessCategory ">{{parkingAccess_.category}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDataProvider"}}
+<!-- #*inline "htmDataProvider" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessDataProvider">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dataProvider">data provider</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDataProvider" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDataProvider"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="data provider"
+															title="A sequence of characters identifying the provider of the harmonised data entity."															id="{{classApiMethodMethod}}_dataProvider"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDataProvider classParkingAccess inputParkingAccess{{pk}}DataProvider w3-input w3-border "
+																name="setDataProvider"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDataProvider classParkingAccess inputParkingAccess{{pk}}DataProvider w3-input w3-border "
+																name="setDataProvider"
+		{{else}}
+																class="valueDataProvider w3-input w3-border classParkingAccess inputParkingAccess{{pk}}DataProvider w3-input w3-border "
+																name="dataProvider"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDataProvider', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dataProvider')); }, function() { addError($('#{{classApiMethodMethod}}_dataProvider')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.dataProvider}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}DataProvider varParkingAccessDataProvider ">{{parkingAccess_.dataProvider}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}DataProvider varParkingAccessDataProvider ">{{parkingAccess_.dataProvider}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateCreated"}}
+<!-- #*inline "htmDateCreated" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessDateCreated">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateCreated">date created</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateCreated" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateCreated"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="date created"
+															title="Entity creation timestamp. This will usually be allocated by the storage platform."															id="{{classApiMethodMethod}}_dateCreated"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateCreated classParkingAccess inputParkingAccess{{pk}}DateCreated w3-input w3-border "
+																name="setDateCreated"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateCreated classParkingAccess inputParkingAccess{{pk}}DateCreated w3-input w3-border "
+																name="setDateCreated"
+		{{else}}
+																class="valueDateCreated w3-input w3-border classParkingAccess inputParkingAccess{{pk}}DateCreated w3-input w3-border "
+																name="dateCreated"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateCreated', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateCreated')); }, function() { addError($('#{{classApiMethodMethod}}_dateCreated')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.dateCreated}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}DateCreated varParkingAccessDateCreated ">{{parkingAccess_.dateCreated}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}DateCreated varParkingAccessDateCreated ">{{parkingAccess_.dateCreated}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDateModified"}}
+<!-- #*inline "htmDateModified" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessDateModified">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_dateModified">date modified</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDateModified" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDateModified"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="date modified"
+															title="Timestamp of the last modification of the entity. This will usually be allocated by the storage platform."															id="{{classApiMethodMethod}}_dateModified"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDateModified classParkingAccess inputParkingAccess{{pk}}DateModified w3-input w3-border "
+																name="setDateModified"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDateModified classParkingAccess inputParkingAccess{{pk}}DateModified w3-input w3-border "
+																name="setDateModified"
+		{{else}}
+																class="valueDateModified w3-input w3-border classParkingAccess inputParkingAccess{{pk}}DateModified w3-input w3-border "
+																name="dateModified"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDateModified', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_dateModified')); }, function() { addError($('#{{classApiMethodMethod}}_dateModified')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.dateModified}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}DateModified varParkingAccessDateModified ">{{parkingAccess_.dateModified}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}DateModified varParkingAccessDateModified ">{{parkingAccess_.dateModified}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmDescription"}}
+<!-- #*inline "htmDescription" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessDescription">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_description">description</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputDescription" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputDescription"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="description"
+															title="A description of this item"															id="{{classApiMethodMethod}}_description"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setDescription classParkingAccess inputParkingAccess{{pk}}Description w3-input w3-border "
+																name="setDescription"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setDescription classParkingAccess inputParkingAccess{{pk}}Description w3-input w3-border "
+																name="setDescription"
+		{{else}}
+																class="valueDescription w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Description w3-input w3-border "
+																name="description"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDescription', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_description')); }, function() { addError($('#{{classApiMethodMethod}}_description')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.description}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Description varParkingAccessDescription ">{{parkingAccess_.description}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Description varParkingAccessDescription ">{{parkingAccess_.description}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmFeatures"}}
+<!-- #*inline "htmFeatures" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessFeatures">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_features">features</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputFeatures" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputFeatures"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="features"
+															title="Those specified by the DATEX II _essEquipmentEnum_ and by _AccessibilityEnum_ or other values meaningful to the application."															id="{{classApiMethodMethod}}_features"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setFeatures classParkingAccess inputParkingAccess{{pk}}Features w3-input w3-border "
+																name="setFeatures"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setFeatures classParkingAccess inputParkingAccess{{pk}}Features w3-input w3-border "
+																name="setFeatures"
+		{{else}}
+																class="valueFeatures w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Features w3-input w3-border "
+																name="features"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setFeatures', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_features')); }, function() { addError($('#{{classApiMethodMethod}}_features')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.features}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Features varParkingAccessFeatures ">{{parkingAccess_.features}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Features varParkingAccessFeatures ">{{parkingAccess_.features}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmHeight"}}
+<!-- #*inline "htmHeight" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessHeight">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_height">height</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputHeight" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputHeight"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="height"
+															title="Height of the access point"															id="{{classApiMethodMethod}}_height"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setHeight classParkingAccess inputParkingAccess{{pk}}Height w3-input w3-border "
+																name="setHeight"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setHeight classParkingAccess inputParkingAccess{{pk}}Height w3-input w3-border "
+																name="setHeight"
+		{{else}}
+																class="valueHeight w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Height w3-input w3-border "
+																name="height"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setHeight', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_height')); }, function() { addError($('#{{classApiMethodMethod}}_height')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.height}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Height varParkingAccessHeight ">{{parkingAccess_.height}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Height varParkingAccessHeight ">{{parkingAccess_.height}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmLocation"}}
+<!-- #*inline "htmLocation" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessLocation">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_location">location</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputLocation" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputLocation"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="location"
+															title="Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"															id="{{classApiMethodMethod}}_location"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setLocation classParkingAccess inputParkingAccess{{pk}}Location w3-input w3-border "
+																name="setLocation"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setLocation classParkingAccess inputParkingAccess{{pk}}Location w3-input w3-border "
+																name="setLocation"
+		{{else}}
+																class="valueLocation w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Location w3-input w3-border "
+																name="location"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setLocation', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_location')); }, function() { addError($('#{{classApiMethodMethod}}_location')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.location}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Location varParkingAccessLocation ">{{parkingAccess_.location}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Location varParkingAccessLocation ">{{parkingAccess_.location}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmName"}}
+<!-- #*inline "htmName" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessName">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_name">name</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputName" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputName"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="name"
+															title="The name of this item."															id="{{classApiMethodMethod}}_name"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setName classParkingAccess inputParkingAccess{{pk}}Name w3-input w3-border "
+																name="setName"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setName classParkingAccess inputParkingAccess{{pk}}Name w3-input w3-border "
+																name="setName"
+		{{else}}
+																class="valueName w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Name w3-input w3-border "
+																name="name"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setName', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_name')); }, function() { addError($('#{{classApiMethodMethod}}_name')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.name}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Name varParkingAccessName ">{{parkingAccess_.name}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Name varParkingAccessName ">{{parkingAccess_.name}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmOwner"}}
+<!-- #*inline "htmOwner" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessOwner">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_owner">owner</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputOwner" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputOwner"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="owner"
+															title="A List containing a JSON encoded sequence of characters referencing the unique Ids of the owner(s)"															id="{{classApiMethodMethod}}_owner"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setOwner classParkingAccess inputParkingAccess{{pk}}Owner w3-input w3-border "
+																name="setOwner"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setOwner classParkingAccess inputParkingAccess{{pk}}Owner w3-input w3-border "
+																name="setOwner"
+		{{else}}
+																class="valueOwner w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Owner w3-input w3-border "
+																name="owner"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setOwner', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_owner')); }, function() { addError($('#{{classApiMethodMethod}}_owner')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.owner}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Owner varParkingAccessOwner ">{{parkingAccess_.owner}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Owner varParkingAccessOwner ">{{parkingAccess_.owner}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmRefOffStreetParking"}}
+<!-- #*inline "htmRefOffStreetParking" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessRefOffStreetParking">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_refOffStreetParking">ref off street parking</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputRefOffStreetParking" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputRefOffStreetParking"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="ref off street parking"
+															title="The offstreet parking site this access point gives access to."															id="{{classApiMethodMethod}}_refOffStreetParking"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setRefOffStreetParking classParkingAccess inputParkingAccess{{pk}}RefOffStreetParking w3-input w3-border "
+																name="setRefOffStreetParking"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setRefOffStreetParking classParkingAccess inputParkingAccess{{pk}}RefOffStreetParking w3-input w3-border "
+																name="setRefOffStreetParking"
+		{{else}}
+																class="valueRefOffStreetParking w3-input w3-border classParkingAccess inputParkingAccess{{pk}}RefOffStreetParking w3-input w3-border "
+																name="refOffStreetParking"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setRefOffStreetParking', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_refOffStreetParking')); }, function() { addError($('#{{classApiMethodMethod}}_refOffStreetParking')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.refOffStreetParking}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}RefOffStreetParking varParkingAccessRefOffStreetParking ">{{parkingAccess_.refOffStreetParking}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}RefOffStreetParking varParkingAccessRefOffStreetParking ">{{parkingAccess_.refOffStreetParking}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmSeeAlso"}}
+<!-- #*inline "htmSeeAlso" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessSeeAlso">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_seeAlso">see also</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSeeAlso" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSeeAlso"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="see also"
+															title="list of uri pointing to additional resources about the item"															id="{{classApiMethodMethod}}_seeAlso"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSeeAlso classParkingAccess inputParkingAccess{{pk}}SeeAlso w3-input w3-border "
+																name="setSeeAlso"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSeeAlso classParkingAccess inputParkingAccess{{pk}}SeeAlso w3-input w3-border "
+																name="setSeeAlso"
+		{{else}}
+																class="valueSeeAlso w3-input w3-border classParkingAccess inputParkingAccess{{pk}}SeeAlso w3-input w3-border "
+																name="seeAlso"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeAlso', $(this).val() == '' ? null : JSON.parse($(this).val()), function() { addGlow($('#{{classApiMethodMethod}}_seeAlso')); }, function() { addError($('#{{classApiMethodMethod}}_seeAlso')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{toJsonObjectString parkingAccess_.seeAlso}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}SeeAlso varParkingAccessSeeAlso ">{{parkingAccess_.seeAlso}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}SeeAlso varParkingAccessSeeAlso ">{{parkingAccess_.seeAlso}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmSlope"}}
+<!-- #*inline "htmSlope" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessSlope">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_slope">slope</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSlope" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSlope"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="slope"
+															title="Slope of the access point (in relative terms)"															id="{{classApiMethodMethod}}_slope"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSlope classParkingAccess inputParkingAccess{{pk}}Slope w3-input w3-border "
+																name="setSlope"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSlope classParkingAccess inputParkingAccess{{pk}}Slope w3-input w3-border "
+																name="setSlope"
+		{{else}}
+																class="valueSlope w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Slope w3-input w3-border "
+																name="slope"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSlope', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_slope')); }, function() { addError($('#{{classApiMethodMethod}}_slope')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.slope}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Slope varParkingAccessSlope ">{{parkingAccess_.slope}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Slope varParkingAccessSlope ">{{parkingAccess_.slope}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmSource"}}
+<!-- #*inline "htmSource" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessSource">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_source">source</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputSource" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputSource"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="source"
+															title="A sequence of characters giving the original source of the entity data as a URL. Recommended to be the fully qualified domain name of the source provider, or the URL to the source object."															id="{{classApiMethodMethod}}_source"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setSource classParkingAccess inputParkingAccess{{pk}}Source w3-input w3-border "
+																name="setSource"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setSource classParkingAccess inputParkingAccess{{pk}}Source w3-input w3-border "
+																name="setSource"
+		{{else}}
+																class="valueSource w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Source w3-input w3-border "
+																name="source"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSource', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_source')); }, function() { addError($('#{{classApiMethodMethod}}_source')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.source}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Source varParkingAccessSource ">{{parkingAccess_.source}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Source varParkingAccessSource ">{{parkingAccess_.source}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmWidth"}}
+<!-- #*inline "htmWidth" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}ParkingAccessWidth">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_width">width</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputWidth" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputWidth"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="width"
+															title="Width of the access point"															id="{{classApiMethodMethod}}_width"
+	{{#eq "Page" classApiMethodMethod}}
+																class="setWidth classParkingAccess inputParkingAccess{{pk}}Width w3-input w3-border "
+																name="setWidth"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="setWidth classParkingAccess inputParkingAccess{{pk}}Width w3-input w3-border "
+																name="setWidth"
+		{{else}}
+																class="valueWidth w3-input w3-border classParkingAccess inputParkingAccess{{pk}}Width w3-input w3-border "
+																name="width"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setWidth', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_width')); }, function() { addError($('#{{classApiMethodMethod}}_width')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{parkingAccess_.width}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+														{{#ifContainsKeys userKeys}}
+															<span class="varParkingAccess{{pk}}Width varParkingAccessWidth ">{{parkingAccess_.width}}</span>
+			{{/ifContainsKeys}}
+		{{else}}
+														<span class="varParkingAccess{{pk}}Width varParkingAccessWidth ">{{parkingAccess_.width}}</span>
+		{{/eq}}
+{{/inline}}
