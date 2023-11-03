@@ -5,13 +5,13 @@ QUAYIO_ORG: computateorg
 SITE_POWERED_BY_NAME: NERC
 SITE_POWERED_BY_URL: https://nerc.mghpcc.org/
 SITE_POWERED_BY_IMAGE_URI: /png/nerc/nerc-logo.png
-SITE_NAME: smartabyar-smartvillage
+SITE_NAME: smartvillage-platform
 SITE_SHORT_NAME: smartvillage
 SITE_DISPLAY_NAME: Smart Village Project
 SITE_DESCRIPTION: Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities. 
 SITE_PUBLIC_URL: https://smartabyarsmartvillage.org
-MAILING_LIST_URL: https://computate.topicbox.com/groups/smartabyar-smartvillage
-MAILING_LIST_EMAIL: smartabyar-smartvillage@computate.topicbox.com
+MAILING_LIST_URL: https://computate.topicbox.com/groups/smartvillage-platform
+MAILING_LIST_EMAIL: smartvillage-platform@computate.topicbox.com
 SITE_LICENSE_NAME: GNU GENERAL PUBLIC LICENSE, Version 3
 SITE_LICENSE_URL: https://www.gnu.org/licenses/gpl-3.0.en.html
 DEVELOPER_NAME: Christopher Tate
@@ -29,7 +29,7 @@ SITE_POM_ARTIFACT_ID_ROOT: "{{ SITE_NAME }}"
 SITE_POM_VERSION_PREFIX: "{{ API_VERSION }}"
 SITE_POM_VERSION_SUFFIX: ""
 SITE_POM_VERSION: "{{ SITE_POM_VERSION_PREFIX }}{{ SITE_POM_VERSION_SUFFIX }}"
-SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillageview.enus"
+SITE_JAVA_PACKAGE: "{{ SITE_POM_GROUP_ID }}.smartvillage.enus"
 SITE_PORT: 12080
 CLUSTER_PORT: "{{ SITE_PORT | regex_replace('(...)', '\\1') }}81"
 JDBC_DATABASE: "smartvillage"
@@ -321,7 +321,7 @@ CONFIG_KEYS: |2
   	public static final String MQTT_IOT_SUBSCRIBE_TOPIC = "MQTT_IOT_SUBSCRIBE_TOPIC";
 
 MAIN_VERTICLE_IMPORTS: |
-  import org.computate.smartvillageview.enus.mqtt.MqttMessageReader;
+  import org.computate.smartvillage.enus.mqtt.MqttMessageReader;
 
 WORKER_IMPORTS: |
   import java.time.LocalDateTime;
@@ -330,11 +330,11 @@ WORKER_IMPORTS: |
   import io.vertx.sqlclient.SqlConnection;
   import io.vertx.ext.web.client.predicate.ResponsePredicate;
   import io.vertx.ext.auth.authentication.TokenCredentials;
-  import org.computate.smartvillageview.enus.model.iotnode.IotNode;
-  import org.computate.smartvillageview.enus.model.traffic.simulation.reader.TrafficFcdReader;
-  import org.computate.smartvillageview.enus.model.traffic.time.step.TimeStep;
-  import org.computate.smartvillageview.enus.model.iotnode.reader.IotNodeReader;
-  import org.computate.smartvillageview.enus.camel.CamelIntegration;
+  import org.computate.smartvillage.enus.model.iotnode.IotNode;
+  import org.computate.smartvillage.enus.model.traffic.simulation.reader.TrafficFcdReader;
+  import org.computate.smartvillage.enus.model.traffic.time.step.TimeStep;
+  import org.computate.smartvillage.enus.model.iotnode.reader.IotNodeReader;
+  import org.computate.smartvillage.enus.camel.CamelIntegration;
 
 WORKER_IMPORT_DATA: |2
   
@@ -512,7 +512,7 @@ ALL_Containerfile: |2
   WORKDIR /root/src/{{SITE_NAME }}
   RUN mvn clean install -DskipTests
   RUN cp /root/src/{{SITE_NAME }}/target/*.jar /root/src/{{SITE_NAME }}/app.jar
-  CMD java $JAVA_OPTS -cp .:* org.computate.smartvillageview.enus.vertx.MainVerticle
+  CMD java $JAVA_OPTS -cp .:* org.computate.smartvillage.enus.vertx.MainVerticle
 
 BEFORE_Containerfile: |2
   

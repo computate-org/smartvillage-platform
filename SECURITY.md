@@ -11,4 +11,4 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-You can report a vulnerability to [the Security Advisories page](https://github.com/computate-org/smartabyar-smartvillage/security/advisories). 
+You can report a vulnerability to [the Security Advisories page](https://github.com/computate-org/smartvillage-platform/security/advisories). 

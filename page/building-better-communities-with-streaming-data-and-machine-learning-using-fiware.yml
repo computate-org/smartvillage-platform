@@ -334,7 +334,7 @@ htmBody:
               - e: span
                 text: |
                   We hope to build a community around smart cities that can thrive by observing all the standards in our project around documentation, change control, reporting, quality, security, and analysis. 
-                  I’m pleased to announce that our latest stable version 1.0.1 of the smartabyar-smartvillage project is now available in the following community locations: 
+                  I’m pleased to announce that our latest stable version 1.0.1 of the smartvillage-platform project is now available in the following community locations: 
           - e: p
             in:
               - e: ul
@@ -342,27 +342,27 @@ htmBody:
                   - e: li
                     in:
                       - e: a
-                        href: "https://github.com/computate-org/smartabyar-smartvillage/releases"
+                        href: "https://github.com/computate-org/smartvillage-platform/releases"
                         text: |
-                          See the latest smartabyar-smartvillage releases tag in GitHub here
+                          See the latest smartvillage-platform releases tag in GitHub here
                   - e: li
                     in:
                       - e: a
-                        href: "https://quay.io/repository/computateorg/smartabyar-smartvillage?tab=tags"
+                        href: "https://quay.io/repository/computateorg/smartvillage-platform?tab=tags"
                         text: |
-                          See the latest smartabyar-smartvillage container image on quay.io
+                          See the latest smartvillage-platform container image on quay.io
                   - e: li
                     in:
                       - e: a
-                        href: "https://mvnrepository.com/artifact/org.computate/smartabyar-smartvillage"
+                        href: "https://mvnrepository.com/artifact/org.computate/smartvillage-platform"
                         text: |
-                          See the latest smartabyar-smartvillage Maven artifacts in Maven Central
+                          See the latest smartvillage-platform Maven artifacts in Maven Central
                   - e: li
                     in:
                       - e: a
-                        href: "https://javadoc.io/doc/org.computate/smartabyar-smartvillage/latest/index.html"
+                        href: "https://javadoc.io/doc/org.computate/smartvillage-platform/latest/index.html"
                         text: |
-                          See the latest smartabyar-smartvillage Javadocs
+                          See the latest smartvillage-platform Javadocs
       - e: div
         a:
           class: w3-padding 

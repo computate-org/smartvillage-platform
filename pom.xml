@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.computate</groupId>
-	<artifactId>smartabyar-smartvillage</artifactId>
+	<artifactId>smartvillage-platform</artifactId>
 	<version>1.0.2</version>
 	<name>Smart Village Project</name>
 	<description>Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities.</description>
@@ -20,16 +20,16 @@
 	<mailingLists>
 		<mailingList>
 			<name>Users</name>
-			<subscribe>https://computate.topicbox.com/groups/smartabyar-smartvillage</subscribe>
-			<unsubscribe>https://computate.topicbox.com/groups/smartabyar-smartvillage</unsubscribe>
-			<post>mailto:smartabyar-smartvillage@computate.topicbox.com</post>
-			<archive>https://computate.topicbox.com/groups/smartabyar-smartvillage</archive>
+			<subscribe>https://computate.topicbox.com/groups/smartvillage-platform</subscribe>
+			<unsubscribe>https://computate.topicbox.com/groups/smartvillage-platform</unsubscribe>
+			<post>mailto:smartvillage-platform@computate.topicbox.com</post>
+			<archive>https://computate.topicbox.com/groups/smartvillage-platform</archive>
 		</mailingList>
 	</mailingLists>
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/computate-org/smartabyar-smartvillage/issues</url>
+		<url>https://github.com/computate-org/smartvillage-platform/issues</url>
 	</issueManagement>
 
 	<organization>
@@ -46,9 +46,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git://github.com/computate-org/smartabyar-smartvillage.git</connection>
-		<developerConnection>scm:git:ssh://github.com:computate-org/smartabyar-smartvillage.git</developerConnection>
-		<url>http://github.com/computate-org/smartabyar-smartvillage/tree/master</url>
+		<connection>scm:git:git://github.com/computate-org/smartvillage-platform.git</connection>
+		<developerConnection>scm:git:ssh://github.com:computate-org/smartvillage-platform.git</developerConnection>
+		<url>http://github.com/computate-org/smartvillage-platform/tree/master</url>
 	</scm>
 
 	<repositories>
@@ -601,7 +601,7 @@
 					<executable>maven</executable>
 					<includePluginDependencies>false</includePluginDependencies>
 					<includeProjectDependencies>true</includeProjectDependencies>
-					<mainClass>org.computate.smartvillageview.enus.vertx.MainVerticle</mainClass>
+					<mainClass>org.computate.smartvillage.enus.vertx.MainVerticle</mainClass>
 				</configuration>
 			</plugin>
 

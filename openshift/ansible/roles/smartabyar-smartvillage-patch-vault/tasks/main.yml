@@ -1,6 +1,6 @@
 ---
 
-- name: Update smartabyar-smartvillage postgres secret value to vault
+- name: Update smartvillage-platform postgres secret value to vault
   include_role:
     name: vault-patch-secret
   vars:
@@ -15,7 +15,7 @@
       - user
       - jdbc-uri
 
-- name: Update smartabyar-smartvillage sso secret value to vault
+- name: Update smartvillage-platform sso secret value to vault
   include_role:
     name: vault-patch-secret
   vars:
@@ -24,7 +24,7 @@
     SOURCE_SECRET_KEYS: [ 'CLIENT_ID', 'CLIENT_SECRET' ]
     DESTINATION_NAMESPACE: smart-village-view
 
-- name: Update smartabyar-smartvillage email secrets to vault
+- name: Update smartvillage-platform email secrets to vault
   include_role:
     name: vault-patch-secret
   vars:
@@ -39,7 +39,7 @@
       EMAIL_USERNAME: TODO
       EMAIL_PASSWORD: TODO
 
-- name: Update smartabyar-smartvillage Yggio secrets to vault
+- name: Update smartvillage-platform Yggio secrets to vault
   include_role:
     name: vault-patch-secret
   vars:
@@ -54,7 +54,7 @@
       YGGIO_USERNAME: TODO
       YGGIO_PASSWORD: TODO
 
-- name: Update smartabyar-smartvillage Font Awesome secrets to vault
+- name: Update smartvillage-platform Font Awesome secrets to vault
   include_role:
     name: vault-patch-secret
   vars:

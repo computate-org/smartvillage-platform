@@ -44,7 +44,7 @@ SOLR_HOST_NAME: "solr.{{SOLR_NAMESPACE}}.svc"
 # The Kubernetes pod label that identifies a Solr pod to connect to. 
 SOLR_LABEL: statefulset.kubernetes.io/pod-name=default-solrcloud-0
 # The Solr collection to create
-SOLR_COLLECTION: smartabyar-smartvillage
+SOLR_COLLECTION: smartvillage-platform
 # The computate Solr collection to create
 SOLR_COLLECTION_COMPUTATE: computate
 

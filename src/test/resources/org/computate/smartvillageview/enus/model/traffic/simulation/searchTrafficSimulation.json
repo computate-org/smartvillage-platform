@@ -7,7 +7,7 @@
       "q": "*:*",
       "start": "0",
       "fq": [
-        "classCanonicalNames_docvalues_strings:org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation",
+        "classCanonicalNames_docvalues_strings:org.computate.smartvillage.enus.model.traffic.simulation.TrafficSimulation",
         "deleted_docvalues_boolean:false",
         "archived_docvalues_boolean:false"
       ],
@@ -33,11 +33,11 @@
         "modified_docvalues_date": "2022-11-09T18:25:52.237Z",
         "archived_docvalues_boolean": false,
         "deleted_docvalues_boolean": false,
-        "classCanonicalName_docvalues_string": "org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation",
+        "classCanonicalName_docvalues_string": "org.computate.smartvillage.enus.model.traffic.simulation.TrafficSimulation",
         "classSimpleName_docvalues_string": "TrafficSimulation",
         "classCanonicalNames_docvalues_strings": [
-          "org.computate.smartvillageview.enus.model.traffic.simulation.TrafficSimulation",
-          "org.computate.smartvillageview.enus.model.base.BaseModel"
+          "org.computate.smartvillage.enus.model.traffic.simulation.TrafficSimulation",
+          "org.computate.smartvillage.enus.model.base.BaseModel"
         ],
         "userKey_docvalues_long": 1,
         "saves_docvalues_strings": [

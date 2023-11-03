@@ -3,5 +3,5 @@
   hosts: localhost
   connection: local
   roles:
-    - smartabyar-smartvillage-patch-vault
+    - smartvillage-platform-patch-vault
 

@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: smartabyar-smartvillage
+  name: smartvillage-platform
   namespace: openshift-gitops
 spec:
   project: default
   source:
-    repoURL: https://github.com/computate-org/smartabyar-smartvillage.git
+    repoURL: https://github.com/computate-org/smartvillage-platform.git
     targetRevision: HEAD
-    path: openshift/kustomize/bundles/smartabyar-smartvillage/app
+    path: openshift/kustomize/bundles/smartvillage-platform/app
   destination:
     namespace: smart-village-view
     server: 'https://kubernetes.default.svc'

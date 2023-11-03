@@ -77,9 +77,9 @@ GITHUB_ORG_NAME: "computate-org"
 # The Git Repository name. 
 SITE_REPO_NAME: "{{ SITE_NAME }}"
 # The Github Repo. 
-SITE_REPO: "git@github.com:computate-org/smartabyar-smartvillage.git"
+SITE_REPO: "git@github.com:computate-org/smartvillage-platform.git"
 # The Github Repo HTTPS. 
-SITE_REPO_HTTPS: "https://github.com/computate-org/smartabyar-smartvillage.git"
+SITE_REPO_HTTPS: "https://github.com/computate-org/smartvillage-platform.git"
 SITE_POWERED_BY_URL: "https://nerc.mghpcc.org/"
 SITE_POWERED_BY_NAME: "NERC"
 SITE_POWERED_BY_IMAGE_URI: "/png/nerc/nerc-logo.png"
@@ -97,7 +97,7 @@ SITE_TOKEN: "{{ REDHAT_OPENSHIFT_TOKEN }}"
 # The application OpenShift namespace where application be deployed.
 SITE_NAMESPACE: "{{ REDHAT_OPENSHIFT_NAMESPACE }}"
 # The base URL where the static files will point to.
-SITE_STATIC_BASE_URL: "https://computate.neocities.org/smartabyar-smartvillage"
+SITE_STATIC_BASE_URL: "https://computate.neocities.org/smartvillage-platform"
 # Where static files are placed in the pod. 
 SITE_STATIC_PATH: 
 # App memory limit. 
@@ -123,9 +123,9 @@ JAVA_OPTS: "-XX:+ExitOnOutOfMemoryError"
 # The site volume size for files.
 SITE_VOLUME_SIZE: 30Gi
 # The volume name for files in the site.
-SITE_VOLUME_NAME: smartabyar-smartvillage
+SITE_VOLUME_NAME: smartvillage-platform
 # The volume mount path for files in the site.
-SITE_VOLUME_MOUNT_PATH: /var/smartabyar-smartvillage
+SITE_VOLUME_MOUNT_PATH: /var/smartvillage-platform
 
 #########################################
 # application US English defaults #
@@ -154,7 +154,7 @@ SITE_DB_PASSWORD_ENUS: "{{ POSTGRES_DB_PASSWORD }}"
 # The PostgreSQL database name of the site.
 SITE_DB_NAME_ENUS: "{{ SITE_NAME }}"
 # The Java main class of the site.
-SITE_JAVA_MAIN_CLASS_ENUS: "org.computate.smartvillageview.enus.vertx.MainVerticle"
+SITE_JAVA_MAIN_CLASS_ENUS: "org.computate.smartvillage.enus.vertx.MainVerticle"
 
 #################
 # SMTP defaults #

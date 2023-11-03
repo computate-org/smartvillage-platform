@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - smartabyar-smartvillage/
-  - smartabyar-smartvillage-worker/
+  - smartvillage-platform/
+  - smartvillage-platform-worker/
   - smartvillage-traffic-light-controller-sumo/

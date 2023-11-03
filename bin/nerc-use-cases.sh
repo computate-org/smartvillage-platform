@@ -4,7 +4,7 @@ echo ''
 echo '- Smarta Byar'
 echo '- Red Hat'
 echo '- Boston University'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/smartabyar-redhat-bostonuniversity.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/smartabyar-redhat-bostonuniversity.png'
 read -p "" < /dev/tty
 echo ''
 
@@ -14,7 +14,7 @@ echo '- Christos Cassandras - Boston University'
 echo '- Yingqing Chen - Boston University'
 echo '- Jan Malmgren - Smarta Byar'
 echo '- Chris Tate - Red Hat'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/meet-the-team.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/meet-the-team.png'
 read -p "" < /dev/tty
 echo ''
 
@@ -61,7 +61,7 @@ echo ''
 clear; echo -e 'Our Red Hat OpenShift \nCloud Environment' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo 'take a look at our Open IoT Data Science Architecture:'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/design/open-iot-data-science-overview.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/design/open-iot-data-science-overview.png'
 read -p "" < /dev/tty
 echo '  - PostgreSQL relational database'
 echo '  - Apache Zookeeper Cluster Manager'
@@ -87,7 +87,7 @@ clear; echo -e "Our project's \nopen source communities" | toilet -t -f smblock 
 echo ''
 echo 'our communities:'
 echo '  - GitHub'
-xdg-open 'https://github.com/computate-org/smartabyar-smartvillage/'
+xdg-open 'https://github.com/computate-org/smartvillage-platform/'
 read -p "" < /dev/tty
 echo '  - Quay.io'
 xdg-open 'https://quay.io/organization/computateorg'
@@ -110,7 +110,7 @@ echo '- We met with FIWARE CTO about the Smarta Byar Smart Village project'
 echo '- We run social innovation projects in the cloud with FIWARE'
 echo '- We use FIWARE smart data models in the project'
 echo '- We have integrated with the FIWARE context broker on OpenShift'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/fiware-slides/01-meeting-at-bu-with-fiware.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/fiware-slides/01-meeting-at-bu-with-fiware.png'
 read -p "" < /dev/tty
 echo ''
 

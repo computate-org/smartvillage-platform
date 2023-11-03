@@ -23,7 +23,7 @@ IHUB_ORG_PROMOTES: |
   Foster research, development, and collaboration on open source emerging IoT technology powered by FIWARE and Red Hat Cloud and Edge technology for the benefit of all
 IHUB_ORG_CONTACT_NAME: Christopher Tate, Christos Cassandras
 IHUB_ORG_CONTACT_ROLE: Red Hat Principal Software Consultant, Boston University Head, Division of Systems Engineering
-IHUB_ORG_CONTACT_EMAIL: smartabyar-smartvillage@computate.topicbox.com
+IHUB_ORG_CONTACT_EMAIL: smartvillage-platform@computate.topicbox.com
 IHUB_ORG_CONTACT_PHONE: To Be Announced
 
 IHUB_NAME: Smarta Byar Smart Village Community
@@ -58,11 +58,11 @@ IHUB_FIWARE_EXPERIENCE: |
     It currently implements the TrafficFlowObserved smart data model as a Kubernetes custom resource definition with more to come. 
     It's compatible with any Smart Data Model, and easy to extend with new Smart Data Models we have not implemented yet. 
     It registers the smart data model as a service group on the IOT Agent JSON, and individual devices for each instance of the Smart Data Model custom resource definition you define. 
-  - We developed the [GitOps to deploy the FIWARE IoT Agent JSON](https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/iotagent-json) to Red Hat OpenShift and Kubernetes. 
-  - We developed the [GitOps to deploy the FIWARE IoT Agent UL](https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/iotagent-ul) to Red Hat OpenShift and Kubernetes. 
+  - We developed the [GitOps to deploy the FIWARE IoT Agent JSON](https://github.com/computate-org/smartvillage-platform/tree/main/openshift/kustomize/bundles/iotagent-json) to Red Hat OpenShift and Kubernetes. 
+  - We developed the [GitOps to deploy the FIWARE IoT Agent UL](https://github.com/computate-org/smartvillage-platform/tree/main/openshift/kustomize/bundles/iotagent-ul) to Red Hat OpenShift and Kubernetes. 
   - We helped with the development and documentation of the [FIWARE Local Marinera development environment on Red Hat OpenShift Local](https://github.com/FIWARE-Ops/marinera/blob/main/documentation/LOCAL_MARINERA.md). 
   - We developed two reusable [FIWARE Hackathons on GitHub for Smart Cities](https://github.com/orgs/rh-impact/projects/6/views/1) and [Smart Environment](https://github.com/orgs/rh-impact/projects/5/views/1). 
-  - We have open sourced the working architecture for deploying [FIWARE components to the New England Research Cloud OpenShift environment in production](https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/fiware). 
+  - We have open sourced the working architecture for deploying [FIWARE components to the New England Research Cloud OpenShift environment in production](https://github.com/computate-org/smartvillage-platform/tree/main/openshift/kustomize/bundles/fiware). 
   - We have presented several sessions at the FIWARE Summit 2022 in Gran Canaria, Spain. 
   - We will be  presenting several more sessions at the FIWARE Summit 2023 in Vienna, Austria. 
 IHUB_EXPECTED_LEVEL: Advanced Services
@@ -1303,7 +1303,7 @@ htmBody:
                           - e: dd
                             markdown: |-
                               - The platform is currently being migrated from the Operate First environment to the [New England Research Cloud environment](https://nerc.mghpcc.org/). 
-                              - The platform is open source on GitHub: [https://github.com/computate-org/smartabyar-smartvillage](https://github.com/computate-org/smartabyar-smartvillage). 
+                              - The platform is open source on GitHub: [https://github.com/computate-org/smartvillage-platform](https://github.com/computate-org/smartvillage-platform). 
                       - e: li
                         in:
                           - e: dt

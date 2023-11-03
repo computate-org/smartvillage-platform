@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/computate-org/smartabyar-smartvillage.git
+    repoURL: https://github.com/computate-org/smartvillage-platform.git
     targetRevision: HEAD
     path: openshift/kustomize/bundles/custom-metrics-autoscaler/app
   destination:

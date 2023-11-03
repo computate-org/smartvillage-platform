@@ -14,6 +14,6 @@ spec:
   selector:
     postgres-operator.crunchydata.com/cluster: postgres-cluster
     postgres-operator.crunchydata.com/data: postgres
-    postgres-operator.crunchydata.com/instance-set: smartabyar-smartvillage
+    postgres-operator.crunchydata.com/instance-set: smartvillage-platform
     postgres-operator.crunchydata.com/patroni: postgres-cluster-ha
     postgres-operator.crunchydata.com/role: master

@@ -1,7 +1,7 @@
 kind: ImageStream
 apiVersion: image.openshift.io/v1
 metadata:
-  name: smartabyar-smartvillage
+  name: smartvillage-platform
   namespace: smart-village-view
 spec:
   lookupPolicy:
@@ -10,7 +10,7 @@ spec:
     - name: latest
       from:
         kind: DockerImage
-        name: 'quay.io/computateorg/smartabyar-smartvillage:latest'
+        name: 'quay.io/computateorg/smartvillage-platform:latest'
       importPolicy:
         scheduled: true
       referencePolicy:

@@ -4,7 +4,7 @@ echo ''
 echo '- Smarta Byar'
 echo '- Red Hat'
 echo '- Boston University'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/smartabyar-redhat-bostonuniversity.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/smartabyar-redhat-bostonuniversity.png'
 read -p "" < /dev/tty
 echo ''
 
@@ -13,14 +13,14 @@ echo ''
 echo '- Yingqing Chen - Boston University'
 echo '- Jan Malmgren - Smarta Byar'
 echo '- Chris Tate - Red Hat'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/meet-the-team.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/meet-the-team.png'
 read -p "" < /dev/tty
 echo ''
 
 clear; echo -e 'In the beginning (2022)' | toilet -t -f smblock --rainbow -F border 
 echo ''
 echo '- Jan to Jim: "Just wanted to see what is out there for driving open source for digital twins"'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/smartabyar-smartvillage-in-the-beginning.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/smartvillage-platform-in-the-beginning.png'
 read -p "" < /dev/tty
 echo '- Jim reached out to Hugh Brock at Red Hat Research and the Red Hat Collaboratory with Boston University'
 xdg-open 'https://www.bu.edu/rhcollab/about/people/'
@@ -123,7 +123,7 @@ clear; echo -e "Our project's \nopen source communities" | toilet -t -f smblock 
 echo ''
 echo 'our communities:'
 echo '  - GitHub'
-xdg-open 'https://github.com/computate-org/smartabyar-smartvillage/'
+xdg-open 'https://github.com/computate-org/smartvillage-platform/'
 read -p "" < /dev/tty
 echo '  - Quay.io'
 xdg-open 'https://quay.io/organization/computateorg'
@@ -132,7 +132,7 @@ echo '  - Maven Central'
 xdg-open 'https://mvnrepository.com/artifact/org.computate'
 read -p "" < /dev/tty
 echo '  - Mailing List'
-xdg-open 'https://computate.topicbox.com/groups/smartabyar-smartvillage'
+xdg-open 'https://computate.topicbox.com/groups/smartvillage-platform'
 read -p "" < /dev/tty
 echo '  - Youtube'
 xdg-open 'https://www.youtube.com/@computateorg/playlists'
@@ -187,7 +187,7 @@ echo '- More graphs and data in the simulation reports'
 xdg-open 'https://www.smartabyarsmartvillage.org/simulation-report?facet.range={!tag=r1}created&stats.field={!tag=r1}created&facet.pivot={!range=r1}classSimpleName'
 read -p "" < /dev/tty
 echo '- OpenShift Serverless Operator for on demand application scaling of traffic simulations'
-xdg-open 'https://github.com/computate-org/smartabyar-smartvillage/tree/main/openshift/kustomize/bundles/serverless/app'
+xdg-open 'https://github.com/computate-org/smartvillage-platform/tree/main/openshift/kustomize/bundles/serverless/app'
 read -p "" < /dev/tty
 echo '- Testing traffic simulations on Red Hat Device Edge and Microshift'
 read -p "" < /dev/tty
@@ -200,7 +200,7 @@ echo '- We met with FIWARE CTO about the Smarta Byar Smart Village project'
 echo '- We run social innovation projects in the cloud with FIWARE'
 echo '- We use FIWARE smart data models in the project'
 echo '- We have integrated with the FIWARE context broker on OpenShift'
-xdg-open '/home/ctate/.local/src/smartabyar-smartvillage-static/png/fiware-slides/01-meeting-at-bu-with-fiware.png'
+xdg-open '/home/ctate/.local/src/smartvillage-platform-static/png/fiware-slides/01-meeting-at-bu-with-fiware.png'
 read -p "" < /dev/tty
 echo ''
 
