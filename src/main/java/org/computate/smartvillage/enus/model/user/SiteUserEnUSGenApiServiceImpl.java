@@ -14,9 +14,12 @@
  */
 package org.computate.smartvillage.enus.model.user;
 
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.search.list.SearchResult;
 import org.computate.vertx.verticle.EmailVerticle;
+import org.computate.smartvillage.enus.config.ConfigKeys;
 import org.computate.vertx.api.BaseApiServiceImpl;
 import io.vertx.ext.web.client.WebClient;
 import java.util.Objects;
@@ -96,15 +99,12 @@ import java.util.regex.Matcher;
 import java.util.Map.Entry;
 import java.util.Iterator;
 import org.computate.search.tool.SearchTool;
-import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.user.SiteUser;
-import org.computate.smartvillage.enus.model.user.SiteUserPage;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.Base64;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillage.enus.model.user.SiteUserPage;
 
 
 /**
@@ -123,7 +123,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	@Override
 	public void searchSiteUser(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 				{
 					try {
 						searchSiteUserList(siteRequest, false, true, false).onSuccess(listSiteUser -> {
@@ -250,7 +250,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void patchSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("patchSiteUser started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 				{
 					try {
 						searchSiteUserList(siteRequest, false, true, true).onSuccess(listSiteUser -> {
@@ -369,7 +369,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	@Override
 	public void patchSiteUserFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
@@ -668,7 +668,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void postSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("postSiteUser started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 				{
 					try {
 						ApiRequest apiRequest = new ApiRequest();
@@ -696,7 +696,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						params.put("query", query);
 						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 						JsonObject json = new JsonObject().put("context", context);
-						eventBus.request("smartvillage-platform-enUS-SiteUser", json, new DeliveryOptions().addHeader("action", "postSiteUserFuture")).onSuccess(a -> {
+						eventBus.request(SiteUser.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "postSiteUserFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 							apiRequest.setPk(Long.parseLong(responseBody.getString("pk")));
@@ -740,7 +740,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	@Override
 	public void postSiteUserFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			ApiRequest apiRequest = new ApiRequest();
 			apiRequest.setRows(1L);
 			apiRequest.setNumFound(1L);
@@ -1078,7 +1078,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 	@Override
 	public void putimportSiteUser(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportSiteUser started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 				{
 					try {
 						ApiRequest apiRequest = new ApiRequest();
@@ -1163,7 +1163,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartvillage-platform-enUS-SiteUser", json, new DeliveryOptions().addHeader("action", "putimportSiteUserFuture")).onSuccess(a -> {
+					eventBus.request(SiteUser.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "putimportSiteUserFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
 						LOG.error(String.format("listPUTImportSiteUser failed. "), ex);
@@ -1187,7 +1187,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	@Override
 	public void putimportSiteUserFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				ApiRequest apiRequest = new ApiRequest();
 				apiRequest.setRows(1L);
@@ -1332,7 +1332,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 	@Override
 	public void searchpageSiteUser(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 				{
 					try {
 						searchSiteUserList(siteRequest, false, true, false).onSuccess(listSiteUser -> {

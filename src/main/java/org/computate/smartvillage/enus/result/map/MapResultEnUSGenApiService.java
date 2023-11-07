@@ -42,7 +42,7 @@ import io.vertx.ext.auth.authorization.AuthorizationProvider;
 @ProxyGen
 public interface MapResultEnUSGenApiService {
 	static void registerService(EventBus eventBus, JsonObject config, WorkerExecutor workerExecutor, PgPool pgPool, KafkaProducer<String, String> kafkaProducer, WebClient webClient, OAuth2Auth oauth2AuthenticationProvider, AuthorizationProvider authorizationProvider, HandlebarsTemplateEngine templateEngine, Vertx vertx) {
-		new ServiceBinder(vertx).setAddress("smartvillage-platform-enUS-MapResult").register(MapResultEnUSGenApiService.class, new MapResultEnUSApiServiceImpl(eventBus, config, workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine));
+		new ServiceBinder(vertx).setAddress(MapResult.CLASS_API_ADDRESS).register(MapResultEnUSGenApiService.class, new MapResultEnUSApiServiceImpl(eventBus, config, workerExecutor, pgPool, kafkaProducer, webClient, oauth2AuthenticationProvider, authorizationProvider, templateEngine));
 	}
 
 	public void searchMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler);

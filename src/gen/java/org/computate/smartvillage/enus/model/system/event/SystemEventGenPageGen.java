@@ -14,8 +14,10 @@
  */
 package org.computate.smartvillage.enus.model.system.event;
 
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-
+import org.computate.smartvillage.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -44,20 +46,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-
+import org.computate.smartvillage.enus.page.PageLayout;
 import org.computate.vertx.search.list.SearchList;
-
+import org.computate.smartvillage.enus.model.system.event.SystemEvent;
 import io.vertx.core.json.JsonArray;
 import java.lang.Integer;
 import java.lang.String;
 import org.computate.search.wrap.Wrap;
-import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.base.BaseModel;
-import org.computate.smartvillage.enus.model.system.event.SystemEvent;
-import org.computate.smartvillage.enus.model.system.event.SystemEventGenPage;
-import org.computate.smartvillage.enus.page.PageLayout;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
-
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
 
@@ -131,7 +126,7 @@ import io.vertx.core.Future;
  * </p>
  * <p>
  * Delete  the project smartvillage-platform in Solr: 
- * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartvillage\-platform&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * Generated: true
  **/
@@ -667,6 +662,7 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SystemEventGenPage";
+	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-SystemEventGenPage";
 	public static final String VAR_searchListSystemEvent_ = "searchListSystemEvent_";
 	public static final String VAR_listSystemEvent = "listSystemEvent";
 	public static final String VAR_systemEventCount = "systemEventCount";

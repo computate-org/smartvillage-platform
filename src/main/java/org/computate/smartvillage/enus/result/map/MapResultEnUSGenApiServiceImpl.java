@@ -14,9 +14,12 @@
  */
 package org.computate.smartvillage.enus.result.map;
 
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.search.list.SearchResult;
 import org.computate.vertx.verticle.EmailVerticle;
+import org.computate.smartvillage.enus.config.ConfigKeys;
 import org.computate.vertx.api.BaseApiServiceImpl;
 import io.vertx.ext.web.client.WebClient;
 import java.util.Objects;
@@ -96,15 +99,12 @@ import java.util.regex.Matcher;
 import java.util.Map.Entry;
 import java.util.Iterator;
 import org.computate.search.tool.SearchTool;
-import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.user.SiteUser;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
-import org.computate.smartvillage.enus.result.map.MapResultPage;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.Base64;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillage.enus.result.map.MapResultPage;
 
 
 /**
@@ -123,7 +123,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	@Override
 	public void searchMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -279,7 +279,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	@Override
 	public void getMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -378,7 +378,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	@Override
 	public void searchpageMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));

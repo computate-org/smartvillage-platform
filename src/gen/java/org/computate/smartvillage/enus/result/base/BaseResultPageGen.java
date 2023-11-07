@@ -14,8 +14,10 @@
  */
 package org.computate.smartvillage.enus.result.base;
 
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
-
+import org.computate.smartvillage.enus.config.ConfigKeys;
 import java.util.Optional;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -44,14 +46,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-
-import org.computate.search.wrap.Wrap;
-import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.base.BaseModel;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.smartvillage.enus.result.base.BaseResultGenPage;
-import org.computate.smartvillage.enus.result.base.BaseResultPage;
-
+import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -126,7 +122,7 @@ import io.vertx.core.json.JsonArray;
  * </p>
  * <p>
  * Delete  the project smartvillage-platform in Solr: 
- * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartabyar\-smartvillage&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
+ * curl -k 'https://solr-solr.apps-crc.testing/solr/computate/update?commitWithin=1000&overwrite=true&wt=json' -X POST -H 'Content-type: text/xml' --data-raw '&lt;add&gt;&lt;delete&gt;&lt;query&gt;siteNom_indexed_string:smartvillage\-platform&lt;/query&gt;&lt;/delete&gt;&lt;/add&gt;'
  * </p>
  * Generated: true
  **/
@@ -147,11 +143,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseBaseResultPage(promise2);
 		promise2.future().onSuccess(a -> {
-			super.promiseDeepBaseResultGenPage(siteRequest_).onSuccess(b -> {
-				promise.complete();
-			}).onFailure(ex -> {
-				promise.fail(ex);
-			});
+			promise.complete();
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -175,7 +167,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		return promise.future();
 	}
 
-	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+	public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
 		return promiseDeepBaseResultPage(siteRequest_);
 	}
 
@@ -184,7 +176,6 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	/////////////////
 
 	public void siteRequestBaseResultPage(SiteRequestEnUS siteRequest_) {
-			super.siteRequestBaseResultGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -195,7 +186,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	// obtain //
 	/////////////
 
-	@Override public Object obtainForClass(String var) {
+	public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -216,7 +207,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		BaseResultPage oBaseResultPage = (BaseResultPage)this;
 		switch(var) {
 			default:
-				return super.obtainBaseResultGenPage(var);
+				return null;
 		}
 	}
 
@@ -224,7 +215,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	// relate //
 	///////////////
 
-	@Override public boolean relateForClass(String var, Object val) {
+	public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -241,7 +232,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		BaseResultPage oBaseResultPage = (BaseResultPage)this;
 		switch(var) {
 			default:
-				return super.relateBaseResultGenPage(var, val);
+				return null;
 		}
 	}
 
@@ -255,7 +246,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static Object staticSetBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return BaseResultGenPage.staticSetBaseResultGenPage(entityVar,  siteRequest_, o);
+				return null;
 		}
 	}
 
@@ -269,7 +260,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static Object staticSearchBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return BaseResultGenPage.staticSearchBaseResultGenPage(entityVar,  siteRequest_, o);
+				return null;
 		}
 	}
 
@@ -283,7 +274,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static String staticSearchStrBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return BaseResultGenPage.staticSearchStrBaseResultGenPage(entityVar,  siteRequest_, o);
+				return null;
 		}
 	}
 
@@ -297,7 +288,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static String staticSearchFqBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return BaseResultGenPage.staticSearchFqBaseResultGenPage(entityVar,  siteRequest_, o);
+				return null;
 		}
 	}
 
@@ -307,11 +298,11 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
 		return sb.toString();
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "BaseResultPage";
+	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-BaseResultPage";
 
 
 	public static String displayNameForClass(String var) {
@@ -320,7 +311,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static String displayNameBaseResultPage(String var) {
 		switch(var) {
 		default:
-			return BaseResultGenPage.displayNameBaseResultGenPage(var);
+			return null;
 		}
 	}
 }

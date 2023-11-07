@@ -14,9 +14,12 @@
  */
 package org.computate.smartvillage.enus.model.system.event;
 
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.model.user.SiteUser;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.search.list.SearchResult;
 import org.computate.vertx.verticle.EmailVerticle;
+import org.computate.smartvillage.enus.config.ConfigKeys;
 import org.computate.vertx.api.BaseApiServiceImpl;
 import io.vertx.ext.web.client.WebClient;
 import java.util.Objects;
@@ -96,15 +99,12 @@ import java.util.regex.Matcher;
 import java.util.Map.Entry;
 import java.util.Iterator;
 import org.computate.search.tool.SearchTool;
-import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.system.event.SystemEventPage;
-import org.computate.smartvillage.enus.model.user.SiteUser;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.search.response.solr.SolrResponse;
 import java.util.Base64;
 import java.time.ZonedDateTime;
 import org.apache.commons.lang3.BooleanUtils;
 import org.computate.vertx.search.list.SearchList;
+import org.computate.smartvillage.enus.model.system.event.SystemEventPage;
 
 
 /**
@@ -123,7 +123,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void searchSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -279,7 +279,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void getSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -374,7 +374,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void postSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("postSystemEvent started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -431,7 +431,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						params.put("query", query);
 						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 						JsonObject json = new JsonObject().put("context", context);
-						eventBus.request("smartvillage-platform-enUS-SystemEvent", json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
+						eventBus.request(SystemEvent.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
@@ -475,7 +475,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void postSystemEventFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			ApiRequest apiRequest = new ApiRequest();
 			apiRequest.setRows(1L);
 			apiRequest.setNumFound(1L);
@@ -558,7 +558,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void patchSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("patchSystemEvent started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -706,7 +706,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void patchSystemEventFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				siteRequest.setJsonObject(body);
 				serviceRequest.getParams().getJsonObject("query").put("rows", 1);
@@ -790,7 +790,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 	@Override
 	public void putimportSystemEvent(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
 		LOG.debug(String.format("putimportSystemEvent started. "));
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -905,7 +905,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request("smartvillage-platform-enUS-SystemEvent", json, new DeliveryOptions().addHeader("action", "putimportSystemEventFuture")).onSuccess(a -> {
+					eventBus.request(SystemEvent.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "putimportSystemEventFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
 						LOG.error(String.format("listPUTImportSystemEvent failed. "), ex);
@@ -929,7 +929,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void putimportSystemEventFuture(JsonObject body, ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 			try {
 				ApiRequest apiRequest = new ApiRequest();
 				apiRequest.setRows(1L);
@@ -1075,7 +1075,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 
 	@Override
 	public void searchpageSystemEvent(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, "smartvillage-platform-enUS-SiteUser", "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
