@@ -85,15 +85,15 @@
 		<mockito.version>4.10.0</mockito.version>
 		<commonmark.version>0.21.0</commonmark.version>
 
-		<quarkus-base.version>2.7.6</quarkus-base.version>
-		<quarkus.version>${quarkus-base.version}.Final-redhat-00006</quarkus.version>
+		<quarkus-base.version>3.2.6</quarkus-base.version>
+		<quarkus.version>${quarkus-base.version}.Final-redhat-00002</quarkus.version>
 		<quarkus-plugin.version>${quarkus.version}</quarkus-plugin.version>
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
 		<quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
 
-		<vertx-base.version>4.2.7</vertx-base.version>
-		<vertx.version>${vertx-base.version}.redhat-00003</vertx.version>
+		<vertx-base.version>4.4.4</vertx-base.version>
+		<vertx.version>${vertx-base.version}.redhat-00001</vertx.version>
 
 		<jfreechart.version>1.5.3</jfreechart.version>
 		<handlebars.version>4.3.1</handlebars.version>
@@ -104,7 +104,7 @@
 		<log4j.version>2.19.0</log4j.version>
 		<log4j-slf4j-impl.version>2.19.0</log4j-slf4j-impl.version>
 		<slf4j.version>2.0.6</slf4j.version>
-		<jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
 		<solr.version>8.11.1</solr.version>
 		<jackson.version>2.14.1</jackson.version>
 		<jackson-databind.version>2.14.1</jackson-databind.version>
@@ -116,7 +116,7 @@
 		<drools.version>8.32.0.Final</drools.version>
 		<cloudevents.version>2.4.0</cloudevents.version>
 
-		<computate.version>4.2.7.29</computate.version>
+		<computate.version>4.4.4.0</computate.version>
 	</properties>
 
 	<dependencyManagement>
@@ -646,8 +646,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
+					<source>17</source>
+					<target>17</target>
 					<encoding>UTF-8</encoding>
 					<annotationProcessors>
 						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
@@ -708,7 +708,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.6</version>
+				<version>0.8.11</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
