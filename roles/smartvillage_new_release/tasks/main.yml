@@ -1,0 +1,158 @@
+---
+
+- name: |
+    Ensure {{ SMARTVILLAGE_PLATFORM_NAME }} project has no uncommitted changes
+  shell:
+    cmd: git status -s -uall
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  register: GIT_STATUS_SMARTVILLAGE_PLATFORM
+- fail:
+    msg: |
+      The {{ SMARTVILLAGE_PLATFORM_NAME }} project has uncommitted changes
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM.stdout_lines | length > 0
+
+- name: |
+    Ensure {{ SMARTABYAR_SMARTVILLAGE_NAME }} project has no uncommitted changes
+  shell:
+    cmd: git status -s -uall
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  register: GIT_STATUS_SMARTABYAR_SMARTVILLAGE
+- fail:
+    msg: |
+      The {{ SMARTABYAR_SMARTVILLAGE_NAME }} project has uncommitted changes
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE.stdout_lines | length > 0
+
+- name: |
+    Find the current smartvillage version
+  set_fact:
+    PREV_VERSION: "{{ lookup('file', SMARTVILLAGE_PLATFORM_SRC + '/pom.xml') | regex_search('<version>([^<]+)</version>', '\\1', multiline=True) | first }}"
+- name: |
+    Find the current smartvillage version prefix and suffix
+  set_fact:
+    PREV_VERSION_PREFIX: "{{ PREV_VERSION | regex_search('^([\\d\\.]+?\\.)(\\d+)$', '\\1', multiline=True) | first }}"
+    PREV_VERSION_SUFFIX: "{{ PREV_VERSION | regex_search('^([\\d\\.]+?\\.)(\\d+)$', '\\2', multiline=True) | first }}"
+- debug:
+    var: PREV_VERSION_PREFIX
+- debug:
+    var: PREV_VERSION_SUFFIX
+
+- name: |
+    Validate NEXT_VERSION specified
+  fail:
+    msg: >-
+      NEXT_VERSION not specified.
+      Current smartvillage version is {{ PREV_VERSION }}.
+      Run the playbook again with the NEXT VERSION set:
+      ansible-playbook smartvillage_new_release.yml -e NEXT_VERSION={{ PREV_VERSION_PREFIX }}{{ (PREV_VERSION_SUFFIX | int) + 1 }}
+  when: NEXT_VERSION is not defined
+
+- name: |
+    Update the version in {{ SMARTVILLAGE_PLATFORM_NAME }}/pom.xml from {{ PREV_VERSION }} to {{ NEXT_VERSION }}
+  ansible.builtin.replace:
+    path: "{{ SMARTVILLAGE_PLATFORM_SRC }}/pom.xml"
+    regexp: '>{{ PREV_VERSION }}<'
+    replace: '>{{ NEXT_VERSION }}<'
+- name: |
+    Ensure {{ SMARTVILLAGE_PLATFORM_NAME }} project has no uncommitted changes
+  shell:
+    cmd: git status -s -uall
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  register: GIT_STATUS_SMARTVILLAGE_PLATFORM_2
+- name: |
+    Run mvn clean install deploy -Pdeploy in {{ SMARTVILLAGE_PLATFORM_NAME }}
+  shell:
+    cmd: mvn clean install deploy -Pdeploy
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM_2.stdout_lines | length > 0
+- name: |
+    git add {{ SMARTVILLAGE_PLATFORM_NAME }}/pom.xml
+  shell:
+    cmd: git add {{ SMARTVILLAGE_PLATFORM_SRC }}/pom.xml
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM_2.stdout_lines | length > 0
+- name: |
+    git commit {{ SMARTVILLAGE_PLATFORM_NAME }}/pom.xml
+  shell:
+    cmd: git commit -m "Releasing version {{ NEXT_VERSION }}"
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM_2.stdout_lines | length > 0
+- name: |
+    git push {{ SMARTVILLAGE_PLATFORM_NAME }}/pom.xml
+  shell:
+    cmd: git push
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM_2.stdout_lines | length > 0
+- name: |
+    {{ SMARTVILLAGE_PLATFORM_NAME }} git tag {{ NEXT_VERSION }}
+  shell:
+    cmd: git tag {{ NEXT_VERSION }}
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM_2.stdout_lines | length > 0
+- name: |
+    git push --tags
+  shell:
+    cmd: git push --tags
+    chdir: "{{ SMARTVILLAGE_PLATFORM_SRC }}"
+  when: GIT_STATUS_SMARTVILLAGE_PLATFORM_2.stdout_lines | length > 0
+
+- name: |
+    Update the version in {{ SMARTABYAR_SMARTVILLAGE_NAME }}/pom.xml from {{ PREV_VERSION }} to {{ NEXT_VERSION }}
+  ansible.builtin.replace:
+    path: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}/pom.xml"
+    regexp: '>{{ PREV_VERSION }}<'
+    replace: '>{{ NEXT_VERSION }}<'
+- name: |
+    Ensure {{ SMARTABYAR_SMARTVILLAGE_NAME }} project has no uncommitted changes
+  shell:
+    cmd: git status -s -uall
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  register: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2
+- name: |
+    Run mvn clean install deploy -Pdeploy in {{ SMARTABYAR_SMARTVILLAGE_NAME }}
+  shell:
+    cmd: mvn clean install deploy -Pdeploy
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2.stdout_lines | length > 0
+- name: |
+    git add {{ SMARTABYAR_SMARTVILLAGE_NAME }}/pom.xml
+  shell:
+    cmd: git add {{ SMARTABYAR_SMARTVILLAGE_SRC }}/pom.xml
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2.stdout_lines | length > 0
+- name: |
+    git commit {{ SMARTABYAR_SMARTVILLAGE_NAME }}/pom.xml
+  shell:
+    cmd: git commit -m "Releasing version {{ NEXT_VERSION }}"
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2.stdout_lines | length > 0
+- name: |
+    git push {{ SMARTABYAR_SMARTVILLAGE_NAME }}/pom.xml
+  shell:
+    cmd: git push
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2.stdout_lines | length > 0
+- name: |
+    {{ SMARTABYAR_SMARTVILLAGE_NAME }} git tag {{ NEXT_VERSION }}
+  shell:
+    cmd: git tag {{ NEXT_VERSION }}
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2.stdout_lines | length > 0
+- name: |
+    git push --tags
+  shell:
+    cmd: git push --tags
+    chdir: "{{ SMARTABYAR_SMARTVILLAGE_SRC }}"
+  when: GIT_STATUS_SMARTABYAR_SMARTVILLAGE_2.stdout_lines | length > 0
+
+- name: |
+    Create a {{ SMARTVILLAGE_PLATFORM_NAME }} {{ NEXT_VERSION }} tag in GitHub
+  shell:
+    cmd: xdg-open https://github.com/smartvillage-org/{{ SMARTVILLAGE_PLATFORM_NAME }}/releases/tag/{{ NEXT_VERSION }}
+- name: |
+    Create a {{ SMARTABYAR_SMARTVILLAGE_NAME }} {{ NEXT_VERSION }} tag in GitHub
+  shell:
+    cmd: xdg-open https://github.com/smartvillage-org/{{ SMARTABYAR_SMARTVILLAGE_NAME }}/releases/tag/{{ NEXT_VERSION }}
+- name: |
+    Send an update on the smartvillage mailing list
+  shell:
+    cmd: xdg-open https://computate.topicbox.com/groups/smartvillage

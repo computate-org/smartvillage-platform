@@ -1,0 +1,7 @@
+---
+- name: Create a new release of the smartvillage software
+  connection: local
+  hosts: localhost
+  roles:
+    - smartvillage_new_release
+
