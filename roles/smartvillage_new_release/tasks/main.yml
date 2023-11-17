@@ -147,11 +147,11 @@
 - name: |
     Create a {{ SMARTVILLAGE_PLATFORM_NAME }} {{ NEXT_VERSION }} tag in GitHub
   shell:
-    cmd: xdg-open https://github.com/smartvillage-org/{{ SMARTVILLAGE_PLATFORM_NAME }}/releases/tag/{{ NEXT_VERSION }}
+    cmd: xdg-open https://github.com/computate-org/{{ SMARTVILLAGE_PLATFORM_NAME }}/releases/tag/{{ NEXT_VERSION }}
 - name: |
     Create a {{ SMARTABYAR_SMARTVILLAGE_NAME }} {{ NEXT_VERSION }} tag in GitHub
   shell:
-    cmd: xdg-open https://github.com/smartvillage-org/{{ SMARTABYAR_SMARTVILLAGE_NAME }}/releases/tag/{{ NEXT_VERSION }}
+    cmd: xdg-open https://github.com/computate-org/{{ SMARTABYAR_SMARTVILLAGE_NAME }}/releases/tag/{{ NEXT_VERSION }}
 - name: |
     Send an update on the smartvillage mailing list
   shell:
