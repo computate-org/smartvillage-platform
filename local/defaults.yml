@@ -6,6 +6,7 @@ SITE_POWERED_BY_NAME: "NERC"
 SITE_POWERED_BY_IMAGE_URI: "/png/nerc/nerc-logo.png"
 SITE_NAME: "smartvillage-platform"
 SITE_POM_GROUP_ID: "org.computate"
+SITE_POM_ARTIFACT_ID: "smartvillage-platform"
 SITE_PUBLIC_URL: "https://smartabyarsmartvillage.org"
 SITE_DISPLAY_NAME: "Smart Village Project"
 SITE_SERVICES:
