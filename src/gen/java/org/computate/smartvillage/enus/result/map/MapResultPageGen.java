@@ -143,7 +143,11 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseMapResultPage(promise2);
 		promise2.future().onSuccess(a -> {
-			promise.complete();
+			super.promiseDeepMapResultGenPage(siteRequest_).onSuccess(b -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -167,7 +171,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
 		return promiseDeepMapResultPage(siteRequest_);
 	}
 
@@ -176,6 +180,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	/////////////////
 
 	public void siteRequestMapResultPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestMapResultGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -186,7 +191,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	// obtain //
 	/////////////
 
-	public Object obtainForClass(String var) {
+	@Override public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -207,7 +212,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 		MapResultPage oMapResultPage = (MapResultPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.obtainMapResultGenPage(var);
 		}
 	}
 
@@ -215,7 +220,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	// relate //
 	///////////////
 
-	public boolean relateForClass(String var, Object val) {
+	@Override public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -232,7 +237,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 		MapResultPage oMapResultPage = (MapResultPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.relateMapResultGenPage(var, val);
 		}
 	}
 
@@ -246,7 +251,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	public static Object staticSetMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return MapResultGenPage.staticSetMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -260,7 +265,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	public static Object staticSearchMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return MapResultGenPage.staticSearchMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -274,7 +279,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	public static String staticSearchStrMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return MapResultGenPage.staticSearchStrMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -288,7 +293,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	public static String staticSearchFqMapResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return MapResultGenPage.staticSearchFqMapResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -298,6 +303,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		return sb.toString();
 	}
 
@@ -311,7 +317,7 @@ public abstract class MapResultPageGen<DEV> extends MapResultGenPage {
 	public static String displayNameMapResultPage(String var) {
 		switch(var) {
 		default:
-			return null;
+			return MapResultGenPage.displayNameMapResultGenPage(var);
 		}
 	}
 }

@@ -143,7 +143,11 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseBaseResultPage(promise2);
 		promise2.future().onSuccess(a -> {
-			promise.complete();
+			super.promiseDeepBaseResultGenPage(siteRequest_).onSuccess(b -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -167,7 +171,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
 		return promiseDeepBaseResultPage(siteRequest_);
 	}
 
@@ -176,6 +180,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	/////////////////
 
 	public void siteRequestBaseResultPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestBaseResultGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -186,7 +191,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	// obtain //
 	/////////////
 
-	public Object obtainForClass(String var) {
+	@Override public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -207,7 +212,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		BaseResultPage oBaseResultPage = (BaseResultPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.obtainBaseResultGenPage(var);
 		}
 	}
 
@@ -215,7 +220,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	// relate //
 	///////////////
 
-	public boolean relateForClass(String var, Object val) {
+	@Override public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -232,7 +237,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 		BaseResultPage oBaseResultPage = (BaseResultPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.relateBaseResultGenPage(var, val);
 		}
 	}
 
@@ -246,7 +251,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static Object staticSetBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return BaseResultGenPage.staticSetBaseResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -260,7 +265,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static Object staticSearchBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return BaseResultGenPage.staticSearchBaseResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -274,7 +279,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static String staticSearchStrBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return BaseResultGenPage.staticSearchStrBaseResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -288,7 +293,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static String staticSearchFqBaseResultPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return BaseResultGenPage.staticSearchFqBaseResultGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -298,6 +303,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		return sb.toString();
 	}
 
@@ -311,7 +317,7 @@ public abstract class BaseResultPageGen<DEV> extends BaseResultGenPage {
 	public static String displayNameBaseResultPage(String var) {
 		switch(var) {
 		default:
-			return null;
+			return BaseResultGenPage.displayNameBaseResultGenPage(var);
 		}
 	}
 }

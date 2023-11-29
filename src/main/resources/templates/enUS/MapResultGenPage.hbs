@@ -47,12 +47,30 @@
 				//calendar.render();
 {{#block "websocket"}}{{/block}}
 			});
+
+			function jsWebsocketMapResult(vars, $response) {
+{{#block "jsWebsocket"}}{{/block}}
+			}
+
+			function jsTooltipMapResult(e, feature) {
+{{#block "jsTooltip"}}{{/block}}
+			}
+
+			function htmTooltipMapResult(feature, layer) {
+				return `{{#block "htmTooltip"}}{{/block}}`;
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketMapResultPage"}}
 				<!-- inline "websocketMapResultPage" -->
 				websocketMapResult(websocketMapResultInner);
 {{/inline}}
+{{#*inline "jsWebsocketMapResultPage"}}{{/inline}}
+{{#*inline "jsTooltipMapResultPage"}}{{/inline}}
+{{#*inline "htmTooltipMapResultPage"}}{{/inline}}
+{{#partial "jsWebsocket"}}{{> jsWebsocketMapResultPage}}{{/partial}}
+{{#partial "jsTooltip"}}{{> jsTooltipMapResultPage}}{{/partial}}
+{{#partial "htmTooltip"}}{{> htmTooltipMapResultPage}}{{/partial}}
 {{#*inline "htmUrlMapResult"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadMapResultPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchMapResultPage"}}								<!-- #*inline "htmBodySearchMapResultPage" -->
@@ -836,14 +854,14 @@
 															placeholder="ID"
 															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setObjectId classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setObjectId classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 		{{else}}
-																class="valueObjectId w3-input w3-border classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
+																{{classApiMethodMethod}}_objectId" class="valueObjectId w3-input w3-border classMapResult inputMapResult{{id}}ObjectId w3-input w3-border "
 																name="objectId"
 		{{/eq}}
 	{{/eq}}
@@ -897,19 +915,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classMapResult inputMapResult{{id}}Archived w3-input w3-border "
+															class="{{classApiMethodMethod}}_archived classMapResult inputMapResult{{id}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classMapResult inputMapResult{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived classMapResult inputMapResult{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classMapResult inputMapResult{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived setArchived valueArchived classMapResult inputMapResult{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_archived')); }, function() { addError($('.{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if mapResult_.archived}}
@@ -965,19 +983,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
+															class="{{classApiMethodMethod}}_deleted classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted setDeleted valueDeleted classMapResult inputMapResult{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_deleted')); }, function() { addError($('.{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if mapResult_.deleted}}
@@ -1028,14 +1046,14 @@
 															placeholder="Time in seconds"
 															title="The time in seconds. "															id="{{classApiMethodMethod}}_time"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setTime classMapResult inputMapResult{{id}}Time w3-input w3-border "
+																class="{{classApiMethodMethod}}_time setTime classMapResult inputMapResult{{id}}Time w3-input w3-border "
 																name="setTime"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setTime classMapResult inputMapResult{{id}}Time w3-input w3-border "
+																class="{{classApiMethodMethod}}_time setTime classMapResult inputMapResult{{id}}Time w3-input w3-border "
 																name="setTime"
 		{{else}}
-																class="valueTime w3-input w3-border classMapResult inputMapResult{{id}}Time w3-input w3-border "
+																{{classApiMethodMethod}}_time" class="valueTime w3-input w3-border classMapResult inputMapResult{{id}}Time w3-input w3-border "
 																name="time"
 		{{/eq}}
 	{{/eq}}
@@ -1081,7 +1099,7 @@
 		{{#eq roleForWriteBool "true"}}
 														<input
 																type="text"
-																class="w3-input w3-border datetimepicker setDateTime classMapResult inputMapResult{{id}}DateTime w3-input w3-border "
+																class="{{classApiMethodMethod}}_dateTime w3-input w3-border datetimepicker setDateTime classMapResult inputMapResult{{id}}DateTime w3-input w3-border "
 																placeholder="MM/dd/yyyy h:mm a '['VV']'"
 																data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
 																id="{{classApiMethodMethod}}_dateTime"
@@ -1089,7 +1107,7 @@
 																value="{{#if mapResult_.dateTime}}{{formatZonedDateTime mapResult_.dateTime "MM/dd/yyyy h:mm a '['VV']'" defaultLocaleId defaultZoneId}}{{/if}}"
 														{{#eq 'Page' classApiMethodMethod}}
 															onclick="removeGlow($(this)); ";
-															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateTime', s, function() { addGlow($('#{{classApiMethodMethod}}_dateTime')); }, function() { addError($('#{{classApiMethodMethod}}_dateTime')); }); } "
+															onchange="var timeZone = this.value.split('[').pop().split(']')[0]; var t1 = moment(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a'); var t2 = moment.tz(this.value.split('[')[0].trim(), 'MM/DD/YYYY h:mm a', timeZone); var t3 = new Date(t1._d); t3.setTime(t1.toDate().getTime() + t2.toDate().getTime() - t1.toDate().getTime()); var t = moment(t3); if(t) { var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']'; patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDateTime', s, function() { addGlow($('.{{classApiMethodMethod}}_dateTime')); }, function() { addError($('.{{classApiMethodMethod}}_dateTime')); }); } "
 														{{/eq}}
 														/>
 													{{else}}
@@ -1133,19 +1151,19 @@
 															id="{{classApiMethodMethod}}_step"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classMapResult inputMapResult{{id}}Step w3-input w3-border "
+															class="{{classApiMethodMethod}}_step classMapResult inputMapResult{{id}}Step w3-input w3-border "
 															name="setStep"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classMapResult inputMapResult{{id}}Step w3-input w3-border "
+																class="{{classApiMethodMethod}}_step classMapResult inputMapResult{{id}}Step w3-input w3-border "
 																name="setStep"
 		{{else}}
-																class="setStep valueStep classMapResult inputMapResult{{id}}Step w3-input w3-border "
+																class="{{classApiMethodMethod}}_step setStep valueStep classMapResult inputMapResult{{id}}Step w3-input w3-border "
 																name="setStep"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setStep', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_step')); }, function() { addError($('#{{classApiMethodMethod}}_step')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setStep', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_step')); }, function() { addError($('.{{classApiMethodMethod}}_step')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if mapResult_.step}}
@@ -1196,14 +1214,14 @@
 															placeholder="map location"
 															id="{{classApiMethodMethod}}_location"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
+																class="{{classApiMethodMethod}}_location setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
 																name="setLocation"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
+																class="{{classApiMethodMethod}}_location setLocation classMapResult inputMapResult{{id}}Location w3-input w3-border "
 																name="setLocation"
 		{{else}}
-																class="valueLocation w3-input w3-border classMapResult inputMapResult{{id}}Location w3-input w3-border "
+																{{classApiMethodMethod}}_location" class="valueLocation w3-input w3-border classMapResult inputMapResult{{id}}Location w3-input w3-border "
 																name="location"
 		{{/eq}}
 	{{/eq}}
@@ -1252,14 +1270,14 @@
 															placeholder="color"
 															id="{{classApiMethodMethod}}_color"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
+																class="{{classApiMethodMethod}}_color setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
 																name="setColor"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
+																class="{{classApiMethodMethod}}_color setColor classMapResult inputMapResult{{id}}Color w3-input w3-border "
 																name="setColor"
 		{{else}}
-																class="valueColor w3-input w3-border classMapResult inputMapResult{{id}}Color w3-input w3-border "
+																{{classApiMethodMethod}}_color" class="valueColor w3-input w3-border classMapResult inputMapResult{{id}}Color w3-input w3-border "
 																name="color"
 		{{/eq}}
 	{{/eq}}

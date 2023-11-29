@@ -47,12 +47,30 @@
 				//calendar.render();
 {{#block "websocket"}}{{/block}}
 			});
+
+			function jsWebsocketBaseResult(vars, $response) {
+{{#block "jsWebsocket"}}{{/block}}
+			}
+
+			function jsTooltipBaseResult(e, feature) {
+{{#block "jsTooltip"}}{{/block}}
+			}
+
+			function htmTooltipBaseResult(feature, layer) {
+				return `{{#block "htmTooltip"}}{{/block}}`;
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketBaseResultPage"}}
 				<!-- inline "websocketBaseResultPage" -->
 				websocketBaseResult(websocketBaseResultInner);
 {{/inline}}
+{{#*inline "jsWebsocketBaseResultPage"}}{{/inline}}
+{{#*inline "jsTooltipBaseResultPage"}}{{/inline}}
+{{#*inline "htmTooltipBaseResultPage"}}{{/inline}}
+{{#partial "jsWebsocket"}}{{> jsWebsocketBaseResultPage}}{{/partial}}
+{{#partial "jsTooltip"}}{{> jsTooltipBaseResultPage}}{{/partial}}
+{{#partial "htmTooltip"}}{{> htmTooltipBaseResultPage}}{{/partial}}
 {{#*inline "htmUrlBaseResult"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseResultPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchBaseResultPage"}}								<!-- #*inline "htmBodySearchBaseResultPage" -->
@@ -713,14 +731,14 @@
 															placeholder="ID"
 															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setObjectId classBaseResult inputBaseResult{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classBaseResult inputBaseResult{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setObjectId classBaseResult inputBaseResult{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classBaseResult inputBaseResult{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 		{{else}}
-																class="valueObjectId w3-input w3-border classBaseResult inputBaseResult{{id}}ObjectId w3-input w3-border "
+																{{classApiMethodMethod}}_objectId" class="valueObjectId w3-input w3-border classBaseResult inputBaseResult{{id}}ObjectId w3-input w3-border "
 																name="objectId"
 		{{/eq}}
 	{{/eq}}
@@ -770,19 +788,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classBaseResult inputBaseResult{{id}}Archived w3-input w3-border "
+															class="{{classApiMethodMethod}}_archived classBaseResult inputBaseResult{{id}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classBaseResult inputBaseResult{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived classBaseResult inputBaseResult{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classBaseResult inputBaseResult{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived setArchived valueArchived classBaseResult inputBaseResult{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_archived')); }, function() { addError($('.{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if baseResult_.archived}}
@@ -834,19 +852,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classBaseResult inputBaseResult{{id}}Deleted w3-input w3-border "
+															class="{{classApiMethodMethod}}_deleted classBaseResult inputBaseResult{{id}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classBaseResult inputBaseResult{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted classBaseResult inputBaseResult{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classBaseResult inputBaseResult{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted setDeleted valueDeleted classBaseResult inputBaseResult{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_deleted')); }, function() { addError($('.{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if baseResult_.deleted}}
