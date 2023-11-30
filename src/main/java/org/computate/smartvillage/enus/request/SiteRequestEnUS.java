@@ -270,6 +270,7 @@ public class SiteRequestEnUS extends SiteRequestEnUSGen<Object> implements Compu
 	 * Description: The request headers
 	 */
 	protected void _requestHeaders(Wrap<MultiMap> c) {
+		c.o(Optional.ofNullable(serviceRequest).map(r -> r.getHeaders()).orElse(null));
 	}
 
 	/**
