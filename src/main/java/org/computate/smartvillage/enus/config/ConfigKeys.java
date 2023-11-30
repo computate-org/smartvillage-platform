@@ -22,6 +22,26 @@ import org.computate.vertx.config.ComputateConfigKeys;
 public class ConfigKeys extends ComputateConfigKeys {
 
 	/**
+	 * The Auth clients of the site. 
+	 **/
+	public static final String AUTH_CLIENTS = "AUTH_CLIENTS";
+
+	/**
+	 * The Auth Client callback URI
+	 **/
+	public static final String AUTH_CALLBACK_URI = "AUTH_CALLBACK_URI";
+
+	/**
+	 * The Auth Client logout URI
+	 **/
+	public static final String AUTH_LOGOUT_URI = "AUTH_LOGOUT_URI";
+
+	/**
+	 * The Auth Client OpenAPI ID
+	 **/
+	public static final String AUTH_OPEN_API_ID = "AUTH_OPEN_API_ID";
+
+	/**
 	 * 
 	 **/
 	public static final String SUMO_EXECUTABLE_PATH = "SUMO_EXECUTABLE_PATH";
