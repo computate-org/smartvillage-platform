@@ -47,12 +47,30 @@
 				//calendar.render();
 {{#block "websocket"}}{{/block}}
 			});
+
+			function jsWebsocketSitePage(vars, $response) {
+{{#block "jsWebsocket"}}{{/block}}
+			}
+
+			function jsTooltipSitePage(e, feature) {
+{{#block "jsTooltip"}}{{/block}}
+			}
+
+			function htmTooltipSitePage(feature, layer) {
+				return `{{#block "htmTooltip"}}{{/block}}`;
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketSitePagePage"}}
 				<!-- inline "websocketSitePagePage" -->
 				websocketSitePage(websocketSitePageInner);
 {{/inline}}
+{{#*inline "jsWebsocketSitePagePage"}}{{/inline}}
+{{#*inline "jsTooltipSitePagePage"}}{{/inline}}
+{{#*inline "htmTooltipSitePagePage"}}{{/inline}}
+{{#partial "jsWebsocket"}}{{> jsWebsocketSitePagePage}}{{/partial}}
+{{#partial "jsTooltip"}}{{> jsTooltipSitePagePage}}{{/partial}}
+{{#partial "htmTooltip"}}{{> htmTooltipSitePagePage}}{{/partial}}
 {{#*inline "htmUrlSitePage"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSitePagePage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSitePagePage"}}								<!-- #*inline "htmBodySearchSitePagePage" -->
@@ -1138,14 +1156,14 @@
 															placeholder="ID"
 															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setObjectId classSitePage inputSitePage{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classSitePage inputSitePage{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setObjectId classSitePage inputSitePage{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classSitePage inputSitePage{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 		{{else}}
-																class="valueObjectId w3-input w3-border classSitePage inputSitePage{{id}}ObjectId w3-input w3-border "
+																{{classApiMethodMethod}}_objectId" class="valueObjectId w3-input w3-border classSitePage inputSitePage{{id}}ObjectId w3-input w3-border "
 																name="objectId"
 		{{/eq}}
 	{{/eq}}
@@ -1197,19 +1215,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSitePage inputSitePage{{id}}Archived w3-input w3-border "
+															class="{{classApiMethodMethod}}_archived classSitePage inputSitePage{{id}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSitePage inputSitePage{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived classSitePage inputSitePage{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classSitePage inputSitePage{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived setArchived valueArchived classSitePage inputSitePage{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_archived')); }, function() { addError($('.{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if sitePage_.archived}}
@@ -1263,19 +1281,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSitePage inputSitePage{{id}}Deleted w3-input w3-border "
+															class="{{classApiMethodMethod}}_deleted classSitePage inputSitePage{{id}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSitePage inputSitePage{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted classSitePage inputSitePage{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classSitePage inputSitePage{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted setDeleted valueDeleted classSitePage inputSitePage{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_deleted')); }, function() { addError($('.{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if sitePage_.deleted}}
@@ -1324,14 +1342,14 @@
 															placeholder="Page ID"
 															title="The ID for this page. "															id="{{classApiMethodMethod}}_pageId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
+																class="{{classApiMethodMethod}}_pageId setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
 																name="setPageId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
+																class="{{classApiMethodMethod}}_pageId setPageId classSitePage inputSitePage{{id}}PageId w3-input w3-border "
 																name="setPageId"
 		{{else}}
-																class="valuePageId w3-input w3-border classSitePage inputSitePage{{id}}PageId w3-input w3-border "
+																{{classApiMethodMethod}}_pageId" class="valuePageId w3-input w3-border classSitePage inputSitePage{{id}}PageId w3-input w3-border "
 																name="pageId"
 		{{/eq}}
 	{{/eq}}
@@ -1378,14 +1396,14 @@
 															placeholder="URL"
 															title="The URL for this page. "															id="{{classApiMethodMethod}}_url"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
+																class="{{classApiMethodMethod}}_url setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
 																name="setUrl"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
+																class="{{classApiMethodMethod}}_url setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
 																name="setUrl"
 		{{else}}
-																class="valueUrl w3-input w3-border classSitePage inputSitePage{{id}}Url w3-input w3-border "
+																{{classApiMethodMethod}}_url" class="valueUrl w3-input w3-border classSitePage inputSitePage{{id}}Url w3-input w3-border "
 																name="url"
 		{{/eq}}
 	{{/eq}}
@@ -1432,14 +1450,14 @@
 															placeholder="URI"
 															title="The relative URI for this page. "															id="{{classApiMethodMethod}}_uri"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setUri classSitePage inputSitePage{{id}}Uri w3-input w3-border "
+																class="{{classApiMethodMethod}}_uri setUri classSitePage inputSitePage{{id}}Uri w3-input w3-border "
 																name="setUri"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setUri classSitePage inputSitePage{{id}}Uri w3-input w3-border "
+																class="{{classApiMethodMethod}}_uri setUri classSitePage inputSitePage{{id}}Uri w3-input w3-border "
 																name="setUri"
 		{{else}}
-																class="valueUri w3-input w3-border classSitePage inputSitePage{{id}}Uri w3-input w3-border "
+																{{classApiMethodMethod}}_uri" class="valueUri w3-input w3-border classSitePage inputSitePage{{id}}Uri w3-input w3-border "
 																name="uri"
 		{{/eq}}
 	{{/eq}}
@@ -1486,14 +1504,14 @@
 															placeholder="author"
 															title="The author"															id="{{classApiMethodMethod}}_author"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setAuthor classSitePage inputSitePage{{id}}Author w3-input w3-border "
+																class="{{classApiMethodMethod}}_author setAuthor classSitePage inputSitePage{{id}}Author w3-input w3-border "
 																name="setAuthor"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setAuthor classSitePage inputSitePage{{id}}Author w3-input w3-border "
+																class="{{classApiMethodMethod}}_author setAuthor classSitePage inputSitePage{{id}}Author w3-input w3-border "
 																name="setAuthor"
 		{{else}}
-																class="valueAuthor w3-input w3-border classSitePage inputSitePage{{id}}Author w3-input w3-border "
+																{{classApiMethodMethod}}_author" class="valueAuthor w3-input w3-border classSitePage inputSitePage{{id}}Author w3-input w3-border "
 																name="author"
 		{{/eq}}
 	{{/eq}}
@@ -1540,14 +1558,14 @@
 															placeholder="imageUri"
 															title="The page image URI"															id="{{classApiMethodMethod}}_pageImageUri"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setPageImageUri classSitePage inputSitePage{{id}}PageImageUri w3-input w3-border "
+																class="{{classApiMethodMethod}}_pageImageUri setPageImageUri classSitePage inputSitePage{{id}}PageImageUri w3-input w3-border "
 																name="setPageImageUri"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setPageImageUri classSitePage inputSitePage{{id}}PageImageUri w3-input w3-border "
+																class="{{classApiMethodMethod}}_pageImageUri setPageImageUri classSitePage inputSitePage{{id}}PageImageUri w3-input w3-border "
 																name="setPageImageUri"
 		{{else}}
-																class="valuePageImageUri w3-input w3-border classSitePage inputSitePage{{id}}PageImageUri w3-input w3-border "
+																{{classApiMethodMethod}}_pageImageUri" class="valuePageImageUri w3-input w3-border classSitePage inputSitePage{{id}}PageImageUri w3-input w3-border "
 																name="pageImageUri"
 		{{/eq}}
 	{{/eq}}

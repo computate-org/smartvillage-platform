@@ -143,7 +143,11 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 		Promise<Void> promise2 = Promise.promise();
 		promiseSiteHtmPage(promise2);
 		promise2.future().onSuccess(a -> {
-			promise.complete();
+			super.promiseDeepSiteHtmGenPage(siteRequest_).onSuccess(b -> {
+				promise.complete();
+			}).onFailure(ex -> {
+				promise.fail(ex);
+			});
 		}).onFailure(ex -> {
 			promise.fail(ex);
 		});
@@ -167,7 +171,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 		return promise.future();
 	}
 
-	public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
+	@Override public Future<Void> promiseDeepForClass(SiteRequestEnUS siteRequest_) {
 		return promiseDeepSiteHtmPage(siteRequest_);
 	}
 
@@ -176,6 +180,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	/////////////////
 
 	public void siteRequestSiteHtmPage(SiteRequestEnUS siteRequest_) {
+			super.siteRequestSiteHtmGenPage(siteRequest_);
 	}
 
 	public void siteRequestForClass(SiteRequestEnUS siteRequest_) {
@@ -186,7 +191,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	// obtain //
 	/////////////
 
-	public Object obtainForClass(String var) {
+	@Override public Object obtainForClass(String var) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -207,7 +212,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 		SiteHtmPage oSiteHtmPage = (SiteHtmPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.obtainSiteHtmGenPage(var);
 		}
 	}
 
@@ -215,7 +220,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	// relate //
 	///////////////
 
-	public boolean relateForClass(String var, Object val) {
+	@Override public boolean relateForClass(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -232,7 +237,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 		SiteHtmPage oSiteHtmPage = (SiteHtmPage)this;
 		switch(var) {
 			default:
-				return null;
+				return super.relateSiteHtmGenPage(var, val);
 		}
 	}
 
@@ -246,7 +251,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	public static Object staticSetSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SiteHtmGenPage.staticSetSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -260,7 +265,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	public static Object staticSearchSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SiteHtmGenPage.staticSearchSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -274,7 +279,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	public static String staticSearchStrSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, Object o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SiteHtmGenPage.staticSearchStrSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -288,7 +293,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	public static String staticSearchFqSiteHtmPage(String entityVar, SiteRequestEnUS siteRequest_, String o) {
 		switch(entityVar) {
 			default:
-				return null;
+				return SiteHtmGenPage.staticSearchFqSiteHtmGenPage(entityVar,  siteRequest_, o);
 		}
 	}
 
@@ -298,6 +303,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
 		return sb.toString();
 	}
 
@@ -311,7 +317,7 @@ public abstract class SiteHtmPageGen<DEV> extends SiteHtmGenPage {
 	public static String displayNameSiteHtmPage(String var) {
 		switch(var) {
 		default:
-			return null;
+			return SiteHtmGenPage.displayNameSiteHtmGenPage(var);
 		}
 	}
 }

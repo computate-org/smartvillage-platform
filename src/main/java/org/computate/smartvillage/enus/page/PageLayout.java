@@ -189,7 +189,7 @@ public class PageLayout extends PageLayoutGen<Object> {
 	 */
 	protected void _authClient(Wrap<JsonObject> w) {
 		JsonObject config = siteRequest_.getConfig();
-		w.o(config.getJsonObject(ConfigKeys.AUTH_CLIENTS).getJsonObject(config.getJsonObject(ConfigKeys.AUTH_CLIENTS).fieldNames().stream().findFirst().orElse(null)));
+		w.o(config.getJsonObject(ConfigKeys.AUTH_CLIENTS).getJsonObject(config.getString(ConfigKeys.AUTH_CLIENT)));
 	}
 
 	/**

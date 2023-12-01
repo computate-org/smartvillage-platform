@@ -357,7 +357,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						params.put("body", siteRequest.getJsonObject());
 						params.put("path", new JsonObject());
 						params.put("cookie", new JsonObject());
-						params.put("header", new JsonObject());
+						params.put("header", siteRequest.getServiceRequest().getParams().getJsonObject("header"));
 						params.put("form", new JsonObject());
 						JsonObject query = new JsonObject();
 						Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);
@@ -831,7 +831,7 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 					params.put("body", obj);
 					params.put("path", new JsonObject());
 					params.put("cookie", new JsonObject());
-					params.put("header", new JsonObject());
+					params.put("header", siteRequest.getServiceRequest().getParams().getJsonObject("header"));
 					params.put("form", new JsonObject());
 					JsonObject query = new JsonObject();
 					Boolean softCommit = Optional.ofNullable(siteRequest.getServiceRequest().getParams()).map(p -> p.getJsonObject("query")).map( q -> q.getBoolean("softCommit")).orElse(null);

@@ -47,12 +47,30 @@
 				//calendar.render();
 {{#block "websocket"}}{{/block}}
 			});
+
+			function jsWebsocketSiteHtm(vars, $response) {
+{{#block "jsWebsocket"}}{{/block}}
+			}
+
+			function jsTooltipSiteHtm(e, feature) {
+{{#block "jsTooltip"}}{{/block}}
+			}
+
+			function htmTooltipSiteHtm(feature, layer) {
+				return `{{#block "htmTooltip"}}{{/block}}`;
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketSiteHtmPage"}}
 				<!-- inline "websocketSiteHtmPage" -->
 				websocketSiteHtm(websocketSiteHtmInner);
 {{/inline}}
+{{#*inline "jsWebsocketSiteHtmPage"}}{{/inline}}
+{{#*inline "jsTooltipSiteHtmPage"}}{{/inline}}
+{{#*inline "htmTooltipSiteHtmPage"}}{{/inline}}
+{{#partial "jsWebsocket"}}{{> jsWebsocketSiteHtmPage}}{{/partial}}
+{{#partial "jsTooltip"}}{{> jsTooltipSiteHtmPage}}{{/partial}}
+{{#partial "htmTooltip"}}{{> htmTooltipSiteHtmPage}}{{/partial}}
 {{#*inline "htmUrlSiteHtm"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSiteHtmPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSiteHtmPage"}}								<!-- #*inline "htmBodySearchSiteHtmPage" -->
@@ -1129,14 +1147,14 @@
 															placeholder="ID"
 															title="A URL friendly unique ID for this object"															id="{{classApiMethodMethod}}_objectId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setObjectId classSiteHtm inputSiteHtm{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classSiteHtm inputSiteHtm{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setObjectId classSiteHtm inputSiteHtm{{id}}ObjectId w3-input w3-border "
+																class="{{classApiMethodMethod}}_objectId setObjectId classSiteHtm inputSiteHtm{{id}}ObjectId w3-input w3-border "
 																name="setObjectId"
 		{{else}}
-																class="valueObjectId w3-input w3-border classSiteHtm inputSiteHtm{{id}}ObjectId w3-input w3-border "
+																{{classApiMethodMethod}}_objectId" class="valueObjectId w3-input w3-border classSiteHtm inputSiteHtm{{id}}ObjectId w3-input w3-border "
 																name="objectId"
 		{{/eq}}
 	{{/eq}}
@@ -1190,19 +1208,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSiteHtm inputSiteHtm{{id}}Archived w3-input w3-border "
+															class="{{classApiMethodMethod}}_archived classSiteHtm inputSiteHtm{{id}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSiteHtm inputSiteHtm{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived classSiteHtm inputSiteHtm{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classSiteHtm inputSiteHtm{{id}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived setArchived valueArchived classSiteHtm inputSiteHtm{{id}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_archived')); }, function() { addError($('.{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteHtm_.archived}}
@@ -1258,19 +1276,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSiteHtm inputSiteHtm{{id}}Deleted w3-input w3-border "
+															class="{{classApiMethodMethod}}_deleted classSiteHtm inputSiteHtm{{id}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSiteHtm inputSiteHtm{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted classSiteHtm inputSiteHtm{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classSiteHtm inputSiteHtm{{id}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted setDeleted valueDeleted classSiteHtm inputSiteHtm{{id}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_deleted')); }, function() { addError($('.{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteHtm_.deleted}}
@@ -1321,14 +1339,14 @@
 															placeholder="Page URL"
 															title="The URL for this page. "															id="{{classApiMethodMethod}}_url"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setUrl classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
+																class="{{classApiMethodMethod}}_url setUrl classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
 																name="setUrl"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setUrl classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
+																class="{{classApiMethodMethod}}_url setUrl classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
 																name="setUrl"
 		{{else}}
-																class="valueUrl w3-input w3-border classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
+																{{classApiMethodMethod}}_url" class="valueUrl w3-input w3-border classSiteHtm inputSiteHtm{{id}}Url w3-input w3-border "
 																name="url"
 		{{/eq}}
 	{{/eq}}
@@ -1377,14 +1395,14 @@
 															placeholder="URI"
 															title="The relative URI for this page. "															id="{{classApiMethodMethod}}_uri"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setUri classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "
+																class="{{classApiMethodMethod}}_uri setUri classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "
 																name="setUri"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setUri classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "
+																class="{{classApiMethodMethod}}_uri setUri classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "
 																name="setUri"
 		{{else}}
-																class="valueUri w3-input w3-border classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "
+																{{classApiMethodMethod}}_uri" class="valueUri w3-input w3-border classSiteHtm inputSiteHtm{{id}}Uri w3-input w3-border "
 																name="uri"
 		{{/eq}}
 	{{/eq}}
@@ -1433,14 +1451,14 @@
 															placeholder="Page ID"
 															title="The ID for this page. "															id="{{classApiMethodMethod}}_pageId"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setPageId classSiteHtm inputSiteHtm{{id}}PageId w3-input w3-border "
+																class="{{classApiMethodMethod}}_pageId setPageId classSiteHtm inputSiteHtm{{id}}PageId w3-input w3-border "
 																name="setPageId"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setPageId classSiteHtm inputSiteHtm{{id}}PageId w3-input w3-border "
+																class="{{classApiMethodMethod}}_pageId setPageId classSiteHtm inputSiteHtm{{id}}PageId w3-input w3-border "
 																name="setPageId"
 		{{else}}
-																class="valuePageId w3-input w3-border classSiteHtm inputSiteHtm{{id}}PageId w3-input w3-border "
+																{{classApiMethodMethod}}_pageId" class="valuePageId w3-input w3-border classSiteHtm inputSiteHtm{{id}}PageId w3-input w3-border "
 																name="pageId"
 		{{/eq}}
 	{{/eq}}
@@ -1489,14 +1507,14 @@
 															placeholder="Sequence Number"
 															title="The sequence number for this page. "															id="{{classApiMethodMethod}}_sequenceNum"
 	{{#eq "Page" classApiMethodMethod}}
-																class="setSequenceNum classSiteHtm inputSiteHtm{{id}}SequenceNum w3-input w3-border "
+																class="{{classApiMethodMethod}}_sequenceNum setSequenceNum classSiteHtm inputSiteHtm{{id}}SequenceNum w3-input w3-border "
 																name="setSequenceNum"
 	{{else}}
 		{{#eq "PATCH" classApiMethodMethod}}
-																class="setSequenceNum classSiteHtm inputSiteHtm{{id}}SequenceNum w3-input w3-border "
+																class="{{classApiMethodMethod}}_sequenceNum setSequenceNum classSiteHtm inputSiteHtm{{id}}SequenceNum w3-input w3-border "
 																name="setSequenceNum"
 		{{else}}
-																class="valueSequenceNum w3-input w3-border classSiteHtm inputSiteHtm{{id}}SequenceNum w3-input w3-border "
+																{{classApiMethodMethod}}_sequenceNum" class="valueSequenceNum w3-input w3-border classSiteHtm inputSiteHtm{{id}}SequenceNum w3-input w3-border "
 																name="sequenceNum"
 		{{/eq}}
 	{{/eq}}

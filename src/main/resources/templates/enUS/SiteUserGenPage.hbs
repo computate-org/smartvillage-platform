@@ -47,12 +47,30 @@
 				//calendar.render();
 {{#block "websocket"}}{{/block}}
 			});
+
+			function jsWebsocketSiteUser(vars, $response) {
+{{#block "jsWebsocket"}}{{/block}}
+			}
+
+			function jsTooltipSiteUser(e, feature) {
+{{#block "jsTooltip"}}{{/block}}
+			}
+
+			function htmTooltipSiteUser(feature, layer) {
+				return `{{#block "htmTooltip"}}{{/block}}`;
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketSiteUserPage"}}
 				<!-- inline "websocketSiteUserPage" -->
 				websocketSiteUser(websocketSiteUserInner);
 {{/inline}}
+{{#*inline "jsWebsocketSiteUserPage"}}{{/inline}}
+{{#*inline "jsTooltipSiteUserPage"}}{{/inline}}
+{{#*inline "htmTooltipSiteUserPage"}}{{/inline}}
+{{#partial "jsWebsocket"}}{{> jsWebsocketSiteUserPage}}{{/partial}}
+{{#partial "jsTooltip"}}{{> jsTooltipSiteUserPage}}{{/partial}}
+{{#partial "htmTooltip"}}{{> htmTooltipSiteUserPage}}{{/partial}}
 {{#*inline "htmUrlSiteUser"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSiteUserPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSiteUserPage"}}								<!-- #*inline "htmBodySearchSiteUserPage" -->
@@ -1044,19 +1062,19 @@
 															id="{{classApiMethodMethod}}_archived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSiteUser inputSiteUser{{pk}}Archived w3-input w3-border "
+															class="{{classApiMethodMethod}}_archived classSiteUser inputSiteUser{{pk}}Archived w3-input w3-border "
 															name="setArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSiteUser inputSiteUser{{pk}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived classSiteUser inputSiteUser{{pk}}Archived w3-input w3-border "
 																name="setArchived"
 		{{else}}
-																class="setArchived valueArchived classSiteUser inputSiteUser{{pk}}Archived w3-input w3-border "
+																class="{{classApiMethodMethod}}_archived setArchived valueArchived classSiteUser inputSiteUser{{pk}}Archived w3-input w3-border "
 																name="setArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_archived')); }, function() { addError($('#{{classApiMethodMethod}}_archived')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to archive that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setArchived', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_archived')); }, function() { addError($('.{{classApiMethodMethod}}_archived')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteUser_.archived}}
@@ -1110,19 +1128,19 @@
 															id="{{classApiMethodMethod}}_deleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSiteUser inputSiteUser{{pk}}Deleted w3-input w3-border "
+															class="{{classApiMethodMethod}}_deleted classSiteUser inputSiteUser{{pk}}Deleted w3-input w3-border "
 															name="setDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSiteUser inputSiteUser{{pk}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted classSiteUser inputSiteUser{{pk}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{else}}
-																class="setDeleted valueDeleted classSiteUser inputSiteUser{{pk}}Deleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_deleted setDeleted valueDeleted classSiteUser inputSiteUser{{pk}}Deleted w3-input w3-border "
 																name="setDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_deleted')); }, function() { addError($('#{{classApiMethodMethod}}_deleted')); }); }"
+															onchange="var confirmResponse = confirm('Are you sure you want to delete that?'); if(confirmResponse) { patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setDeleted', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_deleted')); }, function() { addError($('.{{classApiMethodMethod}}_deleted')); }); }"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteUser_.deleted}}
@@ -1176,19 +1194,19 @@
 															id="{{classApiMethodMethod}}_seeArchived"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSiteUser inputSiteUser{{pk}}SeeArchived w3-input w3-border "
+															class="{{classApiMethodMethod}}_seeArchived classSiteUser inputSiteUser{{pk}}SeeArchived w3-input w3-border "
 															name="setSeeArchived"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSiteUser inputSiteUser{{pk}}SeeArchived w3-input w3-border "
+																class="{{classApiMethodMethod}}_seeArchived classSiteUser inputSiteUser{{pk}}SeeArchived w3-input w3-border "
 																name="setSeeArchived"
 		{{else}}
-																class="setSeeArchived valueSeeArchived classSiteUser inputSiteUser{{pk}}SeeArchived w3-input w3-border "
+																class="{{classApiMethodMethod}}_seeArchived setSeeArchived valueSeeArchived classSiteUser inputSiteUser{{pk}}SeeArchived w3-input w3-border "
 																name="setSeeArchived"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeArchived', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_seeArchived')); }, function() { addError($('#{{classApiMethodMethod}}_seeArchived')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeArchived', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_seeArchived')); }, function() { addError($('.{{classApiMethodMethod}}_seeArchived')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteUser_.seeArchived}}
@@ -1242,19 +1260,19 @@
 															id="{{classApiMethodMethod}}_seeDeleted"
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															class="classSiteUser inputSiteUser{{pk}}SeeDeleted w3-input w3-border "
+															class="{{classApiMethodMethod}}_seeDeleted classSiteUser inputSiteUser{{pk}}SeeDeleted w3-input w3-border "
 															name="setSeeDeleted"
 	{{else}}
 		{{#eq 'Page' classApiMethodMethod}}
-																class="classSiteUser inputSiteUser{{pk}}SeeDeleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_seeDeleted classSiteUser inputSiteUser{{pk}}SeeDeleted w3-input w3-border "
 																name="setSeeDeleted"
 		{{else}}
-																class="setSeeDeleted valueSeeDeleted classSiteUser inputSiteUser{{pk}}SeeDeleted w3-input w3-border "
+																class="{{classApiMethodMethod}}_seeDeleted setSeeDeleted valueSeeDeleted classSiteUser inputSiteUser{{pk}}SeeDeleted w3-input w3-border "
 																name="setSeeDeleted"
 		{{/eq}}
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
-															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeDeleted', $(this).prop('checked'), function() { addGlow($('#{{classApiMethodMethod}}_seeDeleted')); }, function() { addError($('#{{classApiMethodMethod}}_seeDeleted')); }); "
+															onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pk:{{pk}}' }], 'setSeeDeleted', $(this).prop('checked'), function() { addGlow($('.{{classApiMethodMethod}}_seeDeleted')); }, function() { addError($('.{{classApiMethodMethod}}_seeDeleted')); }); "
 	{{/eq}}
 	{{#eq 'Page' classApiMethodMethod}}
 		{{#if siteUser_.seeDeleted}}
