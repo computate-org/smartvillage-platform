@@ -68,9 +68,6 @@
 {{#*inline "jsWebsocketBaseResultPage"}}{{/inline}}
 {{#*inline "jsTooltipBaseResultPage"}}{{/inline}}
 {{#*inline "htmTooltipBaseResultPage"}}{{/inline}}
-{{#partial "jsWebsocket"}}{{> jsWebsocketBaseResultPage}}{{/partial}}
-{{#partial "jsTooltip"}}{{> jsTooltipBaseResultPage}}{{/partial}}
-{{#partial "htmTooltip"}}{{> htmTooltipBaseResultPage}}{{/partial}}
 {{#*inline "htmUrlBaseResult"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseResultPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchBaseResultPage"}}								<!-- #*inline "htmBodySearchBaseResultPage" -->
