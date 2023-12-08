@@ -85,13 +85,6 @@
 		<mockito.version>4.10.0</mockito.version>
 		<commonmark.version>0.21.0</commonmark.version>
 
-		<quarkus-base.version>3.2.6</quarkus-base.version>
-		<quarkus.version>${quarkus-base.version}.Final-redhat-00002</quarkus.version>
-		<quarkus-plugin.version>${quarkus.version}</quarkus-plugin.version>
-		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-		<quarkus.platform.group-id>com.redhat.quarkus.platform</quarkus.platform.group-id>
-		<quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
-
 		<vertx-base.version>4.4.4</vertx-base.version>
 		<vertx.version>${vertx-base.version}.redhat-00001</vertx.version>
 
@@ -128,16 +121,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
-			<!--
-			<dependency>
-				<groupId>${quarkus.platform.group-id}</groupId>
-				<artifactId>${quarkus.platform.artifact-id}</artifactId>
-				<version>${quarkus.platform.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			-->
 
 			<dependency>
 				<groupId>org.apache.camel</groupId>
@@ -234,16 +217,6 @@
 		</dependency>
 
 		<!-- ###### -->
-		<!-- Charts -->
-		<!-- ###### -->
-
-		<dependency>
-			<groupId>org.jfree</groupId>
-			<artifactId>jfreechart</artifactId>
-			<version>1.5.0</version>
-		</dependency>
-
-		<!-- ###### -->
 		<!-- Vert.X -->
 		<!-- ###### -->
 
@@ -297,11 +270,6 @@
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-codegen</artifactId>
 			<classifier>processor</classifier>
-		</dependency>
-
-		<dependency>
-			<groupId>io.vertx</groupId>
-			<artifactId>vertx-service-proxy</artifactId>
 		</dependency>
 
 		<dependency>
@@ -645,8 +613,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
+					<source>11</source>
+					<target>11</target>
 					<encoding>UTF-8</encoding>
 					<annotationProcessors>
 						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
