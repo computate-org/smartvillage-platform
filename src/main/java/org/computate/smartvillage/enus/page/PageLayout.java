@@ -185,19 +185,12 @@ public class PageLayout extends PageLayoutGen<Object> {
 	}
 
 	/**
-	 * Description: The current user's email
-	 */
-	protected void _authClient(Wrap<JsonObject> w) {
-		JsonObject config = siteRequest_.getConfig();
-		w.o(config.getJsonObject(ConfigKeys.AUTH_CLIENTS).getJsonObject(config.getString(ConfigKeys.AUTH_CLIENT)));
-	}
-
-	/**
 	 * Description: The logout URL
 	 */
 	protected void _logoutUrl(Wrap<String> w) {
 		try {
-		JsonObject config = siteRequest_.getConfig();
+			JsonObject config = siteRequest_.getConfig();
+			JsonObject authClient = Optional.ofNullable(config.getJsonObject(ConfigKeys.AUTH_CLIENTS)).map(authClients -> authClients.getJsonObject(config.getString(ConfigKeys.AUTH_CLIENT))).orElse(config);
 			w.o(authClient.getString(ConfigKeys.AUTH_URL) + "/realms/" + authClient.getString(ConfigKeys.AUTH_REALM) + "/protocol/openid-connect/logout?redirect_uri=" + URLEncoder.encode(config.getString(ConfigKeys.SITE_BASE_URL) + authClient.getString(ConfigKeys.AUTH_LOGOUT_URI), "UTF-8"));
 		} catch (UnsupportedEncodingException ex) {
 			ExceptionUtils.rethrow(ex);

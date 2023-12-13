@@ -48,7 +48,7 @@
 {{#block "websocket"}}{{/block}}
 			});
 
-			function jsWebsocketMapResult(vars, $response) {
+			function jsWebsocketMapResult(, vars, $response) {
 {{#block "jsWebsocket"}}{{/block}}
 			}
 
@@ -59,6 +59,10 @@
 			function htmTooltipMapResult(feature, layer) {
 				return `{{#block "htmTooltip"}}{{/block}}`;
 			}
+
+			function jsStyleMapResult(feature) {
+{{#block "jsStyle"}}{{/block}}
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketMapResultPage"}}
@@ -68,9 +72,7 @@
 {{#*inline "jsWebsocketMapResultPage"}}{{/inline}}
 {{#*inline "jsTooltipMapResultPage"}}{{/inline}}
 {{#*inline "htmTooltipMapResultPage"}}{{/inline}}
-{{#partial "jsWebsocket"}}{{> jsWebsocketMapResultPage}}{{/partial}}
-{{#partial "jsTooltip"}}{{> jsTooltipMapResultPage}}{{/partial}}
-{{#partial "htmTooltip"}}{{> htmTooltipMapResultPage}}{{/partial}}
+{{#*inline "jsStyleMapResultPage"}}{{/inline}}
 {{#*inline "htmUrlMapResult"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadMapResultPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchMapResultPage"}}								<!-- #*inline "htmBodySearchMapResultPage" -->

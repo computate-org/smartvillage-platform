@@ -1172,66 +1172,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return PageLayout.staticSearchStrUserEmail(siteRequest_, PageLayout.staticSearchUserEmail(siteRequest_, PageLayout.staticSetUserEmail(siteRequest_, o)));
 	}
 
-	////////////////
-	// authClient //
-	////////////////
-
-
-	/**	 The entity authClient
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected JsonObject authClient;
-
-	/**	<br> The entity authClient
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillage.enus.page.PageLayout&fq=entiteVar_enUS_indexed_string:authClient">Find the entity authClient in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _authClient(Wrap<JsonObject> w);
-
-	public JsonObject getAuthClient() {
-		return authClient;
-	}
-
-	public void setAuthClient(JsonObject authClient) {
-		this.authClient = authClient;
-	}
-	@JsonIgnore
-	public void setAuthClient(String o) {
-		this.authClient = PageLayout.staticSetAuthClient(siteRequest_, o);
-	}
-	public static JsonObject staticSetAuthClient(SiteRequestEnUS siteRequest_, String o) {
-		if(o != null) {
-				return new JsonObject(o);
-		}
-		return null;
-	}
-	protected PageLayout authClientInit() {
-		Wrap<JsonObject> authClientWrap = new Wrap<JsonObject>().var("authClient");
-		if(authClient == null) {
-			_authClient(authClientWrap);
-			Optional.ofNullable(authClientWrap.getO()).ifPresent(o -> {
-				setAuthClient(o);
-			});
-		}
-		return (PageLayout)this;
-	}
-
-	public static String staticSearchAuthClient(SiteRequestEnUS siteRequest_, JsonObject o) {
-		return o.toString();
-	}
-
-	public static String staticSearchStrAuthClient(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqAuthClient(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrAuthClient(siteRequest_, PageLayout.staticSearchAuthClient(siteRequest_, PageLayout.staticSetAuthClient(siteRequest_, o)));
-	}
-
 	///////////////
 	// logoutUrl //
 	///////////////
@@ -4430,7 +4370,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				userFullNameInit();
 				userNameInit();
 				userEmailInit();
-				authClientInit();
 				logoutUrlInit();
 				long0Init();
 				long1Init();
@@ -4607,8 +4546,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 				return oPageLayout.userName;
 			case "userEmail":
 				return oPageLayout.userEmail;
-			case "authClient":
-				return oPageLayout.authClient;
 			case "logoutUrl":
 				return oPageLayout.logoutUrl;
 			case "long0":
@@ -4790,8 +4727,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSetUserName(siteRequest_, o);
 		case "userEmail":
 			return PageLayout.staticSetUserEmail(siteRequest_, o);
-		case "authClient":
-			return PageLayout.staticSetAuthClient(siteRequest_, o);
 		case "logoutUrl":
 			return PageLayout.staticSetLogoutUrl(siteRequest_, o);
 		case "long0":
@@ -4936,8 +4871,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchUserName(siteRequest_, (String)o);
 		case "userEmail":
 			return PageLayout.staticSearchUserEmail(siteRequest_, (String)o);
-		case "authClient":
-			return PageLayout.staticSearchAuthClient(siteRequest_, (JsonObject)o);
 		case "logoutUrl":
 			return PageLayout.staticSearchLogoutUrl(siteRequest_, (String)o);
 		case "long0":
@@ -5082,8 +5015,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchStrUserName(siteRequest_, (String)o);
 		case "userEmail":
 			return PageLayout.staticSearchStrUserEmail(siteRequest_, (String)o);
-		case "authClient":
-			return PageLayout.staticSearchStrAuthClient(siteRequest_, (String)o);
 		case "logoutUrl":
 			return PageLayout.staticSearchStrLogoutUrl(siteRequest_, (String)o);
 		case "long0":
@@ -5228,8 +5159,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return PageLayout.staticSearchFqUserName(siteRequest_, o);
 		case "userEmail":
 			return PageLayout.staticSearchFqUserEmail(siteRequest_, o);
-		case "authClient":
-			return PageLayout.staticSearchFqAuthClient(siteRequest_, o);
 		case "logoutUrl":
 			return PageLayout.staticSearchFqLogoutUrl(siteRequest_, o);
 		case "long0":
@@ -5362,7 +5291,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String VAR_userFullName = "userFullName";
 	public static final String VAR_userName = "userName";
 	public static final String VAR_userEmail = "userEmail";
-	public static final String VAR_authClient = "authClient";
 	public static final String VAR_logoutUrl = "logoutUrl";
 	public static final String VAR_long0 = "long0";
 	public static final String VAR_long1 = "long1";
@@ -5438,7 +5366,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	public static final String DISPLAY_NAME_userFullName = "";
 	public static final String DISPLAY_NAME_userName = "";
 	public static final String DISPLAY_NAME_userEmail = "";
-	public static final String DISPLAY_NAME_authClient = "";
 	public static final String DISPLAY_NAME_logoutUrl = "";
 	public static final String DISPLAY_NAME_long0 = "";
 	public static final String DISPLAY_NAME_long1 = "";
@@ -5539,8 +5466,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 			return DISPLAY_NAME_userName;
 		case VAR_userEmail:
 			return DISPLAY_NAME_userEmail;
-		case VAR_authClient:
-			return DISPLAY_NAME_authClient;
 		case VAR_logoutUrl:
 			return DISPLAY_NAME_logoutUrl;
 		case VAR_long0:
