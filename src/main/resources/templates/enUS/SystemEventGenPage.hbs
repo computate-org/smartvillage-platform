@@ -48,7 +48,7 @@
 {{#block "websocket"}}{{/block}}
 			});
 
-			function jsWebsocketSystemEvent(vars, $response) {
+			function jsWebsocketSystemEvent(, vars, $response) {
 {{#block "jsWebsocket"}}{{/block}}
 			}
 
@@ -59,6 +59,10 @@
 			function htmTooltipSystemEvent(feature, layer) {
 				return `{{#block "htmTooltip"}}{{/block}}`;
 			}
+
+			function jsStyleSystemEvent(feature) {
+{{#block "jsStyle"}}{{/block}}
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketSystemEventPage"}}
@@ -68,9 +72,7 @@
 {{#*inline "jsWebsocketSystemEventPage"}}{{/inline}}
 {{#*inline "jsTooltipSystemEventPage"}}{{/inline}}
 {{#*inline "htmTooltipSystemEventPage"}}{{/inline}}
-{{#partial "jsWebsocket"}}{{> jsWebsocketSystemEventPage}}{{/partial}}
-{{#partial "jsTooltip"}}{{> jsTooltipSystemEventPage}}{{/partial}}
-{{#partial "htmTooltip"}}{{> htmTooltipSystemEventPage}}{{/partial}}
+{{#*inline "jsStyleSystemEventPage"}}{{/inline}}
 {{#*inline "htmUrlSystemEvent"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSystemEventPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSystemEventPage"}}								<!-- #*inline "htmBodySearchSystemEventPage" -->

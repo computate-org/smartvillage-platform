@@ -48,7 +48,7 @@
 {{#block "websocket"}}{{/block}}
 			});
 
-			function jsWebsocketSiteUser(vars, $response) {
+			function jsWebsocketSiteUser(pk, vars, $response) {
 {{#block "jsWebsocket"}}{{/block}}
 			}
 
@@ -59,6 +59,10 @@
 			function htmTooltipSiteUser(feature, layer) {
 				return `{{#block "htmTooltip"}}{{/block}}`;
 			}
+
+			function jsStyleSiteUser(feature) {
+{{#block "jsStyle"}}{{/block}}
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketSiteUserPage"}}
@@ -68,9 +72,7 @@
 {{#*inline "jsWebsocketSiteUserPage"}}{{/inline}}
 {{#*inline "jsTooltipSiteUserPage"}}{{/inline}}
 {{#*inline "htmTooltipSiteUserPage"}}{{/inline}}
-{{#partial "jsWebsocket"}}{{> jsWebsocketSiteUserPage}}{{/partial}}
-{{#partial "jsTooltip"}}{{> jsTooltipSiteUserPage}}{{/partial}}
-{{#partial "htmTooltip"}}{{> htmTooltipSiteUserPage}}{{/partial}}
+{{#*inline "jsStyleSiteUserPage"}}{{/inline}}
 {{#*inline "htmUrlSiteUser"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSiteUserPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSiteUserPage"}}								<!-- #*inline "htmBodySearchSiteUserPage" -->

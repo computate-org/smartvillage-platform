@@ -48,7 +48,7 @@
 {{#block "websocket"}}{{/block}}
 			});
 
-			function jsWebsocketBaseModel(vars, $response) {
+			function jsWebsocketBaseModel(pk, vars, $response) {
 {{#block "jsWebsocket"}}{{/block}}
 			}
 
@@ -59,6 +59,10 @@
 			function htmTooltipBaseModel(feature, layer) {
 				return `{{#block "htmTooltip"}}{{/block}}`;
 			}
+
+			function jsStyleBaseModel(feature) {
+{{#block "jsStyle"}}{{/block}}
+			}
 		</script>
 {{/inline}}
 {{#*inline "websocketBaseModelPage"}}
@@ -68,6 +72,7 @@
 {{#*inline "jsWebsocketBaseModelPage"}}{{/inline}}
 {{#*inline "jsTooltipBaseModelPage"}}{{/inline}}
 {{#*inline "htmTooltipBaseModelPage"}}{{/inline}}
+{{#*inline "jsStyleBaseModelPage"}}{{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseModelPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchBaseModelPage"}}								<!-- #*inline "htmBodySearchBaseModelPage" -->
