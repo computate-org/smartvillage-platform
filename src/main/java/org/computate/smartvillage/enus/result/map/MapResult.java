@@ -107,13 +107,14 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * DocValues: true
 	 * Persist: true
 	 * DisplayName: map location
+	 * Location: true
 	 * HtmRow: 4
 	 * HtmCell: 2
 	 * Facet: true
 	 */
 	protected void _location(Wrap<Point> w) {
 		if(x != null && y != null)
-			w.o(new Point(y, x));
+			w.o(new Point(x, y));
 	}
 
 	/**
