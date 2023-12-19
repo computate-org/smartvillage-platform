@@ -1403,7 +1403,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SiteUser";
-public static final String CLASS_API_ADDRESS_SiteUser = "smartvillage-platform-enUS-SiteUser";
+	public static final String CLASS_API_ADDRESS_SiteUser = "smartvillage-platform-enUS-SiteUser";
 	public static String getClassApiAddress() {
 		return CLASS_API_ADDRESS_SiteUser;
 	}

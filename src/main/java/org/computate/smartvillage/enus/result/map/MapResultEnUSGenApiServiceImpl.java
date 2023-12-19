@@ -123,7 +123,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	@Override
 	public void searchMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.getClassApiAddress(), "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -279,7 +279,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	@Override
 	public void getMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.getClassApiAddress(), "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -378,7 +378,7 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	@Override
 	public void searchpageMapResult(ServiceRequest serviceRequest, Handler<AsyncResult<ServiceResponse>> eventHandler) {
-		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.CLASS_API_ADDRESS, "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
+		user(serviceRequest, SiteRequestEnUS.class, SiteUser.class, SiteUser.getClassApiAddress(), "postSiteUserFuture", "patchSiteUserFuture").onSuccess(siteRequest -> {
 
 			authorizationProvider.getAuthorizations(siteRequest.getUser()).onFailure(ex -> {
 				String msg = String.format("401 UNAUTHORIZED user %s to %s %s", siteRequest.getUser().attributes().getJsonObject("accessToken").getString("preferred_username"), serviceRequest.getExtra().getString("method"), serviceRequest.getExtra().getString("uri"));
@@ -871,5 +871,10 @@ public class MapResultEnUSGenApiServiceImpl extends BaseApiServiceImpl implement
 
 	public String searchVar(String varIndexed) {
 		return MapResult.searchVarMapResult(varIndexed);
+	}
+
+	@Override
+	public String getClassApiAddress() {
+		return MapResult.CLASS_API_ADDRESS_MapResult;
 	}
 }

@@ -3118,7 +3118,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public static final String[] SystemEventVals = new String[] { statusStarted1_enUS, statusCompleted1_enUS, statusError1_enUS };
 
 	public static final String CLASS_SIMPLE_NAME = "SystemEvent";
-public static final String CLASS_API_ADDRESS_SystemEvent = "smartvillage-platform-enUS-SystemEvent";
+	public static final String CLASS_API_ADDRESS_SystemEvent = "smartvillage-platform-enUS-SystemEvent";
 	public static String getClassApiAddress() {
 		return CLASS_API_ADDRESS_SystemEvent;
 	}

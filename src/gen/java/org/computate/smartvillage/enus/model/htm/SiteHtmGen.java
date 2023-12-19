@@ -2148,7 +2148,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String[] SiteHtmVals = new String[] { text_markdown1_enUS };
 
 	public static final String CLASS_SIMPLE_NAME = "SiteHtm";
-public static final String CLASS_API_ADDRESS_SiteHtm = "smartvillage-platform-enUS-SiteHtm";
+	public static final String CLASS_API_ADDRESS_SiteHtm = "smartvillage-platform-enUS-SiteHtm";
 	public static String getClassApiAddress() {
 		return CLASS_API_ADDRESS_SiteHtm;
 	}

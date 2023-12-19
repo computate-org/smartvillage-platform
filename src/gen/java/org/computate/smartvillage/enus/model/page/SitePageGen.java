@@ -2211,7 +2211,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
-public static final String CLASS_API_ADDRESS_SitePage = "smartvillage-platform-enUS-SitePage";
+	public static final String CLASS_API_ADDRESS_SitePage = "smartvillage-platform-enUS-SitePage";
 	public static String getClassApiAddress() {
 		return CLASS_API_ADDRESS_SitePage;
 	}

@@ -1325,7 +1325,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "MapResult";
-public static final String CLASS_API_ADDRESS_MapResult = "smartvillage-platform-enUS-MapResult";
+	public static final String CLASS_API_ADDRESS_MapResult = "smartvillage-platform-enUS-MapResult";
 	public static String getClassApiAddress() {
 		return CLASS_API_ADDRESS_MapResult;
 	}
