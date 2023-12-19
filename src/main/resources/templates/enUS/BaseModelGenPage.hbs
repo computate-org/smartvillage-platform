@@ -73,14 +73,24 @@
 {{#*inline "jsTooltipBaseModelPage"}}{{/inline}}
 {{#*inline "htmTooltipBaseModelPage"}}{{/inline}}
 {{#*inline "jsStyleBaseModelPage"}}
-				return {
-					radius: 8
-					, fillColor: '#ff7800'
-					, color: '#000'
-					, weight: 1
-					, opacity: 1
-					, fillOpacity: 0.8
-				};
+				if(feature.geometry.type == 'Point') {
+					return {
+						radius: 8
+						, fillColor: '#ff7800'
+						, color: '#000'
+						, weight: 1
+						, opacity: 1
+						, fillOpacity: 0.8
+					};
+				} else {
+					return {
+						 fillColor: '#ff7800'
+						, color: (feature.properties.areaServedColors ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, weight: 5
+						, opacity: 1
+						, fillOpacity: 0.8
+					};
+				}
 {{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseModelPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
@@ -321,33 +331,6 @@
 				<span class=""></span>
 			</span>
 		</h2>
-{{#block "htmBodyGraphLocation"}}{{/block}}
-{{#block "htmBodyGraph"}}{{/block}}
-	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
-{{/inline}}
-{{#*inline "htmBodyCount1AllBaseModelPage"}}		<!-- #*inline "htmBodyCount1AllBaseModelPage" -->
-		<h1 class="w3-center ">
-			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-block w3- w3-hover-">
-			{{#if classIconCssClasses}}
-				<i class="{{ classIconCssClasses }} site-menu-icon "></i>
-			{{/if}}
-				<span class=""></span>
-			</a>
-		</h1>
-		<h2 class="w3-center ">
-			<span class="w3-bar-item w3-padding w3-center w3-block w3-">
-				<span class="">{{baseModel_.objectTitle}}</span>
-			</span>
-		</h2>
-{{#block "htmBodyGraphLocation"}}{{/block}}
-{{#block "htmBodyGraph"}}{{/block}}
-	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 {{/inline}}
 {{#*inline "htmBodyCount1BaseModelPage"}}		<!-- #*inline "htmBodyCount1BaseModelPage" -->
 		<h1>
@@ -363,12 +346,6 @@
 				<span class="">{{baseModel_.objectTitle}}</span>
 			</span>
 		</h2>
-{{#block "htmBodyGraphLocation"}}{{/block}}
-{{#block "htmBodyGraph"}}{{/block}}
-	<div class="pageContent w3-content ">
-		<div id="site-calendar-box">
-			<div id="site-calendar"><!-- // --></div>
-		</div>
 {{/inline}}
 {{#*inline "htmBodyAllBaseModelPage"}}		<!-- #*inline "htmBodyAllBaseModelPage" -->
 		<h1>
@@ -518,6 +495,11 @@
 		</div>
 {{#block "htmBodyGraphLocation"}}{{/block}}
 {{#block "htmBodyGraph"}}{{/block}}
+	<div class="pageContent w3-content ">
+		<div id="site-calendar-box">
+			<div id="site-calendar"><!-- // --></div>
+		</div>
+	</div>
 	<div class="pageContent w3-content ">
 	{{#eq baseModelCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
