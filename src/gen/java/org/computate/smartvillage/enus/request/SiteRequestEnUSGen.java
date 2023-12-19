@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.request;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import java.lang.Object;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.lang.Object;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.api.service.ServiceRequest;
@@ -1947,7 +1947,6 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SiteRequestEnUS";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-SiteRequestEnUS";
 	public static final String VAR_config = "config";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_webClient = "webClient";

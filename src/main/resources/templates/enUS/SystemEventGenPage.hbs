@@ -48,7 +48,7 @@
 {{#block "websocket"}}{{/block}}
 			});
 
-			function jsWebsocketSystemEvent(, vars, $response) {
+			function jsWebsocketSystemEvent(id, vars, $response) {
 {{#block "jsWebsocket"}}{{/block}}
 			}
 
@@ -72,7 +72,16 @@
 {{#*inline "jsWebsocketSystemEventPage"}}{{/inline}}
 {{#*inline "jsTooltipSystemEventPage"}}{{/inline}}
 {{#*inline "htmTooltipSystemEventPage"}}{{/inline}}
-{{#*inline "jsStyleSystemEventPage"}}{{/inline}}
+{{#*inline "jsStyleSystemEventPage"}}
+				return {
+					radius: 8
+					, fillColor: '#ff7800'
+					, color: '#000'
+					, weight: 1
+					, opacity: 1
+					, fillOpacity: 0.8
+				};
+{{/inline}}
 {{#*inline "htmUrlSystemEvent"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadSystemEventPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchSystemEventPage"}}								<!-- #*inline "htmBodySearchSystemEventPage" -->
@@ -370,8 +379,6 @@
 				<span class="">system events</span>
 			</a>
 		</h1>
-{{#block "htmBodyGraphLocation"}}{{/block}}
-{{#block "htmBodyGraph"}}{{/block}}
 		<div id="site-calendar-box">
 			<div id="site-calendar"><!-- // --></div>
 		</div>
@@ -902,6 +909,8 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
 	{{#eq systemEventCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
@@ -948,11 +957,13 @@
 			</tr>
 {{/inline}}
 {{#*inline "tbody1SystemEventPage"}}
+<!-- #*inline "tbody1SystemEventPage" -->
 				<tbody>
 {{> tbody2SystemEventPage}}
 				</tbody>
 {{/inline}}
 {{#*inline "tbody2SystemEventPage"}}
+<!-- #*inline "tbody2SystemEventPage" -->
 		{{#each listSystemEvent}}
 					<tr>
 						<td>

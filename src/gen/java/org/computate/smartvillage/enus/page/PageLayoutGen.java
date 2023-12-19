@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.page;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import java.lang.Object;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.lang.Object;
 import java.lang.String;
 import io.vertx.ext.web.api.service.ServiceRequest;
 import io.vertx.core.json.JsonObject;
@@ -3029,12 +3029,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static Date staticSearchRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrRangeEnd(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrRangeEnd(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqRangeEnd(SiteRequestEnUS siteRequest_, String o) {
@@ -3105,12 +3105,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static Date staticSearchRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrRangeStart(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrRangeStart(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqRangeStart(SiteRequestEnUS siteRequest_, String o) {
@@ -3293,12 +3293,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static Date staticSearchDefaultRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchDefaultRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrDefaultRangeEnd(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrDefaultRangeEnd(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqDefaultRangeEnd(SiteRequestEnUS siteRequest_, String o) {
@@ -3369,12 +3369,12 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		return (PageLayout)this;
 	}
 
-	public static Date staticSearchDefaultRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchDefaultRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrDefaultRangeStart(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrDefaultRangeStart(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqDefaultRangeStart(SiteRequestEnUS siteRequest_, String o) {
@@ -5068,17 +5068,17 @@ public abstract class PageLayoutGen<DEV> extends Object {
 		case "rangeGap":
 			return PageLayout.staticSearchStrRangeGap(siteRequest_, (String)o);
 		case "rangeEnd":
-			return PageLayout.staticSearchStrRangeEnd(siteRequest_, (Date)o);
+			return PageLayout.staticSearchStrRangeEnd(siteRequest_, (String)o);
 		case "rangeStart":
-			return PageLayout.staticSearchStrRangeStart(siteRequest_, (Date)o);
+			return PageLayout.staticSearchStrRangeStart(siteRequest_, (String)o);
 		case "defaultRangeStats":
 			return PageLayout.staticSearchStrDefaultRangeStats(siteRequest_, (String)o);
 		case "defaultRangeGap":
 			return PageLayout.staticSearchStrDefaultRangeGap(siteRequest_, (String)o);
 		case "defaultRangeEnd":
-			return PageLayout.staticSearchStrDefaultRangeEnd(siteRequest_, (Date)o);
+			return PageLayout.staticSearchStrDefaultRangeEnd(siteRequest_, (String)o);
 		case "defaultRangeStart":
-			return PageLayout.staticSearchStrDefaultRangeStart(siteRequest_, (Date)o);
+			return PageLayout.staticSearchStrDefaultRangeStart(siteRequest_, (String)o);
 		case "defaultRangeVar":
 			return PageLayout.staticSearchStrDefaultRangeVar(siteRequest_, (String)o);
 		case "defaultFacetSort":
@@ -5270,7 +5270,6 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "PageLayout";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-PageLayout";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_lang = "lang";
 	public static final String VAR_requestVars = "requestVars";

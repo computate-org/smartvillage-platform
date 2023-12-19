@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.model.page.reader;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import java.lang.Object;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.lang.Object;
 import io.vertx.core.Vertx;
 import io.vertx.core.WorkerExecutor;
 import io.vertx.kafka.client.producer.KafkaProducer;
@@ -696,7 +696,6 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	public static final String[] SitePageReaderVals = new String[] { i18nGeneratorComplete1, i18nGeneratorFail1, i18nGeneratorPathComplete1, i18nGeneratorPathFail1, deletePageDataComplete1, deletePageDataFail1, importDataSitePagesComplete1, importDataSitePagesFail1, importDataSitePageComplete1, importDataSitePageFail1, importFuturesFail1, importSitePageComplete1, importSitePageFail1, importSiteHtmComplete1, importSiteHtmFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "SitePageReader";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-SitePageReader";
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_config = "config";
 	public static final String VAR_webClient = "webClient";

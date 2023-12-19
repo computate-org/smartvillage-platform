@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.page.dynamic;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.page.PageLayout;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillage.enus.page.PageLayout;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import org.computate.vertx.search.list.SearchList;
@@ -1236,7 +1236,6 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	public static final String[] DynamicPageVals = new String[] { htmListPromiseComplete1, htmListPromiseFail1, htmListLoopComplete1, htmListLoopFail1 };
 
 	public static final String CLASS_SIMPLE_NAME = "DynamicPage";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-DynamicPage";
 	public static final String VAR_page = "page";
 	public static final String VAR_url = "url";
 	public static final String VAR_uri = "uri";

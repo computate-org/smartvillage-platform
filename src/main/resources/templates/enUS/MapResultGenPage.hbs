@@ -72,7 +72,16 @@
 {{#*inline "jsWebsocketMapResultPage"}}{{/inline}}
 {{#*inline "jsTooltipMapResultPage"}}{{/inline}}
 {{#*inline "htmTooltipMapResultPage"}}{{/inline}}
-{{#*inline "jsStyleMapResultPage"}}{{/inline}}
+{{#*inline "jsStyleMapResultPage"}}
+				return {
+					radius: 8
+					, fillColor: '#ff7800'
+					, color: '#000'
+					, weight: 1
+					, opacity: 1
+					, fillOpacity: 0.8
+				};
+{{/inline}}
 {{#*inline "htmUrlMapResult"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadMapResultPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchMapResultPage"}}								<!-- #*inline "htmBodySearchMapResultPage" -->
@@ -370,8 +379,6 @@
 				<span class="">map results</span>
 			</a>
 		</h1>
-{{#block "htmBodyGraphLocation"}}{{/block}}
-{{#block "htmBodyGraph"}}{{/block}}
 		<div id="site-calendar-box">
 			<div id="site-calendar"><!-- // --></div>
 		</div>
@@ -630,6 +637,8 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
 	{{#eq mapResultCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
@@ -667,18 +676,26 @@
 {{/inline}}
 {{#*inline "thead2MapResultPage"}}
 			<tr>
+						<th>ID</th>
 						<th>created</th>
 						<th></th>
 			</tr>
 {{/inline}}
 {{#*inline "tbody1MapResultPage"}}
+<!-- #*inline "tbody1MapResultPage" -->
 				<tbody>
 {{> tbody2MapResultPage}}
 				</tbody>
 {{/inline}}
 {{#*inline "tbody2MapResultPage"}}
+<!-- #*inline "tbody2MapResultPage" -->
 		{{#each listMapResult}}
 					<tr>
+						<td>
+							<a href="{{pageUrlPk}}">
+								<span class="white-space-pre-wrap ">{{objectId}}</span>
+							</a>
+						</td>
 						<td>
 							<a href="{{pageUrlPk}}">
 								<span class="white-space-pre-wrap ">{{siteZonedDateTimeFormat created "MMM d, yyyy h:mm:ss a" siteLocale}}</span>
@@ -700,6 +717,10 @@
 {{/inline}}
 {{#*inline "tfoot2MapResultPage"}}
 			<tr>
+			{{#if getColumnObjectId}}
+				<td>
+				</td>
+			{{/if}}
 			{{#if getColumnCreated}}
 				<td>
 				</td>

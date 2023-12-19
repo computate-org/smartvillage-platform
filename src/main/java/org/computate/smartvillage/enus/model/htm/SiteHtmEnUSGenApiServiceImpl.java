@@ -431,7 +431,7 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 						params.put("query", query);
 						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 						JsonObject json = new JsonObject().put("context", context);
-						eventBus.request(SiteHtm.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "postSiteHtmFuture")).onSuccess(a -> {
+						eventBus.request(SiteHtm.getClassApiAddress(), json, new DeliveryOptions().addHeader("action", "postSiteHtmFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
@@ -905,7 +905,7 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request(SiteHtm.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "putimportSiteHtmFuture")).onSuccess(a -> {
+					eventBus.request(SiteHtm.getClassApiAddress(), json, new DeliveryOptions().addHeader("action", "putimportSiteHtmFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
 						LOG.error(String.format("listPUTImportSiteHtm failed. "), ex);

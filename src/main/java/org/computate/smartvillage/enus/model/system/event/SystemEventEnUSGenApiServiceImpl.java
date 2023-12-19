@@ -431,7 +431,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 						params.put("query", query);
 						JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 						JsonObject json = new JsonObject().put("context", context);
-						eventBus.request(SystemEvent.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
+						eventBus.request(SystemEvent.getClassApiAddress(), json, new DeliveryOptions().addHeader("action", "postSystemEventFuture")).onSuccess(a -> {
 							JsonObject responseMessage = (JsonObject)a.body();
 							JsonObject responseBody = new JsonObject(Buffer.buffer(JsonUtil.BASE64_DECODER.decode(responseMessage.getString("payload"))));
 							eventHandler.handle(Future.succeededFuture(ServiceResponse.completedWithJson(Buffer.buffer(responseBody.encodePrettily()))));
@@ -905,7 +905,7 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 					params.put("query", query);
 					JsonObject context = new JsonObject().put("params", params).put("user", siteRequest.getUserPrincipal());
 					JsonObject json = new JsonObject().put("context", context);
-					eventBus.request(SystemEvent.CLASS_API_ADDRESS, json, new DeliveryOptions().addHeader("action", "putimportSystemEventFuture")).onSuccess(a -> {
+					eventBus.request(SystemEvent.getClassApiAddress(), json, new DeliveryOptions().addHeader("action", "putimportSystemEventFuture")).onSuccess(a -> {
 						promise1.complete();
 					}).onFailure(ex -> {
 						LOG.error(String.format("listPUTImportSystemEvent failed. "), ex);

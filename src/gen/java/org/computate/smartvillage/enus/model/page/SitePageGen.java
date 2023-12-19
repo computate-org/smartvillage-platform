@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.model.page;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.result.base.BaseResult;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillage.enus.result.base.BaseResult;
 import java.lang.String;
 import java.lang.Integer;
 import org.computate.search.wrap.Wrap;
@@ -2211,7 +2211,10 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static final String CLASS_SIMPLE_NAME = "SitePage";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-SitePage";
+public static final String CLASS_API_ADDRESS_SitePage = "smartvillage-platform-enUS-SitePage";
+	public static String getClassApiAddress() {
+		return CLASS_API_ADDRESS_SitePage;
+	}
 	public static final String VAR_githubOrg = "githubOrg";
 	public static final String VAR_siteName = "siteName";
 	public static final String VAR_siteDisplayName = "siteDisplayName";

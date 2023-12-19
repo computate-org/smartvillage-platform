@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.model.system.event;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import java.lang.Object;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.lang.Object;
 import java.lang.Void;
 import java.lang.String;
 import java.time.ZonedDateTime;
@@ -575,12 +575,12 @@ public abstract class SystemEventGen<DEV> extends Object {
 		return (SystemEvent)this;
 	}
 
-	public static Date staticSearchCompleted(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchCompleted(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrCompleted(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrCompleted(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqCompleted(SiteRequestEnUS siteRequest_, String o) {
@@ -711,12 +711,12 @@ public abstract class SystemEventGen<DEV> extends Object {
 		return (SystemEvent)this;
 	}
 
-	public static Date staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrCreated(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrCreated(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqCreated(SiteRequestEnUS siteRequest_, String o) {
@@ -791,12 +791,12 @@ public abstract class SystemEventGen<DEV> extends Object {
 		return (SystemEvent)this;
 	}
 
-	public static Date staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant());
+	public static String staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
+		return o == null ? null : Date.from(o.toInstant()).toString();
 	}
 
-	public static String staticSearchStrModified(SiteRequestEnUS siteRequest_, Date o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
+	public static String staticSearchStrModified(SiteRequestEnUS siteRequest_, String o) {
+		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchFqModified(SiteRequestEnUS siteRequest_, String o) {
@@ -2332,13 +2332,13 @@ public abstract class SystemEventGen<DEV> extends Object {
 		case "status":
 			return SystemEvent.staticSearchStrStatus(siteRequest_, (String)o);
 		case "completed":
-			return SystemEvent.staticSearchStrCompleted(siteRequest_, (Date)o);
+			return SystemEvent.staticSearchStrCompleted(siteRequest_, (String)o);
 		case "inheritPk":
 			return SystemEvent.staticSearchStrInheritPk(siteRequest_, (String)o);
 		case "created":
-			return SystemEvent.staticSearchStrCreated(siteRequest_, (Date)o);
+			return SystemEvent.staticSearchStrCreated(siteRequest_, (String)o);
 		case "modified":
-			return SystemEvent.staticSearchStrModified(siteRequest_, (Date)o);
+			return SystemEvent.staticSearchStrModified(siteRequest_, (String)o);
 		case "pageImageUri":
 			return SystemEvent.staticSearchStrPageImageUri(siteRequest_, (String)o);
 		case "pageImageWidth":
@@ -2559,9 +2559,9 @@ public abstract class SystemEventGen<DEV> extends Object {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addObjectText(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setObjectText(v.toString()));
+					((JsonArray)val).stream().forEach(v -> addObjectText(staticSetObjectText(siteRequest_, v.toString())));
 				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setObjectText((String)v));
+					Arrays.asList((String[])val).stream().forEach(v -> addObjectText((String)v));
 				}
 				if(!saves.contains("objectText")) {
 					saves.add("objectText");
@@ -2603,7 +2603,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 			}
 
 			if(saves.contains("completed")) {
-				Date completed = (Date)doc.get("completed_docvalues_date");
+				String completed = (String)doc.get("completed_docvalues_date");
 				if(completed != null)
 					oSystemEvent.setCompleted(completed);
 			}
@@ -2615,13 +2615,13 @@ public abstract class SystemEventGen<DEV> extends Object {
 			}
 
 			if(saves.contains("created")) {
-				Date created = (Date)doc.get("created_docvalues_date");
+				String created = (String)doc.get("created_docvalues_date");
 				if(created != null)
 					oSystemEvent.setCreated(created);
 			}
 
 			if(saves.contains("modified")) {
-				Date modified = (Date)doc.get("modified_docvalues_date");
+				String modified = (String)doc.get("modified_docvalues_date");
 				if(modified != null)
 					oSystemEvent.setModified(modified);
 			}
@@ -3118,7 +3118,10 @@ public abstract class SystemEventGen<DEV> extends Object {
 	public static final String[] SystemEventVals = new String[] { statusStarted1_enUS, statusCompleted1_enUS, statusError1_enUS };
 
 	public static final String CLASS_SIMPLE_NAME = "SystemEvent";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-SystemEvent";
+public static final String CLASS_API_ADDRESS_SystemEvent = "smartvillage-platform-enUS-SystemEvent";
+	public static String getClassApiAddress() {
+		return CLASS_API_ADDRESS_SystemEvent;
+	}
 	public static final String VAR_siteRequest_ = "siteRequest_";
 	public static final String VAR_promiseBefore = "promiseBefore";
 	public static final String VAR_type = "type";

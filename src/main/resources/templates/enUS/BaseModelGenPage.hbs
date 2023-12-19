@@ -72,7 +72,16 @@
 {{#*inline "jsWebsocketBaseModelPage"}}{{/inline}}
 {{#*inline "jsTooltipBaseModelPage"}}{{/inline}}
 {{#*inline "htmTooltipBaseModelPage"}}{{/inline}}
-{{#*inline "jsStyleBaseModelPage"}}{{/inline}}
+{{#*inline "jsStyleBaseModelPage"}}
+				return {
+					radius: 8
+					, fillColor: '#ff7800'
+					, color: '#000'
+					, weight: 1
+					, opacity: 1
+					, fillOpacity: 0.8
+				};
+{{/inline}}
 {{#*inline "htmUrlBaseModel"}}{{pageUri}}?q={{query.q}}&amp;rows={{#if rows}}{{rows}}{{else}}{{pagination.rows}}{{/if}}&amp;rows={{#if start}}{{start}}{{else}}{{pagination.start}}{{/if}}{{#each query.fq}}{{#eq fq this}}{{else}}&fq={{fq}}:{{val}}{{/eq}}{{/each}}{{#each query.sort}}{{#eq sort this}}{{else}}&sort={{var}} {{order}}{{/eq}}{{/each}}{{/inline}}
 {{#*inline "htmHeadBaseModelPage"}}{{#block "htmTitle"}}{{/block}}{{#block "htmMeta"}}{{/block}}{{#block "htmStyle"}}{{/block}}{{#block "htmScripts"}}{{/block}}{{#block "htmScript"}}{{/block}}{{/inline}}
 {{#*inline "htmBodySearchBaseModelPage"}}								<!-- #*inline "htmBodySearchBaseModelPage" -->
@@ -370,8 +379,6 @@
 				<span class=""></span>
 			</a>
 		</h1>
-{{#block "htmBodyGraphLocation"}}{{/block}}
-{{#block "htmBodyGraph"}}{{/block}}
 		<div id="site-calendar-box">
 			<div id="site-calendar"><!-- // --></div>
 		</div>
@@ -509,6 +516,8 @@
 		<div class="w3-bar w3-content ">
 {{#block "htmBodySidebar"}}{{/block}}
 		</div>
+{{#block "htmBodyGraphLocation"}}{{/block}}
+{{#block "htmBodyGraph"}}{{/block}}
 	<div class="pageContent w3-content ">
 	{{#eq baseModelCount int0}}
 {{#block "htmBodyCount0"}}{{/block}}
@@ -551,11 +560,13 @@
 			</tr>
 {{/inline}}
 {{#*inline "tbody1BaseModelPage"}}
+<!-- #*inline "tbody1BaseModelPage" -->
 				<tbody>
 {{> tbody2BaseModelPage}}
 				</tbody>
 {{/inline}}
 {{#*inline "tbody2BaseModelPage"}}
+<!-- #*inline "tbody2BaseModelPage" -->
 		{{#each listBaseModel}}
 					<tr>
 						<td>

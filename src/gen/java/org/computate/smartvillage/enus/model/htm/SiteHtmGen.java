@@ -15,6 +15,7 @@
 package org.computate.smartvillage.enus.model.htm;
 
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
+import org.computate.smartvillage.enus.result.base.BaseResult;
 import org.computate.smartvillage.enus.model.base.BaseModel;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.smartvillage.enus.config.ConfigKeys;
@@ -46,7 +47,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.math.RoundingMode;
 import java.util.Map;
-import org.computate.smartvillage.enus.result.base.BaseResult;
 import java.lang.String;
 import java.lang.Long;
 import io.vertx.core.json.JsonArray;
@@ -1648,9 +1648,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addLabels(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setLabels(v.toString()));
+					((JsonArray)val).stream().forEach(v -> addLabels(staticSetLabels(siteRequest_, v.toString())));
 				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setLabels((String)v));
+					Arrays.asList((String[])val).stream().forEach(v -> addLabels((String)v));
 				}
 				if(!saves.contains("labels")) {
 					saves.add("labels");
@@ -1680,9 +1680,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addText(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setText(v.toString()));
+					((JsonArray)val).stream().forEach(v -> addText(staticSetText(siteRequest_, v.toString())));
 				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setText((String)v));
+					Arrays.asList((String[])val).stream().forEach(v -> addText((String)v));
 				}
 				if(!saves.contains("text")) {
 					saves.add("text");
@@ -1692,9 +1692,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addComment(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setComment(v.toString()));
+					((JsonArray)val).stream().forEach(v -> addComment(staticSetComment(siteRequest_, v.toString())));
 				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setComment((String)v));
+					Arrays.asList((String[])val).stream().forEach(v -> addComment((String)v));
 				}
 				if(!saves.contains("comment")) {
 					saves.add("comment");
@@ -1724,9 +1724,9 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 				if(val instanceof List<?>) {
 					((List<String>)val).stream().forEach(v -> addHtmMiddle(v));
 				} else if(val instanceof JsonArray) {
-					((JsonArray)val).stream().forEach(v -> setHtmMiddle(v.toString()));
+					((JsonArray)val).stream().forEach(v -> addHtmMiddle(staticSetHtmMiddle(siteRequest_, v.toString())));
 				} else if(val instanceof String[]) {
-					Arrays.asList((String[])val).stream().forEach(v -> setHtmMiddle((String)v));
+					Arrays.asList((String[])val).stream().forEach(v -> addHtmMiddle((String)v));
 				}
 				if(!saves.contains("htmMiddle")) {
 					saves.add("htmMiddle");
@@ -2148,7 +2148,10 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	public static final String[] SiteHtmVals = new String[] { text_markdown1_enUS };
 
 	public static final String CLASS_SIMPLE_NAME = "SiteHtm";
-	public static final String CLASS_API_ADDRESS = "smartvillage-platform-enUS-SiteHtm";
+public static final String CLASS_API_ADDRESS_SiteHtm = "smartvillage-platform-enUS-SiteHtm";
+	public static String getClassApiAddress() {
+		return CLASS_API_ADDRESS_SiteHtm;
+	}
 	public static final String VAR_url = "url";
 	public static final String VAR_uri = "uri";
 	public static final String VAR_pageId = "pageId";
