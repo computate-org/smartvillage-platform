@@ -288,7 +288,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqGithubOrg(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrGithubOrg(siteRequest_, SitePage.staticSearchGithubOrg(siteRequest_, SitePage.staticSetGithubOrg(siteRequest_, o)));
+		return SitePage.staticSearchGithubOrg(siteRequest_, SitePage.staticSetGithubOrg(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -340,7 +340,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqSiteName(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrSiteName(siteRequest_, SitePage.staticSearchSiteName(siteRequest_, SitePage.staticSetSiteName(siteRequest_, o)));
+		return SitePage.staticSearchSiteName(siteRequest_, SitePage.staticSetSiteName(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -392,7 +392,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqSiteDisplayName(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrSiteDisplayName(siteRequest_, SitePage.staticSearchSiteDisplayName(siteRequest_, SitePage.staticSetSiteDisplayName(siteRequest_, o)));
+		return SitePage.staticSearchSiteDisplayName(siteRequest_, SitePage.staticSetSiteDisplayName(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -444,7 +444,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqSitePublicUrl(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrSitePublicUrl(siteRequest_, SitePage.staticSearchSitePublicUrl(siteRequest_, SitePage.staticSetSitePublicUrl(siteRequest_, o)));
+		return SitePage.staticSearchSitePublicUrl(siteRequest_, SitePage.staticSetSitePublicUrl(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -496,7 +496,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqMailingListUrl(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrMailingListUrl(siteRequest_, SitePage.staticSearchMailingListUrl(siteRequest_, SitePage.staticSetMailingListUrl(siteRequest_, o)));
+		return SitePage.staticSearchMailingListUrl(siteRequest_, SitePage.staticSetMailingListUrl(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -548,7 +548,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqQuayioOrg(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrQuayioOrg(siteRequest_, SitePage.staticSearchQuayioOrg(siteRequest_, SitePage.staticSetQuayioOrg(siteRequest_, o)));
+		return SitePage.staticSearchQuayioOrg(siteRequest_, SitePage.staticSetQuayioOrg(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -600,7 +600,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqSitePomGroupId(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrSitePomGroupId(siteRequest_, SitePage.staticSearchSitePomGroupId(siteRequest_, SitePage.staticSetSitePomGroupId(siteRequest_, o)));
+		return SitePage.staticSearchSitePomGroupId(siteRequest_, SitePage.staticSetSitePomGroupId(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -652,7 +652,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqStaticBaseUrl(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrStaticBaseUrl(siteRequest_, SitePage.staticSearchStaticBaseUrl(siteRequest_, SitePage.staticSetStaticBaseUrl(siteRequest_, o)));
+		return SitePage.staticSearchStaticBaseUrl(siteRequest_, SitePage.staticSetStaticBaseUrl(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -704,7 +704,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqStaticPath(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrStaticPath(siteRequest_, SitePage.staticSearchStaticPath(siteRequest_, SitePage.staticSetStaticPath(siteRequest_, o)));
+		return SitePage.staticSearchStaticPath(siteRequest_, SitePage.staticSetStaticPath(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -756,7 +756,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrSiteBaseUrl(siteRequest_, SitePage.staticSearchSiteBaseUrl(siteRequest_, SitePage.staticSetSiteBaseUrl(siteRequest_, o)));
+		return SitePage.staticSearchSiteBaseUrl(siteRequest_, SitePage.staticSetSiteBaseUrl(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -816,7 +816,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqCourseNum(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrCourseNum(siteRequest_, SitePage.staticSearchCourseNum(siteRequest_, SitePage.staticSetCourseNum(siteRequest_, o)));
+		return SitePage.staticSearchCourseNum(siteRequest_, SitePage.staticSetCourseNum(siteRequest_, o)).toString();
 	}
 
 	public Integer sqlCourseNum() {
@@ -880,7 +880,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqLessonNum(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrLessonNum(siteRequest_, SitePage.staticSearchLessonNum(siteRequest_, SitePage.staticSetLessonNum(siteRequest_, o)));
+		return SitePage.staticSearchLessonNum(siteRequest_, SitePage.staticSetLessonNum(siteRequest_, o)).toString();
 	}
 
 	public Integer sqlLessonNum() {
@@ -936,7 +936,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqUrl(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrUrl(siteRequest_, SitePage.staticSearchUrl(siteRequest_, SitePage.staticSetUrl(siteRequest_, o)));
+		return SitePage.staticSearchUrl(siteRequest_, SitePage.staticSetUrl(siteRequest_, o)).toString();
 	}
 
 	public String sqlUrl() {
@@ -992,7 +992,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqUri(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrUri(siteRequest_, SitePage.staticSearchUri(siteRequest_, SitePage.staticSetUri(siteRequest_, o)));
+		return SitePage.staticSearchUri(siteRequest_, SitePage.staticSetUri(siteRequest_, o)).toString();
 	}
 
 	public String sqlUri() {
@@ -1048,7 +1048,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrPageId(siteRequest_, SitePage.staticSearchPageId(siteRequest_, SitePage.staticSetPageId(siteRequest_, o)));
+		return SitePage.staticSearchPageId(siteRequest_, SitePage.staticSetPageId(siteRequest_, o)).toString();
 	}
 
 	public String sqlPageId() {
@@ -1104,7 +1104,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqH1(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrH1(siteRequest_, SitePage.staticSearchH1(siteRequest_, SitePage.staticSetH1(siteRequest_, o)));
+		return SitePage.staticSearchH1(siteRequest_, SitePage.staticSetH1(siteRequest_, o)).toString();
 	}
 
 	public String sqlH1() {
@@ -1160,7 +1160,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqH2(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrH2(siteRequest_, SitePage.staticSearchH2(siteRequest_, SitePage.staticSetH2(siteRequest_, o)));
+		return SitePage.staticSearchH2(siteRequest_, SitePage.staticSetH2(siteRequest_, o)).toString();
 	}
 
 	public String sqlH2() {
@@ -1216,7 +1216,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqAuthor(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrAuthor(siteRequest_, SitePage.staticSearchAuthor(siteRequest_, SitePage.staticSetAuthor(siteRequest_, o)));
+		return SitePage.staticSearchAuthor(siteRequest_, SitePage.staticSetAuthor(siteRequest_, o)).toString();
 	}
 
 	public String sqlAuthor() {
@@ -1272,7 +1272,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqPageImageUri(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrPageImageUri(siteRequest_, SitePage.staticSearchPageImageUri(siteRequest_, SitePage.staticSetPageImageUri(siteRequest_, o)));
+		return SitePage.staticSearchPageImageUri(siteRequest_, SitePage.staticSetPageImageUri(siteRequest_, o)).toString();
 	}
 
 	public String sqlPageImageUri() {
@@ -1336,7 +1336,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqPageImageWidth(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrPageImageWidth(siteRequest_, SitePage.staticSearchPageImageWidth(siteRequest_, SitePage.staticSetPageImageWidth(siteRequest_, o)));
+		return SitePage.staticSearchPageImageWidth(siteRequest_, SitePage.staticSetPageImageWidth(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -1396,7 +1396,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqPageImageHeight(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrPageImageHeight(siteRequest_, SitePage.staticSearchPageImageHeight(siteRequest_, SitePage.staticSetPageImageHeight(siteRequest_, o)));
+		return SitePage.staticSearchPageImageHeight(siteRequest_, SitePage.staticSetPageImageHeight(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -1448,7 +1448,7 @@ public abstract class SitePageGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqPageImageType(SiteRequestEnUS siteRequest_, String o) {
-		return SitePage.staticSearchStrPageImageType(siteRequest_, SitePage.staticSearchPageImageType(siteRequest_, SitePage.staticSetPageImageType(siteRequest_, o)));
+		return SitePage.staticSearchPageImageType(siteRequest_, SitePage.staticSetPageImageType(siteRequest_, o)).toString();
 	}
 
 	//////////////

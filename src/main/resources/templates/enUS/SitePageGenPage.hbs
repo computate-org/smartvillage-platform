@@ -60,6 +60,31 @@
 				return `{{#block "htmTooltip"}}{{/block}}`;
 			}
 
+			function jsLegendSitePage(map) {
+{{#block "jsLegend"}}{{/block}}
+			}
+
+			function htmLegendSitePage(map, shape, , index, count) {
+				var color = sitePage.[index];
+				var title = sitePage.[index];
+				var url = sitePage.[index];
+				var htm = '';
+				if(index == 0) {
+					htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off ">
+	<div class="w3-larger font-weight-bold ">articles</div>
+	<div>
+`;
+				}
+				htm += `{{#block "htmLegend"}}{{/block}}`;
+				if(index == (count - 1)) {
+					htm += `
+	</div>
+</div>
+`;
+				}
+				return htm;
+			}
+
 			function jsStyleSitePage(feature) {
 {{#block "jsStyle"}}{{/block}}
 			}
@@ -72,6 +97,30 @@
 {{#*inline "jsWebsocketSitePagePage"}}{{/inline}}
 {{#*inline "jsTooltipSitePagePage"}}{{/inline}}
 {{#*inline "htmTooltipSitePagePage"}}{{/inline}}
+{{#*inline "jsLegendSitePagePage"}}
+				var div = L.DomUtil.create('div', 'info legend');
+				var htm = '';
+				$.each( window.listSitePage, function(index, sitePage) {
+					if(sitePage.) {
+						var shapes = [];
+						if(Array.isArray(sitePage.))
+							shapes = shapes.concat(sitePage.);
+						else
+							shapes.push(sitePage.);
+						shapes.forEach(function(shape, index) {
+							htm += htmLegendSitePage(map, shape, , index, shapes.length);
+						});
+					}
+				});
+				div.innerHTML = htm;
+				return div;
+{{/inline}}
+{{#*inline "htmLegendSitePagePage"}}
+		<div>
+			<i class="fa-light fa-circle" style="color: ${color}; "></i>
+			<span data-id="${.id}" onclick="window.geoJSONLayerGroupSitePage.getLayer(window.mapLayers[this.getAttribute('data-id')]).openPopup(); return false;" href="">${title}</span>
+		</div>
+{{/inline}}
 {{#*inline "jsStyleSitePagePage"}}
 				if(feature.geometry.type == 'Point') {
 					return {
@@ -85,7 +134,7 @@
 				} else {
 					return {
 						 fillColor: '#ff7800'
-						, color: (feature.properties.areaServedColors ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, weight: 5
 						, opacity: 1
 						, fillOpacity: 0.8
@@ -313,7 +362,7 @@
 {{#*inline "htmBodyGraphSitePagePage"}}		<!-- #*inline "htmBodyGraphSitePagePage" -->
 <div id="htmBodyGraphBaseResultPage" class="w3-content htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyGraphLocationSitePagePage"}}		<!-- #*inline "htmBodyGraphLocationSitePagePage" -->
-<div id="htmBodyGraphLocationBaseResultPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
+<div id="htmBodyGraphLocationSitePagePage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0SitePagePage"}}		<!-- #*inline "htmBodyCount0SitePagePage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">

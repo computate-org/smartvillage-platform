@@ -287,7 +287,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqTimeStepId(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrTimeStepId(siteRequest_, MapResult.staticSearchTimeStepId(siteRequest_, MapResult.staticSetTimeStepId(siteRequest_, o)));
+		return MapResult.staticSearchTimeStepId(siteRequest_, MapResult.staticSetTimeStepId(siteRequest_, o)).toString();
 	}
 
 	public String sqlTimeStepId() {
@@ -364,7 +364,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqTime(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrTime(siteRequest_, MapResult.staticSearchTime(siteRequest_, MapResult.staticSetTime(siteRequest_, o)));
+		return MapResult.staticSearchTime(siteRequest_, MapResult.staticSetTime(siteRequest_, o)).toString();
 	}
 
 	public BigDecimal sqlTime() {
@@ -436,15 +436,15 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchDateTime(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrDateTime(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return MapResult.staticSearchDateTime(siteRequest_, MapResult.staticSetDateTime(siteRequest_, o));
 	}
 
 	public static String staticSearchFqDateTime(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrDateTime(siteRequest_, MapResult.staticSearchDateTime(siteRequest_, MapResult.staticSetDateTime(siteRequest_, o)));
+		return MapResult.staticSearchDateTime(siteRequest_, MapResult.staticSetDateTime(siteRequest_, o)).toString();
 	}
 
 	public OffsetDateTime sqlDateTime() {
@@ -508,7 +508,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqX(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrX(siteRequest_, MapResult.staticSearchX(siteRequest_, MapResult.staticSetX(siteRequest_, o)));
+		return MapResult.staticSearchX(siteRequest_, MapResult.staticSetX(siteRequest_, o)).toString();
 	}
 
 	public Double sqlX() {
@@ -572,7 +572,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqY(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrY(siteRequest_, MapResult.staticSearchY(siteRequest_, MapResult.staticSetY(siteRequest_, o)));
+		return MapResult.staticSearchY(siteRequest_, MapResult.staticSetY(siteRequest_, o)).toString();
 	}
 
 	public Double sqlY() {
@@ -644,7 +644,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqLocation(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrLocation(siteRequest_, MapResult.staticSearchLocation(siteRequest_, MapResult.staticSetLocation(siteRequest_, o)));
+		return MapResult.staticSearchLocation(siteRequest_, MapResult.staticSetLocation(siteRequest_, o)).toString();
 	}
 
 	public Point sqlLocation() {
@@ -700,7 +700,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrColor(siteRequest_, MapResult.staticSearchColor(siteRequest_, MapResult.staticSetColor(siteRequest_, o)));
+		return MapResult.staticSearchColor(siteRequest_, MapResult.staticSetColor(siteRequest_, o)).toString();
 	}
 
 	public String sqlColor() {
@@ -761,7 +761,7 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqStep(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchStrStep(siteRequest_, MapResult.staticSearchStep(siteRequest_, MapResult.staticSetStep(siteRequest_, o)));
+		return MapResult.staticSearchStep(siteRequest_, MapResult.staticSetStep(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlStep() {

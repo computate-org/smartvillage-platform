@@ -225,7 +225,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqListBaseModel(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModelGenPage.staticSearchStrListBaseModel(siteRequest_, BaseModelGenPage.staticSearchListBaseModel(siteRequest_, BaseModelGenPage.staticSetListBaseModel(siteRequest_, o)));
+		return BaseModelGenPage.staticSearchListBaseModel(siteRequest_, BaseModelGenPage.staticSetListBaseModel(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -285,7 +285,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqBaseModelCount(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModelGenPage.staticSearchStrBaseModelCount(siteRequest_, BaseModelGenPage.staticSearchBaseModelCount(siteRequest_, BaseModelGenPage.staticSetBaseModelCount(siteRequest_, o)));
+		return BaseModelGenPage.staticSearchBaseModelCount(siteRequest_, BaseModelGenPage.staticSetBaseModelCount(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -386,7 +386,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModelGenPage.staticSearchStrPk(siteRequest_, BaseModelGenPage.staticSearchPk(siteRequest_, BaseModelGenPage.staticSetPk(siteRequest_, o)));
+		return BaseModelGenPage.staticSearchPk(siteRequest_, BaseModelGenPage.staticSetPk(siteRequest_, o)).toString();
 	}
 
 	////////
@@ -438,7 +438,7 @@ public abstract class BaseModelGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModelGenPage.staticSearchStrId(siteRequest_, BaseModelGenPage.staticSearchId(siteRequest_, BaseModelGenPage.staticSetId(siteRequest_, o)));
+		return BaseModelGenPage.staticSearchId(siteRequest_, BaseModelGenPage.staticSetId(siteRequest_, o)).toString();
 	}
 
 	//////////////

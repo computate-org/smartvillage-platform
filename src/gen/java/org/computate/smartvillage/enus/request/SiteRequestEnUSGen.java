@@ -173,7 +173,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqConfig(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrConfig(siteRequest_, SiteRequestEnUS.staticSearchConfig(siteRequest_, SiteRequestEnUS.staticSetConfig(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchConfig(siteRequest_, SiteRequestEnUS.staticSetConfig(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -356,7 +356,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqJsonObject(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrJsonObject(siteRequest_, SiteRequestEnUS.staticSearchJsonObject(siteRequest_, SiteRequestEnUS.staticSetJsonObject(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchJsonObject(siteRequest_, SiteRequestEnUS.staticSetJsonObject(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -498,7 +498,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserPrincipal(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserPrincipal(siteRequest_, SiteRequestEnUS.staticSearchUserPrincipal(siteRequest_, SiteRequestEnUS.staticSetUserPrincipal(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserPrincipal(siteRequest_, SiteRequestEnUS.staticSetUserPrincipal(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -550,7 +550,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserId(siteRequest_, SiteRequestEnUS.staticSearchUserId(siteRequest_, SiteRequestEnUS.staticSetUserId(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserId(siteRequest_, SiteRequestEnUS.staticSetUserId(siteRequest_, o)).toString();
 	}
 
 	/////////////
@@ -610,7 +610,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserKey(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserKey(siteRequest_, SiteRequestEnUS.staticSearchUserKey(siteRequest_, SiteRequestEnUS.staticSetUserKey(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserKey(siteRequest_, SiteRequestEnUS.staticSetUserKey(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -662,7 +662,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSessionId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrSessionId(siteRequest_, SiteRequestEnUS.staticSearchSessionId(siteRequest_, SiteRequestEnUS.staticSetSessionId(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchSessionId(siteRequest_, SiteRequestEnUS.staticSetSessionId(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -714,7 +714,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSessionIdBefore(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrSessionIdBefore(siteRequest_, SiteRequestEnUS.staticSearchSessionIdBefore(siteRequest_, SiteRequestEnUS.staticSetSessionIdBefore(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchSessionIdBefore(siteRequest_, SiteRequestEnUS.staticSetSessionIdBefore(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -766,7 +766,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserName(siteRequest_, SiteRequestEnUS.staticSearchUserName(siteRequest_, SiteRequestEnUS.staticSetUserName(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserName(siteRequest_, SiteRequestEnUS.staticSetUserName(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -818,7 +818,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserLastName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserLastName(siteRequest_, SiteRequestEnUS.staticSearchUserLastName(siteRequest_, SiteRequestEnUS.staticSetUserLastName(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserLastName(siteRequest_, SiteRequestEnUS.staticSetUserLastName(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -870,7 +870,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserFirstName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserFirstName(siteRequest_, SiteRequestEnUS.staticSearchUserFirstName(siteRequest_, SiteRequestEnUS.staticSetUserFirstName(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserFirstName(siteRequest_, SiteRequestEnUS.staticSetUserFirstName(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -922,7 +922,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserFullName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserFullName(siteRequest_, SiteRequestEnUS.staticSearchUserFullName(siteRequest_, SiteRequestEnUS.staticSetUserFullName(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserFullName(siteRequest_, SiteRequestEnUS.staticSetUserFullName(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -974,7 +974,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserEmail(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserEmail(siteRequest_, SiteRequestEnUS.staticSearchUserEmail(siteRequest_, SiteRequestEnUS.staticSetUserEmail(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserEmail(siteRequest_, SiteRequestEnUS.staticSetUserEmail(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -1048,7 +1048,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserRealmRoles(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserRealmRoles(siteRequest_, SiteRequestEnUS.staticSearchUserRealmRoles(siteRequest_, SiteRequestEnUS.staticSetUserRealmRoles(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserRealmRoles(siteRequest_, SiteRequestEnUS.staticSetUserRealmRoles(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -1108,7 +1108,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserResource(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserResource(siteRequest_, SiteRequestEnUS.staticSearchUserResource(siteRequest_, SiteRequestEnUS.staticSetUserResource(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserResource(siteRequest_, SiteRequestEnUS.staticSetUserResource(siteRequest_, o)).toString();
 	}
 
 	///////////////////////
@@ -1182,7 +1182,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserResourceRoles(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrUserResourceRoles(siteRequest_, SiteRequestEnUS.staticSearchUserResourceRoles(siteRequest_, SiteRequestEnUS.staticSetUserResourceRoles(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchUserResourceRoles(siteRequest_, SiteRequestEnUS.staticSetUserResourceRoles(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1275,7 +1275,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqLang(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrLang(siteRequest_, SiteRequestEnUS.staticSearchLang(siteRequest_, SiteRequestEnUS.staticSetLang(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchLang(siteRequest_, SiteRequestEnUS.staticSetLang(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1335,7 +1335,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRequestPk(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrRequestPk(siteRequest_, SiteRequestEnUS.staticSearchRequestPk(siteRequest_, SiteRequestEnUS.staticSetRequestPk(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchRequestPk(siteRequest_, SiteRequestEnUS.staticSetRequestPk(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -1387,7 +1387,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRequestUri(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrRequestUri(siteRequest_, SiteRequestEnUS.staticSearchRequestUri(siteRequest_, SiteRequestEnUS.staticSetRequestUri(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchRequestUri(siteRequest_, SiteRequestEnUS.staticSetRequestUri(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -1439,7 +1439,7 @@ public abstract class SiteRequestEnUSGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRequestMethod(SiteRequestEnUS siteRequest_, String o) {
-		return SiteRequestEnUS.staticSearchStrRequestMethod(siteRequest_, SiteRequestEnUS.staticSearchRequestMethod(siteRequest_, SiteRequestEnUS.staticSetRequestMethod(siteRequest_, o)));
+		return SiteRequestEnUS.staticSearchRequestMethod(siteRequest_, SiteRequestEnUS.staticSetRequestMethod(siteRequest_, o)).toString();
 	}
 
 	///////////////////

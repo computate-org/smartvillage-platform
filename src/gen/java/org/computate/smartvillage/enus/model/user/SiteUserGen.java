@@ -325,7 +325,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserKeys(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserKeys(siteRequest_, SiteUser.staticSearchUserKeys(siteRequest_, SiteUser.staticSetUserKeys(siteRequest_, o)));
+		return SiteUser.staticSearchUserKeys(siteRequest_, SiteUser.staticSetUserKeys(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -377,7 +377,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserId(siteRequest_, SiteUser.staticSearchUserId(siteRequest_, SiteUser.staticSetUserId(siteRequest_, o)));
+		return SiteUser.staticSearchUserId(siteRequest_, SiteUser.staticSetUserId(siteRequest_, o)).toString();
 	}
 
 	public String sqlUserId() {
@@ -433,7 +433,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserName(siteRequest_, SiteUser.staticSearchUserName(siteRequest_, SiteUser.staticSetUserName(siteRequest_, o)));
+		return SiteUser.staticSearchUserName(siteRequest_, SiteUser.staticSetUserName(siteRequest_, o)).toString();
 	}
 
 	public String sqlUserName() {
@@ -489,7 +489,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserEmail(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserEmail(siteRequest_, SiteUser.staticSearchUserEmail(siteRequest_, SiteUser.staticSetUserEmail(siteRequest_, o)));
+		return SiteUser.staticSearchUserEmail(siteRequest_, SiteUser.staticSetUserEmail(siteRequest_, o)).toString();
 	}
 
 	public String sqlUserEmail() {
@@ -545,7 +545,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserFirstName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserFirstName(siteRequest_, SiteUser.staticSearchUserFirstName(siteRequest_, SiteUser.staticSetUserFirstName(siteRequest_, o)));
+		return SiteUser.staticSearchUserFirstName(siteRequest_, SiteUser.staticSetUserFirstName(siteRequest_, o)).toString();
 	}
 
 	public String sqlUserFirstName() {
@@ -601,7 +601,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserLastName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserLastName(siteRequest_, SiteUser.staticSearchUserLastName(siteRequest_, SiteUser.staticSetUserLastName(siteRequest_, o)));
+		return SiteUser.staticSearchUserLastName(siteRequest_, SiteUser.staticSetUserLastName(siteRequest_, o)).toString();
 	}
 
 	public String sqlUserLastName() {
@@ -657,7 +657,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqUserFullName(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrUserFullName(siteRequest_, SiteUser.staticSearchUserFullName(siteRequest_, SiteUser.staticSetUserFullName(siteRequest_, o)));
+		return SiteUser.staticSearchUserFullName(siteRequest_, SiteUser.staticSetUserFullName(siteRequest_, o)).toString();
 	}
 
 	public String sqlUserFullName() {
@@ -718,7 +718,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqSeeArchived(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrSeeArchived(siteRequest_, SiteUser.staticSearchSeeArchived(siteRequest_, SiteUser.staticSetSeeArchived(siteRequest_, o)));
+		return SiteUser.staticSearchSeeArchived(siteRequest_, SiteUser.staticSetSeeArchived(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlSeeArchived() {
@@ -779,7 +779,7 @@ public abstract class SiteUserGen<DEV> extends BaseModel {
 	}
 
 	public static String staticSearchFqSeeDeleted(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUser.staticSearchStrSeeDeleted(siteRequest_, SiteUser.staticSearchSeeDeleted(siteRequest_, SiteUser.staticSetSeeDeleted(siteRequest_, o)));
+		return SiteUser.staticSearchSeeDeleted(siteRequest_, SiteUser.staticSetSeeDeleted(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlSeeDeleted() {

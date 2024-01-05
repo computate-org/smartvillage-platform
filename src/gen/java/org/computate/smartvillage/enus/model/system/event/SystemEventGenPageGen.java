@@ -225,7 +225,7 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqListSystemEvent(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEventGenPage.staticSearchStrListSystemEvent(siteRequest_, SystemEventGenPage.staticSearchListSystemEvent(siteRequest_, SystemEventGenPage.staticSetListSystemEvent(siteRequest_, o)));
+		return SystemEventGenPage.staticSearchListSystemEvent(siteRequest_, SystemEventGenPage.staticSetListSystemEvent(siteRequest_, o)).toString();
 	}
 
 	//////////////////////
@@ -285,7 +285,7 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqSystemEventCount(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEventGenPage.staticSearchStrSystemEventCount(siteRequest_, SystemEventGenPage.staticSearchSystemEventCount(siteRequest_, SystemEventGenPage.staticSetSystemEventCount(siteRequest_, o)));
+		return SystemEventGenPage.staticSearchSystemEventCount(siteRequest_, SystemEventGenPage.staticSetSystemEventCount(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -378,7 +378,7 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEventGenPage.staticSearchStrId(siteRequest_, SystemEventGenPage.staticSearchId(siteRequest_, SystemEventGenPage.staticSetId(siteRequest_, o)));
+		return SystemEventGenPage.staticSearchId(siteRequest_, SystemEventGenPage.staticSetId(siteRequest_, o)).toString();
 	}
 
 	////////////////////////
@@ -430,7 +430,7 @@ public abstract class SystemEventGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqPageUriSystemEvent(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEventGenPage.staticSearchStrPageUriSystemEvent(siteRequest_, SystemEventGenPage.staticSearchPageUriSystemEvent(siteRequest_, SystemEventGenPage.staticSetPageUriSystemEvent(siteRequest_, o)));
+		return SystemEventGenPage.staticSearchPageUriSystemEvent(siteRequest_, SystemEventGenPage.staticSetPageUriSystemEvent(siteRequest_, o)).toString();
 	}
 
 	//////////////

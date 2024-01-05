@@ -500,6 +500,22 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 
 			for(String entityVar : methodNames) {
 				switch(entityVar) {
+					case "setInheritPk":
+							o2.setInheritPk(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SiteUser.VAR_inheritPk + "=$" + num);
+							num++;
+							bParams.add(o2.sqlInheritPk());
+						break;
+					case "setCreated":
+							o2.setCreated(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SiteUser.VAR_created + "=$" + num);
+							num++;
+							bParams.add(o2.sqlCreated());
+						break;
 					case "setArchived":
 							o2.setArchived(jsonObject.getBoolean(entityVar));
 							if(bParams.size() > 0)
@@ -532,29 +548,13 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
-					case "setInheritPk":
-							o2.setInheritPk(jsonObject.getString(entityVar));
+					case "setSeeDeleted":
+							o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
-							bSql.append(SiteUser.VAR_inheritPk + "=$" + num);
+							bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
 							num++;
-							bParams.add(o2.sqlInheritPk());
-						break;
-					case "setCreated":
-							o2.setCreated(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_created + "=$" + num);
-							num++;
-							bParams.add(o2.sqlCreated());
-						break;
-					case "setUserLastName":
-							o2.setUserLastName(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userLastName + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserLastName());
+							bParams.add(o2.sqlSeeDeleted());
 						break;
 					case "setUserId":
 							o2.setUserId(jsonObject.getString(entityVar));
@@ -588,6 +588,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							num++;
 							bParams.add(o2.sqlUserFirstName());
 						break;
+					case "setUserLastName":
+							o2.setUserLastName(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SiteUser.VAR_userLastName + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUserLastName());
+						break;
 					case "setUserFullName":
 							o2.setUserFullName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -603,14 +611,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							bSql.append(SiteUser.VAR_seeArchived + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSeeArchived());
-						break;
-					case "setSeeDeleted":
-							o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
-							num++;
-							bParams.add(o2.sqlSeeDeleted());
 						break;
 				}
 			}
@@ -897,6 +897,24 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 				Set<String> entityVars = jsonObject.fieldNames();
 				for(String entityVar : entityVars) {
 					switch(entityVar) {
+					case SiteUser.VAR_inheritPk:
+						o2.setInheritPk(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SiteUser.VAR_inheritPk + "=$" + num);
+						num++;
+						bParams.add(o2.sqlInheritPk());
+						break;
+					case SiteUser.VAR_created:
+						o2.setCreated(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SiteUser.VAR_created + "=$" + num);
+						num++;
+						bParams.add(o2.sqlCreated());
+						break;
 					case SiteUser.VAR_archived:
 						o2.setArchived(jsonObject.getBoolean(entityVar));
 						if(bParams.size() > 0) {
@@ -933,32 +951,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
-					case SiteUser.VAR_inheritPk:
-						o2.setInheritPk(jsonObject.getString(entityVar));
+					case SiteUser.VAR_seeDeleted:
+						o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_inheritPk + "=$" + num);
+						bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
 						num++;
-						bParams.add(o2.sqlInheritPk());
-						break;
-					case SiteUser.VAR_created:
-						o2.setCreated(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_created + "=$" + num);
-						num++;
-						bParams.add(o2.sqlCreated());
-						break;
-					case SiteUser.VAR_userLastName:
-						o2.setUserLastName(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userLastName + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserLastName());
+						bParams.add(o2.sqlSeeDeleted());
 						break;
 					case SiteUser.VAR_userId:
 						o2.setUserId(jsonObject.getString(entityVar));
@@ -996,6 +996,15 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						num++;
 						bParams.add(o2.sqlUserFirstName());
 						break;
+					case SiteUser.VAR_userLastName:
+						o2.setUserLastName(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SiteUser.VAR_userLastName + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUserLastName());
+						break;
 					case SiteUser.VAR_userFullName:
 						o2.setUserFullName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1013,15 +1022,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						bSql.append(SiteUser.VAR_seeArchived + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSeeArchived());
-						break;
-					case SiteUser.VAR_seeDeleted:
-						o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
-						num++;
-						bParams.add(o2.sqlSeeDeleted());
 						break;
 					}
 				}
@@ -1219,7 +1219,7 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								Object bodyVal = body.getValue(f);
 								if(bodyVal instanceof JsonArray) {
 									JsonArray bodyVals = (JsonArray)bodyVal;
-									Collection<?> vals = (Collection<?>)o.obtainForClass(f);
+									Collection<?> vals = bodyVals.getList();
 									if(bodyVals.size() == vals.size()) {
 										Boolean match = true;
 										for(Object val : vals) {

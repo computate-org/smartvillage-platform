@@ -223,7 +223,7 @@ public abstract class SitePageReaderGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqConfig(SiteRequestEnUS siteRequest_, String o) {
-		return SitePageReader.staticSearchStrConfig(siteRequest_, SitePageReader.staticSearchConfig(siteRequest_, SitePageReader.staticSetConfig(siteRequest_, o)));
+		return SitePageReader.staticSearchConfig(siteRequest_, SitePageReader.staticSetConfig(siteRequest_, o)).toString();
 	}
 
 	///////////////

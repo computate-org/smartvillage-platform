@@ -226,7 +226,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqListSiteUser(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUserGenPage.staticSearchStrListSiteUser(siteRequest_, SiteUserGenPage.staticSearchListSiteUser(siteRequest_, SiteUserGenPage.staticSetListSiteUser(siteRequest_, o)));
+		return SiteUserGenPage.staticSearchListSiteUser(siteRequest_, SiteUserGenPage.staticSetListSiteUser(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -286,7 +286,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqSiteUserCount(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUserGenPage.staticSearchStrSiteUserCount(siteRequest_, SiteUserGenPage.staticSearchSiteUserCount(siteRequest_, SiteUserGenPage.staticSetSiteUserCount(siteRequest_, o)));
+		return SiteUserGenPage.staticSearchSiteUserCount(siteRequest_, SiteUserGenPage.staticSetSiteUserCount(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -387,7 +387,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUserGenPage.staticSearchStrPk(siteRequest_, SiteUserGenPage.staticSearchPk(siteRequest_, SiteUserGenPage.staticSetPk(siteRequest_, o)));
+		return SiteUserGenPage.staticSearchPk(siteRequest_, SiteUserGenPage.staticSetPk(siteRequest_, o)).toString();
 	}
 
 	////////
@@ -439,7 +439,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUserGenPage.staticSearchStrId(siteRequest_, SiteUserGenPage.staticSearchId(siteRequest_, SiteUserGenPage.staticSetId(siteRequest_, o)));
+		return SiteUserGenPage.staticSearchId(siteRequest_, SiteUserGenPage.staticSetId(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -491,7 +491,7 @@ public abstract class SiteUserGenPageGen<DEV> extends BaseModelPage {
 	}
 
 	public static String staticSearchFqPageUriSiteUser(SiteRequestEnUS siteRequest_, String o) {
-		return SiteUserGenPage.staticSearchStrPageUriSiteUser(siteRequest_, SiteUserGenPage.staticSearchPageUriSiteUser(siteRequest_, SiteUserGenPage.staticSetPageUriSiteUser(siteRequest_, o)));
+		return SiteUserGenPage.staticSearchPageUriSiteUser(siteRequest_, SiteUserGenPage.staticSetPageUriSiteUser(siteRequest_, o)).toString();
 	}
 
 	//////////////

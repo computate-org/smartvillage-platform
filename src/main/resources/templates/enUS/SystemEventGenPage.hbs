@@ -60,6 +60,31 @@
 				return `{{#block "htmTooltip"}}{{/block}}`;
 			}
 
+			function jsLegendSystemEvent(map) {
+{{#block "jsLegend"}}{{/block}}
+			}
+
+			function htmLegendSystemEvent(map, shape, , index, count) {
+				var color = systemEvent.[index];
+				var title = systemEvent.[index];
+				var url = systemEvent.[index];
+				var htm = '';
+				if(index == 0) {
+					htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off ">
+	<div class="w3-larger font-weight-bold ">system events</div>
+	<div>
+`;
+				}
+				htm += `{{#block "htmLegend"}}{{/block}}`;
+				if(index == (count - 1)) {
+					htm += `
+	</div>
+</div>
+`;
+				}
+				return htm;
+			}
+
 			function jsStyleSystemEvent(feature) {
 {{#block "jsStyle"}}{{/block}}
 			}
@@ -72,6 +97,30 @@
 {{#*inline "jsWebsocketSystemEventPage"}}{{/inline}}
 {{#*inline "jsTooltipSystemEventPage"}}{{/inline}}
 {{#*inline "htmTooltipSystemEventPage"}}{{/inline}}
+{{#*inline "jsLegendSystemEventPage"}}
+				var div = L.DomUtil.create('div', 'info legend');
+				var htm = '';
+				$.each( window.listSystemEvent, function(index, systemEvent) {
+					if(systemEvent.) {
+						var shapes = [];
+						if(Array.isArray(systemEvent.))
+							shapes = shapes.concat(systemEvent.);
+						else
+							shapes.push(systemEvent.);
+						shapes.forEach(function(shape, index) {
+							htm += htmLegendSystemEvent(map, shape, , index, shapes.length);
+						});
+					}
+				});
+				div.innerHTML = htm;
+				return div;
+{{/inline}}
+{{#*inline "htmLegendSystemEventPage"}}
+		<div>
+			<i class="fa-light fa-circle" style="color: ${color}; "></i>
+			<span data-id="${.id}" onclick="window.geoJSONLayerGroupSystemEvent.getLayer(window.mapLayers[this.getAttribute('data-id')]).openPopup(); return false;" href="">${title}</span>
+		</div>
+{{/inline}}
 {{#*inline "jsStyleSystemEventPage"}}
 				if(feature.geometry.type == 'Point') {
 					return {
@@ -85,7 +134,7 @@
 				} else {
 					return {
 						 fillColor: '#ff7800'
-						, color: (feature.properties.areaServedColors ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, weight: 5
 						, opacity: 1
 						, fillOpacity: 0.8
@@ -313,7 +362,7 @@
 {{#*inline "htmBodyGraphSystemEventPage"}}		<!-- #*inline "htmBodyGraphSystemEventPage" -->
 <div id="htmBodyGraphPageLayout" class="w3-content htmBodyGraph "></div>{{/inline}}
 {{#*inline "htmBodyGraphLocationSystemEventPage"}}		<!-- #*inline "htmBodyGraphLocationSystemEventPage" -->
-<div id="htmBodyGraphLocationPageLayout" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
+<div id="htmBodyGraphLocationSystemEventPage" class="w3-content htmBodyGraphLocation "></div>{{/inline}}
 {{#*inline "htmBodyCount0SystemEventPage"}}		<!-- #*inline "htmBodyCount0SystemEventPage" -->
 		<h1>
 			<a href="{{pageUri}}" class="w3-bar-item w3-btn w3-center w3-block w3-2017-shaded-spruce w3-hover-2017-shaded-spruce">

@@ -239,7 +239,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqLang(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrLang(siteRequest_, PageLayout.staticSearchLang(siteRequest_, PageLayout.staticSetLang(siteRequest_, o)));
+		return PageLayout.staticSearchLang(siteRequest_, PageLayout.staticSetLang(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -373,7 +373,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqStaticBaseUrl(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrStaticBaseUrl(siteRequest_, PageLayout.staticSearchStaticBaseUrl(siteRequest_, PageLayout.staticSetStaticBaseUrl(siteRequest_, o)));
+		return PageLayout.staticSearchStaticBaseUrl(siteRequest_, PageLayout.staticSetStaticBaseUrl(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -425,7 +425,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSiteBaseUrl(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSiteBaseUrl(siteRequest_, PageLayout.staticSearchSiteBaseUrl(siteRequest_, PageLayout.staticSetSiteBaseUrl(siteRequest_, o)));
+		return PageLayout.staticSearchSiteBaseUrl(siteRequest_, PageLayout.staticSetSiteBaseUrl(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -477,7 +477,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSiteAuthUrl(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSiteAuthUrl(siteRequest_, PageLayout.staticSearchSiteAuthUrl(siteRequest_, PageLayout.staticSetSiteAuthUrl(siteRequest_, o)));
+		return PageLayout.staticSearchSiteAuthUrl(siteRequest_, PageLayout.staticSetSiteAuthUrl(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -529,7 +529,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSiteAuthRealm(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrSiteAuthRealm(siteRequest_, PageLayout.staticSearchSiteAuthRealm(siteRequest_, PageLayout.staticSetSiteAuthRealm(siteRequest_, o)));
+		return PageLayout.staticSearchSiteAuthRealm(siteRequest_, PageLayout.staticSetSiteAuthRealm(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -581,7 +581,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqFontAwesomeKit(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrFontAwesomeKit(siteRequest_, PageLayout.staticSearchFontAwesomeKit(siteRequest_, PageLayout.staticSetFontAwesomeKit(siteRequest_, o)));
+		return PageLayout.staticSearchFontAwesomeKit(siteRequest_, PageLayout.staticSetFontAwesomeKit(siteRequest_, o)).toString();
 	}
 
 	//////////////////////////
@@ -633,7 +633,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqFacebookGraphVersion(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrFacebookGraphVersion(siteRequest_, PageLayout.staticSearchFacebookGraphVersion(siteRequest_, PageLayout.staticSetFacebookGraphVersion(siteRequest_, o)));
+		return PageLayout.staticSearchFacebookGraphVersion(siteRequest_, PageLayout.staticSetFacebookGraphVersion(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -685,7 +685,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqFacebookAppId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrFacebookAppId(siteRequest_, PageLayout.staticSearchFacebookAppId(siteRequest_, PageLayout.staticSetFacebookAppId(siteRequest_, o)));
+		return PageLayout.staticSearchFacebookAppId(siteRequest_, PageLayout.staticSetFacebookAppId(siteRequest_, o)).toString();
 	}
 
 	/////////////
@@ -737,7 +737,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUri(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageUri(siteRequest_, PageLayout.staticSearchPageUri(siteRequest_, PageLayout.staticSetPageUri(siteRequest_, o)));
+		return PageLayout.staticSearchPageUri(siteRequest_, PageLayout.staticSetPageUri(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -789,7 +789,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageId(siteRequest_, PageLayout.staticSearchPageId(siteRequest_, PageLayout.staticSetPageId(siteRequest_, o)));
+		return PageLayout.staticSearchPageId(siteRequest_, PageLayout.staticSetPageId(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -841,7 +841,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqApiUri(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrApiUri(siteRequest_, PageLayout.staticSearchApiUri(siteRequest_, PageLayout.staticSetApiUri(siteRequest_, o)));
+		return PageLayout.staticSearchApiUri(siteRequest_, PageLayout.staticSetApiUri(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -893,7 +893,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageMethod(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageMethod(siteRequest_, PageLayout.staticSearchPageMethod(siteRequest_, PageLayout.staticSetPageMethod(siteRequest_, o)));
+		return PageLayout.staticSearchPageMethod(siteRequest_, PageLayout.staticSetPageMethod(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -953,7 +953,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqParams(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrParams(siteRequest_, PageLayout.staticSearchParams(siteRequest_, PageLayout.staticSetParams(siteRequest_, o)));
+		return PageLayout.staticSearchParams(siteRequest_, PageLayout.staticSetParams(siteRequest_, o)).toString();
 	}
 
 	/////////////
@@ -1013,7 +1013,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserKey(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrUserKey(siteRequest_, PageLayout.staticSearchUserKey(siteRequest_, PageLayout.staticSetUserKey(siteRequest_, o)));
+		return PageLayout.staticSearchUserKey(siteRequest_, PageLayout.staticSetUserKey(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -1065,7 +1065,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserFullName(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrUserFullName(siteRequest_, PageLayout.staticSearchUserFullName(siteRequest_, PageLayout.staticSetUserFullName(siteRequest_, o)));
+		return PageLayout.staticSearchUserFullName(siteRequest_, PageLayout.staticSetUserFullName(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -1117,7 +1117,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserName(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrUserName(siteRequest_, PageLayout.staticSearchUserName(siteRequest_, PageLayout.staticSetUserName(siteRequest_, o)));
+		return PageLayout.staticSearchUserName(siteRequest_, PageLayout.staticSetUserName(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1169,7 +1169,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserEmail(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrUserEmail(siteRequest_, PageLayout.staticSearchUserEmail(siteRequest_, PageLayout.staticSetUserEmail(siteRequest_, o)));
+		return PageLayout.staticSearchUserEmail(siteRequest_, PageLayout.staticSetUserEmail(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1221,7 +1221,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqLogoutUrl(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrLogoutUrl(siteRequest_, PageLayout.staticSearchLogoutUrl(siteRequest_, PageLayout.staticSetLogoutUrl(siteRequest_, o)));
+		return PageLayout.staticSearchLogoutUrl(siteRequest_, PageLayout.staticSetLogoutUrl(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -1281,7 +1281,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqLong0(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrLong0(siteRequest_, PageLayout.staticSearchLong0(siteRequest_, PageLayout.staticSetLong0(siteRequest_, o)));
+		return PageLayout.staticSearchLong0(siteRequest_, PageLayout.staticSetLong0(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -1341,7 +1341,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqLong1(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrLong1(siteRequest_, PageLayout.staticSearchLong1(siteRequest_, PageLayout.staticSetLong1(siteRequest_, o)));
+		return PageLayout.staticSearchLong1(siteRequest_, PageLayout.staticSetLong1(siteRequest_, o)).toString();
 	}
 
 	//////////
@@ -1401,7 +1401,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqInt0(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrInt0(siteRequest_, PageLayout.staticSearchInt0(siteRequest_, PageLayout.staticSetInt0(siteRequest_, o)));
+		return PageLayout.staticSearchInt0(siteRequest_, PageLayout.staticSetInt0(siteRequest_, o)).toString();
 	}
 
 	//////////
@@ -1461,7 +1461,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqInt1(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrInt1(siteRequest_, PageLayout.staticSearchInt1(siteRequest_, PageLayout.staticSetInt1(siteRequest_, o)));
+		return PageLayout.staticSearchInt1(siteRequest_, PageLayout.staticSetInt1(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -1556,7 +1556,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassSimpleName(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrClassSimpleName(siteRequest_, PageLayout.staticSearchClassSimpleName(siteRequest_, PageLayout.staticSetClassSimpleName(siteRequest_, o)));
+		return PageLayout.staticSearchClassSimpleName(siteRequest_, PageLayout.staticSetClassSimpleName(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1608,7 +1608,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageTitle(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageTitle(siteRequest_, PageLayout.staticSearchPageTitle(siteRequest_, PageLayout.staticSetPageTitle(siteRequest_, o)));
+		return PageLayout.staticSearchPageTitle(siteRequest_, PageLayout.staticSetPageTitle(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -1682,7 +1682,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRoles(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRoles(siteRequest_, PageLayout.staticSearchRoles(siteRequest_, PageLayout.staticSetRoles(siteRequest_, o)));
+		return PageLayout.staticSearchRoles(siteRequest_, PageLayout.staticSetRoles(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -1756,7 +1756,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRoleForWrite(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRoleForWrite(siteRequest_, PageLayout.staticSearchRoleForWrite(siteRequest_, PageLayout.staticSetRoleForWrite(siteRequest_, o)));
+		return PageLayout.staticSearchRoleForWrite(siteRequest_, PageLayout.staticSetRoleForWrite(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -1830,7 +1830,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRoleForRead(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRoleForRead(siteRequest_, PageLayout.staticSearchRoleForRead(siteRequest_, PageLayout.staticSetRoleForRead(siteRequest_, o)));
+		return PageLayout.staticSearchRoleForRead(siteRequest_, PageLayout.staticSetRoleForRead(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -1904,7 +1904,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqAuthRoleAdmin(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrAuthRoleAdmin(siteRequest_, PageLayout.staticSearchAuthRoleAdmin(siteRequest_, PageLayout.staticSetAuthRoleAdmin(siteRequest_, o)));
+		return PageLayout.staticSearchAuthRoleAdmin(siteRequest_, PageLayout.staticSetAuthRoleAdmin(siteRequest_, o)).toString();
 	}
 
 	////////////////////////
@@ -1978,7 +1978,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqAuthRoleSuperAdmin(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrAuthRoleSuperAdmin(siteRequest_, PageLayout.staticSearchAuthRoleSuperAdmin(siteRequest_, PageLayout.staticSetAuthRoleSuperAdmin(siteRequest_, o)));
+		return PageLayout.staticSearchAuthRoleSuperAdmin(siteRequest_, PageLayout.staticSetAuthRoleSuperAdmin(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -2114,7 +2114,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPagination(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPagination(siteRequest_, PageLayout.staticSearchPagination(siteRequest_, PageLayout.staticSetPagination(siteRequest_, o)));
+		return PageLayout.staticSearchPagination(siteRequest_, PageLayout.staticSetPagination(siteRequest_, o)).toString();
 	}
 
 	//////////////////////////
@@ -2188,7 +2188,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultFieldListVars(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultFieldListVars(siteRequest_, PageLayout.staticSearchDefaultFieldListVars(siteRequest_, PageLayout.staticSetDefaultFieldListVars(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultFieldListVars(siteRequest_, PageLayout.staticSetDefaultFieldListVars(siteRequest_, o)).toString();
 	}
 
 	//////////////////////
@@ -2262,7 +2262,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultStatsVars(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultStatsVars(siteRequest_, PageLayout.staticSearchDefaultStatsVars(siteRequest_, PageLayout.staticSetDefaultStatsVars(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultStatsVars(siteRequest_, PageLayout.staticSetDefaultStatsVars(siteRequest_, o)).toString();
 	}
 
 	//////////////////////
@@ -2336,7 +2336,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultPivotVars(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultPivotVars(siteRequest_, PageLayout.staticSearchDefaultPivotVars(siteRequest_, PageLayout.staticSetDefaultPivotVars(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultPivotVars(siteRequest_, PageLayout.staticSetDefaultPivotVars(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -2390,7 +2390,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqVarsQ(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrVarsQ(siteRequest_, PageLayout.staticSearchVarsQ(siteRequest_, PageLayout.staticSetVarsQ(siteRequest_, o)));
+		return PageLayout.staticSearchVarsQ(siteRequest_, PageLayout.staticSetVarsQ(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -2444,7 +2444,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqVarsFq(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrVarsFq(siteRequest_, PageLayout.staticSearchVarsFq(siteRequest_, PageLayout.staticSetVarsFq(siteRequest_, o)));
+		return PageLayout.staticSearchVarsFq(siteRequest_, PageLayout.staticSetVarsFq(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -2498,7 +2498,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqVarsRange(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrVarsRange(siteRequest_, PageLayout.staticSearchVarsRange(siteRequest_, PageLayout.staticSetVarsRange(siteRequest_, o)));
+		return PageLayout.staticSearchVarsRange(siteRequest_, PageLayout.staticSetVarsRange(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -2552,7 +2552,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqQuery(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrQuery(siteRequest_, PageLayout.staticSearchQuery(siteRequest_, PageLayout.staticSetQuery(siteRequest_, o)));
+		return PageLayout.staticSearchQuery(siteRequest_, PageLayout.staticSetQuery(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -2604,7 +2604,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageResponse(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageResponse(siteRequest_, PageLayout.staticSearchPageResponse(siteRequest_, PageLayout.staticSetPageResponse(siteRequest_, o)));
+		return PageLayout.staticSearchPageResponse(siteRequest_, PageLayout.staticSetPageResponse(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -2656,7 +2656,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultZoneId(siteRequest_, PageLayout.staticSearchDefaultZoneId(siteRequest_, PageLayout.staticSetDefaultZoneId(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultZoneId(siteRequest_, PageLayout.staticSetDefaultZoneId(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -2749,7 +2749,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultLocaleId(siteRequest_, PageLayout.staticSearchDefaultLocaleId(siteRequest_, PageLayout.staticSetDefaultLocaleId(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultLocaleId(siteRequest_, PageLayout.staticSetDefaultLocaleId(siteRequest_, o)).toString();
 	}
 
 	//////////
@@ -2809,7 +2809,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRows(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRows(siteRequest_, PageLayout.staticSearchRows(siteRequest_, PageLayout.staticSetRows(siteRequest_, o)));
+		return PageLayout.staticSearchRows(siteRequest_, PageLayout.staticSetRows(siteRequest_, o)).toString();
 	}
 
 	///////////
@@ -2869,7 +2869,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqStart(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrStart(siteRequest_, PageLayout.staticSearchStart(siteRequest_, PageLayout.staticSetStart(siteRequest_, o)));
+		return PageLayout.staticSearchStart(siteRequest_, PageLayout.staticSetStart(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -2962,7 +2962,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqRangeGap(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRangeGap(siteRequest_, PageLayout.staticSearchRangeGap(siteRequest_, PageLayout.staticSetRangeGap(siteRequest_, o)));
+		return PageLayout.staticSearchRangeGap(siteRequest_, PageLayout.staticSetRangeGap(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -3030,15 +3030,15 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrRangeEnd(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return PageLayout.staticSearchRangeEnd(siteRequest_, PageLayout.staticSetRangeEnd(siteRequest_, o));
 	}
 
 	public static String staticSearchFqRangeEnd(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRangeEnd(siteRequest_, PageLayout.staticSearchRangeEnd(siteRequest_, PageLayout.staticSetRangeEnd(siteRequest_, o)));
+		return PageLayout.staticSearchRangeEnd(siteRequest_, PageLayout.staticSetRangeEnd(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -3106,15 +3106,15 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrRangeStart(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return PageLayout.staticSearchRangeStart(siteRequest_, PageLayout.staticSetRangeStart(siteRequest_, o));
 	}
 
 	public static String staticSearchFqRangeStart(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrRangeStart(siteRequest_, PageLayout.staticSearchRangeStart(siteRequest_, PageLayout.staticSetRangeStart(siteRequest_, o)));
+		return PageLayout.staticSearchRangeStart(siteRequest_, PageLayout.staticSetRangeStart(siteRequest_, o)).toString();
 	}
 
 	///////////////////////
@@ -3174,7 +3174,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultRangeStats(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultRangeStats(siteRequest_, PageLayout.staticSearchDefaultRangeStats(siteRequest_, PageLayout.staticSetDefaultRangeStats(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultRangeStats(siteRequest_, PageLayout.staticSetDefaultRangeStats(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -3226,7 +3226,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultRangeGap(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultRangeGap(siteRequest_, PageLayout.staticSearchDefaultRangeGap(siteRequest_, PageLayout.staticSetDefaultRangeGap(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultRangeGap(siteRequest_, PageLayout.staticSetDefaultRangeGap(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -3294,15 +3294,15 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchDefaultRangeEnd(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrDefaultRangeEnd(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return PageLayout.staticSearchDefaultRangeEnd(siteRequest_, PageLayout.staticSetDefaultRangeEnd(siteRequest_, o));
 	}
 
 	public static String staticSearchFqDefaultRangeEnd(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultRangeEnd(siteRequest_, PageLayout.staticSearchDefaultRangeEnd(siteRequest_, PageLayout.staticSetDefaultRangeEnd(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultRangeEnd(siteRequest_, PageLayout.staticSetDefaultRangeEnd(siteRequest_, o)).toString();
 	}
 
 	///////////////////////
@@ -3370,15 +3370,15 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchDefaultRangeStart(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrDefaultRangeStart(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return PageLayout.staticSearchDefaultRangeStart(siteRequest_, PageLayout.staticSetDefaultRangeStart(siteRequest_, o));
 	}
 
 	public static String staticSearchFqDefaultRangeStart(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultRangeStart(siteRequest_, PageLayout.staticSearchDefaultRangeStart(siteRequest_, PageLayout.staticSetDefaultRangeStart(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultRangeStart(siteRequest_, PageLayout.staticSetDefaultRangeStart(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -3430,7 +3430,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultRangeVar(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultRangeVar(siteRequest_, PageLayout.staticSearchDefaultRangeVar(siteRequest_, PageLayout.staticSetDefaultRangeVar(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultRangeVar(siteRequest_, PageLayout.staticSetDefaultRangeVar(siteRequest_, o)).toString();
 	}
 
 	//////////////////////
@@ -3482,7 +3482,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultFacetSort(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultFacetSort(siteRequest_, PageLayout.staticSearchDefaultFacetSort(siteRequest_, PageLayout.staticSetDefaultFacetSort(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultFacetSort(siteRequest_, PageLayout.staticSetDefaultFacetSort(siteRequest_, o)).toString();
 	}
 
 	///////////////////////
@@ -3542,7 +3542,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultFacetLimit(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultFacetLimit(siteRequest_, PageLayout.staticSearchDefaultFacetLimit(siteRequest_, PageLayout.staticSetDefaultFacetLimit(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultFacetLimit(siteRequest_, PageLayout.staticSetDefaultFacetLimit(siteRequest_, o)).toString();
 	}
 
 	//////////////////////////
@@ -3602,7 +3602,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultFacetMinCount(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultFacetMinCount(siteRequest_, PageLayout.staticSearchDefaultFacetMinCount(siteRequest_, PageLayout.staticSetDefaultFacetMinCount(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultFacetMinCount(siteRequest_, PageLayout.staticSetDefaultFacetMinCount(siteRequest_, o)).toString();
 	}
 
 	//////////////////////////
@@ -3662,7 +3662,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDefaultPivotMinCount(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDefaultPivotMinCount(siteRequest_, PageLayout.staticSearchDefaultPivotMinCount(siteRequest_, PageLayout.staticSetDefaultPivotMinCount(siteRequest_, o)));
+		return PageLayout.staticSearchDefaultPivotMinCount(siteRequest_, PageLayout.staticSetDefaultPivotMinCount(siteRequest_, o)).toString();
 	}
 
 	//////////////////////////
@@ -3722,7 +3722,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDEFAULT_MAP_LOCATION(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDEFAULT_MAP_LOCATION(siteRequest_, PageLayout.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, PageLayout.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)));
+		return PageLayout.staticSearchDEFAULT_MAP_LOCATION(siteRequest_, PageLayout.staticSetDEFAULT_MAP_LOCATION(siteRequest_, o)).toString();
 	}
 
 	//////////////////////
@@ -3795,7 +3795,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDEFAULT_MAP_ZOOM(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrDEFAULT_MAP_ZOOM(siteRequest_, PageLayout.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, PageLayout.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)));
+		return PageLayout.staticSearchDEFAULT_MAP_ZOOM(siteRequest_, PageLayout.staticSetDEFAULT_MAP_ZOOM(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -3847,7 +3847,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqQueryStr(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrQueryStr(siteRequest_, PageLayout.staticSearchQueryStr(siteRequest_, PageLayout.staticSetQueryStr(siteRequest_, o)));
+		return PageLayout.staticSearchQueryStr(siteRequest_, PageLayout.staticSetQueryStr(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -3942,7 +3942,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageUri(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageImageUri(siteRequest_, PageLayout.staticSearchPageImageUri(siteRequest_, PageLayout.staticSetPageImageUri(siteRequest_, o)));
+		return PageLayout.staticSearchPageImageUri(siteRequest_, PageLayout.staticSetPageImageUri(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -4002,7 +4002,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageWidth(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageImageWidth(siteRequest_, PageLayout.staticSearchPageImageWidth(siteRequest_, PageLayout.staticSetPageImageWidth(siteRequest_, o)));
+		return PageLayout.staticSearchPageImageWidth(siteRequest_, PageLayout.staticSetPageImageWidth(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -4062,7 +4062,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageHeight(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageImageHeight(siteRequest_, PageLayout.staticSearchPageImageHeight(siteRequest_, PageLayout.staticSetPageImageHeight(siteRequest_, o)));
+		return PageLayout.staticSearchPageImageHeight(siteRequest_, PageLayout.staticSetPageImageHeight(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -4114,7 +4114,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageVideoId(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageVideoId(siteRequest_, PageLayout.staticSearchPageVideoId(siteRequest_, PageLayout.staticSetPageVideoId(siteRequest_, o)));
+		return PageLayout.staticSearchPageVideoId(siteRequest_, PageLayout.staticSetPageVideoId(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -4166,7 +4166,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassIconGroup(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrClassIconGroup(siteRequest_, PageLayout.staticSearchClassIconGroup(siteRequest_, PageLayout.staticSetClassIconGroup(siteRequest_, o)));
+		return PageLayout.staticSearchClassIconGroup(siteRequest_, PageLayout.staticSetClassIconGroup(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -4218,7 +4218,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassIconName(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrClassIconName(siteRequest_, PageLayout.staticSearchClassIconName(siteRequest_, PageLayout.staticSetClassIconName(siteRequest_, o)));
+		return PageLayout.staticSearchClassIconName(siteRequest_, PageLayout.staticSetClassIconName(siteRequest_, o)).toString();
 	}
 
 	/////////////////////////
@@ -4270,7 +4270,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassIconCssClasses(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrClassIconCssClasses(siteRequest_, PageLayout.staticSearchClassIconCssClasses(siteRequest_, PageLayout.staticSetClassIconCssClasses(siteRequest_, o)));
+		return PageLayout.staticSearchClassIconCssClasses(siteRequest_, PageLayout.staticSetClassIconCssClasses(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -4322,7 +4322,7 @@ public abstract class PageLayoutGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageDescription(SiteRequestEnUS siteRequest_, String o) {
-		return PageLayout.staticSearchStrPageDescription(siteRequest_, PageLayout.staticSearchPageDescription(siteRequest_, PageLayout.staticSetPageDescription(siteRequest_, o)));
+		return PageLayout.staticSearchPageDescription(siteRequest_, PageLayout.staticSetPageDescription(siteRequest_, o)).toString();
 	}
 
 	//////////////

@@ -225,7 +225,7 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqListSitePage(SiteRequestEnUS siteRequest_, String o) {
-		return SitePageGenPage.staticSearchStrListSitePage(siteRequest_, SitePageGenPage.staticSearchListSitePage(siteRequest_, SitePageGenPage.staticSetListSitePage(siteRequest_, o)));
+		return SitePageGenPage.staticSearchListSitePage(siteRequest_, SitePageGenPage.staticSetListSitePage(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -285,7 +285,7 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqSitePageCount(SiteRequestEnUS siteRequest_, String o) {
-		return SitePageGenPage.staticSearchStrSitePageCount(siteRequest_, SitePageGenPage.staticSearchSitePageCount(siteRequest_, SitePageGenPage.staticSetSitePageCount(siteRequest_, o)));
+		return SitePageGenPage.staticSearchSitePageCount(siteRequest_, SitePageGenPage.staticSetSitePageCount(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -378,7 +378,7 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return SitePageGenPage.staticSearchStrId(siteRequest_, SitePageGenPage.staticSearchId(siteRequest_, SitePageGenPage.staticSetId(siteRequest_, o)));
+		return SitePageGenPage.staticSearchId(siteRequest_, SitePageGenPage.staticSetId(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -430,7 +430,7 @@ public abstract class SitePageGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqPageUriSitePage(SiteRequestEnUS siteRequest_, String o) {
-		return SitePageGenPage.staticSearchStrPageUriSitePage(siteRequest_, SitePageGenPage.staticSearchPageUriSitePage(siteRequest_, SitePageGenPage.staticSetPageUriSitePage(siteRequest_, o)));
+		return SitePageGenPage.staticSearchPageUriSitePage(siteRequest_, SitePageGenPage.staticSetPageUriSitePage(siteRequest_, o)).toString();
 	}
 
 	//////////////

@@ -289,7 +289,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqUrl(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrUrl(siteRequest_, SiteHtm.staticSearchUrl(siteRequest_, SiteHtm.staticSetUrl(siteRequest_, o)));
+		return SiteHtm.staticSearchUrl(siteRequest_, SiteHtm.staticSetUrl(siteRequest_, o)).toString();
 	}
 
 	public String sqlUrl() {
@@ -345,7 +345,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqUri(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrUri(siteRequest_, SiteHtm.staticSearchUri(siteRequest_, SiteHtm.staticSetUri(siteRequest_, o)));
+		return SiteHtm.staticSearchUri(siteRequest_, SiteHtm.staticSetUri(siteRequest_, o)).toString();
 	}
 
 	public String sqlUri() {
@@ -401,7 +401,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrPageId(siteRequest_, SiteHtm.staticSearchPageId(siteRequest_, SiteHtm.staticSetPageId(siteRequest_, o)));
+		return SiteHtm.staticSearchPageId(siteRequest_, SiteHtm.staticSetPageId(siteRequest_, o)).toString();
 	}
 
 	public String sqlPageId() {
@@ -465,7 +465,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqSequenceNum(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrSequenceNum(siteRequest_, SiteHtm.staticSearchSequenceNum(siteRequest_, SiteHtm.staticSetSequenceNum(siteRequest_, o)));
+		return SiteHtm.staticSearchSequenceNum(siteRequest_, SiteHtm.staticSetSequenceNum(siteRequest_, o)).toString();
 	}
 
 	public Long sqlSequenceNum() {
@@ -521,7 +521,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqHtmGroup(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrHtmGroup(siteRequest_, SiteHtm.staticSearchHtmGroup(siteRequest_, SiteHtm.staticSetHtmGroup(siteRequest_, o)));
+		return SiteHtm.staticSearchHtmGroup(siteRequest_, SiteHtm.staticSetHtmGroup(siteRequest_, o)).toString();
 	}
 
 	public String sqlHtmGroup() {
@@ -599,7 +599,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqLabels(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrLabels(siteRequest_, SiteHtm.staticSearchLabels(siteRequest_, SiteHtm.staticSetLabels(siteRequest_, o)));
+		return SiteHtm.staticSearchLabels(siteRequest_, SiteHtm.staticSetLabels(siteRequest_, o)).toString();
 	}
 
 	public String[] sqlLabels() {
@@ -655,7 +655,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqEBefore(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrEBefore(siteRequest_, SiteHtm.staticSearchEBefore(siteRequest_, SiteHtm.staticSetEBefore(siteRequest_, o)));
+		return SiteHtm.staticSearchEBefore(siteRequest_, SiteHtm.staticSetEBefore(siteRequest_, o)).toString();
 	}
 
 	public String sqlEBefore() {
@@ -711,7 +711,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqEAfter(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrEAfter(siteRequest_, SiteHtm.staticSearchEAfter(siteRequest_, SiteHtm.staticSetEAfter(siteRequest_, o)));
+		return SiteHtm.staticSearchEAfter(siteRequest_, SiteHtm.staticSetEAfter(siteRequest_, o)).toString();
 	}
 
 	public String sqlEAfter() {
@@ -775,7 +775,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqA(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrA(siteRequest_, SiteHtm.staticSearchA(siteRequest_, SiteHtm.staticSetA(siteRequest_, o)));
+		return SiteHtm.staticSearchA(siteRequest_, SiteHtm.staticSetA(siteRequest_, o)).toString();
 	}
 
 	public JsonObject sqlA() {
@@ -855,7 +855,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqText(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrText(siteRequest_, SiteHtm.staticSearchText(siteRequest_, SiteHtm.staticSetText(siteRequest_, o)));
+		return SiteHtm.staticSearchText(siteRequest_, SiteHtm.staticSetText(siteRequest_, o)).toString();
 	}
 
 	public String[] sqlText() {
@@ -933,7 +933,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqComment(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrComment(siteRequest_, SiteHtm.staticSearchComment(siteRequest_, SiteHtm.staticSetComment(siteRequest_, o)));
+		return SiteHtm.staticSearchComment(siteRequest_, SiteHtm.staticSetComment(siteRequest_, o)).toString();
 	}
 
 	public String[] sqlComment() {
@@ -989,7 +989,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqTabs(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrTabs(siteRequest_, SiteHtm.staticSearchTabs(siteRequest_, SiteHtm.staticSetTabs(siteRequest_, o)));
+		return SiteHtm.staticSearchTabs(siteRequest_, SiteHtm.staticSetTabs(siteRequest_, o)).toString();
 	}
 
 	public String sqlTabs() {
@@ -1050,7 +1050,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqNewLine(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrNewLine(siteRequest_, SiteHtm.staticSearchNewLine(siteRequest_, SiteHtm.staticSetNewLine(siteRequest_, o)));
+		return SiteHtm.staticSearchNewLine(siteRequest_, SiteHtm.staticSetNewLine(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlNewLine() {
@@ -1106,7 +1106,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqHtmBefore(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrHtmBefore(siteRequest_, SiteHtm.staticSearchHtmBefore(siteRequest_, SiteHtm.staticSetHtmBefore(siteRequest_, o)));
+		return SiteHtm.staticSearchHtmBefore(siteRequest_, SiteHtm.staticSetHtmBefore(siteRequest_, o)).toString();
 	}
 
 	public String sqlHtmBefore() {
@@ -1184,7 +1184,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqHtmMiddle(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrHtmMiddle(siteRequest_, SiteHtm.staticSearchHtmMiddle(siteRequest_, SiteHtm.staticSetHtmMiddle(siteRequest_, o)));
+		return SiteHtm.staticSearchHtmMiddle(siteRequest_, SiteHtm.staticSetHtmMiddle(siteRequest_, o)).toString();
 	}
 
 	public String[] sqlHtmMiddle() {
@@ -1240,7 +1240,7 @@ public abstract class SiteHtmGen<DEV> extends BaseResult {
 	}
 
 	public static String staticSearchFqHtmAfter(SiteRequestEnUS siteRequest_, String o) {
-		return SiteHtm.staticSearchStrHtmAfter(siteRequest_, SiteHtm.staticSearchHtmAfter(siteRequest_, SiteHtm.staticSetHtmAfter(siteRequest_, o)));
+		return SiteHtm.staticSearchHtmAfter(siteRequest_, SiteHtm.staticSetHtmAfter(siteRequest_, o)).toString();
 	}
 
 	public String sqlHtmAfter() {

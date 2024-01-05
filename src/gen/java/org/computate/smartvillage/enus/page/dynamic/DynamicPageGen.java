@@ -192,7 +192,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqPage(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrPage(siteRequest_, DynamicPage.staticSearchPage(siteRequest_, DynamicPage.staticSetPage(siteRequest_, o)));
+		return DynamicPage.staticSearchPage(siteRequest_, DynamicPage.staticSetPage(siteRequest_, o)).toString();
 	}
 
 	/////////
@@ -244,7 +244,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqUrl(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrUrl(siteRequest_, DynamicPage.staticSearchUrl(siteRequest_, DynamicPage.staticSetUrl(siteRequest_, o)));
+		return DynamicPage.staticSearchUrl(siteRequest_, DynamicPage.staticSetUrl(siteRequest_, o)).toString();
 	}
 
 	/////////
@@ -296,7 +296,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqUri(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrUri(siteRequest_, DynamicPage.staticSearchUri(siteRequest_, DynamicPage.staticSetUri(siteRequest_, o)));
+		return DynamicPage.staticSearchUri(siteRequest_, DynamicPage.staticSetUri(siteRequest_, o)).toString();
 	}
 
 	////////////
@@ -348,7 +348,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqPageId(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrPageId(siteRequest_, DynamicPage.staticSearchPageId(siteRequest_, DynamicPage.staticSetPageId(siteRequest_, o)));
+		return DynamicPage.staticSearchPageId(siteRequest_, DynamicPage.staticSetPageId(siteRequest_, o)).toString();
 	}
 
 	//////////
@@ -441,7 +441,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqFilterLabel(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrFilterLabel(siteRequest_, DynamicPage.staticSearchFilterLabel(siteRequest_, DynamicPage.staticSetFilterLabel(siteRequest_, o)));
+		return DynamicPage.staticSearchFilterLabel(siteRequest_, DynamicPage.staticSetFilterLabel(siteRequest_, o)).toString();
 	}
 
 	/////////////
@@ -556,7 +556,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqHtmTitle(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrHtmTitle(siteRequest_, DynamicPage.staticSearchHtmTitle(siteRequest_, DynamicPage.staticSetHtmTitle(siteRequest_, o)));
+		return DynamicPage.staticSearchHtmTitle(siteRequest_, DynamicPage.staticSetHtmTitle(siteRequest_, o)).toString();
 	}
 
 	/////////////
@@ -610,7 +610,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqHtmMeta(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrHtmMeta(siteRequest_, DynamicPage.staticSearchHtmMeta(siteRequest_, DynamicPage.staticSetHtmMeta(siteRequest_, o)));
+		return DynamicPage.staticSearchHtmMeta(siteRequest_, DynamicPage.staticSetHtmMeta(siteRequest_, o)).toString();
 	}
 
 	/////////////
@@ -664,7 +664,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqHtmBody(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrHtmBody(siteRequest_, DynamicPage.staticSearchHtmBody(siteRequest_, DynamicPage.staticSetHtmBody(siteRequest_, o)));
+		return DynamicPage.staticSearchHtmBody(siteRequest_, DynamicPage.staticSetHtmBody(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -716,7 +716,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqPageResponse(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrPageResponse(siteRequest_, DynamicPage.staticSearchPageResponse(siteRequest_, DynamicPage.staticSetPageResponse(siteRequest_, o)));
+		return DynamicPage.staticSearchPageResponse(siteRequest_, DynamicPage.staticSetPageResponse(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -768,7 +768,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqDefaultZoneId(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrDefaultZoneId(siteRequest_, DynamicPage.staticSearchDefaultZoneId(siteRequest_, DynamicPage.staticSetDefaultZoneId(siteRequest_, o)));
+		return DynamicPage.staticSearchDefaultZoneId(siteRequest_, DynamicPage.staticSetDefaultZoneId(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -861,7 +861,7 @@ public abstract class DynamicPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqDefaultLocaleId(SiteRequestEnUS siteRequest_, String o) {
-		return DynamicPage.staticSearchStrDefaultLocaleId(siteRequest_, DynamicPage.staticSearchDefaultLocaleId(siteRequest_, DynamicPage.staticSetDefaultLocaleId(siteRequest_, o)));
+		return DynamicPage.staticSearchDefaultLocaleId(siteRequest_, DynamicPage.staticSetDefaultLocaleId(siteRequest_, o)).toString();
 	}
 
 	///////////////////

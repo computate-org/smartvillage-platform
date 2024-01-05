@@ -386,7 +386,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqType(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrType(siteRequest_, SystemEvent.staticSearchType(siteRequest_, SystemEvent.staticSetType(siteRequest_, o)));
+		return SystemEvent.staticSearchType(siteRequest_, SystemEvent.staticSetType(siteRequest_, o)).toString();
 	}
 
 	public String sqlType() {
@@ -442,7 +442,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqMessage(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrMessage(siteRequest_, SystemEvent.staticSearchMessage(siteRequest_, SystemEvent.staticSetMessage(siteRequest_, o)));
+		return SystemEvent.staticSearchMessage(siteRequest_, SystemEvent.staticSetMessage(siteRequest_, o)).toString();
 	}
 
 	public String sqlMessage() {
@@ -504,7 +504,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqStatus(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrStatus(siteRequest_, SystemEvent.staticSearchStatus(siteRequest_, SystemEvent.staticSetStatus(siteRequest_, o)));
+		return SystemEvent.staticSearchStatus(siteRequest_, SystemEvent.staticSetStatus(siteRequest_, o)).toString();
 	}
 
 	public String sqlStatus() {
@@ -576,15 +576,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchCompleted(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrCompleted(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return SystemEvent.staticSearchCompleted(siteRequest_, SystemEvent.staticSetCompleted(siteRequest_, o));
 	}
 
 	public static String staticSearchFqCompleted(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrCompleted(siteRequest_, SystemEvent.staticSearchCompleted(siteRequest_, SystemEvent.staticSetCompleted(siteRequest_, o)));
+		return SystemEvent.staticSearchCompleted(siteRequest_, SystemEvent.staticSetCompleted(siteRequest_, o)).toString();
 	}
 
 	public OffsetDateTime sqlCompleted() {
@@ -640,7 +640,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrInheritPk(siteRequest_, SystemEvent.staticSearchInheritPk(siteRequest_, SystemEvent.staticSetInheritPk(siteRequest_, o)));
+		return SystemEvent.staticSearchInheritPk(siteRequest_, SystemEvent.staticSetInheritPk(siteRequest_, o)).toString();
 	}
 
 	public String sqlInheritPk() {
@@ -712,15 +712,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrCreated(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return SystemEvent.staticSearchCreated(siteRequest_, SystemEvent.staticSetCreated(siteRequest_, o));
 	}
 
 	public static String staticSearchFqCreated(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrCreated(siteRequest_, SystemEvent.staticSearchCreated(siteRequest_, SystemEvent.staticSetCreated(siteRequest_, o)));
+		return SystemEvent.staticSearchCreated(siteRequest_, SystemEvent.staticSetCreated(siteRequest_, o)).toString();
 	}
 
 	public OffsetDateTime sqlCreated() {
@@ -792,15 +792,15 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrModified(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return SystemEvent.staticSearchModified(siteRequest_, SystemEvent.staticSetModified(siteRequest_, o));
 	}
 
 	public static String staticSearchFqModified(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrModified(siteRequest_, SystemEvent.staticSearchModified(siteRequest_, SystemEvent.staticSetModified(siteRequest_, o)));
+		return SystemEvent.staticSearchModified(siteRequest_, SystemEvent.staticSetModified(siteRequest_, o)).toString();
 	}
 
 	//////////////////
@@ -852,7 +852,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageUri(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageImageUri(siteRequest_, SystemEvent.staticSearchPageImageUri(siteRequest_, SystemEvent.staticSetPageImageUri(siteRequest_, o)));
+		return SystemEvent.staticSearchPageImageUri(siteRequest_, SystemEvent.staticSetPageImageUri(siteRequest_, o)).toString();
 	}
 
 	public String sqlPageImageUri() {
@@ -916,7 +916,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageWidth(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageImageWidth(siteRequest_, SystemEvent.staticSearchPageImageWidth(siteRequest_, SystemEvent.staticSetPageImageWidth(siteRequest_, o)));
+		return SystemEvent.staticSearchPageImageWidth(siteRequest_, SystemEvent.staticSetPageImageWidth(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -976,7 +976,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageHeight(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageImageHeight(siteRequest_, SystemEvent.staticSearchPageImageHeight(siteRequest_, SystemEvent.staticSetPageImageHeight(siteRequest_, o)));
+		return SystemEvent.staticSearchPageImageHeight(siteRequest_, SystemEvent.staticSetPageImageHeight(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -1028,7 +1028,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageImageType(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageImageType(siteRequest_, SystemEvent.staticSearchPageImageType(siteRequest_, SystemEvent.staticSetPageImageType(siteRequest_, o)));
+		return SystemEvent.staticSearchPageImageType(siteRequest_, SystemEvent.staticSetPageImageType(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -1085,7 +1085,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqArchived(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrArchived(siteRequest_, SystemEvent.staticSearchArchived(siteRequest_, SystemEvent.staticSetArchived(siteRequest_, o)));
+		return SystemEvent.staticSearchArchived(siteRequest_, SystemEvent.staticSetArchived(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlArchived() {
@@ -1146,7 +1146,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDeleted(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrDeleted(siteRequest_, SystemEvent.staticSearchDeleted(siteRequest_, SystemEvent.staticSetDeleted(siteRequest_, o)));
+		return SystemEvent.staticSearchDeleted(siteRequest_, SystemEvent.staticSetDeleted(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlDeleted() {
@@ -1202,7 +1202,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassCanonicalName(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrClassCanonicalName(siteRequest_, SystemEvent.staticSearchClassCanonicalName(siteRequest_, SystemEvent.staticSetClassCanonicalName(siteRequest_, o)));
+		return SystemEvent.staticSearchClassCanonicalName(siteRequest_, SystemEvent.staticSetClassCanonicalName(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -1254,7 +1254,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassSimpleName(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrClassSimpleName(siteRequest_, SystemEvent.staticSearchClassSimpleName(siteRequest_, SystemEvent.staticSetClassSimpleName(siteRequest_, o)));
+		return SystemEvent.staticSearchClassSimpleName(siteRequest_, SystemEvent.staticSetClassSimpleName(siteRequest_, o)).toString();
 	}
 
 	/////////////////////////
@@ -1328,7 +1328,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrClassCanonicalNames(siteRequest_, SystemEvent.staticSearchClassCanonicalNames(siteRequest_, SystemEvent.staticSetClassCanonicalNames(siteRequest_, o)));
+		return SystemEvent.staticSearchClassCanonicalNames(siteRequest_, SystemEvent.staticSetClassCanonicalNames(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1380,7 +1380,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSessionId(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrSessionId(siteRequest_, SystemEvent.staticSearchSessionId(siteRequest_, SystemEvent.staticSetSessionId(siteRequest_, o)));
+		return SystemEvent.staticSearchSessionId(siteRequest_, SystemEvent.staticSetSessionId(siteRequest_, o)).toString();
 	}
 
 	public String sqlSessionId() {
@@ -1444,7 +1444,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserKey(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrUserKey(siteRequest_, SystemEvent.staticSearchUserKey(siteRequest_, SystemEvent.staticSetUserKey(siteRequest_, o)));
+		return SystemEvent.staticSearchUserKey(siteRequest_, SystemEvent.staticSetUserKey(siteRequest_, o)).toString();
 	}
 
 	public Long sqlUserKey() {
@@ -1522,7 +1522,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSaves(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrSaves(siteRequest_, SystemEvent.staticSearchSaves(siteRequest_, SystemEvent.staticSetSaves(siteRequest_, o)));
+		return SystemEvent.staticSearchSaves(siteRequest_, SystemEvent.staticSetSaves(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -1574,7 +1574,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrObjectTitle(siteRequest_, SystemEvent.staticSearchObjectTitle(siteRequest_, SystemEvent.staticSetObjectTitle(siteRequest_, o)));
+		return SystemEvent.staticSearchObjectTitle(siteRequest_, SystemEvent.staticSetObjectTitle(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -1626,7 +1626,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectId(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrObjectId(siteRequest_, SystemEvent.staticSearchObjectId(siteRequest_, SystemEvent.staticSetObjectId(siteRequest_, o)));
+		return SystemEvent.staticSearchObjectId(siteRequest_, SystemEvent.staticSetObjectId(siteRequest_, o)).toString();
 	}
 
 	public String sqlObjectId() {
@@ -1682,7 +1682,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectSuggest(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrObjectSuggest(siteRequest_, SystemEvent.staticSearchObjectSuggest(siteRequest_, SystemEvent.staticSetObjectSuggest(siteRequest_, o)));
+		return SystemEvent.staticSearchObjectSuggest(siteRequest_, SystemEvent.staticSetObjectSuggest(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -1756,7 +1756,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrObjectText(siteRequest_, SystemEvent.staticSearchObjectText(siteRequest_, SystemEvent.staticSetObjectText(siteRequest_, o)));
+		return SystemEvent.staticSearchObjectText(siteRequest_, SystemEvent.staticSetObjectText(siteRequest_, o)).toString();
 	}
 
 	public String[] sqlObjectText() {
@@ -1812,7 +1812,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlId(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageUrlId(siteRequest_, SystemEvent.staticSearchPageUrlId(siteRequest_, SystemEvent.staticSetPageUrlId(siteRequest_, o)));
+		return SystemEvent.staticSearchPageUrlId(siteRequest_, SystemEvent.staticSetPageUrlId(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1864,7 +1864,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlPk(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageUrlPk(siteRequest_, SystemEvent.staticSearchPageUrlPk(siteRequest_, SystemEvent.staticSetPageUrlPk(siteRequest_, o)));
+		return SystemEvent.staticSearchPageUrlPk(siteRequest_, SystemEvent.staticSetPageUrlPk(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -1916,7 +1916,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlApi(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrPageUrlApi(siteRequest_, SystemEvent.staticSearchPageUrlApi(siteRequest_, SystemEvent.staticSetPageUrlApi(siteRequest_, o)));
+		return SystemEvent.staticSearchPageUrlApi(siteRequest_, SystemEvent.staticSetPageUrlApi(siteRequest_, o)).toString();
 	}
 
 	////////
@@ -1968,7 +1968,7 @@ public abstract class SystemEventGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return SystemEvent.staticSearchStrId(siteRequest_, SystemEvent.staticSearchId(siteRequest_, SystemEvent.staticSetId(siteRequest_, o)));
+		return SystemEvent.staticSearchId(siteRequest_, SystemEvent.staticSetId(siteRequest_, o)).toString();
 	}
 
 	//////////////

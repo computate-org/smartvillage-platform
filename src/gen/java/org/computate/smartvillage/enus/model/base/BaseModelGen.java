@@ -266,7 +266,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPk(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrPk(siteRequest_, BaseModel.staticSearchPk(siteRequest_, BaseModel.staticSetPk(siteRequest_, o)));
+		return BaseModel.staticSearchPk(siteRequest_, BaseModel.staticSetPk(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -318,7 +318,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqInheritPk(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrInheritPk(siteRequest_, BaseModel.staticSearchInheritPk(siteRequest_, BaseModel.staticSetInheritPk(siteRequest_, o)));
+		return BaseModel.staticSearchInheritPk(siteRequest_, BaseModel.staticSetInheritPk(siteRequest_, o)).toString();
 	}
 
 	public String sqlInheritPk() {
@@ -390,15 +390,15 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchCreated(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrCreated(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return BaseModel.staticSearchCreated(siteRequest_, BaseModel.staticSetCreated(siteRequest_, o));
 	}
 
 	public static String staticSearchFqCreated(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrCreated(siteRequest_, BaseModel.staticSearchCreated(siteRequest_, BaseModel.staticSetCreated(siteRequest_, o)));
+		return BaseModel.staticSearchCreated(siteRequest_, BaseModel.staticSetCreated(siteRequest_, o)).toString();
 	}
 
 	public OffsetDateTime sqlCreated() {
@@ -470,15 +470,15 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchModified(SiteRequestEnUS siteRequest_, ZonedDateTime o) {
-		return o == null ? null : Date.from(o.toInstant()).toString();
+		return o == null ? null : ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(o.toInstant().atOffset(ZoneOffset.UTC));
 	}
 
 	public static String staticSearchStrModified(SiteRequestEnUS siteRequest_, String o) {
-		return ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER.format(ZonedDateTime.parse(o, ComputateZonedDateTimeSerializer.UTC_DATE_TIME_FORMATTER).toInstant().atOffset(ZoneOffset.UTC));
+		return BaseModel.staticSearchModified(siteRequest_, BaseModel.staticSetModified(siteRequest_, o));
 	}
 
 	public static String staticSearchFqModified(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrModified(siteRequest_, BaseModel.staticSearchModified(siteRequest_, BaseModel.staticSetModified(siteRequest_, o)));
+		return BaseModel.staticSearchModified(siteRequest_, BaseModel.staticSetModified(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -535,7 +535,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqArchived(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrArchived(siteRequest_, BaseModel.staticSearchArchived(siteRequest_, BaseModel.staticSetArchived(siteRequest_, o)));
+		return BaseModel.staticSearchArchived(siteRequest_, BaseModel.staticSetArchived(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlArchived() {
@@ -596,7 +596,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqDeleted(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrDeleted(siteRequest_, BaseModel.staticSearchDeleted(siteRequest_, BaseModel.staticSetDeleted(siteRequest_, o)));
+		return BaseModel.staticSearchDeleted(siteRequest_, BaseModel.staticSetDeleted(siteRequest_, o)).toString();
 	}
 
 	public Boolean sqlDeleted() {
@@ -652,7 +652,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassCanonicalName(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrClassCanonicalName(siteRequest_, BaseModel.staticSearchClassCanonicalName(siteRequest_, BaseModel.staticSetClassCanonicalName(siteRequest_, o)));
+		return BaseModel.staticSearchClassCanonicalName(siteRequest_, BaseModel.staticSetClassCanonicalName(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -704,7 +704,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassSimpleName(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrClassSimpleName(siteRequest_, BaseModel.staticSearchClassSimpleName(siteRequest_, BaseModel.staticSetClassSimpleName(siteRequest_, o)));
+		return BaseModel.staticSearchClassSimpleName(siteRequest_, BaseModel.staticSetClassSimpleName(siteRequest_, o)).toString();
 	}
 
 	/////////////////////////
@@ -778,7 +778,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqClassCanonicalNames(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrClassCanonicalNames(siteRequest_, BaseModel.staticSearchClassCanonicalNames(siteRequest_, BaseModel.staticSetClassCanonicalNames(siteRequest_, o)));
+		return BaseModel.staticSearchClassCanonicalNames(siteRequest_, BaseModel.staticSetClassCanonicalNames(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -830,7 +830,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSessionId(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrSessionId(siteRequest_, BaseModel.staticSearchSessionId(siteRequest_, BaseModel.staticSetSessionId(siteRequest_, o)));
+		return BaseModel.staticSearchSessionId(siteRequest_, BaseModel.staticSetSessionId(siteRequest_, o)).toString();
 	}
 
 	public String sqlSessionId() {
@@ -894,7 +894,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqUserKey(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrUserKey(siteRequest_, BaseModel.staticSearchUserKey(siteRequest_, BaseModel.staticSetUserKey(siteRequest_, o)));
+		return BaseModel.staticSearchUserKey(siteRequest_, BaseModel.staticSetUserKey(siteRequest_, o)).toString();
 	}
 
 	public Long sqlUserKey() {
@@ -972,7 +972,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqSaves(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrSaves(siteRequest_, BaseModel.staticSearchSaves(siteRequest_, BaseModel.staticSetSaves(siteRequest_, o)));
+		return BaseModel.staticSearchSaves(siteRequest_, BaseModel.staticSetSaves(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -1024,7 +1024,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectTitle(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrObjectTitle(siteRequest_, BaseModel.staticSearchObjectTitle(siteRequest_, BaseModel.staticSetObjectTitle(siteRequest_, o)));
+		return BaseModel.staticSearchObjectTitle(siteRequest_, BaseModel.staticSetObjectTitle(siteRequest_, o)).toString();
 	}
 
 	//////////////
@@ -1076,7 +1076,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectId(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrObjectId(siteRequest_, BaseModel.staticSearchObjectId(siteRequest_, BaseModel.staticSetObjectId(siteRequest_, o)));
+		return BaseModel.staticSearchObjectId(siteRequest_, BaseModel.staticSetObjectId(siteRequest_, o)).toString();
 	}
 
 	///////////////////
@@ -1128,7 +1128,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectSuggest(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrObjectSuggest(siteRequest_, BaseModel.staticSearchObjectSuggest(siteRequest_, BaseModel.staticSetObjectSuggest(siteRequest_, o)));
+		return BaseModel.staticSearchObjectSuggest(siteRequest_, BaseModel.staticSetObjectSuggest(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -1202,7 +1202,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqObjectText(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrObjectText(siteRequest_, BaseModel.staticSearchObjectText(siteRequest_, BaseModel.staticSetObjectText(siteRequest_, o)));
+		return BaseModel.staticSearchObjectText(siteRequest_, BaseModel.staticSetObjectText(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1254,7 +1254,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlId(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrPageUrlId(siteRequest_, BaseModel.staticSearchPageUrlId(siteRequest_, BaseModel.staticSetPageUrlId(siteRequest_, o)));
+		return BaseModel.staticSearchPageUrlId(siteRequest_, BaseModel.staticSetPageUrlId(siteRequest_, o)).toString();
 	}
 
 	///////////////
@@ -1306,7 +1306,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlPk(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrPageUrlPk(siteRequest_, BaseModel.staticSearchPageUrlPk(siteRequest_, BaseModel.staticSetPageUrlPk(siteRequest_, o)));
+		return BaseModel.staticSearchPageUrlPk(siteRequest_, BaseModel.staticSetPageUrlPk(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -1358,7 +1358,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqPageUrlApi(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrPageUrlApi(siteRequest_, BaseModel.staticSearchPageUrlApi(siteRequest_, BaseModel.staticSetPageUrlApi(siteRequest_, o)));
+		return BaseModel.staticSearchPageUrlApi(siteRequest_, BaseModel.staticSetPageUrlApi(siteRequest_, o)).toString();
 	}
 
 	////////
@@ -1410,7 +1410,7 @@ public abstract class BaseModelGen<DEV> extends Object {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return BaseModel.staticSearchStrId(siteRequest_, BaseModel.staticSearchId(siteRequest_, BaseModel.staticSetId(siteRequest_, o)));
+		return BaseModel.staticSearchId(siteRequest_, BaseModel.staticSetId(siteRequest_, o)).toString();
 	}
 
 	//////////////

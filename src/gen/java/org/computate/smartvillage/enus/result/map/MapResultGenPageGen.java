@@ -225,7 +225,7 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqListMapResult(SiteRequestEnUS siteRequest_, String o) {
-		return MapResultGenPage.staticSearchStrListMapResult(siteRequest_, MapResultGenPage.staticSearchListMapResult(siteRequest_, MapResultGenPage.staticSetListMapResult(siteRequest_, o)));
+		return MapResultGenPage.staticSearchListMapResult(siteRequest_, MapResultGenPage.staticSetListMapResult(siteRequest_, o)).toString();
 	}
 
 	////////////////////
@@ -285,7 +285,7 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqMapResultCount(SiteRequestEnUS siteRequest_, String o) {
-		return MapResultGenPage.staticSearchStrMapResultCount(siteRequest_, MapResultGenPage.staticSearchMapResultCount(siteRequest_, MapResultGenPage.staticSetMapResultCount(siteRequest_, o)));
+		return MapResultGenPage.staticSearchMapResultCount(siteRequest_, MapResultGenPage.staticSetMapResultCount(siteRequest_, o)).toString();
 	}
 
 	////////////////
@@ -378,7 +378,7 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return MapResultGenPage.staticSearchStrId(siteRequest_, MapResultGenPage.staticSearchId(siteRequest_, MapResultGenPage.staticSetId(siteRequest_, o)));
+		return MapResultGenPage.staticSearchId(siteRequest_, MapResultGenPage.staticSetId(siteRequest_, o)).toString();
 	}
 
 	//////////////////////
@@ -430,7 +430,7 @@ public abstract class MapResultGenPageGen<DEV> extends BaseResultPage {
 	}
 
 	public static String staticSearchFqPageUriMapResult(SiteRequestEnUS siteRequest_, String o) {
-		return MapResultGenPage.staticSearchStrPageUriMapResult(siteRequest_, MapResultGenPage.staticSearchPageUriMapResult(siteRequest_, MapResultGenPage.staticSetPageUriMapResult(siteRequest_, o)));
+		return MapResultGenPage.staticSearchPageUriMapResult(siteRequest_, MapResultGenPage.staticSetPageUriMapResult(siteRequest_, o)).toString();
 	}
 
 	//////////////

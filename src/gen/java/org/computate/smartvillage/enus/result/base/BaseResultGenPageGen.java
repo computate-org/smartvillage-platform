@@ -225,7 +225,7 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqListBaseResult(SiteRequestEnUS siteRequest_, String o) {
-		return BaseResultGenPage.staticSearchStrListBaseResult(siteRequest_, BaseResultGenPage.staticSearchListBaseResult(siteRequest_, BaseResultGenPage.staticSetListBaseResult(siteRequest_, o)));
+		return BaseResultGenPage.staticSearchListBaseResult(siteRequest_, BaseResultGenPage.staticSetListBaseResult(siteRequest_, o)).toString();
 	}
 
 	/////////////////////
@@ -285,7 +285,7 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqBaseResultCount(SiteRequestEnUS siteRequest_, String o) {
-		return BaseResultGenPage.staticSearchStrBaseResultCount(siteRequest_, BaseResultGenPage.staticSearchBaseResultCount(siteRequest_, BaseResultGenPage.staticSetBaseResultCount(siteRequest_, o)));
+		return BaseResultGenPage.staticSearchBaseResultCount(siteRequest_, BaseResultGenPage.staticSetBaseResultCount(siteRequest_, o)).toString();
 	}
 
 	/////////////////
@@ -378,7 +378,7 @@ public abstract class BaseResultGenPageGen<DEV> extends PageLayout {
 	}
 
 	public static String staticSearchFqId(SiteRequestEnUS siteRequest_, String o) {
-		return BaseResultGenPage.staticSearchStrId(siteRequest_, BaseResultGenPage.staticSearchId(siteRequest_, BaseResultGenPage.staticSetId(siteRequest_, o)));
+		return BaseResultGenPage.staticSearchId(siteRequest_, BaseResultGenPage.staticSetId(siteRequest_, o)).toString();
 	}
 
 	//////////////
