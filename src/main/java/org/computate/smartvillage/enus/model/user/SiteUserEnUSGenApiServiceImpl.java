@@ -524,14 +524,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							num++;
 							bParams.add(o2.sqlArchived());
 						break;
-					case "setDeleted":
-							o2.setDeleted(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_deleted + "=$" + num);
-							num++;
-							bParams.add(o2.sqlDeleted());
-						break;
 					case "setSessionId":
 							o2.setSessionId(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -548,13 +540,13 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
-					case "setSeeDeleted":
-							o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
+					case "setDeleted":
+							o2.setDeleted(jsonObject.getBoolean(entityVar));
 							if(bParams.size() > 0)
 								bSql.append(", ");
-							bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
+							bSql.append(SiteUser.VAR_deleted + "=$" + num);
 							num++;
-							bParams.add(o2.sqlSeeDeleted());
+							bParams.add(o2.sqlDeleted());
 						break;
 					case "setUserId":
 							o2.setUserId(jsonObject.getString(entityVar));
@@ -611,6 +603,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							bSql.append(SiteUser.VAR_seeArchived + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSeeArchived());
+						break;
+					case "setSeeDeleted":
+							o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
+							num++;
+							bParams.add(o2.sqlSeeDeleted());
 						break;
 				}
 			}
@@ -924,15 +924,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						num++;
 						bParams.add(o2.sqlArchived());
 						break;
-					case SiteUser.VAR_deleted:
-						o2.setDeleted(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_deleted + "=$" + num);
-						num++;
-						bParams.add(o2.sqlDeleted());
-						break;
 					case SiteUser.VAR_sessionId:
 						o2.setSessionId(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -951,14 +942,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
-					case SiteUser.VAR_seeDeleted:
-						o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
+					case SiteUser.VAR_deleted:
+						o2.setDeleted(jsonObject.getBoolean(entityVar));
 						if(bParams.size() > 0) {
 							bSql.append(", ");
 						}
-						bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
+						bSql.append(SiteUser.VAR_deleted + "=$" + num);
 						num++;
-						bParams.add(o2.sqlSeeDeleted());
+						bParams.add(o2.sqlDeleted());
 						break;
 					case SiteUser.VAR_userId:
 						o2.setUserId(jsonObject.getString(entityVar));
@@ -1022,6 +1013,15 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						bSql.append(SiteUser.VAR_seeArchived + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSeeArchived());
+						break;
+					case SiteUser.VAR_seeDeleted:
+						o2.setSeeDeleted(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
+						num++;
+						bParams.add(o2.sqlSeeDeleted());
 						break;
 					}
 				}
@@ -1219,7 +1219,8 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								Object bodyVal = body.getValue(f);
 								if(bodyVal instanceof JsonArray) {
 									JsonArray bodyVals = (JsonArray)bodyVal;
-									Collection<?> vals = bodyVals.getList();
+									Object valsObj = o.obtainForClass(f);
+									Collection<?> vals = valsObj instanceof JsonArray ? ((JsonArray)valsObj).getList() : (Collection<?>)valsObj;
 									if(bodyVals.size() == vals.size()) {
 										Boolean match = true;
 										for(Object val : vals) {
