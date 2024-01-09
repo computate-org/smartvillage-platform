@@ -997,6 +997,9 @@ public class SystemEventEnUSGenApiServiceImpl extends BaseApiServiceImpl impleme
 								}
 							}
 							if(body2.size() > 0) {
+								if(searchList.size() == 1) {
+									apiRequest.setOriginal(o);
+								}
 								siteRequest.setJsonObject(body2);
 								patchSystemEventFuture(o2, true).onSuccess(b -> {
 									LOG.debug("Import SystemEvent {} succeeded, modified SystemEvent. ", body.getValue(SystemEvent.VAR_id));

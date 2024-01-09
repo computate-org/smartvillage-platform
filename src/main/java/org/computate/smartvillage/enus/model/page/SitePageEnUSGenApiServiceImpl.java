@@ -937,6 +937,9 @@ public class SitePageEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								}
 							}
 							if(body2.size() > 0) {
+								if(searchList.size() == 1) {
+									apiRequest.setOriginal(o);
+								}
 								siteRequest.setJsonObject(body2);
 								patchSitePageFuture(o2, true).onSuccess(b -> {
 									LOG.debug("Import SitePage {} succeeded, modified SitePage. ", body.getValue(SitePage.VAR_id));

@@ -997,6 +997,9 @@ public class SiteHtmEnUSGenApiServiceImpl extends BaseApiServiceImpl implements 
 								}
 							}
 							if(body2.size() > 0) {
+								if(searchList.size() == 1) {
+									apiRequest.setOriginal(o);
+								}
 								siteRequest.setJsonObject(body2);
 								patchSiteHtmFuture(o2, true).onSuccess(b -> {
 									LOG.debug("Import SiteHtm {} succeeded, modified SiteHtm. ", body.getValue(SiteHtm.VAR_id));

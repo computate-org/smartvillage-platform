@@ -524,6 +524,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							num++;
 							bParams.add(o2.sqlArchived());
 						break;
+					case "setDeleted":
+							o2.setDeleted(jsonObject.getBoolean(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SiteUser.VAR_deleted + "=$" + num);
+							num++;
+							bParams.add(o2.sqlDeleted());
+						break;
 					case "setSessionId":
 							o2.setSessionId(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -539,14 +547,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							bSql.append(SiteUser.VAR_userKey + "=$" + num);
 							num++;
 							bParams.add(o2.sqlUserKey());
-						break;
-					case "setDeleted":
-							o2.setDeleted(jsonObject.getBoolean(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_deleted + "=$" + num);
-							num++;
-							bParams.add(o2.sqlDeleted());
 						break;
 					case "setUserId":
 							o2.setUserId(jsonObject.getString(entityVar));
@@ -924,6 +924,15 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						num++;
 						bParams.add(o2.sqlArchived());
 						break;
+					case SiteUser.VAR_deleted:
+						o2.setDeleted(jsonObject.getBoolean(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SiteUser.VAR_deleted + "=$" + num);
+						num++;
+						bParams.add(o2.sqlDeleted());
+						break;
 					case SiteUser.VAR_sessionId:
 						o2.setSessionId(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -941,15 +950,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						bSql.append(SiteUser.VAR_userKey + "=$" + num);
 						num++;
 						bParams.add(o2.sqlUserKey());
-						break;
-					case SiteUser.VAR_deleted:
-						o2.setDeleted(jsonObject.getBoolean(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_deleted + "=$" + num);
-						num++;
-						bParams.add(o2.sqlDeleted());
 						break;
 					case SiteUser.VAR_userId:
 						o2.setUserId(jsonObject.getString(entityVar));
@@ -1254,6 +1254,10 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 								}
 							}
 							if(body2.size() > 0) {
+								if(searchList.size() == 1) {
+									apiRequest.setOriginal(o);
+									apiRequest.setPk(o.getPk());
+								}
 								siteRequest.setJsonObject(body2);
 								patchSiteUserFuture(o, true).onSuccess(b -> {
 									LOG.debug("Import SiteUser {} succeeded, modified SiteUser. ", body.getValue(SiteUser.VAR_pk));
