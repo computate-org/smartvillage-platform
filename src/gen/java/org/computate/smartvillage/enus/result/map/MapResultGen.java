@@ -61,6 +61,7 @@ import java.time.Instant;
 import java.util.Locale;
 import java.time.OffsetDateTime;
 import java.lang.Double;
+import io.vertx.core.json.JsonArray;
 import io.vertx.pgclient.data.Point;
 import org.computate.vertx.serialize.pgclient.PgClientPointSerializer;
 import org.computate.vertx.serialize.pgclient.PgClientPointDeserializer;
@@ -77,7 +78,6 @@ import java.lang.Boolean;
 import org.computate.search.wrap.Wrap;
 import io.vertx.core.Promise;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.search.response.solr.SolrResponse;
 
@@ -587,6 +587,284 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		return y;
 	}
 
+	///////////
+	// color //
+	///////////
+
+
+	/**	 The entity color
+	 *	 is defined as null before being initialized. 
+	 */
+	@JsonProperty
+	@JsonInclude(Include.NON_NULL)
+	protected String color;
+
+	/**	<br> The entity color
+	 *  is defined as null before being initialized. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillage.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
+	 * <br>
+	 * @param w is for wrapping a value to assign to this entity during initialization. 
+	 **/
+	protected abstract void _color(Wrap<String> w);
+
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String o) {
+		this.color = MapResult.staticSetColor(siteRequest_, o);
+	}
+	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	protected MapResult colorInit() {
+		Wrap<String> colorWrap = new Wrap<String>().var("color");
+		if(color == null) {
+			_color(colorWrap);
+			Optional.ofNullable(colorWrap.getO()).ifPresent(o -> {
+				setColor(o);
+			});
+		}
+		return (MapResult)this;
+	}
+
+	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchColor(siteRequest_, MapResult.staticSetColor(siteRequest_, o)).toString();
+	}
+
+	public String sqlColor() {
+		return color;
+	}
+
+	////////////////////
+	// locationColors //
+	////////////////////
+
+
+	/**	 The entity locationColors
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> locationColors = new ArrayList<String>();
+
+	/**	<br> The entity locationColors
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillage.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:locationColors">Find the entity locationColors in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _locationColors(List<String> l);
+
+	public List<String> getLocationColors() {
+		return locationColors;
+	}
+
+	public void setLocationColors(List<String> locationColors) {
+		this.locationColors = locationColors;
+	}
+	public void setLocationColors(String o) {
+		String l = MapResult.staticSetLocationColors(siteRequest_, o);
+		if(l != null)
+			addLocationColors(l);
+	}
+	public static String staticSetLocationColors(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public MapResult addLocationColors(String...objects) {
+		for(String o : objects) {
+			addLocationColors(o);
+		}
+		return (MapResult)this;
+	}
+	public MapResult addLocationColors(String o) {
+		if(o != null)
+			this.locationColors.add(o);
+		return (MapResult)this;
+	}
+	@JsonIgnore
+	public void setLocationColors(JsonArray objects) {
+		locationColors.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addLocationColors(o);
+		}
+	}
+	protected MapResult locationColorsInit() {
+		_locationColors(locationColors);
+		return (MapResult)this;
+	}
+
+	public static String staticSearchLocationColors(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrLocationColors(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLocationColors(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchLocationColors(siteRequest_, MapResult.staticSetLocationColors(siteRequest_, o)).toString();
+	}
+
+	////////////////////
+	// locationTitles //
+	////////////////////
+
+
+	/**	 The entity locationTitles
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> locationTitles = new ArrayList<String>();
+
+	/**	<br> The entity locationTitles
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillage.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:locationTitles">Find the entity locationTitles in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _locationTitles(List<String> l);
+
+	public List<String> getLocationTitles() {
+		return locationTitles;
+	}
+
+	public void setLocationTitles(List<String> locationTitles) {
+		this.locationTitles = locationTitles;
+	}
+	public void setLocationTitles(String o) {
+		String l = MapResult.staticSetLocationTitles(siteRequest_, o);
+		if(l != null)
+			addLocationTitles(l);
+	}
+	public static String staticSetLocationTitles(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public MapResult addLocationTitles(String...objects) {
+		for(String o : objects) {
+			addLocationTitles(o);
+		}
+		return (MapResult)this;
+	}
+	public MapResult addLocationTitles(String o) {
+		if(o != null)
+			this.locationTitles.add(o);
+		return (MapResult)this;
+	}
+	@JsonIgnore
+	public void setLocationTitles(JsonArray objects) {
+		locationTitles.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addLocationTitles(o);
+		}
+	}
+	protected MapResult locationTitlesInit() {
+		_locationTitles(locationTitles);
+		return (MapResult)this;
+	}
+
+	public static String staticSearchLocationTitles(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrLocationTitles(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLocationTitles(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchLocationTitles(siteRequest_, MapResult.staticSetLocationTitles(siteRequest_, o)).toString();
+	}
+
+	///////////////////
+	// locationLinks //
+	///////////////////
+
+
+	/**	 The entity locationLinks
+	 *	 It is constructed before being initialized with the constructor by default. 
+	 */
+	@JsonProperty
+	@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+	@JsonInclude(Include.NON_NULL)
+	protected List<String> locationLinks = new ArrayList<String>();
+
+	/**	<br> The entity locationLinks
+	 *  It is constructed before being initialized with the constructor by default. 
+	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillage.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:locationLinks">Find the entity locationLinks in Solr</a>
+	 * <br>
+	 * @param l is the entity already constructed. 
+	 **/
+	protected abstract void _locationLinks(List<String> l);
+
+	public List<String> getLocationLinks() {
+		return locationLinks;
+	}
+
+	public void setLocationLinks(List<String> locationLinks) {
+		this.locationLinks = locationLinks;
+	}
+	public void setLocationLinks(String o) {
+		String l = MapResult.staticSetLocationLinks(siteRequest_, o);
+		if(l != null)
+			addLocationLinks(l);
+	}
+	public static String staticSetLocationLinks(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+	public MapResult addLocationLinks(String...objects) {
+		for(String o : objects) {
+			addLocationLinks(o);
+		}
+		return (MapResult)this;
+	}
+	public MapResult addLocationLinks(String o) {
+		if(o != null)
+			this.locationLinks.add(o);
+		return (MapResult)this;
+	}
+	@JsonIgnore
+	public void setLocationLinks(JsonArray objects) {
+		locationLinks.clear();
+		if(objects == null)
+			return;
+		for(int i = 0; i < objects.size(); i++) {
+			String o = objects.getString(i);
+			addLocationLinks(o);
+		}
+	}
+	protected MapResult locationLinksInit() {
+		_locationLinks(locationLinks);
+		return (MapResult)this;
+	}
+
+	public static String staticSearchLocationLinks(SiteRequestEnUS siteRequest_, String o) {
+		return o;
+	}
+
+	public static String staticSearchStrLocationLinks(SiteRequestEnUS siteRequest_, String o) {
+		return o == null ? null : o.toString();
+	}
+
+	public static String staticSearchFqLocationLinks(SiteRequestEnUS siteRequest_, String o) {
+		return MapResult.staticSearchLocationLinks(siteRequest_, MapResult.staticSetLocationLinks(siteRequest_, o)).toString();
+	}
+
 	//////////////
 	// location //
 	//////////////
@@ -690,62 +968,6 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		return location;
 	}
 
-	///////////
-	// color //
-	///////////
-
-
-	/**	 The entity color
-	 *	 is defined as null before being initialized. 
-	 */
-	@JsonProperty
-	@JsonInclude(Include.NON_NULL)
-	protected String color;
-
-	/**	<br> The entity color
-	 *  is defined as null before being initialized. 
-	 * <br><a href="https://solr-solr.apps-crc.testing/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.smartvillage.enus.result.map.MapResult&fq=entiteVar_enUS_indexed_string:color">Find the entity color in Solr</a>
-	 * <br>
-	 * @param w is for wrapping a value to assign to this entity during initialization. 
-	 **/
-	protected abstract void _color(Wrap<String> w);
-
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String o) {
-		this.color = MapResult.staticSetColor(siteRequest_, o);
-	}
-	public static String staticSetColor(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-	protected MapResult colorInit() {
-		Wrap<String> colorWrap = new Wrap<String>().var("color");
-		if(color == null) {
-			_color(colorWrap);
-			Optional.ofNullable(colorWrap.getO()).ifPresent(o -> {
-				setColor(o);
-			});
-		}
-		return (MapResult)this;
-	}
-
-	public static String staticSearchColor(SiteRequestEnUS siteRequest_, String o) {
-		return o;
-	}
-
-	public static String staticSearchStrColor(SiteRequestEnUS siteRequest_, String o) {
-		return o == null ? null : o.toString();
-	}
-
-	public static String staticSearchFqColor(SiteRequestEnUS siteRequest_, String o) {
-		return MapResult.staticSearchColor(siteRequest_, MapResult.staticSetColor(siteRequest_, o)).toString();
-	}
-
-	public String sqlColor() {
-		return color;
-	}
-
 	//////////
 	// step //
 	//////////
@@ -841,8 +1063,11 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				dateTimeInit();
 				xInit();
 				yInit();
-				locationInit();
 				colorInit();
+				locationColorsInit();
+				locationTitlesInit();
+				locationLinksInit();
+				locationInit();
 				stepInit();
 				promise2.complete();
 			} catch(Exception ex) {
@@ -907,10 +1132,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return oMapResult.x;
 			case "y":
 				return oMapResult.y;
-			case "location":
-				return oMapResult.location;
 			case "color":
 				return oMapResult.color;
+			case "locationColors":
+				return oMapResult.locationColors;
+			case "locationTitles":
+				return oMapResult.locationTitles;
+			case "locationLinks":
+				return oMapResult.locationLinks;
+			case "location":
+				return oMapResult.location;
 			case "step":
 				return oMapResult.step;
 			default:
@@ -962,10 +1193,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSetX(siteRequest_, o);
 		case "y":
 			return MapResult.staticSetY(siteRequest_, o);
-		case "location":
-			return MapResult.staticSetLocation(siteRequest_, o);
 		case "color":
 			return MapResult.staticSetColor(siteRequest_, o);
+		case "locationColors":
+			return MapResult.staticSetLocationColors(siteRequest_, o);
+		case "locationTitles":
+			return MapResult.staticSetLocationTitles(siteRequest_, o);
+		case "locationLinks":
+			return MapResult.staticSetLocationLinks(siteRequest_, o);
+		case "location":
+			return MapResult.staticSetLocation(siteRequest_, o);
 		case "step":
 			return MapResult.staticSetStep(siteRequest_, o);
 			default:
@@ -992,10 +1229,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSearchX(siteRequest_, (Double)o);
 		case "y":
 			return MapResult.staticSearchY(siteRequest_, (Double)o);
-		case "location":
-			return MapResult.staticSearchLocation(siteRequest_, (Point)o);
 		case "color":
 			return MapResult.staticSearchColor(siteRequest_, (String)o);
+		case "locationColors":
+			return MapResult.staticSearchLocationColors(siteRequest_, (String)o);
+		case "locationTitles":
+			return MapResult.staticSearchLocationTitles(siteRequest_, (String)o);
+		case "locationLinks":
+			return MapResult.staticSearchLocationLinks(siteRequest_, (String)o);
+		case "location":
+			return MapResult.staticSearchLocation(siteRequest_, (Point)o);
 		case "step":
 			return MapResult.staticSearchStep(siteRequest_, (Boolean)o);
 			default:
@@ -1022,10 +1265,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSearchStrX(siteRequest_, (Double)o);
 		case "y":
 			return MapResult.staticSearchStrY(siteRequest_, (Double)o);
-		case "location":
-			return MapResult.staticSearchStrLocation(siteRequest_, (Point)o);
 		case "color":
 			return MapResult.staticSearchStrColor(siteRequest_, (String)o);
+		case "locationColors":
+			return MapResult.staticSearchStrLocationColors(siteRequest_, (String)o);
+		case "locationTitles":
+			return MapResult.staticSearchStrLocationTitles(siteRequest_, (String)o);
+		case "locationLinks":
+			return MapResult.staticSearchStrLocationLinks(siteRequest_, (String)o);
+		case "location":
+			return MapResult.staticSearchStrLocation(siteRequest_, (Point)o);
 		case "step":
 			return MapResult.staticSearchStrStep(siteRequest_, (Boolean)o);
 			default:
@@ -1052,10 +1301,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return MapResult.staticSearchFqX(siteRequest_, o);
 		case "y":
 			return MapResult.staticSearchFqY(siteRequest_, o);
-		case "location":
-			return MapResult.staticSearchFqLocation(siteRequest_, o);
 		case "color":
 			return MapResult.staticSearchFqColor(siteRequest_, o);
+		case "locationColors":
+			return MapResult.staticSearchFqLocationColors(siteRequest_, o);
+		case "locationTitles":
+			return MapResult.staticSearchFqLocationTitles(siteRequest_, o);
+		case "locationLinks":
+			return MapResult.staticSearchFqLocationLinks(siteRequest_, o);
+		case "location":
+			return MapResult.staticSearchFqLocation(siteRequest_, o);
 		case "step":
 			return MapResult.staticSearchFqStep(siteRequest_, o);
 			default:
@@ -1122,6 +1377,12 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				}
 				saves.add("y");
 				return val;
+			} else if("color".equals(varLower)) {
+				if(val instanceof String) {
+					setColor((String)val);
+				}
+				saves.add("color");
+				return val;
 			} else if("location".equals(varLower)) {
 				if(val instanceof String) {
 					setLocation((String)val);
@@ -1129,12 +1390,6 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 					setLocation((Point)val);
 				}
 				saves.add("location");
-				return val;
-			} else if("color".equals(varLower)) {
-				if(val instanceof String) {
-					setColor((String)val);
-				}
-				saves.add("color");
 				return val;
 			} else if("step".equals(varLower)) {
 				if(val instanceof Boolean) {
@@ -1179,16 +1434,34 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 					oMapResult.setDateTime(dateTime);
 			}
 
-			if(saves.contains("location")) {
-				Point location = (Point)doc.get("location_docvalues_location");
-				if(location != null)
-					oMapResult.setLocation(location);
-			}
-
 			if(saves.contains("color")) {
 				String color = (String)doc.get("color_docvalues_string");
 				if(color != null)
 					oMapResult.setColor(color);
+			}
+
+			if(saves.contains("locationColors")) {
+				List<String> locationColors = (List<String>)doc.get("locationColors_indexedstored_strings");
+				if(locationColors != null)
+					oMapResult.locationColors.addAll(locationColors);
+			}
+
+			if(saves.contains("locationTitles")) {
+				List<String> locationTitles = (List<String>)doc.get("locationTitles_indexedstored_strings");
+				if(locationTitles != null)
+					oMapResult.locationTitles.addAll(locationTitles);
+			}
+
+			if(saves.contains("locationLinks")) {
+				List<String> locationLinks = (List<String>)doc.get("locationLinks_indexedstored_strings");
+				if(locationLinks != null)
+					oMapResult.locationLinks.addAll(locationLinks);
+			}
+
+			if(saves.contains("location")) {
+				Point location = (Point)doc.get("location_docvalues_location");
+				if(location != null)
+					oMapResult.setLocation(location);
 			}
 
 			if(saves.contains("step")) {
@@ -1211,11 +1484,32 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		if(dateTime != null) {
 			doc.put("dateTime_docvalues_date", DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(ZonedDateTime.ofInstant(dateTime.toInstant(), ZoneId.of("UTC"))));
 		}
-		if(location != null) {
-			doc.put("location_docvalues_location", String.format("%s,%s", location.getX(), location.getY()));
-		}
 		if(color != null) {
 			doc.put("color_docvalues_string", color);
+		}
+		if(locationColors != null) {
+			JsonArray l = new JsonArray();
+			doc.put("locationColors_indexedstored_strings", l);
+			for(String o : locationColors) {
+				l.add(o);
+			}
+		}
+		if(locationTitles != null) {
+			JsonArray l = new JsonArray();
+			doc.put("locationTitles_indexedstored_strings", l);
+			for(String o : locationTitles) {
+				l.add(o);
+			}
+		}
+		if(locationLinks != null) {
+			JsonArray l = new JsonArray();
+			doc.put("locationLinks_indexedstored_strings", l);
+			for(String o : locationLinks) {
+				l.add(o);
+			}
+		}
+		if(location != null) {
+			doc.put("location_docvalues_location", String.format("%s,%s", location.getX(), location.getY()));
 		}
 		if(step != null) {
 			doc.put("step_docvalues_boolean", step);
@@ -1232,10 +1526,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return "time_docvalues_double";
 			case "dateTime":
 				return "dateTime_docvalues_date";
-			case "location":
-				return "location_docvalues_location";
 			case "color":
 				return "color_docvalues_string";
+			case "locationColors":
+				return "locationColors_indexedstored_strings";
+			case "locationTitles":
+				return "locationTitles_indexedstored_strings";
+			case "locationLinks":
+				return "locationLinks_indexedstored_strings";
+			case "location":
+				return "location_docvalues_location";
 			case "step":
 				return "step_docvalues_boolean";
 			default:
@@ -1251,10 +1551,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return "time_docvalues_double";
 			case "dateTime":
 				return "dateTime_docvalues_date";
-			case "location":
-				return "location_docvalues_location";
 			case "color":
 				return "color_docvalues_string";
+			case "locationColors":
+				return "locationColors_indexedstored_strings";
+			case "locationTitles":
+				return "locationTitles_indexedstored_strings";
+			case "locationLinks":
+				return "locationLinks_indexedstored_strings";
+			case "location":
+				return "location_docvalues_location";
 			case "step":
 				return "step_docvalues_boolean";
 			default:
@@ -1270,10 +1576,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				return "time";
 			case "dateTime_docvalues_date":
 				return "dateTime";
-			case "location_docvalues_location":
-				return "location";
 			case "color_docvalues_string":
 				return "color";
+			case "locationColors_indexedstored_strings":
+				return "locationColors";
+			case "locationTitles_indexedstored_strings":
+				return "locationTitles";
+			case "locationLinks_indexedstored_strings":
+				return "locationLinks";
+			case "location_docvalues_location":
+				return "location";
 			case "step_docvalues_boolean":
 				return "step";
 			default:
@@ -1309,8 +1621,17 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		oMapResult.setTimeStepId(Optional.ofNullable(doc.get("timeStepId_docvalues_string")).map(v -> v.toString()).orElse(null));
 		oMapResult.setTime(Optional.ofNullable(doc.get("time_docvalues_double")).map(v -> v.toString()).orElse(null));
 		oMapResult.setDateTime(Optional.ofNullable(doc.get("dateTime_docvalues_date")).map(v -> v.toString()).orElse(null));
-		oMapResult.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oMapResult.setColor(Optional.ofNullable(doc.get("color_docvalues_string")).map(v -> v.toString()).orElse(null));
+		Optional.ofNullable((List<?>)doc.get("locationColors_indexedstored_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oMapResult.addLocationColors(MapResult.staticSetLocationColors(siteRequest, v.toString()));
+		});
+		Optional.ofNullable((List<?>)doc.get("locationTitles_indexedstored_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oMapResult.addLocationTitles(MapResult.staticSetLocationTitles(siteRequest, v.toString()));
+		});
+		Optional.ofNullable((List<?>)doc.get("locationLinks_indexedstored_strings")).orElse(Arrays.asList()).stream().filter(v -> v != null).forEach(v -> {
+			oMapResult.addLocationLinks(MapResult.staticSetLocationLinks(siteRequest, v.toString()));
+		});
+		oMapResult.setLocation(Optional.ofNullable(doc.get("location_docvalues_location")).map(v -> v.toString()).orElse(null));
 		oMapResult.setStep(Optional.ofNullable(doc.get("step_docvalues_boolean")).map(v -> v.toString()).orElse(null));
 
 		super.storeBaseResult(doc);
@@ -1335,10 +1656,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 				apiRequest.addVars("x");
 			if(!Objects.equals(y, original.getY()))
 				apiRequest.addVars("y");
-			if(!Objects.equals(location, original.getLocation()))
-				apiRequest.addVars("location");
 			if(!Objects.equals(color, original.getColor()))
 				apiRequest.addVars("color");
+			if(!Objects.equals(locationColors, original.getLocationColors()))
+				apiRequest.addVars("locationColors");
+			if(!Objects.equals(locationTitles, original.getLocationTitles()))
+				apiRequest.addVars("locationTitles");
+			if(!Objects.equals(locationLinks, original.getLocationLinks()))
+				apiRequest.addVars("locationLinks");
+			if(!Objects.equals(location, original.getLocation()))
+				apiRequest.addVars("location");
 			if(!Objects.equals(step, original.getStep()))
 				apiRequest.addVars("step");
 			super.apiRequestBaseResult();
@@ -1357,8 +1684,11 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 		sb.append(Optional.ofNullable(dateTime).map(v -> "dateTime: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(x).map(v -> "x: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(y).map(v -> "y: " + v + "\n").orElse(""));
-		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(color).map(v -> "color: \"" + v + "\"\n" ).orElse(""));
+		sb.append(Optional.ofNullable(locationColors).map(v -> "locationColors: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(locationTitles).map(v -> "locationTitles: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(locationLinks).map(v -> "locationLinks: " + v + "\n").orElse(""));
+		sb.append(Optional.ofNullable(location).map(v -> "location: " + v + "\n").orElse(""));
 		sb.append(Optional.ofNullable(step).map(v -> "step: " + v + "\n").orElse(""));
 		return sb.toString();
 	}
@@ -1373,8 +1703,11 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static final String VAR_dateTime = "dateTime";
 	public static final String VAR_x = "x";
 	public static final String VAR_y = "y";
-	public static final String VAR_location = "location";
 	public static final String VAR_color = "color";
+	public static final String VAR_locationColors = "locationColors";
+	public static final String VAR_locationTitles = "locationTitles";
+	public static final String VAR_locationLinks = "locationLinks";
+	public static final String VAR_location = "location";
 	public static final String VAR_step = "step";
 
 	public static List<String> varsQForClass() {
@@ -1391,8 +1724,8 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static List<String> varsFqMapResult(List<String> vars) {
 		vars.add(VAR_time);
 		vars.add(VAR_dateTime);
-		vars.add(VAR_location);
 		vars.add(VAR_color);
+		vars.add(VAR_location);
 		vars.add(VAR_step);
 		BaseResult.varsFqBaseResult(vars);
 		return vars;
@@ -1414,8 +1747,11 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 	public static final String DISPLAY_NAME_dateTime = "Date and Time";
 	public static final String DISPLAY_NAME_x = "";
 	public static final String DISPLAY_NAME_y = "";
-	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_color = "color";
+	public static final String DISPLAY_NAME_locationColors = "area served colors";
+	public static final String DISPLAY_NAME_locationTitles = "area served titles";
+	public static final String DISPLAY_NAME_locationLinks = "area served links";
+	public static final String DISPLAY_NAME_location = "map location";
 	public static final String DISPLAY_NAME_step = "step";
 
 	public static String displayNameForClass(String var) {
@@ -1433,10 +1769,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return DISPLAY_NAME_x;
 		case VAR_y:
 			return DISPLAY_NAME_y;
-		case VAR_location:
-			return DISPLAY_NAME_location;
 		case VAR_color:
 			return DISPLAY_NAME_color;
+		case VAR_locationColors:
+			return DISPLAY_NAME_locationColors;
+		case VAR_locationTitles:
+			return DISPLAY_NAME_locationTitles;
+		case VAR_locationLinks:
+			return DISPLAY_NAME_locationLinks;
+		case VAR_location:
+			return DISPLAY_NAME_location;
 		case VAR_step:
 			return DISPLAY_NAME_step;
 		default:
@@ -1452,6 +1794,12 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return "The time in seconds. ";
 		case VAR_dateTime:
 			return "The date and time. ";
+		case VAR_locationColors:
+			return "The colors of each location Paths. ";
+		case VAR_locationTitles:
+			return "The titles of each location Paths. ";
+		case VAR_locationLinks:
+			return "The links of each location Paths. ";
 			default:
 				return BaseResult.descriptionBaseResult(var);
 		}
@@ -1469,10 +1817,16 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return "Double";
 		case VAR_y:
 			return "Double";
-		case VAR_location:
-			return "Point";
 		case VAR_color:
 			return "String";
+		case VAR_locationColors:
+			return "List";
+		case VAR_locationTitles:
+			return "List";
+		case VAR_locationLinks:
+			return "List";
+		case VAR_location:
+			return "Point";
 		case VAR_step:
 			return "Boolean";
 			default:
@@ -1493,9 +1847,9 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return 4;
 		case VAR_dateTime:
 			return 4;
-		case VAR_location:
-			return 4;
 		case VAR_color:
+			return 4;
+		case VAR_location:
 			return 4;
 		case VAR_step:
 			return 4;
@@ -1510,10 +1864,10 @@ public abstract class MapResultGen<DEV> extends BaseResult {
 			return 1;
 		case VAR_dateTime:
 			return 1;
-		case VAR_location:
-			return 2;
 		case VAR_color:
 			return 3;
+		case VAR_location:
+			return 2;
 		case VAR_step:
 			return 1;
 			default:

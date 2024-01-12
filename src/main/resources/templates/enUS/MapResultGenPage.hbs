@@ -64,24 +64,17 @@
 {{#block "jsLegend"}}{{/block}}
 			}
 
-			function htmLegendMapResult(map, shape, location, index, count) {
-				var color = mapResult.[index];
-				var title = mapResult.[index];
-				var url = mapResult.[index];
+			function htmLegendMapResult(map, shape, mapResult, index, count) {
+				var color = mapResult.locationColors[index];
+				var title = mapResult.locationTitles[index];
+				var url = mapResult.locationLinks[index];
 				var htm = '';
-				if(index == 0) {
-					htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off ">
-	<div class="w3-larger font-weight-bold ">map results</div>
-	<div>
+				htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off cursor-pointer " style="max-width: 400px; ">
 `;
-				}
 				htm += `{{#block "htmLegend"}}{{/block}}`;
-				if(index == (count - 1)) {
-					htm += `
-	</div>
+				htm += `
 </div>
 `;
-				}
 				return htm;
 			}
 
@@ -96,7 +89,9 @@
 {{/inline}}
 {{#*inline "jsWebsocketMapResultPage"}}{{/inline}}
 {{#*inline "jsTooltipMapResultPage"}}{{/inline}}
-{{#*inline "htmTooltipMapResultPage"}}{{/inline}}
+{{#*inline "htmTooltipMapResultPage"}}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.pageUrlPk)}">${feature.properties.objectTitle}</a></h3>
+{{/inline}}
 {{#*inline "jsLegendMapResultPage"}}
 				var div = L.DomUtil.create('div', 'info legend');
 				var htm = '';
@@ -108,7 +103,7 @@
 						else
 							shapes.push(mapResult.location);
 						shapes.forEach(function(shape, index) {
-							htm += htmLegendMapResult(map, shape, location, index, shapes.length);
+							htm += htmLegendMapResult(map, shape, mapResult, index, shapes.length);
 						});
 					}
 				});
@@ -116,28 +111,38 @@
 				return div;
 {{/inline}}
 {{#*inline "htmLegendMapResultPage"}}
-		<div>
+		<div class="w3-row " title="${quoteattr(title)}">
+		<div class="w3-col " style="width: 20px; ">
 			<i class="fa-light fa-circle" style="color: ${color}; "></i>
-			<span data-id="${location.id}" onclick="window.geoJSONLayerGroupMapResult.getLayer(window.mapLayers[this.getAttribute('data-id')]).openPopup(); return false;" href="">${title}</span>
+		</div>
+		<div class="w3-rest text-overflow-ellipsis ">
+			<span class="" data-id="${mapResult.id}" onclick="window.mapLayers[this.getAttribute('data-id')].openPopup(); return false;" href="">${title}</span>
+		</div>
 		</div>
 {{/inline}}
 {{#*inline "jsStyleMapResultPage"}}
 				if(feature.geometry.type == 'Point') {
 					return {
 						radius: 8
-						, fillColor: '#ff7800'
-						, color: '#000'
+						, fillColor: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, weight: 1
-						, opacity: 1
-						, fillOpacity: 0.8
+						, opacity: 0.7
+						, fillOpacity: 0.7
+					};
+				} else if(feature.geometry.type == 'LineString') {
+					return {
+						color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, weight: 5
+						, opacity: 0.7
 					};
 				} else {
 					return {
-						 fillColor: '#ff7800'
+						 fillColor: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
-						, weight: 5
-						, opacity: 1
-						, fillOpacity: 0.8
+						, weight: 3
+						, opacity: 0.7
+						, fillOpacity: 0.7
 					};
 				}
 {{/inline}}

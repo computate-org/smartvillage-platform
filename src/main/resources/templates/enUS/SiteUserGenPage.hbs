@@ -64,24 +64,17 @@
 {{#block "jsLegend"}}{{/block}}
 			}
 
-			function htmLegendSiteUser(map, shape, , index, count) {
+			function htmLegendSiteUser(map, shape, siteUser, index, count) {
 				var color = siteUser.[index];
 				var title = siteUser.[index];
 				var url = siteUser.[index];
 				var htm = '';
-				if(index == 0) {
-					htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off ">
-	<div class="w3-larger font-weight-bold ">site users</div>
-	<div>
+				htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off cursor-pointer " style="max-width: 400px; ">
 `;
-				}
 				htm += `{{#block "htmLegend"}}{{/block}}`;
-				if(index == (count - 1)) {
-					htm += `
-	</div>
+				htm += `
 </div>
 `;
-				}
 				return htm;
 			}
 
@@ -96,7 +89,9 @@
 {{/inline}}
 {{#*inline "jsWebsocketSiteUserPage"}}{{/inline}}
 {{#*inline "jsTooltipSiteUserPage"}}{{/inline}}
-{{#*inline "htmTooltipSiteUserPage"}}{{/inline}}
+{{#*inline "htmTooltipSiteUserPage"}}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.pageUrlPk)}">${feature.properties.objectTitle}</a></h3>
+{{/inline}}
 {{#*inline "jsLegendSiteUserPage"}}
 				var div = L.DomUtil.create('div', 'info legend');
 				var htm = '';
@@ -108,7 +103,7 @@
 						else
 							shapes.push(siteUser.);
 						shapes.forEach(function(shape, index) {
-							htm += htmLegendSiteUser(map, shape, , index, shapes.length);
+							htm += htmLegendSiteUser(map, shape, siteUser, index, shapes.length);
 						});
 					}
 				});
@@ -116,28 +111,38 @@
 				return div;
 {{/inline}}
 {{#*inline "htmLegendSiteUserPage"}}
-		<div>
+		<div class="w3-row " title="${quoteattr(title)}">
+		<div class="w3-col " style="width: 20px; ">
 			<i class="fa-light fa-circle" style="color: ${color}; "></i>
-			<span data-id="${.id}" onclick="window.geoJSONLayerGroupSiteUser.getLayer(window.mapLayers[this.getAttribute('data-id')]).openPopup(); return false;" href="">${title}</span>
+		</div>
+		<div class="w3-rest text-overflow-ellipsis ">
+			<span class="" data-id="${siteUser.id}" onclick="window.mapLayers[this.getAttribute('data-id')].openPopup(); return false;" href="">${title}</span>
+		</div>
 		</div>
 {{/inline}}
 {{#*inline "jsStyleSiteUserPage"}}
 				if(feature.geometry.type == 'Point') {
 					return {
 						radius: 8
-						, fillColor: '#ff7800'
-						, color: '#000'
+						, fillColor: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, weight: 1
-						, opacity: 1
-						, fillOpacity: 0.8
+						, opacity: 0.7
+						, fillOpacity: 0.7
+					};
+				} else if(feature.geometry.type == 'LineString') {
+					return {
+						color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, weight: 5
+						, opacity: 0.7
 					};
 				} else {
 					return {
-						 fillColor: '#ff7800'
+						 fillColor: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
-						, weight: 5
-						, opacity: 1
-						, fillOpacity: 0.8
+						, weight: 3
+						, opacity: 0.7
+						, fillOpacity: 0.7
 					};
 				}
 {{/inline}}

@@ -106,6 +106,54 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
+	 * DisplayName: color
+	 * HtmRow: 4
+	 * HtmCell: 3
+	 * Facet: true
+	 * Color: true
+	 */
+	protected void _color(Wrap<String> w) {
+		w.o("magenta");
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * LocationColor: true
+	 * Indexed: true
+	 * Stored: true
+	 * DisplayName: area served colors
+	 * Description: The colors of each location Paths. 
+	 */
+	protected void _locationColors(List<String> l) {
+		l.add(color);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * LocationTitle: true
+	 * Indexed: true
+	 * Stored: true
+	 * DisplayName: area served titles
+	 * Description: The titles of each location Paths. 
+	 */
+	protected void _locationTitles(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * LocationUrl: true
+	 * Indexed: true
+	 * Stored: true
+	 * DisplayName: area served links
+	 * Description: The links of each location Paths. 
+	 */
+	protected void _locationLinks(List<String> l) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * DocValues: true
+	 * Persist: true
 	 * DisplayName: map location
 	 * Location: true
 	 * HtmRow: 4
@@ -121,20 +169,6 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 * {@inheritDoc}
 	 * DocValues: true
 	 * Persist: true
-	 * DisplayName: color
-	 * HtmRow: 4
-	 * HtmCell: 3
-	 * Facet: true
-	 * Color: true
-	 */
-	protected void _color(Wrap<String> w) {
-		w.o("magenta");
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * DocValues: true
-	 * Persist: true
 	 * DisplayName: step
 	 * HtmRow: 4
 	 * HtmCell: 1
@@ -142,6 +176,12 @@ public class MapResult extends MapResultGen<BaseResult> {
 	 */
 	protected void _step(Wrap<Boolean> w) {
 		w.o(false);
+	}
+
+	@Override
+	protected void _pageUrlPk(Wrap<String> w) {
+		super._pageUrlPk(w);
+		locationTitles.add(w.getO());
 	}
 
 	@Override

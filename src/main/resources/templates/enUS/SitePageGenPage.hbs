@@ -64,24 +64,17 @@
 {{#block "jsLegend"}}{{/block}}
 			}
 
-			function htmLegendSitePage(map, shape, , index, count) {
+			function htmLegendSitePage(map, shape, sitePage, index, count) {
 				var color = sitePage.[index];
 				var title = sitePage.[index];
 				var url = sitePage.[index];
 				var htm = '';
-				if(index == 0) {
-					htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off ">
-	<div class="w3-larger font-weight-bold ">articles</div>
-	<div>
+				htm += `<div class="w3-white w3-padding w3-border w3-opacity w3-hover-opacity-off cursor-pointer " style="max-width: 400px; ">
 `;
-				}
 				htm += `{{#block "htmLegend"}}{{/block}}`;
-				if(index == (count - 1)) {
-					htm += `
-	</div>
+				htm += `
 </div>
 `;
-				}
 				return htm;
 			}
 
@@ -96,7 +89,9 @@
 {{/inline}}
 {{#*inline "jsWebsocketSitePagePage"}}{{/inline}}
 {{#*inline "jsTooltipSitePagePage"}}{{/inline}}
-{{#*inline "htmTooltipSitePagePage"}}{{/inline}}
+{{#*inline "htmTooltipSitePagePage"}}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.pageUrlPk)}">${feature.properties.objectTitle}</a></h3>
+{{/inline}}
 {{#*inline "jsLegendSitePagePage"}}
 				var div = L.DomUtil.create('div', 'info legend');
 				var htm = '';
@@ -108,7 +103,7 @@
 						else
 							shapes.push(sitePage.);
 						shapes.forEach(function(shape, index) {
-							htm += htmLegendSitePage(map, shape, , index, shapes.length);
+							htm += htmLegendSitePage(map, shape, sitePage, index, shapes.length);
 						});
 					}
 				});
@@ -116,28 +111,38 @@
 				return div;
 {{/inline}}
 {{#*inline "htmLegendSitePagePage"}}
-		<div>
+		<div class="w3-row " title="${quoteattr(title)}">
+		<div class="w3-col " style="width: 20px; ">
 			<i class="fa-light fa-circle" style="color: ${color}; "></i>
-			<span data-id="${.id}" onclick="window.geoJSONLayerGroupSitePage.getLayer(window.mapLayers[this.getAttribute('data-id')]).openPopup(); return false;" href="">${title}</span>
+		</div>
+		<div class="w3-rest text-overflow-ellipsis ">
+			<span class="" data-id="${sitePage.id}" onclick="window.mapLayers[this.getAttribute('data-id')].openPopup(); return false;" href="">${title}</span>
+		</div>
 		</div>
 {{/inline}}
 {{#*inline "jsStyleSitePagePage"}}
 				if(feature.geometry.type == 'Point') {
 					return {
 						radius: 8
-						, fillColor: '#ff7800'
-						, color: '#000'
+						, fillColor: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, weight: 1
-						, opacity: 1
-						, fillOpacity: 0.8
+						, opacity: 0.7
+						, fillOpacity: 0.7
+					};
+				} else if(feature.geometry.type == 'LineString') {
+					return {
+						color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
+						, weight: 5
+						, opacity: 0.7
 					};
 				} else {
 					return {
-						 fillColor: '#ff7800'
+						 fillColor: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
 						, color: (feature.properties.areaServedColors && feature.properties.areaServedColors[feature.index] ? feature.properties.areaServedColors[feature.index] : (feature.properties.color ? feature.properties.color : '#000'))
-						, weight: 5
-						, opacity: 1
-						, fillOpacity: 0.8
+						, weight: 3
+						, opacity: 0.7
+						, fillOpacity: 0.7
 					};
 				}
 {{/inline}}
@@ -509,21 +514,21 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmUrl" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmUrl" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmUrl" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmUri" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
 {{> "htmUri" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmUri" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUrl" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUrl" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUrl" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -638,21 +643,21 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmUrl" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmUrl" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmUrl" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmUri" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
 {{> "htmUri" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmUri" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUrl" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUrl" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUrl" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -802,21 +807,21 @@
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
-{{> "htmUrl" roleForWriteBool="true" roleForReadBool="true"}}
-{{else}}
-{{#ifContainsAnyRoles roles roleForRead}}
-{{> "htmUrl" roleForWriteBool="false" roleForReadBool="true"}}
-{{else}}
-{{> "htmUrl" roleForWriteBool="false" roleForReadBool="false"}}
-{{/ifContainsAnyRoles}}
-{{/ifContainsAnyRoles}}
-{{#ifContainsAnyRoles roles roleForWrite}}
 {{> "htmUri" roleForWriteBool="true" roleForReadBool="true"}}
 {{else}}
 {{#ifContainsAnyRoles roles roleForRead}}
 {{> "htmUri" roleForWriteBool="false" roleForReadBool="true"}}
 {{else}}
 {{> "htmUri" roleForWriteBool="false" roleForReadBool="false"}}
+{{/ifContainsAnyRoles}}
+{{/ifContainsAnyRoles}}
+{{#ifContainsAnyRoles roles roleForWrite}}
+{{> "htmUrl" roleForWriteBool="true" roleForReadBool="true"}}
+{{else}}
+{{#ifContainsAnyRoles roles roleForRead}}
+{{> "htmUrl" roleForWriteBool="false" roleForReadBool="true"}}
+{{else}}
+{{> "htmUrl" roleForWriteBool="false" roleForReadBool="false"}}
 {{/ifContainsAnyRoles}}
 {{/ifContainsAnyRoles}}
 {{#ifContainsAnyRoles roles roleForWrite}}
@@ -1423,60 +1428,6 @@
 		{{/eq}}
 {{/inline}}
 
-{{#*inline "htmUrl"}}
-<!-- #*inline "htmUrl" -->
-								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
-									<div class="w3-padding ">
-										<div id="suggest{{classApiMethodMethod}}SitePageUrl">
-											<div class="w3-card ">
-												<div class="w3-cell-row w3-2017-shaded-spruce">
-													<label for="{{classApiMethodMethod}}_url">URL</label>
-												</div>
-											<div class="w3-cell-row w3-padding ">
-													<div class="w3-cell ">
-														{{> "inputUrl" roleForWrite=roleForWrite roleForRead=roleForRead}}
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-{{/inline}}
-
-{{#*inline "inputUrl"}}
-		{{#eq roleForWriteBool "true"}}
-														<input
-															type="text"
-															placeholder="URL"
-															title="The URL for this page. "															id="{{classApiMethodMethod}}_url"
-	{{#eq "Page" classApiMethodMethod}}
-																class="{{classApiMethodMethod}}_url setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
-																name="setUrl"
-	{{else}}
-		{{#eq "PATCH" classApiMethodMethod}}
-																class="{{classApiMethodMethod}}_url setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
-																name="setUrl"
-		{{else}}
-																{{classApiMethodMethod}}_url" class="valueUrl w3-input w3-border classSitePage inputSitePage{{id}}Url w3-input w3-border "
-																name="url"
-		{{/eq}}
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-																onclick="removeGlow($(this)); "
-																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setUrl', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_url')); }, function() { addError($('#{{classApiMethodMethod}}_url')); }); "
-	{{/eq}}
-	{{#eq "Page" classApiMethodMethod}}
-															value="{{sitePage_.url}}"
-	{{/eq}}
-														/>
-
-													{{else}}
-															<span class="varSitePage{{id}}Url varSitePageUrl ">{{sitePage_.url}}</span>
-		{{else}}
-														<span class="varSitePage{{id}}Url varSitePageUrl ">{{sitePage_.url}}</span>
-		{{/eq}}
-{{/inline}}
-
 {{#*inline "htmUri"}}
 <!-- #*inline "htmUri" -->
 								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
@@ -1528,6 +1479,60 @@
 															<span class="varSitePage{{id}}Uri varSitePageUri ">{{sitePage_.uri}}</span>
 		{{else}}
 														<span class="varSitePage{{id}}Uri varSitePageUri ">{{sitePage_.uri}}</span>
+		{{/eq}}
+{{/inline}}
+
+{{#*inline "htmUrl"}}
+<!-- #*inline "htmUrl" -->
+								<div class="w3-cell w3-cell-top w3-center w3-mobile ">
+									<div class="w3-padding ">
+										<div id="suggest{{classApiMethodMethod}}SitePageUrl">
+											<div class="w3-card ">
+												<div class="w3-cell-row w3-2017-shaded-spruce">
+													<label for="{{classApiMethodMethod}}_url">URL</label>
+												</div>
+											<div class="w3-cell-row w3-padding ">
+													<div class="w3-cell ">
+														{{> "inputUrl" roleForWrite=roleForWrite roleForRead=roleForRead}}
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+{{/inline}}
+
+{{#*inline "inputUrl"}}
+		{{#eq roleForWriteBool "true"}}
+														<input
+															type="text"
+															placeholder="URL"
+															title="The URL for this page. "															id="{{classApiMethodMethod}}_url"
+	{{#eq "Page" classApiMethodMethod}}
+																class="{{classApiMethodMethod}}_url setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
+																name="setUrl"
+	{{else}}
+		{{#eq "PATCH" classApiMethodMethod}}
+																class="{{classApiMethodMethod}}_url setUrl classSitePage inputSitePage{{id}}Url w3-input w3-border "
+																name="setUrl"
+		{{else}}
+																{{classApiMethodMethod}}_url" class="valueUrl w3-input w3-border classSitePage inputSitePage{{id}}Url w3-input w3-border "
+																name="url"
+		{{/eq}}
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+																onclick="removeGlow($(this)); "
+																onchange="patch{{classSimpleName}}Val([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:{{id}}' }], 'setUrl', $(this).val(), function() { addGlow($('#{{classApiMethodMethod}}_url')); }, function() { addError($('#{{classApiMethodMethod}}_url')); }); "
+	{{/eq}}
+	{{#eq "Page" classApiMethodMethod}}
+															value="{{sitePage_.url}}"
+	{{/eq}}
+														/>
+
+													{{else}}
+															<span class="varSitePage{{id}}Url varSitePageUrl ">{{sitePage_.url}}</span>
+		{{else}}
+														<span class="varSitePage{{id}}Url varSitePageUrl ">{{sitePage_.url}}</span>
 		{{/eq}}
 {{/inline}}
 

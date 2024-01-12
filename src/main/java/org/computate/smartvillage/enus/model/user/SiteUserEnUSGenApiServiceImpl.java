@@ -548,14 +548,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							num++;
 							bParams.add(o2.sqlUserKey());
 						break;
-					case "setUserId":
-							o2.setUserId(jsonObject.getString(entityVar));
-							if(bParams.size() > 0)
-								bSql.append(", ");
-							bSql.append(SiteUser.VAR_userId + "=$" + num);
-							num++;
-							bParams.add(o2.sqlUserId());
-						break;
 					case "setUserName":
 							o2.setUserName(jsonObject.getString(entityVar));
 							if(bParams.size() > 0)
@@ -611,6 +603,14 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 							bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
 							num++;
 							bParams.add(o2.sqlSeeDeleted());
+						break;
+					case "setUserId":
+							o2.setUserId(jsonObject.getString(entityVar));
+							if(bParams.size() > 0)
+								bSql.append(", ");
+							bSql.append(SiteUser.VAR_userId + "=$" + num);
+							num++;
+							bParams.add(o2.sqlUserId());
 						break;
 				}
 			}
@@ -951,15 +951,6 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						num++;
 						bParams.add(o2.sqlUserKey());
 						break;
-					case SiteUser.VAR_userId:
-						o2.setUserId(jsonObject.getString(entityVar));
-						if(bParams.size() > 0) {
-							bSql.append(", ");
-						}
-						bSql.append(SiteUser.VAR_userId + "=$" + num);
-						num++;
-						bParams.add(o2.sqlUserId());
-						break;
 					case SiteUser.VAR_userName:
 						o2.setUserName(jsonObject.getString(entityVar));
 						if(bParams.size() > 0) {
@@ -1022,6 +1013,15 @@ public class SiteUserEnUSGenApiServiceImpl extends BaseApiServiceImpl implements
 						bSql.append(SiteUser.VAR_seeDeleted + "=$" + num);
 						num++;
 						bParams.add(o2.sqlSeeDeleted());
+						break;
+					case SiteUser.VAR_userId:
+						o2.setUserId(jsonObject.getString(entityVar));
+						if(bParams.size() > 0) {
+							bSql.append(", ");
+						}
+						bSql.append(SiteUser.VAR_userId + "=$" + num);
+						num++;
+						bParams.add(o2.sqlUserId());
 						break;
 					}
 				}
