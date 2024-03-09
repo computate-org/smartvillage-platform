@@ -17,7 +17,7 @@ CLASS_SIMPLE_NAME_MainVerticle: "MainVerticle"
 RUN_OPENAPI3_GENERATOR: true
 RUN_SQL_GENERATOR: true
 RUN_ARTICLE_GENERATOR: false
-I18N_PATHS: ["{{ SITE_PREFIX }}/computate/src/main/resources/org/computate/i18n/i18n_enUS.yml"]
+I18N_PATHS: ["{{ SITE_PREFIX }}/computate/src/main/resources/org/computate/i18n/i18n_enUS.yaml"]
 DYNAMIC_PAGE_PATHS: ["{{ SITE_PREFIX }}/smartvillage-platform/page"]
 
 LANGUAGE_NAME: "enUS"

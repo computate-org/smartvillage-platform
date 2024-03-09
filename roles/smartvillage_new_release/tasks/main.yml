@@ -43,7 +43,7 @@
       NEXT_VERSION not specified.
       Current smartvillage version is {{ PREV_VERSION }}.
       Run the playbook again with the NEXT VERSION set:
-      ansible-playbook smartvillage_new_release.yml -e NEXT_VERSION={{ PREV_VERSION_PREFIX }}{{ (PREV_VERSION_SUFFIX | int) + 1 }}
+      ansible-playbook smartvillage_new_release.yaml -e NEXT_VERSION={{ PREV_VERSION_PREFIX }}{{ (PREV_VERSION_SUFFIX | int) + 1 }}
   when: NEXT_VERSION is not defined
 
 - name: |

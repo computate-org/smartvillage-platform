@@ -212,7 +212,7 @@ public class SitePageReader extends SitePageReaderGen<Object> {
 			dynamicPagePaths.forEach(dynamicPagePath -> {
 				try {
 					try(Stream<Path> stream = Files.walk(Paths.get(dynamicPagePath))) {
-						stream.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".yml")).forEach(path -> {
+						stream.filter(Files::isRegularFile).filter(p -> p.getFileName().toString().endsWith(".yaml")).forEach(path -> {
 							pagePaths.add(path.toAbsolutePath().toString());
 						});
 					}

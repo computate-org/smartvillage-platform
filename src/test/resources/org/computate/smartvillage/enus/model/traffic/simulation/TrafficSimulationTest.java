@@ -151,7 +151,7 @@ public class TrafficSimulationTest {
 		try {
 			ConfigRetrieverOptions retrieverOptions = new ConfigRetrieverOptions();
 
-			retrieverOptions.addStore(new ConfigStoreOptions().setType("file").setFormat("yaml").setConfig(new JsonObject().put("path", "application.yml")));
+			retrieverOptions.addStore(new ConfigStoreOptions().setType("file").setFormat("yaml").setConfig(new JsonObject().put("path", "application.yaml")));
 
 			ConfigRetriever configRetriever = ConfigRetriever.create(vertx, retrieverOptions);
 			configRetriever.getConfig().onSuccess(config -> {
