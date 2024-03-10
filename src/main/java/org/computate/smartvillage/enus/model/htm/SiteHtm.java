@@ -25,7 +25,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.tool.XmlTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.htm.SiteHtmGen;
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.smartvillage.enus.result.base.BaseResult;
 

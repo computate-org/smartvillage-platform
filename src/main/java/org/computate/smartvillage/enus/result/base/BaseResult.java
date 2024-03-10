@@ -26,7 +26,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillage.enus.config.ConfigKeys;
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
-import org.computate.smartvillage.enus.result.base.BaseResultGen;
 import org.computate.vertx.result.base.ComputateBaseResult;
 
 import io.vertx.core.Promise;

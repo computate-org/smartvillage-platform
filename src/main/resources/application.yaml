@@ -1,8 +1,8 @@
 ---
 
-API_VERSION: 1.0.2
+API_VERSION: 2.0.2
 SITE_NAME: smartvillage-platform
-SITE_DISPLAY_NAME: Smart Village Project
+SITE_DISPLAY_NAME: Smart Village Platform
 SITE_PUBLIC_URL: https://smartabyarsmartvillage.org
 MAILING_LIST_URL: https://computate.topicbox.com/groups/smartvillage-platform
 SITE_HOST_NAME: localhost
@@ -24,17 +24,15 @@ QUAYIO_ORG: "computateorg"
 SITE_POWERED_BY_URL: "https://nerc.mghpcc.org/"
 SITE_POWERED_BY_NAME: "NERC"
 SITE_POWERED_BY_IMAGE_URI: "/png/nerc/nerc-logo.png"
+ENABLE_ZOOKEEPER_CLUSTER: true
+ENABLE_KAFKA: true
 
 STATIC_BASE_URL: "http://localhost:12080/static"
 STATIC_PATH: "/usr/local/src/smartvillage-platform-static"
 
 API_CONTACT_EMAIL: 
 API_COUNTER_RESUME: 0
-API_COUNTER_FETCH: 1
-API_COUNTER_RESUME_TimeStep: 0
-API_COUNTER_FETCH_TimeStep: 1
-API_COUNTER_RESUME_VehicleStep: 0
-API_COUNTER_FETCH_VehicleStep: 10
+API_COUNTER_FETCH: 10
 API_COUNTER_FETCH_SitePage: 10
 API_COUNTER_FETCH_SiteHtm: 10
 
@@ -59,22 +57,22 @@ SSL_VERIFY: true
 
 ZOOKEEPER_HOST_NAME: localhost
 ZOOKEEPER_PORT: 2181
-ZOOKEEPER_POLICY: one_time
+ZOOKEEPER_RETRY_POLICY: one_time
 ZOOKEEPER_BASE_SLEEP_TIME_MILLIS: 5000
 ZOOKEEPER_MAX_SLEEP_MILLIS: 5000
 ZOOKEEPER_MAX_RETRIES: 5
 ZOOKEEPER_CONNECTION_TIMEOUT_MILLIS: 3000
 ZOOKEEPER_SESSION_TIMEOUT_MILLIS: 5000
 
-SOLR_URL: https://solr-smartvillage.apps-crc.testing/solr/smartvillage-platform
+SOLR_URL: https://solr-solr.apps-crc.testing/solr/smartvillage
 SOLR_HOST_NAME: solr-smartvillage.apps-crc.testing
 SOLR_PORT: 443
 SOLR_COLLECTION: smartvillage
-SOLR_SSL: true
-SOLR_HOST_NAME_COMPUTATE: solr-solr.apps-crc.testing
+SOLR_SSL: True
+SOLR_HOST_NAME_COMPUTATE: solr-smartvillage.apps-crc.testing
 SOLR_PORT_COMPUTATE: 443
 SOLR_COLLECTION_COMPUTATE: computate
-SOLR_SSL_COMPUTATE: true
+SOLR_SSL_COMPUTATE: True
 SOLR_URL_COMPUTATE: "https://solr-solr.apps-crc.testing/solr/computate"
 SOLR_WORKER_COMMIT_WITHIN_MILLIS: 10000
 
@@ -91,89 +89,26 @@ OPEN_TELEMETRY_ENABLED: false
 
 REFRESH_DATA_PAUSE_IN_SECONDS: 10
 ENABLE_REFRESH_DATA: false
-ENABLE_REFRESH_DATA_IotNode: true
-ENABLE_REFRESH_DATA_SitePage: true
-ENABLE_REFRESH_DATA_SimulationReport: true
-ENABLE_REFRESH_DATA_TrafficSimulation: true
-ENABLE_REFRESH_DATA_TrafficLightStep: true
-ENABLE_REFRESH_DATA_VehicleStep: true
-ENABLE_REFRESH_DATA_PersonStep: true
-ENABLE_REFRESH_DATA_TrafficLight: true
-ENABLE_REFRESH_DATA_TimeStep: true
-ENABLE_REFRESH_DATA_BicycleStep: true
-ENABLE_REFRESH_DATA_TrafficFlowObserved: true
-ENABLE_REFRESH_DATA_SmartTrafficLight: true
-ENABLE_REFRESH_DATA_SystemEvent: true
 ENABLE_REFRESH_DATA_SiteHtm: true
-ENABLE_REFRESH_DATA_IotNodeStep: true
+ENABLE_REFRESH_DATA_SitePage: true
+ENABLE_REFRESH_DATA_SystemEvent: true
 ENABLE_REFRESH_DATA_MapResult: true
 
 ENABLE_IMPORT_DATA: true
-ENABLE_IMPORT_DATA_IotNode: true
-ENABLE_IMPORT_DATA_SitePage: true
-ENABLE_IMPORT_DATA_SimulationReport: true
-ENABLE_IMPORT_DATA_TrafficSimulation: true
-ENABLE_IMPORT_DATA_TrafficLightStep: true
-ENABLE_IMPORT_DATA_VehicleStep: true
-ENABLE_IMPORT_DATA_PersonStep: true
-ENABLE_IMPORT_DATA_TrafficLight: true
-ENABLE_IMPORT_DATA_TimeStep: true
-ENABLE_IMPORT_DATA_BicycleStep: true
-ENABLE_IMPORT_DATA_TrafficFlowObserved: true
-ENABLE_IMPORT_DATA_SmartTrafficLight: true
-ENABLE_IMPORT_DATA_SystemEvent: true
 ENABLE_IMPORT_DATA_SiteHtm: true
-ENABLE_IMPORT_DATA_IotNodeStep: true
+ENABLE_IMPORT_DATA_SitePage: true
+ENABLE_IMPORT_DATA_SystemEvent: true
 ENABLE_IMPORT_DATA_MapResult: true
 
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: 'SiteAdmin'
 # The Auth roles required to add and modify site user records. 
 AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
-# The Auth roles required to add and modify IOT node records. 
-AUTH_ROLE_REQUIRED_IotNode: 'SiteAdmin'
-# The Auth roles required to add and modify article records. 
-AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
-# The Auth roles required to add and modify simulation report records. 
-AUTH_ROLE_REQUIRED_SimulationReport: 'SiteAdmin'
-# The Auth roles required to add and modify traffic simulation records. 
-AUTH_ROLE_REQUIRED_TrafficSimulation: 'SiteAdmin'
-# The Auth roles required to add and modify traffic light step records. 
-AUTH_ROLE_REQUIRED_TrafficLightStep: 'SiteAdmin'
-# The Auth roles required to add and modify vehicle step records. 
-AUTH_ROLE_REQUIRED_VehicleStep: 'SiteAdmin'
-# The Auth roles required to add and modify person step records. 
-AUTH_ROLE_REQUIRED_PersonStep: 'SiteAdmin'
-# The Auth roles required to add and modify traffic light records. 
-AUTH_ROLE_REQUIRED_TrafficLight: 'SiteAdmin'
-# The Auth roles required to add and modify time step records. 
-AUTH_ROLE_REQUIRED_TimeStep: 'SiteAdmin'
-# The Auth roles required to add and modify bicycle step records. 
-AUTH_ROLE_REQUIRED_BicycleStep: 'SiteAdmin'
-# The Auth roles required to add and modify traffic flow observed records. 
-AUTH_ROLE_REQUIRED_TrafficFlowObserved: 'SiteAdmin'
-# The Auth roles required to add and modify crowd flow observed records. 
-AUTH_ROLE_REQUIRED_CrowdFlowObserved: 'SiteAdmin'
-# The Auth roles required to add and modify smart traffic light records. 
-AUTH_ROLE_REQUIRED_SmartTrafficLight: 'SiteAdmin'
-# The Auth roles required to add and modify system event records. 
-AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
 # The Auth roles required to add and modify HTML records. 
 AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
-# The Auth roles required to add and modify IOT node step records. 
-AUTH_ROLE_REQUIRED_IotNodeStep: 'SiteAdmin'
+# The Auth roles required to add and modify article records. 
+AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
 # The Auth roles required to add and modify map result records. 
 AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'
-
-KAFKA_TOPIC_SUMO_RUN: smartvillage-sumo-run
-KAFKA_TOPIC_SUMO_STOP: smartvillage-sumo-stop
-KAFKA_TOPIC_SUMO_RUN_REPORT: smartvillage-sumo-run-report
-KAFKA_TOPIC_SUMO_SIMULATION_INFO: smartvillage-sumo-simulation-info
-KAFKA_TOPIC_SUMO_SIMULATION_INFO_PATCH: smartvillage-sumo-simulation-info-patch
-KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO: smartvillage-sumo-traffic-flow-observed-info
-KAFKA_TOPIC_SUMO_TRAFFIC_FLOW_OBSERVED_INFO_PATCH: smartvillage-sumo-traffic-flow-observed-info-patch
-
-MQTT_ENABLED: true
-MQTT_HOST: fiware-broker-mqtt-nodeport.apps-crc.testing
-MQTT_PORT: 30083
-MQTT_IOT_SUBSCRIBE_TOPIC: iot/subscribe

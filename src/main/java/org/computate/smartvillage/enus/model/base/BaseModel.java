@@ -25,7 +25,6 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.model.base.BaseModelGen;
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.vertx.model.base.ComputateBaseModel;
 
@@ -54,6 +53,8 @@ public class BaseModel extends BaseModelGen<Object> implements ComputateBaseMode
 	 * PrimaryKey: true
 	 * UrlVar: pageUrlApi
 	 * Modify: false
+	 * HtmRow: 1
+	 * HtmCell: 1
 	 * DisplayName.enUS: primary key
 	 * Description: The primary key of this object in the database
 	 * Facet: true

@@ -34,9 +34,8 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillage.enus.config.ConfigKeys;
 import org.computate.smartvillage.enus.model.base.BaseModel;
-import org.computate.smartvillage.enus.model.page.SitePageGen;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.smartvillage.enus.result.base.BaseResult;
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 
 import io.vertx.core.Promise;
 

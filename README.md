@@ -19,22 +19,16 @@ oc -n postgres get secret/postgres-cluster-pguser-smartvillage -o jsonpath='{.da
 ```bash
 
 # Get KAFKA_SSL_KEYSTORE_LOCATION: 
-oc extract -n smart-village-view secret/smartvillage-kafka --to=$HOME/.local/src/smartvillage-platform/config/ --keys=user.p12 --confirm
+oc extract -n smart-village-view secret/smartvillage-kafka --to=$HOME/.local/src/smartabyar-smartvillage/config/ --keys=user.p12 --confirm
 
 # Get KAFKA_SSL_KEYSTORE_PASSWORD: 
 oc -n smart-village-view get secret/smartvillage-kafka -o jsonpath='{.data.user\.password}' | base64 -d; echo
 
 # Get KAFKA_SSL_TRUSTSTORE_LOCATION: 
-oc extract -n smart-village-view secret/smartvillage-kafka-cluster-ca-cert --to=$HOME/.local/src/smartvillage-platform/config/ --keys=ca.p12 --confirm
+oc extract -n smart-village-view secret/smartvillage-kafka-cluster-ca-cert --to=$HOME/.local/src/smartabyar-smartvillage/config/ --keys=ca.p12 --confirm
 
 # Get KAFKA_SSL_TRUSTSTORE_PASSWORD: 
 oc -n smart-village-view get secret/smartvillage-kafka-cluster-ca-cert -o jsonpath='{.data.ca\.password}' | base64 -d; echo
-```
-
-# Create or update database table schema
-
-```
-psql -h psql-postgres.apps-crc.testing -p 30432 -U smartvillage smartvillage < ~/.local/src/smartvillage-platform/src/main/resources/sql/db-create.sql
 ```
 
 # Setup smartvillage-platform development environment on MacOSX or Linux (Fedora, RHEL, CentOS, Ubuntu)
@@ -106,7 +100,7 @@ git clone git@github.com:computate-org/computate_project.git ~/.ansible/roles/co
 ## Run the Ansible Galaxy roles to install the complete project locally. 
 
 ```bash
-ansible-playbook ~/.ansible/roles/computate.computate_project/install.yaml -e SITE_NAME=smartvillage-platform -e ENABLE_CODE_GENERATION_SERVICE=true
+ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smartvillage-platform -e ENABLE_CODE_GENERATION_SERVICE=true
 ```
 
 ## Running the project build and test suite
@@ -140,7 +134,7 @@ ansible-vault edit ~/.local/src/smartvillage-platform-ansible/vault/$USER-local
 You can then run the project install automation again with the secrets in the vault, it will ask for the password. 
 
 ```bash
-ansible-playbook ~/.ansible/roles/computate.computate_project/install.yaml -e SITE_NAME=smartvillage-platform -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-local --vault-id @prompt
+ansible-playbook ~/.ansible/roles/computate.computate_project/install.yml -e SITE_NAME=smartvillage-platform -e ENABLE_CODE_GENERATION_SERVICE=true -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-local --vault-id @prompt
 ```
 
 # Configure Eclipse IDE 
@@ -212,7 +206,7 @@ Add these update sites and install these useful plugins:
 
 Setup the following variables to setup the Vert.x verticle. 
 
-* CONFIG_PATH: ~/.local/src/smartvillage-platform/config/smartvillage-platform.yaml
+* CONFIG_PATH: ~/.local/src/smartvillage-platform/config/smartvillage-platform.yml
 * RUN_OPENAPI3_GENERATOR: true
 * RUN_SQL_GENERATOR: true
 * RUN_FIWARE_GENERATOR: true
@@ -239,7 +233,7 @@ Setup the following VM arguments to disable caching for easier web development:
 
 Setup the following variables to setup the Vert.x verticle. 
 
-* CONFIG_PATH: ~/.local/src/smartvillage-platform/config/smartvillage-platform.yaml
+* CONFIG_PATH: ~/.local/src/smartvillage-platform/config/smartvillage-platform.yml
 * VERTXWEB_ENVIRONMENT: dev
 
 Click [ Apply ] and [ Debug ] to debug the application. 
@@ -315,13 +309,13 @@ AUTH_TOKEN_URI: "/auth/realms/SMARTVILLAGE/protocol/openid-connect/token"
 
 ```bash
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yaml -e SITE_NAME=smartvillage-platform
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_postgres_openshift/install.yml -e SITE_NAME=smartvillage-platform
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yaml -e SITE_NAME=smartvillage-platform
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_zookeeper_openshift/install.yml -e SITE_NAME=smartvillage-platform
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yaml -e SITE_NAME=smartvillage-platform
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_solr_openshift/install.yml -e SITE_NAME=smartvillage-platform
 
-ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yaml -e SITE_NAME=smartvillage-platform
+ansible-playbook --vault-id @prompt -e @~/.local/src/smartvillage-platform-ansible/vault/$USER-staging/vault ~/.ansible/roles/computate.computate_project_openshift/install.yml -e SITE_NAME=smartvillage-platform
 ```
 
 ## How to run the application as a Podman container
@@ -344,68 +338,4 @@ podman build -t computateorg/smartvillage-platform:latest .
 ```bash
 podman login quay.io
 podman push computateorg/smartvillage-platform:latest quay.io/computateorg/smartvillage-platform:latest
-```
-
-## How the base classes for this project were created
-
-```bash
-ansible-playbook -e @~/.local/src/smartvillage-platform/local/ansible_install_vars.yaml ~/.local/src/computate-org/vertx_project.yaml
-```
-
-# Load a new map traffic data into SUMO
-
-```bash
-cd ~/.local/share/sumo/data
-env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" python ~/.local/share/sumo/tools/osmWebWizard.py
-```
-
-# Export SUMO vehicle coordinate data
-
-```bash
-env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --fcd-output ~/.local/share/sumo/data/veberod/veberod-fcd.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
-```
-
-# Export SUMO full data
-
-```bash
-env LD_LIBRARY_PATH=~/.local/lib:~/.local/lib64 "SUMO_HOME=$HOME/.local/share/sumo" SUMO_HOME=~/.local/share/sumo sumo --full-output ~/.local/share/sumo/data/veberod/veberod-full.xml -c ~/.local/share/sumo/data/veberod/veberod.sumocfg --fcd-output.geo -b 10 -e 360 --step-length 0.1
-```
-
-# Convert X,Y coordinates to geo coordinates with python
-
-The Veberod_intersection.net.xml contains data about traffic lights like the x/y position. 
-
-```xml
-<junction id="267701936" type="traffic_light" x="220.61" y="853.48" 
-```
-
-To convert the x/y position, use python: 
-
-```bash
-pip install pyproj sumolib
-python
->>> import sumolib
->>> net = sumolib.net.readNet('/home/ctate/.local/src/TLC/TLC_sumo/Veberod_intersection.net.xml')
->>> print(net.convertXY2LonLat(220.61,853.48))
-(13.49260653795143, 55.633791753658265)
-```
-
-# Run SUMO with Traci TCP server
-
-```bash
-env SUMO_HOME=/home/ctate/.local/share/sumo LD_LIBRARY_PATH=/home/ctate/.local/lib:~/.local/lib64 /home/ctate/.local/bin/sumo-gui --remote-port 8813 --num-clients 1 --start
-```
-
-## Python interact with the Traci TCP server
-
-```bash
-cd ~/.local/share/sumo/tools
-```
-
-```python
-import traci
-conn = traci.connect()
-conn.simulationStep()
-conn.simulationStep()
-conn.simulationStep()
 ```

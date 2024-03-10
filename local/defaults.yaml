@@ -8,7 +8,7 @@ SITE_NAME: "smartvillage-platform"
 SITE_POM_GROUP_ID: "org.computate"
 SITE_POM_ARTIFACT_ID: "smartvillage-platform"
 SITE_PUBLIC_URL: "https://smartabyarsmartvillage.org"
-SITE_DISPLAY_NAME: "Smart Village Project"
+SITE_DISPLAY_NAME: "Smart Village Platform"
 SITE_SERVICES:
   - SITE_NAME: "smartvillage-platform"
     SITE_SRC: "{{ SITE_PREFIX }}/smartvillage-platform"
@@ -17,6 +17,8 @@ CLASS_SIMPLE_NAME_MainVerticle: "MainVerticle"
 RUN_OPENAPI3_GENERATOR: true
 RUN_SQL_GENERATOR: true
 RUN_ARTICLE_GENERATOR: false
+RUN_FIWARE_GENERATOR: false
+RUN_PROJECT_GENERATOR: true
 I18N_PATHS: ["{{ SITE_PREFIX }}/computate/src/main/resources/org/computate/i18n/i18n_enUS.yaml"]
 DYNAMIC_PAGE_PATHS: ["{{ SITE_PREFIX }}/smartvillage-platform/page"]
 
@@ -32,6 +34,7 @@ API_COUNTER_FETCH: 50
 API_COUNTER_RESUME: 10
 COMPUTATE_SRC: "{{ SITE_PREFIX }}/computate"
 
+SITE_INSTANCES: 2
 SITE_HOST_NAME: "localhost"
 SITE_BASE_URL: "http://localhost:12080"
 SITE_PORT: 12080
@@ -43,8 +46,11 @@ TEMPLATE_PATH: "{{ SITE_PREFIX }}/smartvillage-platform/src/main/resources/templ
 API_CONTACT_EMAIL: ""
 FONTAWESOME_KIT: ""
 
-JDBC_HOST: "localhost"
-JDBC_PORT: 5432
+ZOOKEEPER_HOST_NAME: "zookeeper.apps-crc.testing"
+ZOOKEEPER_PORT: 30081
+
+JDBC_HOST: "postgres.apps-crc.testing"
+JDBC_PORT: 30432
 JDBC_DATABASE: "smartvillage"
 JDBC_USERNAME: "smartvillage"
 
@@ -60,6 +66,7 @@ AUTH_TOKEN_URI: "/auth/realms/SMARTVILLAGE/protocol/openid-connect/token"
 
 SOLR_HOST_NAME: solr-smartvillage.apps-crc.testing
 SOLR_PORT: 443
+SOLR_SSL: true
 SOLR_COLLECTION: "smartvillage"
 SOLR_URL: "https://solr-solr.apps-crc.testing/solr/smartvillage"
 SOLR_URL_COMPUTATE: "https://solr-solr.apps-crc.testing/solr/computate"
@@ -93,9 +100,9 @@ WRITE_API: true
 WRITE_COMMENTS: true
 
 # The Auth roles required to be an admin in the site. 
-AUTH_ROLE_ADMIN: 'SiteAdmin'
+AUTH_ROLE_ADMIN: SiteAdmin
 # The Auth roles required to be a super admin in the site. 
-AUTH_ROLE_SUPER_ADMIN: 'SuperAdmin'
+AUTH_ROLE_SUPER_ADMIN: SuperAdmin
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: true

@@ -34,7 +34,6 @@ import org.computate.search.response.solr.SolrResponse;
 import org.computate.search.tool.SearchTool;
 import org.computate.search.wrap.Wrap;
 import org.computate.smartvillage.enus.config.ConfigKeys;
-import org.computate.smartvillage.enus.page.PageLayoutGen;
 import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.vertx.config.ComputateConfigKeys;
 

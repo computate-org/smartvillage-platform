@@ -16,11 +16,10 @@ package org.computate.smartvillage.enus.model.user;
 
 import java.util.List;
 import org.computate.search.wrap.Wrap;
-import org.computate.smartvillage.enus.model.base.BaseModel;
-import org.computate.smartvillage.enus.model.user.SiteUserGen;
-import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 import org.computate.vertx.model.user.ComputateSiteUser;
 import org.computate.vertx.request.ComputateSiteRequest;
+import org.computate.smartvillage.enus.model.base.BaseModel;
+import org.computate.smartvillage.enus.request.SiteRequestEnUS;
 
 /**
  * Model: true

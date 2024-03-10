@@ -23,11 +23,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.computate.search.wrap.Wrap;
-import org.computate.smartvillage.enus.model.user.SiteUser;
-import org.computate.smartvillage.enus.request.SiteRequestEnUSGen;
 import org.computate.vertx.api.ApiRequest;
 import org.computate.vertx.model.user.ComputateSiteUser;
 import org.computate.vertx.request.ComputateSiteRequest;
+import org.computate.smartvillage.enus.model.user.SiteUser;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
@@ -293,7 +292,6 @@ public class SiteRequestEnUS extends SiteRequestEnUSGen<Object> implements Compu
 		o.setUserKey(userKey); // The user primary key
 		o.setUserId(userId); // The user identifier in the authentication system
 		o.setApiRequest_(apiRequest_); // The current API request information
-		o.initDeepForClass();
 		return o;
 	}
 

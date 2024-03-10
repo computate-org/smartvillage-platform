@@ -2581,6 +2581,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 
 	public static Integer htmRowBaseModel(String var) {
 		switch(var) {
+		case VAR_pk:
+			return 1;
 		case VAR_created:
 			return 1;
 		case VAR_modified:
@@ -2598,6 +2600,8 @@ public abstract class BaseModelGen<DEV> extends Object {
 
 	public static Integer htmCellBaseModel(String var) {
 		switch(var) {
+		case VAR_pk:
+			return 1;
 		case VAR_created:
 			return 2;
 		case VAR_modified:

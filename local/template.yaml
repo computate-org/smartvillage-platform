@@ -3,6 +3,7 @@ SITE_NAME: "{{ SITE_NAME }}"
 SITE_SRC: "{{ SITE_SRC }}"
 SITE_DISPLAY_NAME: "{{ SITE_DISPLAY_NAME }}"
 SITE_POM_GROUP_ID: "{{ SITE_POM_GROUP_ID }}"
+SITE_POM_ARTIFACT_ID: "{{ SITE_POM_ARTIFACT_ID }}"
 SITE_PUBLIC_URL: "{{ SITE_PUBLIC_URL }}"
 GITHUB_ORG: "{{ GITHUB_ORG }}"
 QUAYIO_ORG: "{{ QUAYIO_ORG }}"
@@ -30,6 +31,23 @@ I18N_PATHS: {{ I18N_PATHS | to_json }}
 DYNAMIC_PAGE_PATHS:
   - "{{ SITE_SRC }}/page"
 SSL_VERIFY: false
+
+JDBC_HOST: "{{ JDBC_HOST }}"
+JDBC_PORT: {{ JDBC_PORT }}
+JDBC_DATABASE: "{{ JDBC_DATABASE }}"
+JDBC_USERNAME: "{{ JDBC_USERNAME }}"
+# oc get -n smartvillage secret/postgres-pguser-smartvillage -o 'jsonpath={.data.password}' | base64 -d && echo
+JDBC_PASSWORD: "{{ JDBC_PASSWORD }}"
+
+AUTH_HOST_NAME: "{{ AUTH_HOST_NAME | default('') }}"
+AUTH_PORT: {{ AUTH_PORT }}
+AUTH_SSL: {{ AUTH_SSL | lower }}
+AUTH_SSL_REQUIRED: {{ AUTH_SSL_REQUIRED }}
+AUTH_REALM: "{{ AUTH_REALM | default('') }}"
+AUTH_CLIENT: "{{ AUTH_CLIENT | default('') }}"
+AUTH_SECRET: "{{ AUTH_SECRET | default('') }}"
+AUTH_URL: "{{ AUTH_URL }}"
+AUTH_TOKEN_URI: "{{ AUTH_TOKEN_URI }}"
 
 SOLR_HOST_NAME: "{{ SOLR_HOST_NAME }}"
 SOLR_PORT: {{ SOLR_PORT }}
@@ -62,9 +80,22 @@ WRITE_COMMENTS: true
 
 # Enable data import in the site. 
 ENABLE_IMPORT_DATA: {{ ENABLE_IMPORT_DATA | lower }}
-ENABLE_IMPORT_DATA_SitePage: true
 ENABLE_IMPORT_DATA_SiteHtm: true
+ENABLE_IMPORT_DATA_SitePage: true
 ENABLE_IMPORT_DATA_SystemEvent: true
+ENABLE_IMPORT_DATA_MapResult: true
 
+# The Auth roles required to be a super admin in the site. 
+AUTH_ROLE_SUPER_ADMIN: {{ AUTH_ROLE_SUPER_ADMIN }}
 # The Auth roles required to be an admin in the site. 
 AUTH_ROLE_ADMIN: {{ AUTH_ROLE_ADMIN }}
+# The Auth roles required to add and modify site user records. 
+AUTH_ROLE_REQUIRED_SiteUser: 'SiteAdmin'
+# The Auth roles required to add and modify HTML records. 
+AUTH_ROLE_REQUIRED_SiteHtm: 'SiteAdmin'
+# The Auth roles required to add and modify article records. 
+AUTH_ROLE_REQUIRED_SitePage: 'SiteAdmin'
+# The Auth roles required to add and modify system event records. 
+AUTH_ROLE_REQUIRED_SystemEvent: 'SiteAdmin'
+# The Auth roles required to add and modify map result records. 
+AUTH_ROLE_REQUIRED_MapResult: 'SiteAdmin'

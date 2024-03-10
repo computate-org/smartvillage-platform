@@ -30,7 +30,6 @@ import org.computate.search.wrap.Wrap;
 import org.computate.smartvillage.enus.config.ConfigKeys;
 import org.computate.smartvillage.enus.model.htm.SiteHtm;
 import org.computate.smartvillage.enus.page.PageLayout;
-import org.computate.smartvillage.enus.page.dynamic.DynamicPageGen;
 import org.computate.vertx.search.list.SearchList;
 
 import io.vertx.core.Future;
