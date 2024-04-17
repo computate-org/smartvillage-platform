@@ -4,7 +4,7 @@
 
 	<groupId>org.computate</groupId>
 	<artifactId>smartvillage-platform</artifactId>
-	<version>2.0.2</version>
+	<version>2.0.3</version>
 	<name>Smart Village Platform</name>
 	<description>Red Hat Global Social Innovation Program is partnering with Boston University and Smarta Byar in order to collaborate on creating a global and open research platform allowing researchers to study what social sustainability means by using a digital twin of Veberöd, Sweden as the test village, supported by Smarta Byar. The goal of this collaboration is to build the open source technological infrastructure so that researchers can collaborate on this platform effectively to study mobility, public health, sustainability among other study areas to ultimately help define better the link between well being and eco-smart cities.</description>
 	<url>https://smartabyarsmartvillage.org</url>
@@ -85,12 +85,13 @@
 		<mockito.version>4.10.0</mockito.version>
 		<commonmark.version>0.21.0</commonmark.version>
 
-		<quarkus-base.version>2.7.6</quarkus-base.version>
-		<quarkus.version>${quarkus-base.version}.Final-redhat-00006</quarkus.version>
+		<quarkus-base.version>3.2.9</quarkus-base.version>
+		<quarkus.version>${quarkus-base.version}.Final-redhat-00002</quarkus.version>
 		<quarkus-plugin.version>${quarkus.version}</quarkus-plugin.version>
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-		<quarkus.platform.group-id>com.redhat.quarkus.platform</quarkus.platform.group-id>
+		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
 		<quarkus.platform.version>${quarkus.version}</quarkus.platform.version>
+		<rest-assured.version>5.3.2</rest-assured.version>
 
 		<vertx-base.version>4.4.4</vertx-base.version>
 		<vertx.version>${vertx-base.version}.redhat-00001</vertx.version>
@@ -107,7 +108,7 @@
 		<solr.version>8.11.1</solr.version>
 		<jackson.version>2.14.1</jackson.version>
 		<jackson-databind.version>2.14.1</jackson-databind.version>
-		<commons-lang3.version>3.12.0.redhat-00001</commons-lang3.version>
+		<commons-lang3.version>3.13.0.redhat-00001</commons-lang3.version>
 		<commons-configuration2.version>2.8.0</commons-configuration2.version>
 		<snakeyaml.version>1.33.0.redhat-00001</snakeyaml.version>
 		<camel.version>3.18.3.redhat-00022</camel.version>
@@ -351,6 +352,63 @@
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-opentelemetry</artifactId>
 		</dependency>
+
+		<!-- ####### -->
+		<!-- Quarkus -->
+		<!-- ####### -->
+
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-resteasy-reactive-jackson</artifactId>
+			<version>${quarkus.platform.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-vertx</artifactId>
+			<version>${quarkus.platform.version}</version>
+			<exclusions>
+				<exclusion>
+			        <groupId>org.jboss.slf4j</groupId>
+			        <artifactId>slf4j-jboss-logmanager</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-bootstrap-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-bootstrap-maven-resolver</artifactId>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>io.smallrye.reactive</groupId>
+			<artifactId>smallrye-mutiny-vertx-web-client</artifactId>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-arc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-bootstrap-runner</artifactId>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-junit5</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<scope>test</scope>
+			<version>${rest-assured.version}</version>
+		</dependency>
+		-->
 		
 		<!-- ########## -->
 		<!-- jfreechart -->
@@ -378,6 +436,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
@@ -387,6 +451,7 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
 			<version>${slf4j.version}</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<!-- ############ -->
